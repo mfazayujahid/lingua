@@ -52,6 +52,9 @@ export const AppContent: React.FC = () => {
   };
 
   const handleTrackChange = async (newTrack: LevelCode) => {
+    if (newTrack.startsWith('ielts_') && activeView === 'kanji') {
+      setActiveView('dashboard');
+    }
     setActiveTrack(newTrack);
     const DEFAULT_EXAMS: Record<string, string> = {
       jlpt_n5: 'les_n5_gram_1',
