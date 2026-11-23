@@ -19,6 +19,7 @@ import {
 
 interface DashboardViewProps {
   data: any;
+  activeTrack?: LevelCode;
   onNavigate: (view: string) => void;
   onTrackChange: (track: LevelCode) => void;
 }
@@ -38,6 +39,7 @@ function localizeLessonTitle(title: string, lang: string): string {
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   data,
+  activeTrack: propActiveTrack,
   onNavigate,
   onTrackChange
 }) => {
@@ -46,15 +48,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   const user = data?.user || {
     username: 'Learner',
-    activeTrack: 'jlpt_n5',
+    activeTrack: propActiveTrack || 'jlpt_n5',
     baselineScore: 0,
     targetScore: 80,
     dailyGoalMinutes: 20,
     streakDays: 0
   };
 
-  const activeTrack = user.activeTrack as LevelCode;
-  const isJLPT = activeTrack?.startsWith('jlpt');
+  const activeTrack = (propActiveTrack || user.activeTrack || 'jlpt_n5') as LevelCode;
+  const isJLPT = activeTrack.startsWith('jlpt_') || activeTrack.startsWith('ja_');
   const srsDue = data?.srsDueCount || 0;
   const progressPct = data?.progressPct || 0;
   const hasActivity = data?.hasActivity || false;
@@ -66,63 +68,84 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   return (
     <div className="space-y-6 sm:space-y-8 animate-fadeIn max-w-5xl mx-auto pb-12">
       
-      {/* Sub-Track / Level Selection Pill (Strictly Partitioned) */}
+      {/* Dual-Track & Level Selection Pill (Instant & Foolproof) */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-washi-50 dark:bg-sumi-900 border border-washi-300 dark:border-sumi-800 rounded-xl p-3 sm:p-4 shadow-sm">
-        {isJLPT ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-stone-700 dark:text-stone-300 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-vermilion-500" />
-              <span>{t('dashboard.jp_track')}</span>
-            </span>
-            <div className="flex flex-wrap items-center gap-1.5">
+        {/* Track Switcher (Japanese vs English) */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
+            {language === 'id' ? 'Jalur Belajar:' : 'Program:'}
+          </span>
+          <div className="flex items-center gap-1.5 bg-washi-200 dark:bg-sumi-800 p-1 rounded-xl border border-washi-300 dark:border-sumi-700">
+            <button
+              onClick={() => onTrackChange('jlpt_n5')}
+              className={'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ' + (
+                isJLPT
+                  ? 'bg-vermilion-500 text-white shadow-sm'
+                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+              )}
+            >
+              <span>🇯🇵</span>
+              <span>{language === 'id' ? 'Bahasa Jepang (JLPT)' : 'Japanese (JLPT)'}</span>
+            </button>
+            <button
+              onClick={() => onTrackChange('ielts_academic')}
+              className={'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ' + (
+                !isJLPT
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+              )}
+            >
+              <span>🇬🇧</span>
+              <span>{language === 'id' ? 'Bahasa Inggris (IELTS)' : 'English (IELTS)'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Sub-Level / Sub-Track Selector */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-xs font-bold text-stone-500 dark:text-stone-400">
+            {isJLPT ? (language === 'id' ? 'Tingkat:' : 'Level:') : (language === 'id' ? 'Kategori:' : 'Track:')}
+          </span>
+          {isJLPT ? (
+            <div className="flex flex-wrap items-center gap-1">
               {(['jlpt_n5', 'jlpt_n4', 'jlpt_n3', 'jlpt_n2', 'jlpt_n1'] as LevelCode[]).map(lvl => (
                 <button
                   key={lvl}
                   onClick={() => onTrackChange(lvl)}
-                  className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                  className={'px-2.5 py-1 rounded-md text-xs font-semibold transition-all ' + (
                     activeTrack === lvl
                       ? 'bg-vermilion-500 text-white shadow-sm'
                       : 'bg-washi-200 dark:bg-sumi-800 text-stone-700 dark:text-stone-300 hover:bg-washi-300 dark:hover:bg-sumi-750'
-                  }`}
+                  )}
                 >
                   {lvl.replace('jlpt_', '').toUpperCase()}
                 </button>
               ))}
             </div>
-          </div>
-        ) : (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-stone-700 dark:text-stone-300 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-indigo-600" />
-              <span>{t('dashboard.ielts_track')}</span>
-            </span>
-            <div className="flex items-center gap-2">
+          ) : (
+            <div className="flex items-center gap-1">
               <button
                 onClick={() => onTrackChange('ielts_academic')}
-                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                className={'px-3 py-1 rounded-md text-xs font-semibold transition-all ' + (
                   activeTrack === 'ielts_academic'
                     ? 'bg-indigo-600 text-white shadow-sm'
                     : 'bg-washi-200 dark:bg-sumi-800 text-stone-700 dark:text-stone-300 hover:bg-washi-300 dark:hover:bg-sumi-750'
-                }`}
+                )}
               >
-                {t('dashboard.academic')}
+                Academic
               </button>
               <button
                 onClick={() => onTrackChange('ielts_general')}
-                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                className={'px-3 py-1 rounded-md text-xs font-semibold transition-all ' + (
                   activeTrack === 'ielts_general'
                     ? 'bg-indigo-600 text-white shadow-sm'
                     : 'bg-washi-200 dark:bg-sumi-800 text-stone-700 dark:text-stone-300 hover:bg-washi-300 dark:hover:bg-sumi-750'
-                }`}
+                )}
               >
-                {t('dashboard.general')}
+                General
               </button>
             </div>
-          </div>
-        )}
-
-        <div className="text-xs font-mono text-stone-500">
-          {isJLPT ? 'Silabus Resmi Japan Foundation' : 'Standar Cambridge IELTS Band 1–9'}
+          )}
         </div>
       </div>
 

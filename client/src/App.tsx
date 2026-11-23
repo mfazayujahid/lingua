@@ -18,7 +18,15 @@ import { AnalyticsView } from './components/AnalyticsView';
 export const AppContent: React.FC = () => {
   const { t } = useLanguage();
   const [activeView, setActiveView] = useState<string>('dashboard');
-  const [activeTrack, setActiveTrack] = useState<LevelCode>('jlpt_n5');
+  const [activeTrack, setActiveTrack] = useState<LevelCode>(() => {
+    try {
+      const saved = localStorage.getItem('lingua_active_track');
+      if (saved && (saved.startsWith('jlpt_') || saved.startsWith('ielts_'))) {
+        return saved as LevelCode;
+      }
+    } catch (e) {}
+    return 'jlpt_n5';
+  });
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [srsDueCount, setSrsDueCount] = useState<number>(0);
   const [currentExamLessonId, setCurrentExamLessonId] = useState<string>("les_n5_gram_1");
@@ -62,6 +70,10 @@ export const AppContent: React.FC = () => {
       setActiveView('dashboard');
     }
     setActiveTrack(newTrack);
+    try {
+      localStorage.setItem('lingua_active_track', newTrack);
+    } catch (e) {}
+
     const DEFAULT_EXAMS: Record<string, string> = {
       jlpt_n5: 'les_n5_gram_1',
       jlpt_n4: 'les_n4_gram_1',
@@ -74,18 +86,21 @@ export const AppContent: React.FC = () => {
     if (DEFAULT_EXAMS[newTrack]) {
       setCurrentExamLessonId(DEFAULT_EXAMS[newTrack]);
     }
-    setDashboardData((prev: any) => prev ? {
-      ...prev,
-      user: { ...prev.user, activeTrack: newTrack }
-    } : null);
+
+    setDashboardData((prev: any) => ({
+      ...(prev || {}),
+      user: { ...(prev?.user || {}), activeTrack: newTrack }
+    }));
 
     try {
       await switchUserTrack(newTrack);
       const data = await fetchDashboard();
-      setDashboardData(data);
-      setSrsDueCount(data?.srsDueCount || 0);
+      if (data) {
+        setDashboardData(data);
+        setSrsDueCount(data?.srsDueCount || 0);
+      }
     } catch (err) {
-      console.error('Failed to switch track', err);
+      console.warn('Track switch remote sync notice:', err);
     }
   };
 
@@ -124,6 +139,7 @@ export const AppContent: React.FC = () => {
         {activeView === 'dashboard' && (
           <DashboardView
             data={dashboardData}
+            activeTrack={activeTrack}
             onNavigate={setActiveView}
             onTrackChange={handleTrackChange}
           />

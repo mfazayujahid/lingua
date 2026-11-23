@@ -154,31 +154,25 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <ArrowLeftRight className="w-3 h-3 ml-0.5 opacity-80" />
                 </button>
 
-                {/* Sub-level / Sub-track selector */}
-                {isJapaneseTrack ? (
-                  <select
-                    value={activeTrack}
-                    onChange={(e) => onTrackChange(e.target.value as LevelCode)}
-                    className="bg-transparent text-stone-800 dark:text-stone-200 text-[11px] sm:text-xs font-semibold px-1.5 py-0.5 rounded focus:outline-none cursor-pointer"
-                    aria-label="Pilih Tingkat JLPT"
-                  >
+                {/* Program & Sub-level selector with instant crossover */}
+                <select
+                  value={activeTrack}
+                  onChange={(e) => onTrackChange(e.target.value as LevelCode)}
+                  className="bg-transparent text-stone-800 dark:text-stone-200 text-[11px] sm:text-xs font-semibold px-1.5 py-0.5 rounded focus:outline-none cursor-pointer"
+                  aria-label="Pilih Jalur & Tingkat Belajar"
+                >
+                  <optgroup label="🇯🇵 JLPT (Bahasa Jepang)">
                     <option value="jlpt_n5" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">N5 (Dasar)</option>
                     <option value="jlpt_n4" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">N4 (Pemula)</option>
                     <option value="jlpt_n3" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">N3 (Menengah)</option>
                     <option value="jlpt_n2" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">N2 (Lanjutan)</option>
                     <option value="jlpt_n1" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">N1 (Mahir)</option>
-                  </select>
-                ) : (
-                  <select
-                    value={activeTrack}
-                    onChange={(e) => onTrackChange(e.target.value as LevelCode)}
-                    className="bg-transparent text-stone-800 dark:text-stone-200 text-[11px] sm:text-xs font-semibold px-1.5 py-0.5 rounded focus:outline-none cursor-pointer"
-                    aria-label="Pilih Jalur IELTS"
-                  >
-                    <option value="ielts_academic" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">Academic</option>
-                    <option value="ielts_general" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">General</option>
-                  </select>
-                )}
+                  </optgroup>
+                  <optgroup label="🇬🇧 IELTS (Bahasa Inggris)">
+                    <option value="ielts_academic" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">IELTS Academic</option>
+                    <option value="ielts_general" className="bg-white dark:bg-sumi-850 text-stone-900 dark:text-stone-100">IELTS General</option>
+                  </optgroup>
+                </select>
               </div>
 
               {/* Global Furigana Toggle - ONLY DISPLAYED FOR JAPANESE */}
