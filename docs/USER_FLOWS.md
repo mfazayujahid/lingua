@@ -445,10 +445,11 @@ ightarrow$ Modal displays warning if unanswered questions remain; on confirmatio
 
 ---
 
-### Screen 5: Production Writing & Speaking Studio (Dual Track-Isolated Studios)
+### Screen 5: Production Writing, Speaking & Listening Studio (Multi-Studio Architecture)
 * **Routes**:
   * Writing Studio: `/studio/writing?track=:trackId&level=:levelId`
   * Speaking Studio: `/studio/speaking?track=:trackId&level=:levelId`
+  * Listening Studio: `/studio/listening?track=:trackId&level=:levelId`
 * **Purpose**: Dedicated productive composition and oral discourse testing studios with 100% strict track isolation.
   * In the **Japanese Track (`ja_jlpt`)**: Renders the **Japanese Writing Studio (作文・小論文スタジオ)**, dynamically adapting prompts and rubrics across N5–N1 (*Sakubun / Shoronbun*) with genko yoshi formatting, character counters, and zero English leakage.
   * In the **English Track (`en_ielts`)**: Renders the **IELTS Writing Studio** (Academic Task 1/2 or GT Letters) and the **Interactive IELTS Speaking Studio** (Part 1 Personal Q&A, Part 2 Long Turn Cue Card with 60s scratchpad/120s timer, and Part 3 Two-Way Discussion with AI Examiner).
@@ -526,7 +527,9 @@ ightarrow$ Modal displays warning if unanswered questions remain; on confirmatio
     * **60-Second Preparation Scratchpad**:
       - Visible countdown timer (`00:59`, `00:58`...).
       - Interactive text box for rapid keyword mind-mapping.
-      - "Tips" accordion illustrating high-scoring temporal scaffolding (Past $ightarrow$ Present $ightarrow$ Future).
+      - "Tips" accordion illustrating high-scoring temporal scaffolding (Past $
+ightarrow$ Present $
+ightarrow$ Future).
     * **120-Second Uninterrupted Speaking Gauge**:
       - Large circular progress indicator with color thresholds:
         * Red (`0:00 - 1:00`): Under-time penalty zone ($< 1$ min).
@@ -547,18 +550,116 @@ ightarrow$ Modal displays warning if unanswered questions remain; on confirmatio
     * **Actionable Improvement Roadmap**: Bulleted prioritized feedback per criterion (e.g., *"Expand Part 2 closing with speculative conditionals to boost GRA from 7.0 to 8.0"*).
     * **Band 8.5 Model Audio Comparison**: Audio player allowing the candidate to listen to an authentic native-like response to the same prompt.
 * **User Actions**:
-  * Grant microphone permissions $ightarrow$ System conducts 3-second ambient noise test.
-  * Click "Start Speaking Test" $ightarrow$ Examiner audio delivers initial prompt.
-  * Speak response into microphone $ightarrow$ Visualizer pulses in real time.
+  * Grant microphone permissions $
+ightarrow$ System conducts 3-second ambient noise test.
+  * Click "Start Speaking Test" $
+ightarrow$ Examiner audio delivers initial prompt.
+  * Speak response into microphone $
+ightarrow$ Visualizer pulses in real time.
   * In Part 2: Type keywords in scratchpad during 60s prep; speak continuously when 120s timer starts.
-  * Click "Complete & Evaluate" $ightarrow$ Pipeline runs speech diagnostics and renders results within $< 3	ext{ seconds}$.
+  * Click "Complete & Evaluate" $
+ightarrow$ Pipeline runs speech diagnostics and renders results within $< 3	ext{ seconds}$.
 * **5 Explicit States**:
   * *Empty / Ready*: Studio loaded with chosen prompt, microphone calibrated, examiner standing by.
   * *Examiner Speaking*: Examiner audio playing, candidate microphone muted, animated wave active.
   * *Candidate Recording*: Candidate microphone active, countdown/elapsed timer running, live waveform pulsating.
   * *Evaluating*: Shimmer loading state: *"Transcribing speech... Analyzing phonological cadence & WPM... Parsing syntactic complexity... Aggregating 9-Band descriptors..."*
   * *Completed*: Diagnostic dashboard displayed with audio playback, transcript annotations, and actionable tips.
-  * *Error*: Microphone access denied, audio payload corrupted, or network disconnect $ightarrow$ Explicit error card with browser permission guide and cached recording recovery.
+  * *Error*: Microphone access denied, audio payload corrupted, or network disconnect $
+ightarrow$ Explicit error card with browser permission guide and cached recording recovery.
+
+---
+
+
+#### 5C. Interactive IELTS Listening Studio (`/studio/listening`)
+* **Purpose**: Authentic computer-delivered oral comprehension simulation reproducing official Cambridge / British Council CD-IELTS listening test environments. Integrates single-play audio streaming, multi-regional native accent synthesis, synchronized question auto-scrolling, interactive spatial map labelling, and deterministic distractor diagnostic scorecards.
+* **The 4-Stage Interactive Listening Flow**:
+
+```
+[ Stage 1: Battery Selection & Skill Focus ]
+  ├── Mode A: Full Official Cambridge Simulation Battery (Sections 1–4, 40 items, 32 min)
+  ├── Mode B: Daily Social Survival Battery (Sections 1–2, 20 items, 15 min)
+  └── Mode C: Academic Research & Lecture Battery (Sections 3–4, 20 items, 17 min)
+        │
+        ▼
+[ Stage 2: Audio Setup & Multi-Accent Preview ]
+  ├── Headphone check & audio chime output verification
+  ├── Master volume calibration slider
+  └── Native Accent Preview Switcher (British RP, Australian, Scottish, General American)
+        │
+        ▼
+[ Stage 3: Sections 1–4 Interactive Streaming & Answering ]
+  ├── Single-Play Audio Stream (scrub bar locked in Exam mode)
+  ├── Synchronized Question Auto-Scroll (viewport follows audio timecodes)
+  ├── Section 2 Interactive Spatial Map Labelling (drag-and-drop letter pins A–H)
+  ├── Section 3 Voice Attribution Matrix (matching speakers to research claims)
+  └── 40-item Question Navigation Ribbon with answered/flagged indicators
+        │
+        ▼
+[ Stage 4: Submission & Band Diagnostic Scorecard ]
+  ├── Official Raw Score (/40) mapped to 9-Band scale with CEFR badge
+  ├── Audio Replay Markers (scrub to exact mistake timestamps with -5s pre-roll)
+  ├── Distractor Analysis Breakdown (conversational trap pivots demystified)
+  └── 100% Indonesian Localization Toggle (Panduan & Evaluasi Bahasa Indonesia)
+```
+
+* **Key UI Components**:
+  * *Top Status & Audio Control Header*:
+    * Track Title: e.g. `IELTS Listening Official Simulation 1 (Section 2: Community Arts Complex)`.
+    * Mode Indicator: `EXAM MODE (Single-Play Lock)` vs `PRACTICE MODE (Speed & Seek Active)`.
+    * In Practice Mode: Playback Speed Selector (`0.8x`, `1.0x`, `1.2x`) with pitch-preservation (`preservesPitch: true`), scrubber slider, and $\pm 5\text{s}$ skip buttons.
+    * In Exam Mode: Scrub bar and seek buttons disabled via CSS and event blockers; persistent countdown timer synchronized to stream.
+    * Language Mode Switcher: `English` $\leftrightarrow$ `Bahasa Indonesia (100% Terjemahan)`.
+  * *Audio Setup & Accent Preview Modal (Pre-Test)*:
+    * Interactive test sound chime button to verify stereo output.
+    * Accent Selector Drawer with 4 sample sound clips:
+      - *British RP*: Standard Southern British accent (clear plosives, non-rhotic).
+      - *Australian English*: Broad Australian cadence (vowel shifts, rising inflection).
+      - *Scottish English*: Lowland Scottish lilt (rhotic tap, monophthongs).
+      - *General American*: Standard American collegiate lecture delivery (rhoticity, flapped 't').
+  * *Split-Pane / Synchronized Answering Layout*:
+    * *Audio Waveform & Timecode Banner*: Visual stream progress bar indicating Section milestones (Pre-reading 30s $\rightarrow$ Audio Playing $\rightarrow$ Mid-break 30s $\rightarrow$ Final review).
+    * *Auto-Scrolling Question Canvas*:
+      - Automatically scrolls the active question group into the candidate's primary viewport based on audio timecodes (e.g. at $t = 55\text{s}$, smooth scrolls to Questions 1–5; at $t = 240\text{s}$, scrolls to Questions 6–10).
+      - User can override auto-scroll via manual mouse/touch scroll without breaking audio sync.
+    * *Section 2 Interactive Spatial Map Labelling Viewport*:
+      - High-resolution SVG architectural floor plan / campus map.
+      - Draggable letter pills (`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`) located on a floating side dock.
+      - Hotspot drop zones on the map displaying compass rose (North/South/East/West), highlighted entry gates, and corridors.
+      - Click-to-place fallback for mobile touchscreens: tapping a question item activates target mode, tapping a map zone assigns the letter.
+    * *Section 3 Voice Attribution Matrix*:
+      - Clean grid pairing academic claims with speakers (`Dr. Henderson`, `Marcus`, `Chloe`).
+  * *Bottom 40-Item Question Palette*:
+    * Numbered pills 1 to 40 organized into 4 distinct section clusters.
+    * Visual states: Unanswered (subtle border), Answered (solid indigo), Flagged (amber flag).
+  * *Submission & Diagnostic Scorecard*:
+    * **Overall Score Card**: Raw Score (/40), Official Band Score (e.g. `Band 7.5`), CEFR descriptor (`C1 - Operational Proficiency`).
+    * **Audio Replay Markers**:
+      - Next to every incorrect answer, an *"Audio Replay"* button appears.
+      - Clicking the button loads the audio stream starting exactly 5 seconds before the answer was mentioned, with the transcript line highlighted.
+    * **Conversational Distractor Analysis Panel**:
+      - Detailed breakdown explaining why wrong choices were seductive traps (e.g., *"The speaker initially suggested Tuesday the 14th, but subsequently corrected it to Thursday the 16th due to flight schedules"*).
+    * **Morphological & Word-Count Error Tags**:
+      - Clear error labels: `[WORD_LIMIT_EXCEEDED: Max 2 Words]`, `[PLURAL_FORM_MISSING: Expected 'laboratories', received 'laboratory']`.
+* **100% Indonesian Localization (Mode Bahasa Indonesia)**:
+  * When `languageMode = 'id'`, all UI chrome, instructional banners, error explanations, and diagnostic feedback render in natural, professional Indonesian:
+    - *"Ujian Mendengarkan IELTS Resmi - Bagian 1: Percakapan Sosial Sehari-hari"*
+    - *"Waktu Membaca Soal: 30 Detik Tersisa"*
+    - *"Peringatan Batas Kata: Maksimal 2 kata dan/atau 1 angka. Jawaban 3 kata otomatis bernilai 0."*
+    - *"Analisis Jebakan Percakapan: Pembicara meralat tanggal keberangkatan dari tanggal 14 ke tanggal 16."*
+* **User Actions**:
+  * Select battery mode (Social vs Academic vs Full Simulation).
+  * Run audio test & preview regional accents.
+  * Listen to audio and enter answers in real-time.
+  * In Section 2, drag letter pins onto the architectural SVG map.
+  * Submit exam $\rightarrow$ Examine diagnostic scorecard with audio replay markers.
+* **5 Explicit States**:
+  * *Setup / Ready*: Headphone check completed, volume calibrated, audio stream pre-buffered.
+  * *Streaming & Active*: Audio playing, single-play lock enforced in Exam mode, question auto-scroll tracking.
+  * *Mid-Section Pause*: Audio paused by narration for 30 seconds: *"You now have half a minute to check your answers."*
+  * *Review Phase*: 2-minute final review countdown active at the conclusion of Section 4.
+  * *Diagnostic Review*: Full scorecard rendered with raw score, band conversion, audio replay markers, and distractor audits.
+  * *Error*: Audio file 404, Web Audio decode failure, or network drop $\rightarrow$ Error alert with offline cached audio fallback.
 
 ---
 
@@ -1063,5 +1164,43 @@ On mobile viewports ($< 640	ext{px}$), the desktop top-header collapses into an 
   * **Given** a user is in `/studio/speaking`,
   * **When** viewing the interface,
   * **Then** the view renders 100% authentic English IELTS examiner audio, cue cards, and 9-Band metrics, with zero Japanese text, genko yoshi formatting, or Furigana toggles visible.
+
+---
+### 4.21 IELTS Listening Single-Play Audio & Examination Integrity Verification
+* **Scenario 50: Strict Exam Mode Single-Play Lockout**
+  * **Given** a candidate begins an IELTS Listening Mock Exam in Strict Exam Mode (`ielts_listen_mock_01`),
+  * **When** the audio stream starts playing,
+  * **Then** the seek bar, rewind buttons, pause button, and speed controls are strictly disabled ($N_{\text{play}} = 1$), and attempting to reload or navigate away triggers an immediate proctoring warning.
+* **Scenario 51: Synchronized Question Auto-Scroll with Audio Timecodes**
+  * **Given** an audio stream is actively progressing through Section 1,
+  * **When** the audio narration reaches timecode $t = 55.0\text{s}$ (the beginning of Questions 1–5),
+  * **Then** the question viewport smoothly auto-scrolls to bring Question 1 into the top visible third of the canvas, ensuring the candidate does not have to hunt for active fields while listening.
+* **Scenario 52: Deterministic Grading: Word Limit Violations & Morphological Plurality**
+  * **Given** Question 8 specifies *"NO MORE THAN TWO WORDS"* and Question 31 requires plural *"phonic lips"*,
+  * **When** Candidate A enters *"pair of waterproof boots"* (3 words) for Question 8,
+  * **Then** the grading engine scores it as **0 marks** with tag `[WORD_LIMIT_EXCEEDED]`, even though "waterproof boots" was included.
+  * **When** Candidate B enters singular *"phonic lip"* for Question 31,
+  * **Then** the grading engine scores it as **0 marks** with tag `[PLURAL_MORPHOLOGY_MISSING]`.
+
+### 4.22 Multi-Regional Accent Streaming, Speed Pitch-Preservation & Interactive Spatial Map Labelling
+* **Scenario 53: Multi-Regional Accent Streaming & Pitch-Preserving Speed Adjustment**
+  * **Given** a learner is in Practice Mode on Section 2 (Scottish English) or Section 1 (Australian English),
+  * **When** the learner toggles playback speed to $0.8\times$ or $1.2\times$,
+  * **Then** the audio engine adjusts `playbackRate` while maintaining `preservesPitch = true`, allowing slower or faster audio streaming without frequency shift or voice distortion.
+* **Scenario 54: Section 2 Interactive Spatial Map Labelling**
+  * **Given** a candidate is on Section 2 Questions 11–15 with the Riverside Arts Complex map,
+  * **When** the speaker states *"The Ceramics Workshop is located past the West Gallery at Location B"*,
+  * **Then** the candidate drags the letter pin `B` into the target zone (or taps hotspot B on mobile), which snaps into place with a subtle haptic/visual confirmation and updates the Question 12 answer record to `B`.
+
+### 4.23 Complete Indonesian Localization in ID Mode (Mode Bahasa Indonesia 100%)
+* **Scenario 55: Complete UI & Feedback Localization in ID Mode**
+  * **Given** an Indonesian learner switches language mode to `Bahasa Indonesia` (`mode: 'id'`),
+  * **When** navigating through the Listening Studio,
+  * **Then** all navigation ribbons, instructions, timer alerts, status badges, and diagnostic feedback cards render in grammatically flawless Indonesian with zero raw English interface strings (e.g. *"Sisa Waktu Pemeriksaan"*, *"Analisis Skor Band Diagnostik"*, *"Putar Ulang Audio"*).
+* **Scenario 56: Bilingual Diagnostic Distractor Explanation in ID Mode**
+  * **Given** a learner reviews their incorrect answer for Question 2 in ID mode,
+  * **When** clicking on the distractor analysis drawer,
+  * **Then** the system presents an exhaustive explanation in Indonesian:
+    > *"Analisis Jebakan Percakapan: Anda memilih '12 Oktober', namun pembicara meralat jadwal dengan menyatakan bahwa penerbangan mereka mendarat pada tanggal 14 Oktober ('Actually, our flight lands on the 14th'). Jawaban yang benar adalah 14 Oktober."*
 
 ---

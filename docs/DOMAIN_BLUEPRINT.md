@@ -304,6 +304,78 @@ ightarrow$ Link (Syntactic wrap-up back to the central thesis).
 
 ---
 
+#### 2.1.6 Authentic Cambridge & British Council IELTS Listening Architecture & Audio Streaming Engine
+
+The IELTS Listening examination evaluates receptive oral comprehension under strict, irreversible real-time conditions. The platform implements an **Authentic 4-Section Audio Streaming Architecture** strictly conforming to Cambridge Assessment English and British Council Computer-Delivered IELTS (CD-IELTS) testing standards.
+
+##### 1. The 4 Structural Sections & Pedagogical Scaffolding
+The examination consists of 40 questions across 4 distinct sections of increasing cognitive and syntactic complexity:
+
+| Section | Communicative Context | Speaker Dynamics | Linguistic & Cognitive Focus | Core Question Typologies | Distractor Traps & Challenges |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **Section 1** | Everyday Social Survival & Commercial Transactions | 2 Speakers (Dialogue) | Alphanumeric precision, personal data, dates, telephone numbers, postal codes, international currencies. | Form Completion, Note Taking, Table Completion (Max 2 words/1 number). | Conversational Self-Correction ("Actually, it is...", "Wait, let me check that..."), spelling of unusual surnames, zero/oh disambiguation. |
+| **Section 2** | Public Social Monologue & Orientation | 1 Speaker (Monologue) | Spatial navigation, local amenities, institutional regulations, geographical layout, historical site guides. | Map / Plan / Diagram Labelling, Multiple Choice (Single), Matching Features. | Compass bearings (North/South/East/West), clockwise/counter-clockwise, relative spatial prepositions (*adjacent to, opposite the roundabout*). |
+| **Section 3** | Academic Tutorial & Collaborative Research | 3–4 Speakers (Colloquium) | Higher-education discourse, research methodology, student-tutor consultation, peer evaluation, dissertation scope. | Matching Opinions to Speakers, Multiple Choice (Multi-select), Flowchart Completion. | Qualified agreements (*"I take your point, but..."*), subtle dissent, voice attribution confusion across peer speakers. |
+| **Section 4** | University Academic Lecture | 1 Speaker (Academic Monologue) | High-register university lecture, disciplinary terminology, macro-discourse markers, dense factual synthesis. | Summary / Note Completion (One Word Only), Classification. | Uninterrupted delivery, absence of conversational pauses, technical Academic Word List (AWL) terms, dense signposting (*Having examined X, we now pivot to Y*). |
+
+##### 2. Audio Streaming Specifications & CD-IELTS Constraints
+* **Single-Play Audio Stream Constraint**:
+  * In **Strict Exam Mode**, audio streams play strictly **once only** ($N_{\text{play}} = 1$).
+  * The audio scrub bar (seek slider), pause button, rewind (-10s), and fast-forward controls are disabled via CSS and DOM event suppression.
+  * Section progression is synchronized to audio stream milestones: candidates are given 30 seconds of pre-reading time before each section starts, 30 seconds of mid-section pause where applicable, and 2 minutes of final answer review at the conclusion of Section 4.
+* **Practice Mode Audio Flexibility**:
+  * In **Practice Mode**, candidates can scrub audio, toggle pause/play, and adjust dynamic playback speed:
+    $$\text{speed} \in \{0.8\times, 1.0\times, 1.2\times\}$$
+  * **Pitch Preservation**: The audio pipeline sets HTML5 Audio `preservesPitch = true` (or Web Audio API `AudioContext` with time-stretch phase vocoder) so speech frequencies remain natural and intelligible without chipmunk or demonic distortion.
+* **Multi-Regional Native Accent Distribution**:
+  To replicate authentic international testing environments, audio tracks incorporate certified native English voice talents across four standard geopolitical accent profiles:
+  1. **British RP (Received Pronunciation / Standard Southern British)**: ~50% of content.
+  2. **Australian English**: ~25% of content (distinctive diphthong shifts, rising inflection).
+  3. **Scottish English**: ~15% of content (rhotic 'r', monophthongal vowels).
+  4. **General American**: ~10% of content (flapped 't', rhoticity).
+
+##### 3. Official 40-Item Raw-to-Band Score Conversion Matrix
+IELTS Listening scores are derived deterministically from the 40 raw marks, mapped to official 9-Band descriptors:
+
+```
++---------------+---------------------+--------------------+--------------------------------------+
+| Raw Score (/40| Listening Band Score| CEFR Classification| Official Competency Level Descriptors |
++---------------+---------------------+--------------------+--------------------------------------+
+| 39 - 40       | Band 9.0            | C2 (Mastery)       | Expert User (Effortless comprehension)|
+| 37 - 38       | Band 8.5            | C1 / C2            | Very Good User (Near-native grasp)   |
+| 35 - 36       | Band 8.0            | C1 (Effective)     | Very Good User (Rare inaccuracies)   |
+| 32 - 34       | Band 7.5            | C1 (Operational)   | Good User (Complex discourse grasp)  |
+| 30 - 31       | Band 7.0            | C1 (Threshold)     | Good User (Generally handles nuance) |
+| 26 - 29       | Band 6.5            | B2 (Vantage)       | Competent User (Effective command)   |
+| 23 - 25       | Band 6.0            | B2 (Independent)   | Competent User (Occasional confusion)|
+| 18 - 22       | Band 5.5            | B1 (Threshold)     | Modest User (Partial understanding)  |
+| 16 - 17       | Band 5.0            | B1 (Basic)         | Modest User (Frequent errors)        |
+| 13 - 15       | Band 4.5            | A2 (Waystage)      | Limited User (Basic communication)   |
+| 10 - 12       | Band 4.0            | A2 (Elementary)    | Limited User (Frequent breakdowns)   |
+| <= 9          | Band 0.0 - 3.5      | A1 / Pre-A1        | Intermittent / Non-User              |
++---------------+---------------------+--------------------+--------------------------------------+
+```
+
+##### 4. Distraction Traps & Error Typology Taxonomy
+The platform evaluates candidate answers against official Cambridge grading conventions:
+1. **Word Count Limit Violations (Over-Length Penalty)**:
+   * Rule: If the prompt specifies *"NO MORE THAN TWO WORDS AND/OR A NUMBER"*, entering 3 words results in a score of **0**, even if the correct key is contained within the answer string.
+   * Example: Correct answer is `leather wallet`. Entering `the red leather wallet` $\rightarrow$ Evaluated as `INCORRECT (0 points)`.
+2. **Singular vs Plural Morphological Errors**:
+   * English IELTS requires absolute morphological fidelity to the audio stream. If the speaker utters plural `laboratories` or `councillors`, writing the singular form `laboratory` or `councillor` is graded as **0**.
+3. **Conversational Distractor Traps & Late Pivot Corrections**:
+   * Speakers routinely present an initial plausible value, then retract or modify it:
+     - Speaker A: *"We could meet on Tuesday the 14th."*
+     - Speaker B: *"I'm swamped then. Could we push it back two days to the 16th?"*
+     - Speaker A: *"Thursday the 16th works perfectly."*
+     - Correct Key: `16th October` (Writing `14th` incurs 0 points).
+4. **Alphanumeric Code & Currency Format Nuances**:
+   * Postcodes (e.g. `WA72 4KL` vs `WA724KL`) and currency values (`£150`, `150 pounds`, `150 GBP`) must follow authorized regex patterns.
+5. **Orthographic Spelling Equivalence (UK vs US)**:
+   * Both standard British and American spellings are accepted without penalty (`theatre` / `theater`, `colour` / `color`, `analyse` / `analyze`).
+
+---
+
 ### 2.2 Japanese JLPT Framework (N5 $\rightarrow$ N4 $\rightarrow$ N3 $\rightarrow$ N2 $\rightarrow$ N1)
 
 The JLPT tests Japanese communicative, lexical, orthographic, and academic competence across 5 hierarchical levels. This platform provides full curriculum and pedagogical support across all five tiers, establishing a seamless learning corridor from foundational literacy (N5/N4) to upper-intermediate practical competence (N3) and advanced corporate/academic fluency (N2/N1).
@@ -2630,6 +2702,130 @@ diagnostic aid while fiercely preserving the indispensable human teacher at the 
   * *High-Band Analytical Framework*: Symbolic awareness vs systemic economic externalities; the necessity of statutory carbon taxation.
 * **Question 10 (Cultivating Mental Fortitude in Youth)**: *"Are modern educational institutions insulating students from constructive failure, thereby stunting their capacity to overcome future adversity?"*
   * *High-Band Analytical Framework*: Pedagogical sheltering vs psychological inoculation; cultivating grit through controlled struggle.
+
+---
+
+#### 5.1.6 Authentic Listening Audio Engine & Sections 1–4 Streaming Specifications
+
+The platform provisions a dedicated, high-fidelity audio streaming and synchronized timecoding architecture for the IELTS Listening module:
+
+```
+[ IELTS Listening Audio Engine & Ingestion Pipeline ]
+  ├── 1. Audio Asset Manifest (Opus / AAC / MP3 @ 48kHz, VBR 96–128kbps)
+  │    ├── Section 1: Lakeview Retreat Booking (British RP + Australian English)
+  │    ├── Section 2: Riverside Arts Complex Orientation (Scottish English Monologue)
+  │    ├── Section 3: Subterranean Hydrogen Storage Tutorial (Tutor + 2 Students: RP + General American)
+  │    └── Section 4: Cetacean Bioacoustics Lecture (British RP Academic Monologue)
+  ├── 2. Synchronized Timecode & Auto-Scroll Pipeline
+  │    ├── millisecond-accurate cue markers for question viewport tracking
+  │    └── replay bookmark intervals for diagnostic error analysis
+  ├── 3. Interactive Spatial Map Labelling Engine (Section 2)
+  │    ├── 2D vector coordinate matrix [x, y] in normalized [0, 1000]^2 space
+  │    └── draggable letter pins (A–H) with snap-to-target zone bounding boxes
+  └── 4. Deterministic Distractor Disarmament Matrix
+       └── explicit mapping of trap triggers, linguistic pivots, and override tokens
+```
+
+##### 1. Sections 1–4 Timecoded Audio Stream Manifest
+
+```typescript
+export interface IeltsListeningAudioManifest {
+  manifestId: 'ielts_listen_mock_01_manifest';
+  title: 'IELTS Academic & General Training Listening Simulation 1';
+  totalDurationSeconds: 1920; // 32 minutes (30 min audio + 2 min review)
+  tracks: [
+    {
+      sectionIndex: 1;
+      sectionTitle: 'Lakeview Eco-Lodge Reservation';
+      audioUrl: '/audio/ielts/listening/sec1_lakeview_booking.opus';
+      durationSeconds: 390;
+      speakers: [
+        { speakerId: 'spk_receptionist'; name: 'Clara (Receptionist)'; accent: 'british_rp'; gender: 'female' },
+        { speakerId: 'spk_customer'; name: 'David Heathcote'; accent: 'australian'; gender: 'male' }
+      ];
+      timecodes: {
+        introLeadIn: { startSec: 0.0; endSec: 25.0 };
+        preReadingPause: { startSec: 25.0; endSec: 55.0 }; // 30s look at questions 1-5
+        dialoguePartA: { startSec: 55.0; endSec: 210.0 }; // questions 1-5
+        midBreakPause: { startSec: 210.0; endSec: 240.0 }; // 30s look at questions 6-10
+        dialoguePartB: { startSec: 240.0; endSec: 360.0 }; // questions 6-10
+        sectionReviewPause: { startSec: 360.0; endSec: 390.0 }; // 30s review section 1
+      };
+    },
+    {
+      sectionIndex: 2;
+      sectionTitle: 'Riverside Community Arts Complex Orientation & Map';
+      audioUrl: '/audio/ielts/listening/sec2_arts_complex.opus';
+      durationSeconds: 410;
+      speakers: [
+        { speakerId: 'spk_director'; name: 'Fiona MacLeod (Operations Director)'; accent: 'scottish'; gender: 'female' }
+      ];
+      spatialMapConfig: {
+        mapImageUri: '/assets/ielts/maps/riverside_arts_complex.svg';
+        viewBox: '0 0 1000 750';
+        hotspots: [
+          { letter: 'A'; label: 'Café & Terrace'; x: 180; y: 220; radius: 45 },
+          { letter: 'B'; label: 'Ceramics Workshop'; x: 340; y: 510; radius: 45 },
+          { letter: 'C'; label: 'Sculpture Garden'; x: 520; y: 160; radius: 45 },
+          { letter: 'D'; label: 'Main Amphitheater'; x: 670; y: 380; radius: 45 },
+          { letter: 'E'; label: 'Printmaking Studio'; x: 820; y: 290; radius: 45 },
+          { letter: 'F'; label: 'Audio-Visual Archive'; x: 410; y: 680; radius: 45 },
+          { letter: 'G'; label: 'Emergency Assembly Lawn'; x: 890; y: 600; radius: 45 }
+        ];
+      };
+    },
+    {
+      sectionIndex: 3;
+      sectionTitle: 'Subterranean Hydrogen Storage Tutorial';
+      audioUrl: '/audio/ielts/listening/sec3_hydrogen_storage.opus';
+      durationSeconds: 440;
+      speakers: [
+        { speakerId: 'spk_tutor'; name: 'Dr. Henderson'; accent: 'british_rp'; role: 'tutor' },
+        { speakerId: 'spk_student_m'; name: 'Marcus'; accent: 'british_rp'; role: 'postgraduate_student' },
+        { speakerId: 'spk_student_f'; name: 'Chloe'; accent: 'general_american'; role: 'postgraduate_student' }
+      ];
+      voiceAttributionItems: [21, 22, 23, 24, 25];
+    },
+    {
+      sectionIndex: 4;
+      sectionTitle: 'University Lecture: Cetacean Bioacoustics & Orca Dialects';
+      audioUrl: '/audio/ielts/listening/sec4_cetacean_bioacoustics.opus';
+      durationSeconds: 480;
+      speakers: [
+        { speakerId: 'spk_lecturer'; name: 'Prof. Eleanor Vance'; accent: 'british_rp'; role: 'professor' }
+      ];
+      uninterruptedLecture: true;
+      noteCompletionRange: [31, 40];
+    }
+  ];
+}
+```
+
+##### 2. Comprehensive Distractor & Conversational Trap Audit Table
+
+The table below delineates the exact conversational trap mechanics across all 4 sections of `ielts_listen_mock_01`, detailing the deceptive initial token, the linguistic pivot marker, and the final verified key:
+
+| Item # | Target Focus | Initial Trap Distractor | Linguistic Pivot Marker | Final Correct Answer | Pedagogical Explanation |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **1** | Caller Surname | *"Heathcote with a double T"* | *"No, just one T in the middle: H-E-A-T-H-C-O-T-E"* | **HEATHCOTE** | Spelling correction trap tests listening to the end of the letter sequence. |
+| **2** | Arrival Date | `12th October` | *"Actually, our flight lands on the 14th, so make it the fourteenth"* | **14th October** / **October 14** | Date shift pivot overrules initial departure discussion. |
+| **3** | Cabin Tier | `Lakeside Villa` | *"Unfortunately the Villa is booked, but our Riverside Cabin has just opened up"* | **Riverside Cabin** | Unavailability trap forces fallback to alternative tier. |
+| **4** | Number of Guests | `6 people` | *"Two had to drop out due to work commitments, leaving just the four of us"* | **4** / **four** | Subtraction pivot alters group count. |
+| **5** | Dietary Needs | `gluten-free` | *"My partner is gluten-free, but she's not coming; the rest of us strictly require vegetarian"* | **vegetarian** | Third-party distractor: non-attendee's diet must be disregarded. |
+| **6** | Vehicle Reg | `WA72 KLU` | *"Wait, is that a U or a V? It's definitely a U at the end"* | **WA72 KLU** | Phonetic alphabet clarification test. |
+| **7** | Excursion | `mountain biking` | *"We ruled out the cycling tour in favour of guided kayaking"* | **guided kayaking** | Rejection marker ("ruled out... in favour of") defines valid selection. |
+| **8** | Equipment Hire | `trekking poles` | *"We have poles, but we urgently need waterproof boots"* | **waterproof boots** | Distinguishes owned equipment from equipment requiring rental. |
+| **9** | Deposit Amount | `£250` | *"The full balance is £250, but the advance deposit is exactly half that"* | **£125** / **125 pounds** | Total balance vs required deposit arithmetic trap. |
+| **10**| Confirm Code | `ECH-9040` | *"That's ECH-9042, not 9040"* | **ECH-9042** | Terminal digit correction trap. |
+| **11**| Map: Sculpture Courtyard | South of Pavilion | *"Directly north of the main amphitheater, opposite the courtyard gate"* | **Location D** | Cardinal direction and relative landmark navigation. |
+| **12**| Map: Ceramics Studio | East Wing | *"Tucked behind the West Gallery, right past the corridor"* | **Location B** | Left-hand floorplan tracking under Scottish accent cadence. |
+| **16**| Membership Discount | Seniors over 60 | *"The concession applies strictly to full-time students and those over 65"* | **B** (Students & 65+) | Age qualification threshold trap (60 vs 65). |
+| **21**| Salt Cavern Porosity | Chloe | *"Chloe originally doubted it, but Marcus presented the core data on permeability"* | **Marcus** | Voice attribution: separating proponent from investigator. |
+| **24**| North Sea Sampling | Dr. Henderson | *"I was hesitant about offshore drilling samples, but Chloe convinced the committee"* | **Chloe** | Distinguishing tutor's initial reservation from student's successful proposal. |
+| **31**| Cetacean Anatomy | `vocal cords` | *"Cetaceans possess no vocal cords; acoustic impulses originate in the phonic lips"* | **phonic lips** | Negative assertion (*"possess no..."*) repudiates intuitive biology distractor. |
+| **32**| Dialect Transmission| `genetic inheritance` | *"Far from being genetically hardwired, dialects rely on cultural transmission"* | **cultural transmission**| Concessive contrast (*"Far from being..."*) confirms sociological learning. |
+| **35**| Shipping Noise | `sound pollution` | *"Marine biologists term this specific interference acoustic masking"* | **acoustic masking** | Technical terminology discipline over colloquial phrase. |
+| **38**| Sonar Physiological Risk| `heart arrhythmia` | *"Military sonar induces panic-dives, precipitating lethal decompression sickness"* | **decompression sickness**| Cause-and-effect medical terminology precision. |
 
 ---
 
