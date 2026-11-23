@@ -889,10 +889,16 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
 
   // Calculate current active section from audio timecode
   useEffect(() => {
-    if (currentTimeSec < 390) setActiveSection(1);
-    else if (currentTimeSec < 760) setActiveSection(2);
-    else if (currentTimeSec < 1180) setActiveSection(3);
-    else setActiveSection(4);
+    let targetSection: 1 | 2 | 3 | 4 = 1;
+    if (currentTimeSec < 390) targetSection = 1;
+    else if (currentTimeSec < 760) targetSection = 2;
+    else if (currentTimeSec < 1180) targetSection = 3;
+    else targetSection = 4;
+
+    if (targetSection !== activeSectionRef.current) {
+      setActiveSection(targetSection);
+      activeSectionRef.current = targetSection;
+    }
   }, [currentTimeSec]);
 
   // Audio Stream Simulation Clock
@@ -1106,11 +1112,26 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
 
 
   // Synchronize refs with state
+  const prevActiveSectionRef = useRef<1 | 2 | 3 | 4>(1);
+
   useEffect(() => {
     isPlayingRef.current = isPlaying;
     playbackSpeedRef.current = playbackSpeed;
     activeSectionRef.current = activeSection;
   }, [isPlaying, playbackSpeed, activeSection]);
+
+  // Automatically start audio playback whenever activeSection changes while stream is active
+  useEffect(() => {
+    if (stage === 'listening_stream' && isPlayingRef.current) {
+      if (prevActiveSectionRef.current !== activeSection) {
+        console.log(`[ListeningStudio] Automatic section transition: Section ${prevActiveSectionRef.current} -> ${activeSection}`);
+        prevActiveSectionRef.current = activeSection;
+        playSectionAudio(activeSection, 0);
+      }
+    } else {
+      prevActiveSectionRef.current = activeSection;
+    }
+  }, [activeSection, isPlaying, stage]);
 
   // Audio Playback Engine via SpeechSynthesis with Accent Modeling
   const playSectionAudio = (secNum: 1 | 2 | 3 | 4, startIndex: number = 0) => {
@@ -1133,13 +1154,15 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
       }
       if (idx >= lines.length) {
         setCurrentSpeaker(null);
-        // If not section 4, auto advance to next section after 3 seconds
+        // Auto-advance to next section after 2 seconds when current section script finishes
         if (secNum < 4) {
           setTimeout(() => {
             if (isPlayingRef.current && activeSectionRef.current === secNum) {
-              handleJumpSection((secNum + 1) as any);
+              const nextSec = (secNum + 1) as 1 | 2 | 3 | 4;
+              console.log(`[ListeningStudio] Section ${secNum} dialogue finished, auto-advancing to Section ${nextSec}`);
+              handleJumpSection(nextSec);
             }
-          }, 3000);
+          }, 2000);
         }
         return;
       }
@@ -1193,12 +1216,11 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
   const handleJumpSection = (sNum: 1 | 2 | 3 | 4) => {
     setActiveSection(sNum);
     activeSectionRef.current = sNum;
+    prevActiveSectionRef.current = sNum;
     const startTimes: Record<number, number> = { 1: 0, 2: 390, 3: 760, 4: 1180 };
     setCurrentTimeSec(startTimes[sNum] || 0);
-    if (isPlaying) {
-      setTimeout(() => {
-        playSectionAudio(sNum, 0);
-      }, 200);
+    if (isPlayingRef.current) {
+      playSectionAudio(sNum, 0);
     }
   };
 
