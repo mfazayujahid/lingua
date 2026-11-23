@@ -5,6 +5,7 @@ import { useFurigana } from '../context/FuriganaContext';
 import { useLanguage } from '../context/LanguageContext';
 import {
   Flame,
+  GraduationCap,
   BookOpen,
   Layers,
   Clock,
@@ -56,6 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navItems = isJapaneseTrack
     ? [
         { id: 'dashboard', label: t('nav.dashboard'), shortLabel: t('nav.short.dashboard'), icon: BookOpen },
+        { id: 'lecture', label: t('nav.lecture'), shortLabel: t('nav.short.lecture'), icon: GraduationCap },
         { id: 'curriculum', label: t('nav.curriculum'), shortLabel: t('nav.short.curriculum'), icon: Layers },
         { id: 'kanji', label: t('nav.kanji'), shortLabel: t('nav.short.kanji'), icon: Feather },
         { id: 'srs', label: t('nav.srs'), shortLabel: t('nav.short.srs'), icon: CheckCircle2, badge: srsDueCount },
@@ -65,6 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       ]
     : [
         { id: 'dashboard', label: t('nav.dashboard'), shortLabel: t('nav.short.dashboard'), icon: BookOpen },
+        { id: 'lecture', label: t('nav.lecture'), shortLabel: t('nav.short.lecture'), icon: GraduationCap },
         { id: 'curriculum', label: t('nav.curriculum'), shortLabel: t('nav.short.curriculum'), icon: Layers },
         { id: 'studio', label: t('nav.ielts_studio'), shortLabel: t('nav.ielts_studio'), icon: PenTool },
         { id: 'srs', label: t('nav.ielts_vocab'), shortLabel: t('nav.short.srs'), icon: CheckCircle2, badge: srsDueCount },

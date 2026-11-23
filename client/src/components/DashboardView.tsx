@@ -241,25 +241,27 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 pt-1">
-            {/* Step 1: Writing Studio */}
+            {/* Step 1: Learning Center (Pusat Belajar) */}
             <div className="bg-white/80 dark:bg-sumi-850/80 p-5 rounded-xl border border-washi-200 dark:border-sumi-750 flex flex-col justify-between space-y-4 hover:border-indigo-500/50 transition-all shadow-sm">
               <div className="space-y-1.5">
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                  {t('dashboard.ielts_step1_badge')}
+                  {language === 'id' ? 'Langkah 1 • Teori & Kosakata' : 'Step 1 • Theory & Vocab'}
                 </span>
                 <h3 className="font-bold text-sm text-stone-900 dark:text-stone-100 flex items-center gap-1.5">
-                  <PenTool className="w-4 h-4 text-indigo-600" />
-                  <span>{t('dashboard.ielts_step1_title')}</span>
+                  <GraduationCap className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                  <span>{language === 'id' ? 'Pusat Belajar: Materi & Tata Bahasa' : 'Learning Hub: Theory & Grammar'}</span>
                 </h3>
                 <p className="text-xs text-stone-500 dark:text-stone-400 leading-normal">
-                  {t('dashboard.ielts_step1_desc')}
+                  {language === 'id'
+                    ? 'Pelajari teori skimming, bedah tata bahasa kompleks, dan bank kosakata AWL sebelum masuk ke latihan soal.'
+                    : 'Master reading heuristics, academic grammar formulas, and vocabulary bank before drills.'}
                 </p>
               </div>
               <button
-                onClick={() => onNavigate('studio')}
+                onClick={() => onNavigate('lecture')}
                 className="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
               >
-                <span>{t('dashboard.ielts_step1_btn')}</span>
+                <span>{language === 'id' ? 'Buka Pusat Belajar' : 'Open Learning Hub'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

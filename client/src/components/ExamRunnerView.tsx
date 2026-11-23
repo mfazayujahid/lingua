@@ -325,7 +325,13 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
     try {
       const lessonData = await fetchLesson(idToLoad);
       setLessonInfo(lessonData.lesson);
-      const loadedItems = lessonData.items || [];
+      const loadedItems = (lessonData.items || []).map((it: any) => ({
+        ...it,
+        passageText: it.passageText || it.passage_text,
+        itemType: it.itemType || it.item_type,
+        options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+        correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+      }));
       setItems(loadedItems);
 
       const duration = (idToLoad === 'les_ia_mock_full_1' || loadedItems.length >= 40)
@@ -760,7 +766,7 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
           {/* Two-Pane Reading + Question Layout for IELTS CD-Test */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
             {/* Left Pane: Reading Passage / Stimulus */}
-            {currentItem?.passageText && (
+            {Boolean(currentItem?.passageText || currentItem?.passage_text) && (
               <div className="lg:col-span-6 bg-white dark:bg-sumi-900 border border-washi-300 dark:border-sumi-800 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3 h-[560px] flex flex-col">
                 <div className="flex items-center justify-between border-b border-washi-200 dark:border-sumi-800 pb-2.5 shrink-0">
                   <div className="flex items-center gap-2 text-stone-600 dark:text-stone-400 text-xs font-bold uppercase tracking-wider">
@@ -778,13 +784,13 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
                     fontSizeLevel === 'sm' ? 'text-xs leading-normal' : fontSizeLevel === 'lg' ? 'text-base leading-relaxed' : 'text-sm leading-relaxed'
                   }`}
                 >
-                  {renderWithFuriganaIfJapanese(currentItem.passageText)}
+                  {renderWithFuriganaIfJapanese(currentItem.passageText || currentItem.passage_text || "")}
                 </div>
               </div>
             )}
 
             {/* Right Pane: Question Item & Interactive Input */}
-            <div className={`${currentItem?.passageText ? 'lg:col-span-6' : 'lg:col-span-12'} bg-white dark:bg-sumi-900 border border-washi-300 dark:border-sumi-800 rounded-2xl p-5 sm:p-6 shadow-sm space-y-5 h-[560px] flex flex-col justify-between`}>
+            <div className={`${(currentItem?.passageText || currentItem?.passage_text) ? 'lg:col-span-6' : 'lg:col-span-12'} bg-white dark:bg-sumi-900 border border-washi-300 dark:border-sumi-800 rounded-2xl p-5 sm:p-6 shadow-sm space-y-5 h-[560px] flex flex-col justify-between`}>
               <div className="space-y-4 overflow-y-auto pr-1">
                 {/* Question Top Metadata */}
                 <div className="flex items-center justify-between border-b border-washi-200 dark:border-sumi-800 pb-2.5">

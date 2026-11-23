@@ -103,7 +103,14 @@ curriculumRouter.get('/lessons/:lessonId', (req: Request, res: Response) => {
     return res.status(404).json({ error: 'Lesson not found' });
   }
 
-  const items = db.prepare('SELECT * FROM exercise_items WHERE lesson_id = ?').all(lessonId) as any[];
+  const rawItems = db.prepare('SELECT * FROM exercise_items WHERE lesson_id = ?').all(lessonId) as any[];
+  const items = rawItems.map(it => ({
+    ...it,
+    passageText: it.passage_text || it.passageText,
+    itemType: it.item_type || it.itemType,
+    options: typeof it.options_json === 'string' ? JSON.parse(it.options_json) : (it.options || []),
+    correctAnswer: typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : (it.correctAnswer || '')
+  }));
 
   res.json({
     lesson,

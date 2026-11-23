@@ -876,7 +876,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_listen_5",
     "lessonId": "les_ia_listen_2",
     "itemType": "sentence_completion",
-    "passageText": "See Marine Biomimetics Lecture above.",
+    "passageText": "[AUDIO TRANSCRIPT: Academic Lecture - Biomimetics in Naval Engineering]\nProfessor: Today we examine how the dermal denticles of fast-swimming pelagic sharks inspired drag-reduction riblets on commercial ship hulls. Microscopic grooving channels turbulent vortices, preventing flow separation along the hydrodynamic boundary layer and reducing frictional resistance by up to eight percent.",
     "prompt": "What biological feature inspired the drag-reduction riblet micro-grooves?",
     "options": [
       "Dermal denticles of pelagic sharks",
@@ -906,7 +906,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ig_read_6",
     "lessonId": "les_ig_read_3",
     "itemType": "true_false_not_given",
-    "passageText": "See The Renaissance of the Inland Waterways Network above.",
+    "passageText": "The Renaissance of the Inland Waterways Network\n\nConstructed during the dawn of the Industrial Revolution to transport coal, pottery, and iron between manufacturing hubs, Britain's narrow canal networks fell into steep obsolescence following the expansion of national railway lines in the mid-nineteenth century. Abandoned lock systems deteriorated rapidly until volunteer preservation trusts mobilized in the 1960s. Today, over two thousand miles of navigable inland waterways have been fully restored, functioning as thriving linear ecological reserves and popular recreational cruising destinations.",
     "prompt": "Do the following statement agree with the text?\n\n\"Today, more than two thousand miles of restored canals serve as recreational waterways and ecological corridors.\"",
     "options": [
       "TRUE",
@@ -1064,7 +1064,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_read_2",
     "lessonId": "les_ia_read_1",
     "itemType": "true_false_not_given",
-    "passageText": "See Passage 1: Cognitive Architecture of Bilingualism",
+    "passageText": "The Cognitive Architecture of Bilingualism: Executive Function, Inhibitory Control, and Late-Age Neuroplasticity\n\nParagraph A: Over the past four decades, cognitive psycholinguistics has undergone a profound paradigm shift regarding the neural consequences of multi-language acquisition. Early twentieth-century pedagogical literature routinely warned that bilingualism in young children induced \"mental fatigue\" and \"linguistic confusion.\" Modern neuroimaging has thoroughly dismantled this deficit model. Current fMRI and event-related potential investigations demonstrate that navigating multiple lexical and syntactic inventories actively fortifies the brain's dorsal anterior cingulate cortex and bilateral frontoparietal control networks.\n\nParagraph B: The operational core of this cognitive fortification lies in inhibitory control—the conscious suppression of prepotent mental representations. When a bilingual individual communicates, both language systems remain perpetually activated. Even during monolingual interaction, the non-target vocabulary competes for phonological and semantic selection. Consequently, the brain must continuously deploy executive attentional filters to attenuate interference from competing lemmas. This perpetual cognitive mediation functions akin to resistance training for neural circuitry.\n\nParagraph C: The longitudinal consequences of this sustained neuro-computational exertion become strikingly apparent in geriatric populations. Epidemiological cohorts followed across European and North American clinics indicate that bilingual older adults manifest clinical symptoms of neurodegenerative dementias—including Alzheimer's pathology—approximately 4.5 years later than demographically matched monolingual peers, despite displaying comparable or greater neuropathological plaque burden on post-mortem histological examination. Bilingualism provides a cognitive buffer, delaying cognitive decline through structural resilience.",
     "prompt": "Do the following statement agree with the information given in the text?\n\n\"When a bilingual speaker communicates in one language, lexical items from their secondary language are completely deactivated by the auditory cortex.\"",
     "options": [
       "TRUE",
@@ -1078,7 +1078,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_read_3",
     "lessonId": "les_ia_read_1",
     "itemType": "sentence_completion",
-    "passageText": "See Passage 1: Cognitive Architecture of Bilingualism",
+    "passageText": "The Cognitive Architecture of Bilingualism: Executive Function, Inhibitory Control, and Late-Age Neuroplasticity\n\nParagraph A: Over the past four decades, cognitive psycholinguistics has undergone a profound paradigm shift regarding the neural consequences of multi-language acquisition. Early twentieth-century pedagogical literature routinely warned that bilingualism in young children induced \"mental fatigue\" and \"linguistic confusion.\" Modern neuroimaging has thoroughly dismantled this deficit model. Current fMRI and event-related potential investigations demonstrate that navigating multiple lexical and syntactic inventories actively fortifies the brain's dorsal anterior cingulate cortex and bilateral frontoparietal control networks.\n\nParagraph B: The operational core of this cognitive fortification lies in inhibitory control—the conscious suppression of prepotent mental representations. When a bilingual individual communicates, both language systems remain perpetually activated. Even during monolingual interaction, the non-target vocabulary competes for phonological and semantic selection. Consequently, the brain must continuously deploy executive attentional filters to attenuate interference from competing lemmas. This perpetual cognitive mediation functions akin to resistance training for neural circuitry.\n\nParagraph C: The longitudinal consequences of this sustained neuro-computational exertion become strikingly apparent in geriatric populations. Epidemiological cohorts followed across European and North American clinics indicate that bilingual older adults manifest clinical symptoms of neurodegenerative dementias—including Alzheimer's pathology—approximately 4.5 years later than demographically matched monolingual peers, despite displaying comparable or greater neuropathological plaque burden on post-mortem histological examination. Bilingualism provides a cognitive buffer, delaying cognitive decline through structural resilience.",
     "prompt": "Complete the sentence with NO MORE THAN TWO WORDS from the text:\n\nBilingualism acts as a cognitive buffer that offers protection through ____________.",
     "options": [
       "structural resilience",
@@ -1108,7 +1108,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_read_5",
     "lessonId": "les_ia_read_2",
     "itemType": "true_false_not_given",
-    "passageText": "See Passage 2: Passive Thermal Regulation",
+    "passageText": "Passive Thermal Regulation and Urban Albedo Optimization in Dense Metropolises\n\nParagraph A: The urban heat island (UHI) effect represents one of the most pressing microclimatic challenges of twenty-first-century civil engineering. In high-density agglomerations characterized by dark asphalt surfaces, concrete canyons, and minimal evapotranspirative vegetation, ambient temperatures frequently exceed surrounding rural baselines by 4°C to 9°C. This thermal disparity exacerbates peak electrical grid demand, drives exponential increases in compressor-based refrigeration, and amplifies respiratory mortality during heatwaves.\n\nParagraph B: Mitigating UHI requires a systematic transition from active mechanical cooling toward passive thermodynamic design. Foremost among these interventions is the deployment of high-albedo cool roofs and retroreflective pavements. High-albedo coatings reflect up to 85% of incoming solar irradiance back into the atmosphere, preventing sensible heat absorption in structural building mass. When paired with aerodynamic ventilation corridors that channel prevailing sea breezes through street alignments, localized surface temperatures drop by up to 3.2°C within two seasons of municipal retrofitting.\n\nParagraph C: Nevertheless, urban planners must avoid simplistic monocultures of reflective surfaces. Excessively reflective vertical facades can inadvertently direct reflected solar radiation down to pedestrian eye levels, dramatically degrading Mean Radiant Temperature (MRT) for pedestrians on sidewalks. Hence, contemporary sustainable architecture demands multi-scale microclimate modelling, balancing high-albedo horizontal roofs with high-canopy deciduous foliage at the street tier.",
     "prompt": "Do the following statement agree with the information in Paragraph B?\n\n\"High-albedo coatings prevent building materials from storing sensible solar heat by reflecting the vast majority of incoming solar radiation.\"",
     "options": [
       "TRUE",
@@ -1122,7 +1122,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_read_6",
     "lessonId": "les_ia_read_2",
     "itemType": "multiple_choice",
-    "passageText": "See Passage 2: Passive Thermal Regulation",
+    "passageText": "Passive Thermal Regulation and Urban Albedo Optimization in Dense Metropolises\n\nParagraph A: The urban heat island (UHI) effect represents one of the most pressing microclimatic challenges of twenty-first-century civil engineering. In high-density agglomerations characterized by dark asphalt surfaces, concrete canyons, and minimal evapotranspirative vegetation, ambient temperatures frequently exceed surrounding rural baselines by 4°C to 9°C. This thermal disparity exacerbates peak electrical grid demand, drives exponential increases in compressor-based refrigeration, and amplifies respiratory mortality during heatwaves.\n\nParagraph B: Mitigating UHI requires a systematic transition from active mechanical cooling toward passive thermodynamic design. Foremost among these interventions is the deployment of high-albedo cool roofs and retroreflective pavements. High-albedo coatings reflect up to 85% of incoming solar irradiance back into the atmosphere, preventing sensible heat absorption in structural building mass. When paired with aerodynamic ventilation corridors that channel prevailing sea breezes through street alignments, localized surface temperatures drop by up to 3.2°C within two seasons of municipal retrofitting.\n\nParagraph C: Nevertheless, urban planners must avoid simplistic monocultures of reflective surfaces. Excessively reflective vertical facades can inadvertently direct reflected solar radiation down to pedestrian eye levels, dramatically degrading Mean Radiant Temperature (MRT) for pedestrians on sidewalks. Hence, contemporary sustainable architecture demands multi-scale microclimate modelling, balancing high-albedo horizontal roofs with high-canopy deciduous foliage at the street tier.",
     "prompt": "According to Paragraph C, why must urban planners avoid installing excessively reflective materials on vertical building facades?",
     "options": [
       "They can reflect radiation downward and deteriorate pedestrian Mean Radiant Temperature",
@@ -1152,7 +1152,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_read_8",
     "lessonId": "les_ia_read_3",
     "itemType": "true_false_not_given",
-    "passageText": "See Passage 3: Epistemological Typology in Archaeological Stratigraphy",
+    "passageText": "Epistemological Typology in Archaeological Stratigraphy\n\nArchaeological interpretation has historically oscillated between culture-historical taxonomies and processual quantitative models. The foundational challenge of stratigraphic excavation lies in the \"Harris Matrix\" paradigm: distinguishing depositional events from post-depositional taphonomic disturbances. When burrowing fauna (bioturbation) or cryoturbation displaces lithic artifacts across geological strata, strict vertical depth ceases to correlate linearly with chronological age. Epistemologically, the archaeologist must synthesize radiometric dating, micro-wear residue analysis, and spatial clustering to reconstruct human intentionality rather than geological coincidence.",
     "prompt": "Do the following statement agree with the text?\n\n\"Vertical depth alone is sufficient to establish the exact sequence of human occupation without requiring radiometric or residue verification.\"",
     "options": [
       "TRUE",
@@ -1166,7 +1166,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_read_9",
     "lessonId": "les_ia_read_3",
     "itemType": "sentence_completion",
-    "passageText": "See Passage 3: Epistemological Typology in Archaeological Stratigraphy",
+    "passageText": "Epistemological Typology in Archaeological Stratigraphy\n\nArchaeological interpretation has historically oscillated between culture-historical taxonomies and processual quantitative models. The foundational challenge of stratigraphic excavation lies in the \"Harris Matrix\" paradigm: distinguishing depositional events from post-depositional taphonomic disturbances. When burrowing fauna (bioturbation) or cryoturbation displaces lithic artifacts across geological strata, strict vertical depth ceases to correlate linearly with chronological age. Epistemologically, the archaeologist must synthesize radiometric dating, micro-wear residue analysis, and spatial clustering to reconstruct human intentionality rather than geological coincidence.",
     "prompt": "Complete the sentence with NO MORE THAN TWO WORDS from the text:\n\nArchaeologists rely on micro-wear residue analysis and spatial clustering to reconstruct ____________.",
     "options": [
       "human intentionality",
@@ -1196,7 +1196,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_listen_2",
     "lessonId": "les_ia_listen_1",
     "itemType": "multiple_choice",
-    "passageText": "See Lab Registration Transcript above.",
+    "passageText": "[AUDIO TRANSCRIPT: University Central Laboratory Registration]\nReceptionist: Good morning, Advanced Research Facilities. How can I assist your team today?\nDr. Jensen: Hello, I am Dr. Jensen from the Nanomaterials Group. We need to book the Transmission Electron Microscope (TEM) on Level 3 for next Tuesday morning.\nReceptionist: Certainly, Dr. Jensen. Level 3 is restricted access. Have all researchers in your party completed the Bio-safety Level 2 induction?\nDr. Jensen: Yes, both myself and my research assistant, Mark Davies, finished the certification last Friday. Our group project code is NM-842.\nReceptionist: Perfect. The TEM is available from 09:00 to 13:00. Please note that high-resolution cryogenic cooling requires a 45-minute calibration buffer before observation begins.\nDr. Jensen: Understood. We will log in at 08:15 so the beam alignment and nitrogen stabilization are completed before our sample run at nine.",
     "prompt": "At what time does Dr. Jensen plan to log in to ensure nitrogen stabilization is ready for the 09:00 observation?",
     "options": [
       "08:15",
@@ -1211,7 +1211,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ia_listen_3",
     "lessonId": "les_ia_listen_1",
     "itemType": "sentence_completion",
-    "passageText": "See Lab Registration Transcript above.",
+    "passageText": "[AUDIO TRANSCRIPT: University Central Laboratory Registration]\nReceptionist: Good morning, Advanced Research Facilities. How can I assist your team today?\nDr. Jensen: Hello, I am Dr. Jensen from the Nanomaterials Group. We need to book the Transmission Electron Microscope (TEM) on Level 3 for next Tuesday morning.\nReceptionist: Certainly, Dr. Jensen. Level 3 is restricted access. Have all researchers in your party completed the Bio-safety Level 2 induction?\nDr. Jensen: Yes, both myself and my research assistant, Mark Davies, finished the certification last Friday. Our group project code is NM-842.\nReceptionist: Perfect. The TEM is available from 09:00 to 13:00. Please note that high-resolution cryogenic cooling requires a 45-minute calibration buffer before observation begins.\nDr. Jensen: Understood. We will log in at 08:15 so the beam alignment and nitrogen stabilization are completed before our sample run at nine.",
     "prompt": "What is the group project code provided by Dr. Jensen?",
     "options": [
       "NM-842",
@@ -1241,7 +1241,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ig_read_2",
     "lessonId": "les_ig_read_1",
     "itemType": "multiple_choice",
-    "passageText": "See HVAC Notice above.",
+    "passageText": "SECTION 1: WORKPLACE ERGONOMIC ASSESSMENT PROTOCOL (Health & Safety Directive 402)\nAll employees utilizing Display Screen Equipment (DSE) for continuous periods exceeding two hours daily are entitled to a workstation ergonomic evaluation. Initial assessments must be submitted via the Internal Portal within fourteen calendar days of onboarding. If persistent musculoskeletal discomfort arises, employees must notify the departmental safety representative and request a formal re-audit within 48 hours.\n\nSECTION 2: RESIDENTIAL HVAC EMERGENCY PROTOCOLS (Apex Towers Tenancy Notice)\nIn the event of total central heating failure between October 15 and April 30, tenants must contact the 24/7 Facility Hotline on extension 4 immediately. Portable ceramic space heaters will be dispatched within four hours. Do not attempt manual tampering with district heating valves located inside service risers.",
     "prompt": "According to Section 2, what action is strictly prohibited for tenants during a central heating failure?",
     "options": [
       "Manual tampering with district heating valves in service risers",
@@ -1271,7 +1271,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ig_read_4",
     "lessonId": "les_ig_read_2",
     "itemType": "true_false_not_given",
-    "passageText": "See Company Handbook Section 4.2 above.",
+    "passageText": "COMPANY HANDBOOK: SECTION 4.2 - STATUTORY PARENTAL LEAVE & FORMAL DISPUTES\n\nSub-clause A: Eligible employees who have completed at least twenty-six weeks of continuous service by the end of the qualifying week are entitled to up to eighteen weeks of unpaid parental leave per child. A maximum of four weeks may be taken in any single calendar year, unless an alternative scheduling agreement has been ratified in writing by the departmental director. Employees must submit written notification at least 21 days prior to the proposed leave commencement date.\n\nSub-clause B: If an employee believes a statutory leave request has been unreasonably obstructed, they may initiate Stage 1 of the Formal Grievance Procedure by lodging an incident memorandum with Human Resources within ten working days. Human Resources is required to convene an evidentiary consultation within five business days of receipt.",
     "prompt": "Do the following statement agree with Sub-clause B?\n\n\"Human Resources must convene an evidentiary consultation within five business days after a grievance memorandum is submitted.\"",
     "options": [
       "TRUE",
@@ -1300,7 +1300,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_ig_listen_2",
     "lessonId": "les_ig_listen_1",
     "itemType": "multiple_choice",
-    "passageText": "See Community Centre Transcript above.",
+    "passageText": "[AUDIO TRANSCRIPT: Riverside Community Leisure Centre]\nStaff: Hello, welcome to Riverside Community Centre. Are you looking to join our fitness suites?\nApplicant: Yes, I just moved to the neighbourhood. I am interested in the swimming pool and evening badminton courts.\nStaff: Excellent. We have three tiers: Bronze for gym only, Silver which includes the Olympic pool, and Gold which grants unlimited court reservations and sauna access.\nApplicant: How much is the Silver tier per month?\nStaff: The Silver membership is £38 monthly with no annual lock-in contract. Locker hire is included free, though there is a one-off £15 smart fob registration fee.\nApplicant: That sounds reasonable. Can I use the pool before 7:00 AM on weekdays?\nStaff: Yes, early bird lane swimming starts at 06:00 AM every Monday through Friday.",
     "prompt": "At what time does weekday early bird lane swimming open?",
     "options": [
       "06:00 AM",
@@ -1442,7 +1442,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_n5_r1_2",
     "lessonId": "les_n5_read_1",
     "itemType": "multiple_choice",
-    "passageText": "See Notice: Campus Tea Party above.",
+    "passageText": "留学生センターからのお茶会のお知らせ (Notice: Campus Tea Party)\n\n日時：11月28日（土曜日）午後2時〜午後4時 (Date: Sat, Nov 28, 2:00 PM - 4:00 PM)\n場所：学生会館 2階 日本間 (Location: Student Hall, 2F Japanese Room)\n参加費：無料（お菓子とお茶があります） (Fee: Free - Tea and snacks provided)\n持ち物：特にありません。 (What to bring: Nothing required)\n申し込み：11月25日（水）までに、留学生センターの窓口で名前を書いてください。\n(Registration: Please write your name at the International Student Center desk by Wed, Nov 25)\n※ 定員は20名です。定員になり次第、締め切ります。 (Capacity: 20 participants)",
     "prompt": "Which statement is true according to the notice?",
     "options": [
       "The tea party is free of charge and limited to 20 people (参加費は無料で定員は20名)",
@@ -1472,7 +1472,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_n5_l1_2",
     "lessonId": "les_n5_listen_1",
     "itemType": "multiple_choice",
-    "passageText": "See Movie Meetup Dialogue above.",
+    "passageText": "[AUDIO SCRIPT: 映画の待ち合わせ - Movie Meetup Dialogue]\n男の人：もしもし、田中さん？今どこにいますか。\n女の人：ごめんなさい！電車が少し遅れて、今駅に着きました。南口の改札にいます。\n男の人：わかりました。映画は午後3時からですね。今は2時40分ですから、まだ間に合いますよ。\n女の人：よかったです。どこで会いましょうか。\n男の人：映画館の前の本屋さんにいます。チケットはもう買いましたから、ゆっくり来てください。\n女の人：ありがとうございます。すぐ行きます！",
     "prompt": "What time does the movie start? (映画は何時に始まりますか。)",
     "options": [
       "3:00 PM (午後3時)",
@@ -1600,7 +1600,7 @@ export const CURRICULUM_EXERCISE_ITEMS: SeedExerciseItem[] = [
     "id": "item_n4_r1_2",
     "lessonId": "les_n4_read_1",
     "itemType": "multiple_choice",
-    "passageText": "See Apartment Garbage Disposal Guidelines above.",
+    "passageText": "アパートのゴミ出しのルール (Apartment Garbage Disposal Guidelines)\n\n1. 燃えるゴミ（生ゴミ・紙くずなど） (Combustible: Food waste, paper)\n   ・毎週 火曜日・金曜日の朝8時までに出してください。\n2. 資源ゴミ（カン・ビン・ペットボトル） (Recyclable: Cans, glass bottles, PET bottles)\n   ・毎週 水曜日の朝8時までに出してください。\n   ・中を水で洗ってから、透明な袋に入れてください。\n3. 粗大ゴミ（家具・自転車など） (Bulky waste: Furniture, bicycles)\n   ・捨てる前に必ず「粗大ゴミ受付センター」に電話して予約してください。有料です。\n※ 前の日の夜にゴミを出すと、カラスや猫が荒らしますので、必ず当日の朝に出してください。",
     "prompt": "Why is putting out garbage the night before prohibited? (なぜ前日の夜に出してはいけませんか。)",
     "options": [
       "Crows and cats will scatter the garbage (カラスや猫が荒らすため)",

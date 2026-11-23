@@ -13,6 +13,9 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
   en: {
     // Nav Items
     'nav.dashboard': 'Dashboard',
+    'nav.lecture': 'Learning Hub',
+    'nav.ielts_lecture': 'Learning Hub',
+    'nav.jlpt_lecture': 'Learning Hub',
     'nav.curriculum': 'Curriculum',
     'nav.srs': 'SRS Flashcards',
     'nav.kanji': 'Kana & Kanji',
@@ -20,6 +23,7 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'nav.exam': 'Practice Exam',
     'nav.analytics': 'Analytics',
     'nav.short.dashboard': 'Dashboard',
+    'nav.short.lecture': 'Learn',
     'nav.short.curriculum': 'Curriculum',
     'nav.short.srs': 'SRS',
     'nav.short.kanji': 'Kanji',
@@ -274,6 +278,9 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
   id: {
     // Nav Items (100% Indonesian)
     'nav.dashboard': 'Dasbor',
+    'nav.lecture': 'Pusat Belajar',
+    'nav.ielts_lecture': 'Pusat Belajar',
+    'nav.jlpt_lecture': 'Pusat Belajar',
     'nav.curriculum': 'Kurikulum',
     'nav.srs': 'Kartu Kilas SRS',
     'nav.kanji': 'Huruf & Kanji',
@@ -281,6 +288,7 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'nav.exam': 'Ujian Latihan',
     'nav.analytics': 'Analisis',
     'nav.short.dashboard': 'Dasbor',
+    'nav.short.lecture': 'Belajar',
     'nav.short.curriculum': 'Kurikulum',
     'nav.short.srs': 'SRS',
     'nav.short.kanji': 'Kanji',

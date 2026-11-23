@@ -5,6 +5,7 @@ import { useFurigana } from '../context/FuriganaContext';
 import { useLanguage } from '../context/LanguageContext';
 import {
   Layers,
+  GraduationCap,
   BookOpen,
   Clock,
   ArrowRight,
@@ -19,7 +20,7 @@ import {
 
 interface CurriculumViewProps {
   activeTrack: LevelCode;
-  onLaunchLesson: (lessonType: string, lessonId: string) => void;
+  onLaunchLesson: (lessonType: string, lessonId: string, mode?: 'lecture' | 'drill') => void;
   onTrackChange?: (track: LevelCode) => void;
 }
 
@@ -965,13 +966,22 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({
               )}
             </div>
 
-            <button
-              onClick={() => onLaunchLesson(currentStageObj.lessonType, currentStageObj.lessonId)}
-              className="px-4 py-2.5 rounded-xl bg-vermilion-500 hover:bg-vermilion-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all shrink-0"
-            >
-              <span>{language === 'id' ? currentStageObj.actionId : currentStageObj.actionEn}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <button
+                onClick={() => onLaunchLesson(currentStageObj.lessonType, currentStageObj.lessonId, 'lecture')}
+                className="px-3.5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
+              >
+                <GraduationCap className="w-4 h-4" />
+                <span>{language === 'id' ? 'Pelajari Teori' : 'Study Theory'}</span>
+              </button>
+              <button
+                onClick={() => onLaunchLesson(currentStageObj.lessonType, currentStageObj.lessonId, 'drill')}
+                className="px-3.5 py-2.5 rounded-xl bg-vermilion-500 hover:bg-vermilion-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
+              >
+                <span>{language === 'id' ? currentStageObj.actionId : currentStageObj.actionEn}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           <p className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed font-jp">
@@ -1063,26 +1073,36 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({
                               </h5>
                             </div>
 
-                            <button
-                              onClick={() => onLaunchLesson(les.lessonType, les.id)}
-                              className={`px-3 py-1.5 rounded-lg font-bold text-[11px] shrink-0 flex items-center gap-1 shadow-sm transition-all ${
-                                les.completed
-                                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                                  : 'bg-vermilion-500 hover:bg-vermilion-600 text-white'
-                              }`}
-                            >
-                              {les.completed ? (
-                                <>
-                                  <Check className="w-3.5 h-3.5" />
-                                  <span>{language === 'id' ? 'Ulangi (Selesai)' : 'Review (Done)'}</span>
-                                </>
-                              ) : (
-                                <>
-                                  <PlayCircle className="w-3.5 h-3.5" />
-                                  <span>{language === 'id' ? 'Mulai' : 'Launch'}</span>
-                                </>
-                              )}
-                            </button>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <button
+                                onClick={() => onLaunchLesson(les.lessonType, les.id, 'lecture')}
+                                title={language === 'id' ? 'Pelajari Teori & Kosakata' : 'Study Theory & Vocab'}
+                                className="px-2 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 transition-all"
+                              >
+                                <GraduationCap className="w-3.5 h-3.5" />
+                                <span>{language === 'id' ? 'Materi' : 'Study'}</span>
+                              </button>
+                              <button
+                                onClick={() => onLaunchLesson(les.lessonType, les.id, 'drill')}
+                                className={`px-2.5 py-1.5 rounded-lg font-bold text-[11px] flex items-center gap-1 shadow-sm transition-all ${
+                                  les.completed
+                                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                                    : 'bg-vermilion-500 hover:bg-vermilion-600 text-white'
+                                }`}
+                              >
+                                {les.completed ? (
+                                  <>
+                                    <Check className="w-3.5 h-3.5" />
+                                    <span>{language === 'id' ? 'Ulangi' : 'Review'}</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <span>{language === 'id' ? 'Latihan' : 'Drill'}</span>
+                                    <ArrowRight className="w-3 h-3" />
+                                  </>
+                                )}
+                              </button>
+                            </div>
                           </div>
                         ))}
                       </div>

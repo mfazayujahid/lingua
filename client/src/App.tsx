@@ -10,6 +10,7 @@ import { CurriculumView } from './components/CurriculumView';
 import { SRSReviewerView } from './components/SRSReviewerView';
 import { ExamRunnerView } from './components/ExamRunnerView';
 import { StudioView } from './components/StudioView';
+import { LectureView } from './components/LectureView';
 import { KanjiCanvasView } from './components/KanjiCanvasView';
 import { AnalyticsView } from './components/AnalyticsView';
 
@@ -20,6 +21,7 @@ export const AppContent: React.FC = () => {
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [srsDueCount, setSrsDueCount] = useState<number>(0);
   const [currentExamLessonId, setCurrentExamLessonId] = useState<string>("les_n5_gram_1");
+  const [currentLectureLessonId, setCurrentLectureLessonId] = useState<string | undefined>();
 
   // Initial load
   useEffect(() => {
@@ -83,16 +85,21 @@ export const AppContent: React.FC = () => {
     }
   };
 
-  const handleLaunchLesson = (lessonType: string, lessonId?: string) => {
-    if (lessonId) setCurrentExamLessonId(lessonId);
+  const handleLaunchLesson = (lessonType: string, lessonId?: string, mode: 'lecture' | 'drill' = 'lecture') => {
+    if (lessonId) {
+      setCurrentExamLessonId(lessonId);
+      setCurrentLectureLessonId(lessonId);
+    }
     if (lessonType === 'kanji_writing') {
       setActiveView('kanji');
     } else if (lessonType === 'writing_task') {
       setActiveView('studio');
     } else if (lessonType === 'flashcard_review' || lessonType === 'srs') {
       setActiveView('srs');
-    } else {
+    } else if (mode === 'drill') {
       setActiveView('exam');
+    } else {
+      setActiveView('lecture');
     }
   };
 
@@ -129,6 +136,19 @@ export const AppContent: React.FC = () => {
             activeTrack={activeTrack}
             onSessionComplete={loadDashboard}
             onNavigate={setActiveView}
+          />
+        )}
+
+        {activeView === 'lecture' && (
+          <LectureView
+            activeTrack={activeTrack}
+            initialLessonId={currentLectureLessonId}
+            onStartDrill={(lessonId) => {
+              setCurrentExamLessonId(lessonId);
+              setActiveView('exam');
+            }}
+            onNavigateToWriting={() => setActiveView('studio')}
+            onNavigateToSRS={() => setActiveView('srs')}
           />
         )}
 
