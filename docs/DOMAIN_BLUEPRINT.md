@@ -57,15 +57,122 @@ IELTS scores are reported on a 9-band scale in 0.5-band increments. Writing and 
 4. **Grammatical Range and Accuracy (GRA)**:
    * Balance between simple and complex sentence structures, flexibility of clauses (relative, adverbial, conditional, passive), frequency of error-free sentences, accurate punctuation and tense consistency.
 
-##### Speaking Assessment Criteria (Parts 1–3)
-1. **Fluency and Coherence (FC)**:
-   * Speech rate, rhythm, continuity, absence of hesitation/self-correction, use of discourse markers and connectives, logical topic development.
-2. **Lexical Resource (LR)**:
-   * Range of general and specialized vocabulary, idiom and colloquial awareness, circumlocution ability when struggling for words.
-3. **Grammatical Range and Accuracy (GRA)**:
-   * Variety of grammatical structures, frequency of error-free utterances, systematic vs non-systematic errors.
-4. **Pronunciation (PR)**:
-   * Intelligibility, control of phonological features: sentence stress, word stress, rhythm, chunking/pausing, intonation contours, and individual consonant/vowel accuracy.
+##### Speaking Assessment Criteria (Official Cambridge / British Council 9-Band Matrix)
+
+The Speaking examination evaluates communicative competence across four equally weighted criteria (each scored 0.0 to 9.0 in 0.5-band increments):
+
+```
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| Band      | Fluency & Coherence (FC)        | Lexical Resource (LR)           | Grammatical Range & Acc (GRA)   | Pronunciation (PR)              |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 9.0       | • 150–175 WPM natural cadence.  | • Full flexibility & precision  | • Effortless, natural variety   | • Full phonological control     |
+| (Expert)  | • Zero language hesitation.     |   across all registers.         |   of complex structures.        |   with subtle nuances.          |
+|           | • Rare cognitive pauses only.   | • Seamless idiomatic mastery.   | • Consistently error-free.      | • Effortless to understand.     |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 8.0       | • 140–160 WPM fluent delivery.  | • Wide vocabulary resource;     | • Wide grammatical flexibility; | • Wide range of phonological    |
+| (Very     | • Develops topics coherently.   |   readily uses idioms/phrasals. |   majority of sentences         |   features; flexible stress,    |
+|  Good)    | • Occasional repetition/repair. | • Occasional slight inaccuracy. |   are completely error-free.    |   rhythm, and intonation.       |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 7.0       | • 125–145 WPM steady speech.    | • Sufficient flexibility to     | • Uses a variety of complex     | • Clear thought groups          |
+| (Good)    | • Speaks at length without      |   discuss abstract topics.      |   structures (subordination).   |   and chunking.                 |
+|           |   noticeable muscular effort.   | • Uses some less common/idioms. | • Frequently produces           | • Clear sentence stress; easily |
+|           | • Some language-related pauses. | • Effective circumlocution.     |   error-free complex clauses.   |   understood throughout.        |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 6.0       | • 100–120 WPM moderate cadence. | • Wide enough vocabulary to     | • Uses a mix of simple &        | • Generally intelligible.       |
+| (Competent| • Willing to speak at length    |   discuss topics at length.     |   complex sentence forms.       | • Some accent interference;     |
+|           |   but loses coherence at times. | • Some inappropriate word usage | • Errors in complex structures  |   occasional mispronunciations  |
+|           | • Noticeable hesitations/repair.|   or collocations.              |   rarely cause breakdown.       |   rarely impede communication.  |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 5.0       | • 75–95 WPM slow delivery.      | • Manages familiar topics;      | • Produces basic sentences with | • Limited phonological range.   |
+| (Modest)  | • Frequent pauses to search     |   struggles with abstract.      |   reasonable accuracy.          | • Frequent mispronunciations    |
+|           |   for grammar and vocabulary.   | • Frequent lexical errors       | • Complex structures contain    |   require listener effort.      |
+|           | • Overuses simple connectives.  |   and limited paraphrase.       |   systematic errors.            | • Monotone or erratic stress.   |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| <= 4.0    | • < 70 WPM fragmented speech.   | • Extremely basic word pool;    | • Only simple, memorized        | • Difficult to understand;      |
+| (Limited) | • Cannot sustain speech; long   |   cannot convey abstract ideas; |   phrases; frequent severe      |   persistent mispronunciations  |
+|           |   silent pauses and breakdown.  |   frequent breakdowns.          |   grammatical distortions.      |   cause severe breakdowns.      |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+```
+
+##### 1. Fluency and Coherence (FC) Deep Mechanics
+* **Speech Rate (Words Per Minute / WPM)**:
+  * Band 8–9: 145–175 WPM (effortless native-like pace).
+  * Band 7: 125–145 WPM (steady, smooth, continuous).
+  * Band 6: 100–120 WPM (adequate conversational pace with occasional slowdowns).
+  * Band 5: 75–95 WPM (halting, choppy, search-heavy).
+* **Hesitation & Pause Topography**:
+  * *Cognitive Pauses* (Band 8–9): Pauses are brief ($\le 1.0	ext{s}$) and occur at major semantic boundaries while considering ideas.
+  * *Linguistic Pauses* (Band 5–6): Frequent, long mid-sentence silent pauses ($> 1.5	ext{s}$) or acoustic fillers (*um*, *uh*, *er*) indicating a struggle to retrieve syntactic patterns or vocabulary.
+* **Discourse Markers & Cohesive Devices**:
+  * Overuse of mechanical coordinators (*and, but, because*) limits FC to Band 5.
+  * Band 7+ requires flexible conversational discourse markers:
+    * Stance markers: *To be perfectly candid...*, *As far as I'm concerned...*, *I'm inclined to believe...*
+    * Transition markers: *In terms of...*, *Moving on to the economic side...*, *Conversely...*
+    * Nuance & concession: *Mind you...*, *Having said that...*, *That being said...*
+
+##### 2. Lexical Resource (LR) Deep Mechanics
+* **Collocational Naturalness**: High-band speakers deploy natural adjective-noun and verb-noun partnerships (*pressing issue*, *drastic repercussions*, *spark widespread debate*, *harbour deep reservations*) rather than clunky direct translations.
+* **Idiomatic & Conversational Phrasal Verbs**: Integration of natural spoken phrasal expressions (*come to terms with*, *boil down to*, *phase out*, *iron out differences*).
+* **Circumlocution**: When a specific low-frequency term is inaccessible, high-band candidates smoothly paraphrase the concept without pausing or breaking communicative momentum.
+
+##### 3. Grammatical Range and Accuracy (GRA) Deep Mechanics
+* **Complex Syntactic Architecture**:
+  * Relative clauses (defining and non-defining).
+  * Adverbial clauses of concession (*Even though...*, *Whereas...*).
+  * Conditional structures, including inverted conditionals (*Had authorities acted decisively, the damage might have been averted*).
+  * Speculative modal operators (*It is highly conceivable that...*, *One might speculate that...*).
+* **Error-Free Clause Density**: For Band 7+, over 60% of all uttered clauses must be syntactically error-free; for Band 8+, over 80%.
+
+##### 4. Pronunciation (PR) Deep Mechanics
+* **Thought Groups & Chunking**: Dividing spoken streams into meaningful phonetic chunks separated by micro-pauses (200–400ms), preventing breathless monotone.
+* **Sentence Stress & Rhythm**: Stress-timed English cadence: emphasizing content words (nouns, main verbs, adjectives) while unstressed structural function words undergo vowel reduction to schwa /ə/.
+* **Intonation Contours**:
+  * Falling pitch for completed, assertive statements.
+  * Rising pitch for clarification questions.
+  * Fall-rise pitch for qualified statements, polite disagreement, or provisional assertions.
+
+---
+
+#### 2.1.5 Official Cambridge IELTS Speaking Test Structure & Protocols
+
+The official IELTS Speaking test is a structured face-to-face or computer-delivered oral interview lasting **11 to 14 minutes** across three distinct phases:
+
+##### Phase 1: Part 1 — Introduction & Familiar Topics (4 to 5 Minutes)
+* **Format**: The examiner verifies candidate identity, then asks general, everyday questions on familiar personal themes.
+* **Pacing & Coverage**: 3 distinct topic sets, typically 3 to 4 questions per set (total 10 to 12 questions).
+* **Ideal Response Length**: 2 to 4 complete, well-formed sentences per prompt (~15 to 30 seconds per question).
+* **The 5 Core Authoritative Topic Clusters**:
+  1. *Work & Studies*: Current occupation or academic discipline, rationale for chosen field, daily tasks, future career ambitions.
+  2. *Hometown & Living Environment*: Geographic location, standout local features, historical/urban transformations, suitability for young professionals.
+  3. *Habits, Leisure & Sports*: Weekend routines, leisure activities, physical exercise habits, relaxation methods.
+  4. *Technology, Digital Devices & Internet*: Essential daily applications, screen time habits, digital distraction vs efficiency, intentional disconnection.
+  5. *Daily Environment, Weather & Food*: Regional climate effects, traditional culinary preferences, transportation habits.
+* **Golden Rule**: Never respond with monosyllabic answers (*"Yes"*, *"No"*, *"It's good"*); always apply the **W-H Elaboration Formula** (Answer + Why + Real Example or Frequency).
+
+##### Phase 2: Part 2 — Individual Long Turn / Cue Card (3 to 4 Minutes)
+* **Format**: The examiner presents a printed or digital **Candidate Task Card (Cue Card)** containing a specific topic and 4 mandatory guide prompts.
+* **Strict Timing Protocol**:
+  * **Preparation Phase (Exactly 60 Seconds)**: Candidate receives a virtual scratchpad and pen/keyboard to record outline notes and keywords. Audio recording is muted.
+  * **Speaking Phase (Uninterrupted 120 Seconds)**: Candidate must speak continuously for 1 to 2 full minutes. The examiner does not interrupt until the 2-minute mark is reached.
+  * **Rounding-Off Follow-Up (15–30 Seconds)**: 1 or 2 brief follow-up confirmation questions from the examiner.
+* **Mandatory Task Card Architecture**:
+  * Topic Prompt: *"Describe a [Person / Place / Object / Experience] that..."*
+  * 3 Context Prompts: *"You should say: Who/What/Where..., When/How often..., What actions were taken..."*
+  * 1 Evaluative / Analytical Prompt: *"And explain why you consider this meaningful / memorable / challenging."*
+* **The 4 Canonical Cue Card Archetypes**:
+  1. *People Archetype*: A teacher, mentor, family elder, or inspiring public figure.
+  2. *Places Archetype*: A tranquil nature retreat, a historic monument, or a vibrant urban neighborhood.
+  3. *Objects Archetype*: An indispensable technological gadget, a family heirloom, or a memorable gift.
+  4. *Experiences Archetype*: A challenging goal accomplished, an environmental project, or a memorable journey.
+
+##### Phase 3: Part 3 — Two-Way In-Depth Analytical Discussion (4 to 5 Minutes)
+* **Format**: A two-way discursive exchange exploring abstract, societal, and philosophical concepts thematic to Part 2.
+* **Pedagogical Shift**: Moves completely away from personal self-narrative (*"When I was young..."*) to macro-level sociological, ethical, and universal analysis (*"In contemporary society...", "From an economic standpoint..."*).
+* **The 3 Analytical Prompt Typologies**:
+  1. *Past vs Present Comparative Evolution*: How societal behaviors, traditions, or technologies have shifted across generations.
+  2. *Societal, Ethical & Policy Impact*: The division of responsibility between individual citizen behavior and governmental regulatory mandates.
+  3. *Future Speculation & Prognosis*: Projecting technological breakthroughs, cultural trajectories, or ecological consequences over the next 20 to 50 years.
+
 
 #### 2.1.3 CEFR (Common European Framework of Reference) Mapping
 * **Band 9.0**: Expert User $\rightarrow$ **C2** (Mastery)
@@ -600,6 +707,78 @@ To maintain authentic exam discipline, the client-side exam container enforces a
   $$	ext{timeRemaining} = \max(0, 	ext{endTimeEpoch} - 	ext{currentTimeEpoch})$$
 * **Zero Grace Period**: When `timeRemaining == 0`, the exam interface immediately locks all inputs, displays an amber `"Time Expired — Submitting..."` banner, and triggers the deterministic grading pipeline.
 
+---
+
+
+#### 3.2.6 Interactive IELTS Speaking Speech Evaluation & Scoring Algorithm
+
+The platform provides a real-time, browser-native **Speech Processing & 9-Band Diagnostic Evaluation Engine** for the IELTS Speaking Studio:
+
+```
+[ Speaking Studio Audio Ingestion & Diagnostic Pipeline ]
+  ├── 1. Browser Client Capture (MediaRecorder API @ 16kHz/48kHz Opus/WebM)
+  ├── 2. Acoustic Feature Extractor (VAD, Silence/Hesitation Boundaries, Formants)
+  ├── 3. Speech-to-Text Transcription Engine (Whisper / Web Speech API + Phoneme Timestamps)
+  ├── 4. Psychometric & NLP Evaluation Pipeline:
+  │    ├── Fluency Metric Engine (WPM, Hesitation Ratio, Silent Pause Histogram)
+  │    ├── Lexical Profiler (TTR, AWL Density, Collocation Scoring, Idiomatic Extraction)
+  │    ├── Syntactic Complexity Parser (Clause Density, Tense Consistency, Subordination)
+  │    └── Phonological & Intelligibility Estimator (Pitch Contour, Stress Alignment)
+  └── 5. 4-Criteria Rubric Aggregation & Diagnostic Feedback Generator (0.0–9.0 Band)
+```
+
+##### 1. Acoustic & Temporal Feature Extraction
+* **Audio Capture Standard**:
+  * Browser audio is ingested via `navigator.mediaDevices.getUserMedia({ audio: true })`.
+  * Stream recorded through `MediaRecorder` with `audio/webm;codecs=opus` at 16,000 Hz or 48,000 Hz sampling rate.
+* **Voice Activity Detection (VAD) & Temporal Segmentation**:
+  * Total recording duration: $T_{	ext{total}}$ (seconds).
+  * Active phonation time: $T_{	ext{speech}} = \sum \Delta t_{	ext{voiced}}$.
+  * Silent pause intervals: Any contiguous silence duration $\Delta t_{	ext{silence}} \ge 1.2	ext{s}$ is classified as an **Unnatural Silent Hesitation**. Pauses between $0.2	ext{s}$ and $0.6	ext{s}$ at clause boundaries are classified as **Natural Thought Group Pauses**.
+
+##### 2. Mathematical Scoring Formulas
+
+###### A. Fluency & Coherence (FC) Score Calculation
+* **Words Per Minute (WPM)**:
+  $$\text{WPM} = \frac{\text{Total Word Count}}{T_{\text{total}} / 60}$$
+* **Speech Continuity Index ($SCI$)**:
+  $$SCI = \frac{T_{\text{speech}}}{T_{\text{total}}}$$
+* **Hesitation Penalty ($H_{\text{pen}}$)**:
+  $$H_{\text{pen}} = \sum_{p \in \text{Pauses}} \max(0, \text{duration}(p) - 1.2) \times 0.25 + (\text{Count of 'um/uh/er'} \times 0.05)$$
+* **Discourse Marker Bonus ($DM_{\text{bonus}}$)**:
+  $$DM_{\text{bonus}} = \min\left(1.0, \frac{\text{Unique Spoken Discourse Markers}}{6} \times 0.5\right)$$
+* **Base FC Estimation**:
+  $$FC_{\text{raw}} = \text{clamp}\left(1.0, 9.0, \left(\frac{\text{WPM} - 60}{15}\right) \times 0.8 + (SCI \times 2.5) - H_{\text{pen}} + DM_{\text{bonus}}\right)$$
+
+###### B. Lexical Resource (LR) Score Calculation
+* **Root Type-Token Ratio ($RTTR$)**:
+  $$RTTR = \frac{V}{\sqrt{N}}$$
+  Where $V$ is the count of unique lemma types and $N$ is total tokens.
+* **Academic Word List (AWL) Density**:
+  $$\rho_{\text{AWL}} = \frac{\text{Count of Headwords} \in \text{AWL Sublists 1–10}}{N}$$
+* **Collocation & Idiomatic Density**:
+  $$\rho_{\text{colloc}} = \frac{\text{Count of Recognized Phrasal Verbs \& Collocations}}{N}$$
+* **Base LR Estimation**:
+  $$LR_{\text{raw}} = \text{clamp}\left(1.0, 9.0, 3.0 + (RTTR \times 0.55) + (\rho_{\text{AWL}} \times 25.0) + (\rho_{\text{colloc}} \times 20.0)\right)$$
+
+###### C. Grammatical Range & Accuracy (GRA) Score Calculation
+* **Clause Complexity Ratio ($CCR$)**:
+  $$CCR = \frac{\text{Subordinate \& Dependent Clauses}}{\text{Total Sentences}}$$
+* **Syntactic Error Rate ($SER$)**:
+  $$SER = \frac{\text{Grammatical \& Tense Violations}}{\text{Total Sentences}}$$
+* **Base GRA Estimation**:
+  $$GRA_{\text{raw}} = \text{clamp}\left(1.0, 9.0, 4.0 + (CCR \times 2.0) - (SER \times 3.0) + \text{InversionBonus}\right)$$
+
+###### D. Pronunciation (PR) Score Calculation
+* Evaluates speech intelligibility, phoneme clarity, syllable rhythm regularity, and pitch modulation.
+  $$PR_{\text{raw}} = \text{clamp}(1.0, 9.0, \text{IntelligibilityScore} \times 0.5 + \text{RhythmRegularity} \times 0.3 + \text{PitchModulation} \times 0.2)$$
+
+###### E. Final IELTS Speaking Sectional Band
+$$\text{Speaking Band} = \text{round}_{\text{IELTS}}\left(\frac{FC_{\text{raw}} + LR_{\text{raw}} + GRA_{\text{raw}} + PR_{\text{raw}}}{4}\right)$$
+Where $\text{round}_{\text{IELTS}}$ applies the official Cambridge rounding rules:
+* Fractional remainder $< 0.25 \implies \text{round down to integer}$.
+* $0.25 \le \text{remainder} < 0.75 \implies \text{round to half-band } 0.5$.
+* $\text{remainder} \ge 0.75 \implies \text{round up to next integer}$.
 ---
 
 ### 3.3 JLPT Scaled Scoring & Pass/Fail Determination Logic
@@ -1522,6 +1701,119 @@ export interface IeltsQuestionRecord {
 
 ---
 
+
+#### 4.2.7 IELTS Speaking Studio & Speech Recognition Schemas
+
+```typescript
+/**
+ * Complete IELTS Speaking Examination Package
+ */
+export interface IeltsSpeakingExamPackage {
+  packageId: string;                     // e.g. "ielts_speak_mock_01"
+  title: string;
+  totalDurationMinutes: number;          // 11 - 14 minutes
+  part1: IeltsSpeakingPart1Record;
+  part2: IeltsSpeakingPart2Record;
+  part3: IeltsSpeakingPart3Record;
+}
+
+/**
+ * Part 1 Topic Sets (4-5 minutes)
+ */
+export interface IeltsSpeakingPart1Record {
+  partNumber: 1;
+  topicSets: Array<{
+    setId: string;                       // e.g. "spk_p1_work"
+    category: 'work_studies' | 'hometown' | 'habits_leisure' | 'technology' | 'daily_environment';
+    title: string;
+    questions: Array<{
+      questionId: string;
+      promptText: string;
+      audioPromptUrl?: string;           // Pre-rendered examiner audio
+      idealDurationSeconds: 25;
+      suggestedKeywords: string[];
+      modelBand8Response: string;
+    }>;
+  }>;
+}
+
+/**
+ * Part 2 Task Card / Cue Card (3-4 minutes)
+ */
+export interface IeltsSpeakingPart2Record {
+  partNumber: 2;
+  cueCardId: string;                     // e.g. "cue_people_01"
+  category: 'people' | 'places' | 'objects' | 'experiences';
+  taskTitle: string;                     // e.g. "Describe an inspiring mentor..."
+  promptLeadIn: string;                  // "You should say:"
+  bulletPrompts: string[];               // 4 mandatory bullet points
+  clarificationPrompt: string;           // "And explain why..."
+  preparationTimeSeconds: 60;            // Exactly 60 seconds
+  speakingTimeSeconds: 120;              // Exactly 120 seconds
+  followUpQuestions: string[];           // 1-2 rounding-off questions
+  modelBand8Transcript: string;
+}
+
+/**
+ * Part 3 In-Depth Analytical Discussion (4-5 minutes)
+ */
+export interface IeltsSpeakingPart3Record {
+  partNumber: 3;
+  thematicLink: string;                  // Linked to Part 2 theme
+  discussionQuestions: Array<{
+    questionId: string;
+    typology: 'past_vs_present' | 'societal_impact' | 'future_speculation';
+    promptText: string;
+    audioPromptUrl?: string;
+    modelBand8Response: string;
+  }>;
+}
+
+/**
+ * Diagnostic Evaluation Output from Speech Processing Pipeline
+ */
+export interface SpeakingDiagnosticEvaluationResult {
+  sessionId: string;
+  evaluatedAt: string;
+  overallBand: number;                   // 1.0 - 9.0 in 0.5 increments
+  criteriaScores: {
+    fluencyCoherence: {
+      band: number;
+      wordsPerMinute: number;
+      silentPausesCount: number;
+      hesitationFillersCount: number;
+      continuityPercentage: number;
+      feedback: string[];
+    };
+    lexicalResource: {
+      band: number;
+      uniqueWordsCount: number;
+      typeTokenRatio: number;
+      awlWordsUsed: string[];
+      idiomaticExpressionsUsed: string[];
+      upgradeSuggestions: Array<{ original: string; suggested: string; reason: string }>;
+      feedback: string[];
+    };
+    grammaticalRangeAccuracy: {
+      band: number;
+      complexSentenceRatio: number;
+      detectedErrors: Array<{ snippet: string; correction: string; rule: string }>;
+      feedback: string[];
+    };
+    pronunciation: {
+      band: number;
+      intelligibilityRating: number;      // 0 - 100
+      chunkingEfficiency: number;
+      feedback: string[];
+    };
+  };
+  transcribedText: string;
+  audioRecordingUrl: string;
+}
+```
+
+---
+
 ## 5. Realistic Seed Content Specification
 
 ### 5.1 English IELTS Comprehensive Master Curriculum & Full-Length Mock Exam Seed
@@ -2118,46 +2410,226 @@ diagnostic aid while fiercely preserving the indispensable human teacher at the 
 
 ---
 
-#### 5.1.5 Full-Length Authentic Speaking Mock Exam (`ielts_speak_mock_01`)
+#### 5.1.5 Full-Length Authentic Speaking Mock Exam & 8-Cue Card Master Inventory (`ielts_speak_mock_01`)
 * **Total Time**: 11–14 minutes
-* **Format**: Computer-delivered recorded interview with visual timer, automated prompt delivery, and strict scratchpad/recording limits.
+* **Format**: Interactive computer-delivered oral interview with synthetic examiner audio prompts, live browser speech recording via MediaRecorder, real-time transcription, and automated 9-Band diagnostic speech evaluation.
 
-##### Part 1: Introduction & Familiar Topics (4–5 minutes)
-* **Topic Set 1: Hometown & Urban Environments**:
-  * *Prompt 1*: "Let's talk about your hometown. Where is your hometown located, and what is its most distinctive feature?"
-  * *Prompt 2*: "Has your hometown undergone significant changes in recent years?"
-  * *Prompt 3*: "Do you think your hometown is a desirable location for young professionals to establish their careers?"
-* **Topic Set 2: Technology & Daily Routine**:
-  * *Prompt 4*: "What digital devices or applications do you rely on most heavily during your daily routine?"
-  * *Prompt 5*: "Do you feel that modern technology has made your life more convenient or more stressful?"
-  * *Prompt 6*: "Are there times during the week when you consciously disconnect from your electronic devices?"
-* **Topic Set 3: Literature & Reading Habits**:
-  * *Prompt 7*: "Do you prefer reading physical printed books or digital screens, and why?"
-  * *Prompt 8*: "What genre of literature or non-fiction do you find most intellectually stimulating?"
-  * *Prompt 9*: "Did your parents or teachers encourage you to read when you were a young child?"
+---
 
-##### Part 2: Individual Long Turn (3–4 minutes)
-* **Candidate Task Card (Cue Card)**:
+##### Part 1: Introduction & Familiar Topics (5 Authoritative Topic Sets)
+
+###### Topic Set 1: Work & Academic Studies (職業・学業)
+* **Prompt 1**: *"Are you currently studying or do you have a full-time job?"*
+  * *High-Band Model Strategy*: Direct answer + specific field description + current project focus.
+* **Prompt 2**: *"What motivated you to specialize in your particular discipline or professional field?"*
+  * *High-Band Model Strategy*: Origin story + genuine personal passion + long-term career ambition.
+* **Prompt 3**: *"What is the most demanding aspect of your daily work or university routine?"*
+  * *High-Band Model Strategy*: Specific challenge + causal explanation + active coping strategy.
+* **Prompt 4**: *"Do you envision yourself continuing in this career trajectory over the next decade?"*
+  * *High-Band Model Strategy*: Speculative modals (*"I'm inclined to believe..."*) + anticipated industry trends.
+
+###### Topic Set 2: Hometown & Living Environment (故郷・居住環境)
+* **Prompt 5**: *"Where is your hometown located, and what is its most distinctive geographic or cultural feature?"*
+  * *High-Band Model Strategy*: Geographic precision + evocative adjective collocations (*"bustling coastal hub"*, *"steeped in heritage"*).
+* **Prompt 6**: *"Has your hometown experienced substantial commercial or demographic changes in recent years?"*
+  * *High-Band Model Strategy*: Comparative transition (*"Historically it was... whereas recently rapid gentrification has..."*).
+* **Prompt 7**: *"What civic or recreational amenities in your hometown do you value most?"*
+  * *High-Band Model Strategy*: Concrete facility + frequency of use + personal emotional resonance.
+* **Prompt 8**: *"Would you consider your hometown an advantageous location for young professionals seeking career growth?"*
+  * *High-Band Model Strategy*: Balanced appraisal (pros vs infrastructural limitations).
+
+###### Topic Set 3: Habits, Leisure & Recreation (余暇・運動習慣)
+* **Prompt 9**: *"How do you typically structure your leisure time on weekends?"*
+  * *High-Band Model Strategy*: Contrast between weekday rigor and weekend restorative pursuits.
+* **Prompt 10**: *"Do you prefer engaging in solitary pastimes or participating in collaborative group activities?"*
+  * *High-Band Model Strategy*: Nuanced dichotomy (*"While I relish the camaraderie of team sports, solitary reading allows me to decompress..."*).
+* **Prompt 11**: *"Is physical exercise an indispensable component of your weekly schedule?"*
+  * *High-Band Model Strategy*: Health rationale + psychological cognitive benefits.
+* **Prompt 12**: *"Did you cultivate any distinctive hobbies during your childhood that you still practice today?"*
+  * *High-Band Model Strategy*: Retrospective temporal link + personal skill development.
+
+###### Topic Set 4: Technology, Digital Devices & Internet (技術・デジタル習慣)
+* **Prompt 13**: *"Which digital software application or electronic device is most vital to your everyday functionality?"*
+  * *High-Band Model Strategy*: Naming tool + workflow integration + consequence of its absence.
+* **Prompt 14**: *"Do you feel that pervasive smartphone technology has enriched human communication or eroded authentic social intimacy?"*
+  * *High-Band Model Strategy*: Two-sided synthesis (*"Undeniably eliminates geographic barriers, yet subtly induces cognitive fragmentation..."*).
+* **Prompt 15**: *"Do you intentionally designate periods during the week to disconnect entirely from digital screens?"*
+  * *High-Band Model Strategy*: Digital detox practices + mental restoration rationale.
+* **Prompt 16**: *"What emerging technological innovation are you most eager to see widely adopted in the near future?"*
+  * *High-Band Model Strategy*: Speculative projection (*"Renewable grid storage", "Autonomous mass transit"*).
+
+###### Topic Set 5: Daily Routine, Weather & Local Cuisine (日常・食文化・天候)
+* **Prompt 17**: *"At what hour of the day do you find your cognitive focus and productivity at their absolute peak?"*
+  * *High-Band Model Strategy*: Circadian rhythm description + alignment of demanding intellectual tasks.
+* **Prompt 18**: *"Does fluctuating seasonal weather exert a noticeable impact on your psychological mood and energy?"*
+  * *High-Band Model Strategy*: Seasonal psychological effects + practical adaptations.
+* **Prompt 19**: *"How frequently do you prepare homemade meals compared to dining at commercial culinary establishments?"*
+  * *High-Band Model Strategy*: Nutritional awareness + culinary creativity vs time scarcity.
+* **Prompt 20**: *"What traditional culinary dish from your culture would you enthusiastically recommend to an international visitor?"*
+  * *High-Band Model Strategy*: Ingredients + culinary preparation complexity + cultural symbolism.
+
+---
+
+##### Part 2: Individual Long Turn — The 8-Cue Card Master Inventory
+*Strict Examination Parameters*: Exactly 60 seconds preparation countdown with digital scratchpad notes; followed by an irreversible 120-second uninterrupted recorded monologue.
+
 ```
-Describe an environmental project, policy, or initiative in your community 
-that has made a positive impact.
-
-You should say:
-• What the initiative or project was
-• How you first became aware of it
-• What actions were taken by the participants or authorities
-And explain why you consider this initiative to have been successful or meaningful.
+[ IELTS Part 2 Master Inventory: 8 Official Cue Cards Across 4 Pillars ]
+  ├── 1. Category PEOPLE
+  │    ├── Card 1A: An Inspiring Educator or Academic Mentor (Teacher / Advisor)
+  │    └── Card 1B: A Respected Elderly Person with Extraordinary Life Wisdom
+  ├── 2. Category PLACES
+  │    ├── Card 2A: A Tranquil Nature Retreat Visited to Unwind (Ecological Sanctuary)
+  │    └── Card 2B: A Culturally Significant Historic Monument or Ancient City
+  ├── 3. Category OBJECTS
+  │    ├── Card 3A: An Indispensable Technological Gadget that Transformed Productivity
+  │    └── Card 3B: A Cherished Traditional Family Heirloom or Meaningful Artifact
+  └── 4. Category EXPERIENCES
+       ├── Card 4A: A Demanding Personal Challenge or Long-Term Goal Successfully Overcome
+       └── Card 4B: A Meaningful Community Environmental or Social Volunteer Initiative
 ```
-* **Execution Parameters**: Exactly 1:00 preparation countdown with interactive digital scratchpad, followed by an irreversible 2:00 recording window.
 
-##### Part 3: Two-Way In-Depth Abstract Discussion (4–5 minutes)
-* **Theme**: Global Ecological Governance, Corporate Responsibility, and Individual Ethics.
-* **Abstract Questions & High-Band Model Response Strategies**:
-  * *Question 1 (Individual vs Government Responsibility)*: "To what extent should the burden of environmental preservation rest on individual citizen choices compared to sweeping government legislation?"
-  * *Question 2 (Economic Growth vs Environmental Protection)*: "Can developing economies realistically attain sustainable development without sacrificing immediate industrial expansion?"
-  * *Question 3 (Consumerism and Corporate Greenwashing)*: "How can consumers distinguish between genuine corporate environmental stewardship and superficial marketing greenwashing?"
-  * *Question 4 (International Climate Accords)*: "Why do international environmental agreements frequently face compliance hurdles among sovereign nations?"
-  * *Question 5 (Technological Innovation as an Ecological Remedy)*: "Do you believe future technological breakthroughs will completely resolve ecological degradation without requiring lifestyle sacrifices?"
+###### Category 1: People (人物)
+
+* **Cue Card 1A: An Inspiring Educator or Academic Mentor**
+  ```
+  Describe an educator, tutor, or mentor who exerted a profound positive influence on your intellectual or personal development.
+
+  You should say:
+  • Who this individual was and where you first encountered them
+  • What specific subject, discipline, or philosophy they taught you
+  • How their pedagogical methodology differed from conventional instructors
+  And explain why this person's mentorship left such an indelible mark on your life.
+  ```
+  * *High-Band Lexicon & Collocations*: *intellectual awakening*, *unorthodox pedagogical approach*, *ignited a lifelong curiosity*, *instilled unwavering resilience*, *invaluable guidance*.
+  * *Follow-up Questions*: *"Do you maintain contact with this mentor today?"* / *"Would you consider becoming a mentor yourself?"*
+
+* **Cue Card 1B: An Elderly Person with Extraordinary Wisdom**
+  ```
+  Describe an elderly person whose life experiences, insights, or character you deeply admire.
+
+  You should say:
+  • Who this person is and how you know them
+  • What historical eras, hardships, or notable events they have navigated
+  • What distinct perspectives or pieces of advice they have shared with you
+  And explain why their presence and wisdom resonate so powerfully with you.
+  ```
+  * *High-Band Lexicon & Collocations*: *wealth of lived experience*, *unflinching fortitude*, *witnessed seismic historical shifts*, *timeless philosophical advice*, *an anchor of stability*.
+  * *Follow-up Questions*: *"Do you believe modern youth adequately value the perspectives of the older generation?"*
+
+###### Category 2: Places (場所)
+
+* **Cue Card 2A: A Tranquil Nature Retreat Visited to Unwind**
+  ```
+  Describe an idyllic, tranquil natural setting or rural retreat you visited to decompress and find solace.
+
+  You should say:
+  • Where this location is situated and how you arrived there
+  • What geographical, botanical, or scenic features characterized the landscape
+  • What activities or contemplative pursuits you engaged in while there
+  And explain why this particular natural sanctuary exerted such a restorative effect on your well-being.
+  ```
+  * *High-Band Lexicon & Collocations*: *pristine wilderness*, *far removed from urban cacophony*, *verdant undulating hills*, *breathtaking panoramic vistas*, *rejuvenated my mental reserves*.
+  * *Follow-up Questions*: *"Do you plan to revisit this destination in the near future?"*
+
+* **Cue Card 2B: A Historic City or Architectural Monument**
+  ```
+  Describe a historic city, architectural wonder, or heritage site that fascinated you.
+
+  You should say:
+  • Where this heritage site is located and what century it originates from
+  • What architectural styles, monuments, or artifacts distinguish it
+  • What historical events or civilizational developments transpired there
+  And explain why visiting this site deepened your appreciation for human history.
+  ```
+  * *High-Band Lexicon & Collocations*: *architectural splendor*, *steeped in centuries of intrigue*, *magnificent gothic spires*, *impeccably preserved fortress*, *tangible connection to antiquity*.
+  * *Follow-up Questions*: *"Should national governments allocate larger budgets toward preserving ancient monuments?"*
+
+###### Category 3: Objects (物品・技術)
+
+* **Cue Card 3A: An Indispensable Technological Gadget**
+  ```
+  Describe a technological device, hardware gadget, or digital apparatus that has revolutionized your daily productivity.
+
+  You should say:
+  • What the specific electronic device is and when you acquired it
+  • What software applications and operational features you utilize most frequently
+  • How your daily workflow was structured prior to possessing this device
+  And explain why this piece of technology has become so utterly indispensable to your life.
+  ```
+  * *High-Band Lexicon & Collocations*: *technological marvel*, *seamlessly integrated into my workflow*, *exponentially streamlined productivity*, *intuitive ergonomic design*, *an absolute game-changer*.
+  * *Follow-up Questions*: *"Could you function professionally if this gadget were confiscated for an entire month?"*
+
+* **Cue Card 3B: A Cherished Traditional Heirloom or Meaningful Artifact**
+  ```
+  Describe a traditional artifact, family heirloom, or meaningful handcrafted possession you hold dear.
+
+  You should say:
+  • What the physical object is and who originally crafted or owned it
+  • How it was passed down across generations or acquired by you
+  • What aesthetic craftsmanship or cultural symbolism it embodies
+  And explain why this tangible artifact holds such deep emotional significance for you.
+  ```
+  * *High-Band Lexicon & Collocations*: *cherished heirloom*, *intricate craftsmanship*, *revered talisman*, *tangible embodiment of ancestral heritage*, *priceless sentimental value*.
+  * *Follow-up Questions*: *"Do younger family members display comparable reverence for such heirlooms?"*
+
+###### Category 4: Experiences (経験・活動)
+
+* **Cue Card 4A: A Demanding Personal Challenge or Long-Term Goal**
+  ```
+  Describe a rigorous challenge, arduous competition, or daunting long-term objective you successfully accomplished.
+
+  You should say:
+  • What the objective was and why it appeared so daunting at the outset
+  • What sacrifices, training regimes, or intellectual hurdles were involved
+  • What critical moments of self-doubt or obstacles you encountered along the way
+  And explain how achieving this milestone transformed your self-confidence and outlook.
+  ```
+  * *High-Band Lexicon & Collocations*: *arduous undertaking*, *demanded relentless discipline*, *weathered agonizing setbacks*, *culmination of tireless perseverance*, *pivotal psychological milestone*.
+  * *Follow-up Questions*: *"Has conquering this challenge emboldened you to pursue even more audacious aspirations?"*
+
+* **Cue Card 4B: A Community Environmental or Social Volunteer Initiative**
+  ```
+  Describe an environmental cleanup, conservation policy, or social community volunteer initiative you actively participated in.
+
+  You should say:
+  • What the community campaign was and what ecological or civic issue it targeted
+  • How you became involved and what specific manual or organizational duties you performed
+  • What tangible outcomes, reforms, or improvements were realized by the participants
+  And explain why this collective civic initiative proved so deeply impactful.
+  ```
+  * *High-Band Lexicon & Collocations*: *grassroots collective mobilization*, *combating severe plastic proliferation*, *rehabilitated degraded wetlands*, *fostered profound civic solidarity*, *tangible ecological dividend*.
+  * *Follow-up Questions*: *"What incentives can municipalities offer to encourage wider youth civic engagement?"*
+
+---
+
+##### Part 3: Two-Way In-Depth Abstract Discussion (Analytical Themes)
+
+###### Theme A: Mentorship, Education & Pedagogical Evolution (Linked to Card 1A/1B)
+* **Question 1 (The Changing Role of the Educator)**: *"In an era where generative AI and digital encyclopedias provide instantaneous answers, how has the core role of a human educator evolved?"*
+  * *High-Band Analytical Framework*: Transition from factual gatekeeper to critical thinking facilitator and emotional anchor.
+* **Question 2 (Intergenerational Wisdom Transfer)**: *"Why do contemporary high-speed societies frequently marginalize the lived experiences of senior citizens, and what societal wisdom is lost as a consequence?"*
+  * *High-Band Analytical Framework*: Technological acceleration bias vs timeless ethical perspective and historical pattern recognition.
+* **Question 3 (Lifelong Mentorship in Corporate Structures)**: *"To what extent should enterprises formalize cross-generational mentorship programs to foster corporate resilience?"*
+
+###### Theme B: Urbanization, Heritage Conservation & Nature Depletion (Linked to Card 2A/2B)
+* **Question 4 (Tourism vs Heritage Preservation)**: *"How can international historic cities strike an equilibrium between lucrative global tourism and the physical preservation of fragile ancient monuments?"*
+  * *High-Band Analytical Framework*: Carrying capacity limits, dynamic zoning, tourism tax reinvestment in restorative masonry.
+* **Question 5 (The Psychological Necessity of Nature in Megacities)**: *"Is access to green urban spaces a fundamental public health right or merely a luxury amenity for affluent neighborhoods?"*
+  * *High-Band Analytical Framework*: Biophilia hypothesis, cortisol reduction, socioeconomic equity in urban tree-canopy allocation.
+* **Question 6 (Preserving Vanishing Architectural Identities)**: *"Do modern skyscraper skylines produce an impoverished global monoculture that erases regional architectural uniqueness?"*
+
+###### Theme C: Consumerism, Digital Automation & Material Culture (Linked to Card 3A/3B)
+* **Question 7 (Planned Obsolescence vs Durability)**: *"Why do contemporary consumer electronics prioritize rapid product obsolescence over repairable, multigenerational durability?"*
+  * *High-Band Analytical Framework*: Shareholder capitalism, rapid chip iteration, Right-to-Repair legislative mandates.
+* **Question 8 (The Psychological Cost of Pervasive Connectivity)**: *"Has the eradication of boredom through continuous smartphone stimulation diminished human capacity for deep philosophical reflection?"*
+  * *High-Band Analytical Framework*: Attention economy, dopamine hijacking, the generative value of cognitive daydreaming.
+
+###### Theme D: Civic Responsibility, Overcoming Adversity & Collective Action (Linked to Card 4A/4B)
+* **Question 9 (Individual Voluntarism vs State Regulatory Mandates)**: *"Can voluntary community cleanups realistically solve global ecological crises without sweeping legislative enforcement on multinational corporations?"*
+  * *High-Band Analytical Framework*: Symbolic awareness vs systemic economic externalities; the necessity of statutory carbon taxation.
+* **Question 10 (Cultivating Mental Fortitude in Youth)**: *"Are modern educational institutions insulating students from constructive failure, thereby stunting their capacity to overcome future adversity?"*
+  * *High-Band Analytical Framework*: Pedagogical sheltering vs psychological inoculation; cultivating grit through controlled struggle.
 
 ---
 

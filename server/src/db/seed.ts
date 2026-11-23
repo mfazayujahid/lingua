@@ -3,6 +3,7 @@ import { db, initDatabase } from './database';
 import { KANA_SEEDS } from './seeds/kanaSeeds';
 import { KANJI_SEEDS } from './seeds/kanjiSeeds';
 import { IELTS_MOCK_LESSON_ID, IELTS_FULL_MOCK_ITEMS } from './seeds/ieltsMockExamSeeds';
+import { SPEAKING_PACKAGES_SEED } from './seeds/speakingSeeds';
 import {
   CURRICULUM_PILLARS,
   CURRICULUM_UNITS,
@@ -16,6 +17,8 @@ export function seed() {
   console.log('Clearing existing tables...');
   db.exec(`
     PRAGMA foreign_keys = OFF;
+    DELETE FROM speaking_sessions;
+    DELETE FROM speaking_packages;
     DELETE FROM user_lesson_completions;
     DELETE FROM submissions;
     DELETE FROM kanji_writing_attempts;
@@ -150,8 +153,25 @@ console.log('Seeding Kana vector handwriting datasets (10 seed characters)...');
     );
   }
 
+  console.log('Seeding IELTS speaking exam packages...');
+  const insertSpeakingPackage = db.prepare(`
+    INSERT INTO speaking_packages (id, title, description, level_code, package_data_json)
+    VALUES (?, ?, ?, ?, ?)
+  `);
+
+  for (const pkg of SPEAKING_PACKAGES_SEED) {
+    insertSpeakingPackage.run(
+      pkg.id,
+      pkg.title,
+      pkg.description,
+      pkg.levelCode,
+      JSON.stringify(pkg)
+    );
+  }
+  console.log(`Seeded ${SPEAKING_PACKAGES_SEED.length} IELTS speaking exam packages.`);
+
   console.log('Seeding completed successfully!');
-  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji.`);
+  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages.`);
 }
 
 // Execute directly if run as main

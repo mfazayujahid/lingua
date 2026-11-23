@@ -157,5 +157,34 @@ export function initDatabase() {
       time_spent_sec INTEGER DEFAULT 0,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS speaking_packages (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      description TEXT,
+      level_code TEXT NOT NULL DEFAULT 'ielts_academic',
+      package_data_json TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS speaking_sessions (
+      id TEXT PRIMARY KEY,
+      package_id TEXT NOT NULL REFERENCES speaking_packages(id),
+      user_id TEXT NOT NULL REFERENCES users(id),
+      part_number INTEGER NOT NULL,
+      prompt_title TEXT NOT NULL,
+      transcript TEXT NOT NULL,
+      duration_seconds INTEGER NOT NULL,
+      silent_pauses_count INTEGER DEFAULT 0,
+      hesitation_count INTEGER DEFAULT 0,
+      wpm REAL,
+      fc_score REAL,
+      lr_score REAL,
+      gra_score REAL,
+      pr_score REAL,
+      overall_band REAL,
+      evaluation_json TEXT,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 }

@@ -4,7 +4,9 @@ import {
   SRSItem,
   WritingEvaluationResult,
   DiagnosticAnalytics,
-  LevelCode
+  LevelCode,
+  SpeakingDiagnosticEvaluationResult,
+  SpeakingExamPackage
 } from '../../shared/types';
 
 const BASE_URL = '/api';
@@ -188,5 +190,34 @@ export async function recordKanjiPractice(data: {
 
 export async function fetchAnalytics(userId = 'user_001'): Promise<DiagnosticAnalytics> {
   const res = await fetch(`${BASE_URL}/analytics?userId=${userId}`);
+  return res.json();
+}
+
+// Speaking Studio APIs
+export async function fetchSpeakingPackages(): Promise<{ packages: any[] }> {
+  const res = await fetch(`${BASE_URL}/speaking/packages`);
+  return res.json();
+}
+
+export async function fetchSpeakingPackage(packageId: string): Promise<{ package: SpeakingExamPackage }> {
+  const res = await fetch(`${BASE_URL}/speaking/packages/${packageId}`);
+  return res.json();
+}
+
+export async function evaluateSpeaking(payload: {
+  transcript: string;
+  durationSeconds: number;
+  silentPausesCount?: number;
+  hesitationCount?: number;
+  packageId?: string;
+  partNumber?: number;
+  promptTitle?: string;
+  userId?: string;
+}): Promise<SpeakingDiagnosticEvaluationResult & { sessionId?: string }> {
+  const res = await fetch(`${BASE_URL}/speaking/evaluate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
   return res.json();
 }

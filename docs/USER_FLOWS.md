@@ -287,7 +287,11 @@ flowchart TD
 
 ### Screen 2: Track & Curriculum Navigator (With 6-Stage Japanese Roadmap & Comprehensive IELTS Lecture Curriculum)
 * **Route**: `/curriculum?track=:trackId&level=:levelId`
-* **Purpose**: Comprehensive hierarchical view of the syllabus structure (Track $ightarrow$ Level $ightarrow$ Skill Pillars $ightarrow$ Units $ightarrow$ Lessons). Provides two completely isolated world-class learning tracks:
+* **Purpose**: Comprehensive hierarchical view of the syllabus structure (Track $
+ightarrow$ Level $
+ightarrow$ Skill Pillars $
+ightarrow$ Units $
+ightarrow$ Lessons). Provides two completely isolated world-class learning tracks:
   1. **Japanese Track (`ja_jlpt`)**: Features the **6-Stage Guided Progressive Roadmap** stepper ("Where to start / How to learn"), Kana literacy foundations, Joyo Kanji inventory, and the Global Furigana Engine.
   2. **English Track (`en_ielts_academic` / `en_ielts_general`)**: Features the **Comprehensive Cambridge / British Council IELTS Lecture Curriculum**, organizing authoritative lectures and skill-building units across all 4 pillars (Listening, Reading, Writing, Speaking) and Academic Word List (AWL) vocabulary.
 * **Strict Track & Level Isolation Rules**:
@@ -309,14 +313,18 @@ flowchart TD
   * *おすすめの学習順序 (Guided Learning Roadmap) Stepper (Japanese Track Only)*:
     * Interactive 6-Stage Stepper widget with reassurance callout and stage status badges (`Current`, `Completed`, `Upcoming`).
 * **User Actions**:
-  * Filter IELTS modules by skill pillar $ightarrow$ In-memory instantaneous filtering without losing band context.
-  * Click any IELTS lecture card $ightarrow$ Opens the interactive video/text lecture and accompanying strategy drill runner.
-  * Click "Full Mock Exam" $ightarrow$ Launches Screen 4 in Strict Examination Mode.
+  * Filter IELTS modules by skill pillar $
+ightarrow$ In-memory instantaneous filtering without losing band context.
+  * Click any IELTS lecture card $
+ightarrow$ Opens the interactive video/text lecture and accompanying strategy drill runner.
+  * Click "Full Mock Exam" $
+ightarrow$ Launches Screen 4 in Strict Examination Mode.
 * **5 Explicit States**:
   * *Empty*: Handled gracefully; displays 0% completion bar with welcome prompt: *"Start Lecture L-01: Form Filling & Alphanumeric Accuracy"*.
   * *Loading*: Shimmer skeleton accordion cards matching exact level structure.
   * *Active*: Interactive lecture tree showing unlocked and in-progress units.
-  * *Completed*: All level units mastered $ightarrow$ Official Full-Length Simulation Exam unlocked.
+  * *Completed*: All level units mastered $
+ightarrow$ Official Full-Length Simulation Exam unlocked.
   * *Error*: Network disconnect alert with retry button.
 
 ---
@@ -371,7 +379,10 @@ flowchart TD
     - Tab switch & window blur detection with a 2-strike maximum.
     - Relentless countdown timer with automatic hard submission at `00:00`.
     - Single-play audio for Listening (no pause, seek, or rewind).
-    - Irreversible sequential section lockouts: Listening (32 min) $ightarrow$ Reading (60 min) $ightarrow$ Writing (60 min) $ightarrow$ Speaking (14 min) with zero retroactive navigation.
+    - Irreversible sequential section lockouts: Listening (32 min) $
+ightarrow$ Reading (60 min) $
+ightarrow$ Writing (60 min) $
+ightarrow$ Speaking (14 min) with zero retroactive navigation.
 * **Deterministic Default Lesson Resolution Matrix**:
   * Direct clicks on "Practice Exam" or `/exam` without URL parameters resolve deterministically to active production tests:
     * **IELTS Academic**: `ielts_acad_mock_01` (Full-Length Academic Reading 40-item test, ~2,600 words across 3 passages)
@@ -416,10 +427,14 @@ flowchart TD
   * *Clipboard Lockout*: Pasting (`e.preventDefault()` on `paste`) and right-click context menus (`contextmenu`) are strictly disabled.
   * *Irreversible Section Lockout*: Once a candidate submits a section or time runs out, answers are encrypted in local state and synced. Navigation back to earlier sections is physically blocked.
 * **User Actions**:
-  * Click any question pill in the 40-item palette $ightarrow$ Viewport smoothly scrolls right pane to that question while maintaining passage context.
-  * Select text in the stimulus $ightarrow$ Floating popover provides "Highlight" and "New Note" options.
-  * Flag question $ightarrow$ Adds bookmark pin on the question pill in the bottom ribbon.
-  * Click "Submit Section" $ightarrow$ Modal displays warning if unanswered questions remain; on confirmation, transitions irreversibly to the next section.
+  * Click any question pill in the 40-item palette $
+ightarrow$ Viewport smoothly scrolls right pane to that question while maintaining passage context.
+  * Select text in the stimulus $
+ightarrow$ Floating popover provides "Highlight" and "New Note" options.
+  * Flag question $
+ightarrow$ Adds bookmark pin on the question pill in the bottom ribbon.
+  * Click "Submit Section" $
+ightarrow$ Modal displays warning if unanswered questions remain; on confirmation, transitions irreversibly to the next section.
 * **5 Explicit States**:
   * *Empty*: Deterministic resolver loads official mock package (`ielts_acad_mock_01`), never throwing 404 or empty states.
   * *Loading*: Shimmer skeleton layout for stimulus passage and 40 question cards.
@@ -430,9 +445,17 @@ flowchart TD
 
 ---
 
-### Screen 5: Production Writing & Speaking Studio (Track-Isolated Studio)
-* **Route**: `/studio/writing` and `/studio/speaking`
-* **Purpose**: Dedicated productive composition and speech evaluation studio with strict track isolation. Automatically renders level-appropriate Japanese Composition tasks (*Sakubun/Shoronbun*) for Japanese learners (N5–N1) and IELTS Academic/General Training prompts for English learners, completely eliminating cross-track leakage.
+### Screen 5: Production Writing & Speaking Studio (Dual Track-Isolated Studios)
+* **Routes**:
+  * Writing Studio: `/studio/writing?track=:trackId&level=:levelId`
+  * Speaking Studio: `/studio/speaking?track=:trackId&level=:levelId`
+* **Purpose**: Dedicated productive composition and oral discourse testing studios with 100% strict track isolation.
+  * In the **Japanese Track (`ja_jlpt`)**: Renders the **Japanese Writing Studio (作文・小論文スタジオ)**, dynamically adapting prompts and rubrics across N5–N1 (*Sakubun / Shoronbun*) with genko yoshi formatting, character counters, and zero English leakage.
+  * In the **English Track (`en_ielts`)**: Renders the **IELTS Writing Studio** (Academic Task 1/2 or GT Letters) and the **Interactive IELTS Speaking Studio** (Part 1 Personal Q&A, Part 2 Long Turn Cue Card with 60s scratchpad/120s timer, and Part 3 Two-Way Discussion with AI Examiner).
+
+---
+
+#### 5A. Production Writing Studio (`/studio/writing`)
 * **Contextual Track & Level Mode Switching**:
   * **When Active Track = `ja_jlpt` (or `ja_kana`)**:
     * Displays **Japanese Writing Studio (作文・小論文スタジオ)**.
@@ -449,32 +472,93 @@ flowchart TD
     * Word count thresholds (150 words for Task 1; 250 words for Task 2) and official 4-criterion rubrics (TR/TA, CC, LR, GRA).
     * Zero Japanese prompts or genko yoshi formatting are ever visible.
 * **Key UI Components**:
-  * *Level Task Selector*: Dropdown or pill switcher allowing the user to select their target level writing prompt without navigating away.
-  * *Prompt & Guideline Card*: Full task instructions, target character/word count range, stylistic register guide (`です・ます` vs `だ・である`), and key grammatical checkpoints.
-  * *Writing Input Canvas*:
-    * Clean, distraction-free text editor with real-time character counter (for Japanese) or word counter (for IELTS).
-    * Live progress bar toward minimum target length with color states: Amber (underlength), Green (within target range), Gray (exceeding maximum).
-    * "Format as Genko Yoshi" toggle for Japanese compositions.
-  * *Model Benchmark Drawer*:
-    * Allows learners to compare their drafts against verified high-scoring benchmark compositions (Band 8.5 for IELTS; Master level for JLPT N5–N1).
-  * *Automated Diagnostic Feedback Panel*:
-    * 4 Criterion Sub-Scores (0–100% or 0–9.0 band).
-    * Overall Projected Performance Badge.
-    * Inline Diagnostic Annotations:
-      * Red: Grammatical or particle errors with suggested corrections.
-      * Blue: Register inconsistency (e.g. using `だ` in an N5 `です・ます` composition).
-      * Green: Advanced vocabulary and authentic collocations recognized.
+  * *Level Task Selector Ribbon*: Switcher allowing the user to select their target level writing prompt without navigating away.
+  * *Prompt & Guideline Card*: Full task instructions, target character/word count range, stylistic register guide, and key grammatical checkpoints.
+  * *Writing Input Canvas*: Clean, distraction-free text editor with real-time character/word counter and live color progress bar (Amber = underlength, Green = target, Gray = overlength).
+  * *Model Benchmark Drawer*: Allows learners to compare their drafts against verified high-scoring benchmark compositions (Band 8.5 for IELTS; Master level for JLPT N5–N1).
+  * *Automated Diagnostic Feedback Panel*: 4 criterion sub-scores (0–100% or 0–9.0 band), overall projected badge, and inline annotations (Red = grammar, Blue = register, Green = lexical collocations).
+
+---
+
+#### 5B. Interactive IELTS Speaking Studio (`/studio/speaking`)
+* **Purpose**: Comprehensive, computer-delivered simulation of the official 11–14 minute Cambridge / British Council oral interview. Features virtual examiner voice prompts, live microphone capture, real-time waveform visualization, an interactive 60-second preparation scratchpad, and automated 9-Band speech evaluation.
+* **The 5-Phase Interactive Speaking Workflow**:
+
+```
+[ Phase 1: Microphone Calibration & Mode Selection ]
+        │
+        ▼
+[ Phase 2: Part 1 Interactive Familiar Q&A (4–5 min) ]
+        │  • Examiner audio prompts (5 Topic Sets)
+        │  • Auto-record on audio completion; 15–30s response target
+        ▼
+[ Phase 3: Part 2 Cue Card Long Turn (3–4 min) ]
+        │  • Task card display across 4 categories (People, Places, Objects, Experiences)
+        │  • 60s Digital Scratchpad (keywords outline)
+        │  • 120s Uninterrupted Speech Recording with live pacing gauge
+        ▼
+[ Phase 4: Part 3 In-Depth Analytical Discussion (4–5 min) ]
+        │  • Thematic extension to macro-societal, past vs present, future trends
+        │  • 2-way conversational debate
+        ▼
+[ Phase 5: 9-Band Diagnostic Evaluation & Actionable Review ]
+        │  • Overall Band (1.0–9.0 with 0.25/0.75 rounding)
+        │  • 4-Criterion Radar Matrix (FC, LR, GRA, PR)
+        │  • Words-Per-Minute (WPM) & Hesitation Heatmap
+        │  • Synchronized Audio Playback & Transcribed Text Annotations
+```
+
+* **Key UI Components**:
+  * *Studio Navigation & Mode Ribbon*:
+    * Mode Toggle: `Full 3-Part Official Simulation (11–14 min)` vs `Targeted Skill Drill` (Practice Part 1, Part 2, or Part 3 independently).
+    * Topic / Category Selector: Browse 5 Part 1 topic sets (Work/Study, Hometown, Habits, Technology, Daily Routine) and 8 Part 2 Cue Cards (People, Places, Objects, Experiences).
+  * *Examiner Voice & Avatar Console*:
+    * High-fidelity audio player streaming examiner prompts with realistic British, Australian, and North American accents.
+    * Live waveform animation indicating when the virtual examiner is speaking.
+    * Automatic state handoff: Recording triggers immediately when the examiner finishes speaking.
+  * *Live Speech Recording Viewport*:
+    * Browser `MediaRecorder` integration capturing clean audio (`audio/webm;codecs=opus`).
+    * Real-time Canvas Audio Visualizer rendering frequency bars or oscilloscope wave.
+    * Microphone Input Level Indicator with clipping/noise-floor warnings.
+    * Live Speech-to-Text Transcription Preview (utilizing Web Speech Recognition or post-turn Whisper model).
+  * *Part 2 Interactive Long Turn Console*:
+    * Prominently displayed Task Card with official bullet prompts.
+    * **60-Second Preparation Scratchpad**:
+      - Visible countdown timer (`00:59`, `00:58`...).
+      - Interactive text box for rapid keyword mind-mapping.
+      - "Tips" accordion illustrating high-scoring temporal scaffolding (Past $ightarrow$ Present $ightarrow$ Future).
+    * **120-Second Uninterrupted Speaking Gauge**:
+      - Large circular progress indicator with color thresholds:
+        * Red (`0:00 - 1:00`): Under-time penalty zone ($< 1$ min).
+        * Amber (`1:00 - 1:30`): Acceptable minimum.
+        * Green (`1:30 - 2:00`): Optimal Band 7–9 sustained discourse zone.
+        * Flashing Amber (`2:00`): Time ceiling reached; auto-stops recording.
+  * *Comprehensive 9-Band Diagnostic Evaluation Dashboard*:
+    * **Overall Projected Band Score**: Prominent badge (e.g. `Band 7.5 [Good User]`) computed via official 0.25/0.75 rounding.
+    * **4-Criteria Radar Chart & Score Cards**:
+      1. *Fluency & Coherence (FC)*: Score (e.g. `7.5`), WPM gauge (`136 WPM - Optimal Cadence`), Silent Pause counter (`3 pauses > 1.2s`), Acoustic Fillers (`2 "um"`), and Discourse Markers recognized (`4 used: "As far as I'm concerned", "Moving on to"`).
+      2. *Lexical Resource (LR)*: Score (e.g. `7.0`), Type-Token Ratio (`0.68`), AWL headwords highlighted in amber, natural collocations identified in green.
+      3. *Grammatical Range & Accuracy (GRA)*: Score (e.g. `7.5`), Complex Clause Ratio (`64%`), tense consistency audit, detected syntactic errors with correction tags.
+      4. *Pronunciation (PR)*: Score (e.g. `7.5`), Intelligibility Index (`88%`), thought-group chunking efficiency score.
+    * **Interactive Synchronized Transcript**:
+      - Full transcribed text with clickable timestamp words (clicking a sentence plays back candidate audio from that exact second).
+      - Red strikethroughs on grammatical lapses with hover tooltips showing native corrections.
+      - Green pills over advanced idiomatic phrases and collocations.
+    * **Actionable Improvement Roadmap**: Bulleted prioritized feedback per criterion (e.g., *"Expand Part 2 closing with speculative conditionals to boost GRA from 7.0 to 8.0"*).
+    * **Band 8.5 Model Audio Comparison**: Audio player allowing the candidate to listen to an authentic native-like response to the same prompt.
 * **User Actions**:
-  * Type composition or essay in native script.
-  * Click "Submit for Diagnostic Evaluation".
-  * Click "Inspect Model Benchmark" to review authoritative sample compositions.
+  * Grant microphone permissions $ightarrow$ System conducts 3-second ambient noise test.
+  * Click "Start Speaking Test" $ightarrow$ Examiner audio delivers initial prompt.
+  * Speak response into microphone $ightarrow$ Visualizer pulses in real time.
+  * In Part 2: Type keywords in scratchpad during 60s prep; speak continuously when 120s timer starts.
+  * Click "Complete & Evaluate" $ightarrow$ Pipeline runs speech diagnostics and renders results within $< 3	ext{ seconds}$.
 * **5 Explicit States**:
-  * *Empty*: Prompt initialized with clean editor and character counter at 0.
-  * *Drafting / Active*: User typing, character counter updating in real time with auto-draft saving.
-  * *Evaluating*: Shimmer loading state: "Analyzing grammatical inflections... Verifying stylistic register... Evaluating lexical collocations..."
-  * *Completed*: Diagnostic feedback card populated with criteria scores, register audit, and revision suggestions.
-  * *Error*: Submission payload empty or network error $
-ightarrow$ Friendly error toast with draft preservation.
+  * *Empty / Ready*: Studio loaded with chosen prompt, microphone calibrated, examiner standing by.
+  * *Examiner Speaking*: Examiner audio playing, candidate microphone muted, animated wave active.
+  * *Candidate Recording*: Candidate microphone active, countdown/elapsed timer running, live waveform pulsating.
+  * *Evaluating*: Shimmer loading state: *"Transcribing speech... Analyzing phonological cadence & WPM... Parsing syntactic complexity... Aggregating 9-Band descriptors..."*
+  * *Completed*: Diagnostic dashboard displayed with audio playback, transcript annotations, and actionable tips.
+  * *Error*: Microphone access denied, audio payload corrupted, or network disconnect $ightarrow$ Explicit error card with browser permission guide and cached recording recovery.
 
 ---
 
@@ -943,5 +1027,41 @@ On mobile viewports ($< 640	ext{px}$), the desktop top-header collapses into an 
   * **Given** a candidate is working on the Reading section and the countdown timer reaches `00:00`,
   * **When** the final second elapses,
   * **Then** the interface instantly disables all text inputs, radio buttons, and buttons with zero grace period, displays an amber *"Time Expired — Submitting..."* banner, and submits the test payload to the deterministic grading pipeline.
+
+---
+
+### 4.19 Interactive IELTS Speaking Studio Flow, Audio Capture & Timing Verification
+* **Scenario 44: Audio Calibration & Microphone Initialization**
+  * **Given** a learner navigates to `/studio/speaking` on the English IELTS Track,
+  * **When** they click "Start Speaking Session",
+  * **Then** the browser requests microphone permissions via `getUserMedia`, performs a 3-second noise-floor check, and transitions to the Examiner Greeting viewport without audio latency or clip distortion.
+* **Scenario 45: Part 2 Cue Card 60-Second Scratchpad & 120-Second Monologue Enforcement**
+  * **Given** a candidate begins Part 2 with Cue Card *1A (Inspiring Mentor)*,
+  * **When** the prompt appears,
+  * **Then** the system initiates a strict 60-second preparation countdown, unlocks the digital scratchpad for keyword notes, and automatically transitions to the 120-second recording window when the timer hits `00:00`.
+  * **When** the candidate speaks continuously,
+  * **Then** the circular gauge visually shifts from Red ($< 1$ min) to Amber ($1$–$1.5$ min) to Green ($1.5$–$2$ min), automatically terminating recording and saving the audio chunk when the 120-second ceiling is reached.
+* **Scenario 46: Part 1 & Part 3 Examiner Audio Prompt Synchronization**
+  * **Given** an interactive interview session is in progress,
+  * **When** the virtual examiner delivers a question prompt (e.g. *"Has your hometown experienced substantial commercial changes?"*),
+  * **Then** candidate microphone recording is paused until the examiner's audio stream finishes, whereupon recording activates automatically with an audible chime and live waveform indicator.
+
+### 4.20 IELTS Speaking 9-Band Diagnostic Speech Evaluation & Rubric Feedback Verification
+* **Scenario 47: Speech Metric Extraction & Criteria Scoring**
+  * **Given** a candidate completes a 2-minute Part 2 monologue containing 270 words with two 1.5-second pauses, four complex subordinate clauses, and three academic collocations,
+  * **When** the diagnostic evaluation runs,
+  * **Then** the engine calculates:
+    1. **Fluency & Coherence (FC)**: $	ext{WPM} = rac{270}{2.0} = 135	ext{ WPM}$ (within the optimal 125–145 Band 7.0–7.5 window).
+    2. **Lexical Resource (LR)**: Detects academic terms and computes Type-Token Ratio ($TTR$).
+    3. **Grammatical Range & Accuracy (GRA)**: Identifies clause complexity ($CCR > 60\%$).
+    4. **Pronunciation (PR)**: Evaluates rhythm continuity and generates an aggregated overall band score using official 0.25/0.75 rounding.
+* **Scenario 48: Interactive Transcript & Error Annotation Rendering**
+  * **Given** the diagnostic results screen is rendered,
+  * **When** the candidate reviews the transcribed text,
+  * **Then** clicking any word plays back the candidate's recorded audio from that exact second, grammatical lapses are highlighted in red with suggested corrections, and advanced collocations are tagged in green.
+* **Scenario 49: Strict Track Isolation in Speaking Studio**
+  * **Given** a user is in `/studio/speaking`,
+  * **When** viewing the interface,
+  * **Then** the view renders 100% authentic English IELTS examiner audio, cue cards, and 9-Band metrics, with zero Japanese text, genko yoshi formatting, or Furigana toggles visible.
 
 ---

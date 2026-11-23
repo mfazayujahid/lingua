@@ -209,3 +209,126 @@ export interface DiagnosticAnalytics {
     isCritical: boolean;
   }>;
 }
+
+// Speaking Studio & Assessment Interfaces
+export interface SpeakingDiagnosticEvaluationResult {
+  overallBand: number;
+  wordCount: number;
+  wpm: number;
+  durationSeconds: number;
+  criteria: {
+    fluencyAndCoherence: {
+      score: number;
+      feedback: string;
+      wpm: number;
+      continuityPenalty: number;
+      pausesCount: number;
+      hesitationCount: number;
+    };
+    lexicalResource: {
+      score: number;
+      feedback: string;
+      typeTokenRatio: number;
+      awlWordsDetected: string[];
+      idiomaticPhrasesDetected: string[];
+    };
+    grammaticalRangeAndAccuracy: {
+      score: number;
+      feedback: string;
+      complexClauseRatio: number;
+      detectedSubordinatingConjunctions: string[];
+      detectedRelativePronouns: string[];
+    };
+    pronunciation: {
+      score: number;
+      feedback: string;
+      intelligibilityEstimate: number;
+      thoughtGroupChunkingEstimate: number;
+    };
+  };
+  annotatedSuggestions: Array<{
+    type: 'fluency' | 'lexical' | 'grammar' | 'pronunciation';
+    originalText?: string;
+    suggestion: string;
+    reason: string;
+  }>;
+}
+
+export interface SpeakingTopicSet {
+  topicName: string;
+  questions: string[];
+}
+
+export interface SpeakingPart1Data {
+  title: string;
+  durationGuideline: string;
+  topicSets: SpeakingTopicSet[];
+}
+
+export interface SpeakingCueCard {
+  id: string;
+  cueCardCode: string;
+  themeCategory: 'People' | 'Objects' | 'Places' | 'Experiences' | string;
+  taskTitle: string;
+  promptLeadIn: string;
+  bulletPrompts: string[];
+  clarificationPrompt: string;
+  prepTime: number;
+  speakTime: number;
+  followUpQuestions: string[];
+  modelBand8Transcript: string;
+}
+
+export interface SpeakingPart2Data {
+  title: string;
+  cueCards: SpeakingCueCard[];
+}
+
+export interface SpeakingPart3Question {
+  question: string;
+  probingAspect?: string;
+  sampleBand8KeyPoints?: string[];
+}
+
+export interface SpeakingPart3Topic {
+  themeTitle: string;
+  questions: SpeakingPart3Question[];
+}
+
+export interface SpeakingPart3Data {
+  title: string;
+  durationGuideline: string;
+  thematicTopics: SpeakingPart3Topic[];
+}
+
+export interface SpeakingExamPackage {
+  id: string;
+  title: string;
+  description: string;
+  levelCode: LevelCode;
+  parts: {
+    part1: SpeakingPart1Data;
+    part2: SpeakingPart2Data;
+    part3: SpeakingPart3Data;
+  };
+}
+
+export interface SpeakingSessionRecord {
+  id: string;
+  packageId: string;
+  userId: string;
+  partNumber: number;
+  promptTitle: string;
+  transcript: string;
+  durationSeconds: number;
+  silentPausesCount: number;
+  hesitationCount: number;
+  wpm: number;
+  fcScore: number;
+  lrScore: number;
+  graScore: number;
+  prScore: number;
+  overallBand: number;
+  evaluationJson?: string;
+  createdAt?: string;
+}

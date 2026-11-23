@@ -6,6 +6,7 @@ import { curriculumRouter } from './routes/curriculum';
 import { srsRouter } from './routes/srs';
 import { sessionsRouter } from './routes/sessions';
 import { studioRouter } from './routes/studio';
+import { speakingRouter } from './routes/speaking';
 import { kanjiRouter } from './routes/kanji';
 import { analyticsRouter } from './routes/analytics';
 
@@ -34,6 +35,7 @@ app.use('/api/curriculum', curriculumRouter);
 app.use('/api/srs', srsRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/studio', studioRouter);
+app.use('/api/speaking', speakingRouter);
 app.use('/api/kanji', kanjiRouter);
 app.use('/api/analytics', analyticsRouter);
 

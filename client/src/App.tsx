@@ -10,6 +10,7 @@ import { CurriculumView } from './components/CurriculumView';
 import { SRSReviewerView } from './components/SRSReviewerView';
 import { ExamRunnerView } from './components/ExamRunnerView';
 import { StudioView } from './components/StudioView';
+import { SpeakingStudioView } from './components/SpeakingStudioView';
 import { LectureView } from './components/LectureView';
 import { KanjiCanvasView } from './components/KanjiCanvasView';
 import { AnalyticsView } from './components/AnalyticsView';
@@ -57,6 +58,9 @@ export const AppContent: React.FC = () => {
     if (newTrack.startsWith('ielts_') && activeView === 'kanji') {
       setActiveView('dashboard');
     }
+    if (newTrack.startsWith('jlpt_') && activeView === 'speaking') {
+      setActiveView('dashboard');
+    }
     setActiveTrack(newTrack);
     const DEFAULT_EXAMS: Record<string, string> = {
       jlpt_n5: 'les_n5_gram_1',
@@ -92,6 +96,8 @@ export const AppContent: React.FC = () => {
     }
     if (lessonType === 'kanji_writing') {
       setActiveView('kanji');
+    } else if (lessonType === 'speaking_task' || lessonType === 'speaking') {
+      setActiveView('speaking');
     } else if (lessonType === 'writing_task') {
       setActiveView('studio');
     } else if (lessonType === 'flashcard_review' || lessonType === 'srs') {
@@ -163,6 +169,10 @@ export const AppContent: React.FC = () => {
 
         {activeView === 'studio' && (
           <StudioView activeTrack={activeTrack} />
+        )}
+
+        {activeView === 'speaking' && (
+          <SpeakingStudioView activeTrack={activeTrack} />
         )}
 
         {activeView === 'kanji' && (

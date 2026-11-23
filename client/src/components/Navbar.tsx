@@ -17,7 +17,8 @@ import {
   Moon,
   Languages,
   Globe,
-  ArrowLeftRight
+  ArrowLeftRight,
+  Mic
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -69,6 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         { id: 'dashboard', label: t('nav.dashboard'), shortLabel: t('nav.short.dashboard'), icon: BookOpen },
         { id: 'lecture', label: t('nav.lecture'), shortLabel: t('nav.short.lecture'), icon: GraduationCap },
         { id: 'curriculum', label: t('nav.curriculum'), shortLabel: t('nav.short.curriculum'), icon: Layers },
+        { id: 'speaking', label: t('nav.ielts_speaking'), shortLabel: t('nav.short.speaking'), icon: Mic },
         { id: 'studio', label: t('nav.ielts_studio'), shortLabel: t('nav.ielts_studio'), icon: PenTool },
         { id: 'srs', label: t('nav.ielts_vocab'), shortLabel: t('nav.short.srs'), icon: CheckCircle2, badge: srsDueCount },
         { id: 'exam', label: t('nav.ielts_exam'), shortLabel: t('nav.short.exam'), icon: Clock },
