@@ -1,0 +1,17 @@
+{
+  "name": "lingua-mastery-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:server": "npm.cmd --prefix server install",
+    "install:client": "npm.cmd --prefix client install",
+    "install:all": "npm.cmd run install:server && npm.cmd run install:client",
+    "db:seed": "npm.cmd --prefix server run seed",
+    "server": "npm.cmd --prefix server run start",
+    "client": "npm.cmd --prefix client run dev",
+    "build": "npm.cmd --prefix server run build && npm.cmd --prefix client run build"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}
