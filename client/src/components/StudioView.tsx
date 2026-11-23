@@ -79,7 +79,7 @@ const LOCALIZED_STUDIO_PROMPTS: Record<string, {
     modelRationaleId: 'Kritik filosofis yang terintegrasi mendalam berdasarkan semiotika dan epistemologi, dengan eksekusi sempurna penanda ragam bahasa puncak.'
   },
   ielts_academic: {
-    promptId: '【Writing Task 1 & 2】Present a reasoned argument or analysis on academic trends, organizing your response with formal register, appropriate cohesive devices, and varied lexical resource.',
+    promptId: '[Writing Task 1 & 2]Present a reasoned argument or analysis on academic trends, organizing your response with formal register, appropriate cohesive devices, and varied lexical resource.',
     guidelinesId: 'Length: 250+ words • Recommended Time: 40 minutes • Formal academic register required',
     rubricLabelsId: {
       c1: 'Respon Tugas (Task Achievement / Response)',
@@ -90,7 +90,7 @@ const LOCALIZED_STUDIO_PROMPTS: Record<string, {
     modelRationaleId: 'Logika argumen yang tertata dengan piranti kohesi yang bervariasi dan struktur kalimat kompleks yang akurat.'
   },
   ielts_general: {
-    promptId: '【Writing Task 1 & 2】Write a formal or semi-formal letter explaining a situation and requesting appropriate action from the relevant authority or organization.',
+    promptId: '[Writing Task 1 & 2]Write a formal or semi-formal letter explaining a situation and requesting appropriate action from the relevant authority or organization.',
     guidelinesId: 'Length: 150+ words for Task 1, 250+ words for Task 2 • Recommended Time: 40 minutes',
     rubricLabelsId: {
       c1: 'Pemenuhan Tujuan Komunikasi (Task Achievement)',

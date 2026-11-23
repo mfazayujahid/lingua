@@ -465,6 +465,8 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
   onSelectExam
 }) => {
   const { renderFurigana } = useFurigana();
+  const isJapaneseTrack = (activeTrack || 'jlpt_n5').startsWith('jlpt_');
+  const renderWithFuriganaIfJapanese = (txt: string) => isJapaneseTrack ? renderFurigana(txt) : txt;
   const { t, language } = useLanguage();
 
   const trackKey = activeTrack || 'jlpt_n5';
@@ -687,7 +689,7 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
                 <span>{t('exam.reference_title')}</span>
               </div>
               <div className="text-xs sm:text-sm text-stone-800 dark:text-stone-200 leading-relaxed font-jp whitespace-pre-line border-t border-washi-200 dark:border-sumi-800 pt-3">
-                {renderFurigana(currentItem.passageText)}
+                {renderWithFuriganaIfJapanese(currentItem.passageText)}
               </div>
             </div>
           )}
@@ -755,7 +757,7 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
                   {language === 'id' ? 'Penjelasan Pedagogis:' : 'Pedagogical Explanation:'}
                 </span>
                 <p className="leading-relaxed">
-                  {renderFurigana(currentItem.explanation)}
+                  {renderWithFuriganaIfJapanese(currentItem.explanation)}
                 </p>
               </div>
             )}

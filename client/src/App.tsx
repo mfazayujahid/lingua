@@ -126,6 +126,7 @@ export const AppContent: React.FC = () => {
 
         {activeView === 'srs' && (
           <SRSReviewerView
+            activeTrack={activeTrack}
             onSessionComplete={loadDashboard}
             onNavigate={setActiveView}
           />

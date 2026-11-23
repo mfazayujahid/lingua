@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SRSItem, RecallGrade } from '../../../shared/types';
+import { SRSItem, RecallGrade, LevelCode } from '../../../shared/types';
 import { fetchSRSQueue, submitSRSReview } from '../api';
 import {
   Volume2,
@@ -13,11 +13,17 @@ import { useFurigana } from '../context/FuriganaContext';
 import { useLanguage } from '../context/LanguageContext';
 
 interface SRSReviewerViewProps {
+  activeTrack?: LevelCode;
   onSessionComplete?: () => void;
   onNavigate?: (view: string) => void;
 }
 
-export const SRSReviewerView: React.FC<SRSReviewerViewProps> = ({ onSessionComplete, onNavigate }) => {
+export const SRSReviewerView: React.FC<SRSReviewerViewProps> = ({
+  activeTrack = 'jlpt_n5',
+  onSessionComplete,
+  onNavigate
+}) => {
+  const isJapaneseTrack = activeTrack.startsWith('jlpt_');
   const { furiganaEnabled, toggleFurigana, renderFurigana } = useFurigana();
   const { t, language } = useLanguage();
 
@@ -129,9 +135,17 @@ export const SRSReviewerView: React.FC<SRSReviewerViewProps> = ({ onSessionCompl
               )
             ) : (
               language === 'id' ? (
-                <>0 kartu yang jatuh tempo hari ini. Akun baru dimulai dengan status 0%. Latihlah karakter di Studio Huruf & Kanji atau buka kurikulum untuk menambahkan materi ke antrean pengulangan berjeda.</>
+                isJapaneseTrack ? (
+            <>0 kartu yang jatuh tempo hari ini. Akun baru dimulai dengan status 0%. Latihlah karakter di Studio Huruf & Kanji atau buka kurikulum untuk menambahkan materi ke antrean pengulangan berjeda.</>
+          ) : (
+            <>0 kartu yang jatuh tempo hari ini. Buka kurikulum modul IELTS atau selesaikan latihan membaca untuk menambahkan kosakata baru ke antrean pengulangan berjeda.</>
+          )
               ) : (
-                <>0 cards due today. Fresh accounts start with a true 0% empty state. Practice characters in the Kanji Studio or explore lessons in Curriculum to add items to your spaced repetition queue.</>
+                isJapaneseTrack ? (
+            <>0 cards due today. Fresh accounts start with a true 0% empty state. Practice characters in the Kanji Studio or explore lessons in Curriculum to add items to your spaced repetition queue.</>
+          ) : (
+            <>0 cards due today. Explore IELTS curriculum modules or complete reading passages to add vocabulary items to your spaced repetition queue.</>
+          )
               )
             )}
           </p>
@@ -166,14 +180,16 @@ export const SRSReviewerView: React.FC<SRSReviewerViewProps> = ({ onSessionCompl
         </div>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggleFurigana}
-            className="hover:text-stone-900 dark:hover:text-stone-200 flex items-center gap-1 transition-colors"
-            title="Toggle Furigana reading hints"
-          >
-            {furiganaEnabled ? <Eye className="w-3.5 h-3.5 text-vermilion-600 dark:text-vermilion-500" /> : <EyeOff className="w-3.5 h-3.5" />}
-            <span>ふりがな</span>
-          </button>
+          {isJapaneseTrack && (
+            <button
+              onClick={toggleFurigana}
+              className="hover:text-stone-900 dark:hover:text-stone-200 flex items-center gap-1 transition-colors"
+              title="Toggle Furigana reading hints"
+            >
+              {furiganaEnabled ? <Eye className="w-3.5 h-3.5 text-vermilion-600 dark:text-vermilion-500" /> : <EyeOff className="w-3.5 h-3.5" />}
+              <span>ふりがな</span>
+            </button>
+          )}
           <span>{language === 'id' ? 'Kemudahan' : 'Ease'}: {current.easeFactor}</span>
         </div>
       </div>
@@ -207,7 +223,7 @@ export const SRSReviewerView: React.FC<SRSReviewerViewProps> = ({ onSessionCompl
           ) : (
             <div className="space-y-2">
               <span className="text-3xl font-bold text-stone-900 dark:text-stone-100 tracking-tight block">
-                {renderFurigana(current.prompt)}
+                {isJapaneseTrack ? renderFurigana(current.prompt) : current.prompt}
               </span>
               {back.reading && (
                 <span className="text-xs text-stone-500 dark:text-stone-400 font-mono">
