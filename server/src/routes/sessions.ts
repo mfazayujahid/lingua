@@ -23,7 +23,40 @@ sessionsRouter.post('/start', (req: Request, res: Response) => {
 
 sessionsRouter.post('/:sessionId/submit', (req: Request, res: Response) => {
   const { sessionId } = req.params;
-  const { answers, timeSpentSec } = req.body; // answers is Record<itemId, userAnswer>
+  const { answers, timeSpentSec, isAbandoned } = req.body;
+  const nowIso = new Date().toISOString(); // answers is Record<itemId, userAnswer>
+
+  // Handle premature abandonment / test disqualification (Score 0 / Band 0.0)
+  if (isAbandoned) {
+    db.prepare(`
+      UPDATE practice_sessions SET
+        completed_at = ?,
+        time_spent_sec = ?,
+        score_raw = 0,
+        score_scaled = 0,
+        band_estimate = 0.0,
+        pass_status = 'disqualified'
+      WHERE id = ?
+    `).run(nowIso, timeSpentSec || 0, sessionId);
+
+    return res.json({
+      sessionId,
+      lessonId: 'les_ia_mock_full_1',
+      score: 0,
+      maxScore: 40,
+      correctCount: 0,
+      totalQuestions: 40,
+      accuracyPct: 0,
+      bandEstimate: 0.0,
+      scaledScore: 0,
+      passStatus: 'disqualified',
+      passed: false,
+      disqualified: true,
+      taskDone: true,
+      message: 'Sesi ujian didiskualifikasi karena keluar sebelum waktu selesai. Skor Band Resmi: 0.0',
+      itemResults: []
+    });
+  }
 
   const session = db.prepare('SELECT * FROM practice_sessions WHERE id = ?').get(sessionId) as any;
   if (!session) {
@@ -34,8 +67,6 @@ sessionsRouter.post('/:sessionId/submit', (req: Request, res: Response) => {
   let correctCount = 0;
   const itemResults: any[] = [];
   let detectedLessonId = '';
-
-  const nowIso = new Date().toISOString();
 
   if (answers && typeof answers === 'object') {
     for (const [itemId, rawUserAnswer] of Object.entries(answers)) {

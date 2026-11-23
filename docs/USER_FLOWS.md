@@ -285,55 +285,39 @@ flowchart TD
 
 ---
 
-### Screen 2: Track & Curriculum Navigator (With 6-Stage Guided Roadmap & Global Furigana Synchronization)
+### Screen 2: Track & Curriculum Navigator (With 6-Stage Japanese Roadmap & Comprehensive IELTS Lecture Curriculum)
 * **Route**: `/curriculum?track=:trackId&level=:levelId`
-* **Purpose**: Comprehensive hierarchical view of the syllabus structure (Track $\rightarrow$ Level $\rightarrow$ Skill Pillars $\rightarrow$ Units $\rightarrow$ Lessons). Features an explicit **"おすすめの学習順序 (Guided Learning Roadmap)"** stepper that completely eliminates beginner uncertainty ("Where do I start? Do I learn all words first?"), guarantees 100% strict track isolation, authentic level-specific content loading with zero fallback, and synchronizes with the Global Furigana Engine.
+* **Purpose**: Comprehensive hierarchical view of the syllabus structure (Track $ightarrow$ Level $ightarrow$ Skill Pillars $ightarrow$ Units $ightarrow$ Lessons). Provides two completely isolated world-class learning tracks:
+  1. **Japanese Track (`ja_jlpt`)**: Features the **6-Stage Guided Progressive Roadmap** stepper ("Where to start / How to learn"), Kana literacy foundations, Joyo Kanji inventory, and the Global Furigana Engine.
+  2. **English Track (`en_ielts_academic` / `en_ielts_general`)**: Features the **Comprehensive Cambridge / British Council IELTS Lecture Curriculum**, organizing authoritative lectures and skill-building units across all 4 pillars (Listening, Reading, Writing, Speaking) and Academic Word List (AWL) vocabulary.
 * **Strict Track & Level Isolation Rules**:
   * **Track Isolation**: When `trackId = ja_jlpt` (or `ja_kana`), the navigator renders ONLY Japanese modules. English IELTS modules are strictly excluded from state, DOM, and queries. Conversely, in `trackId = en_ielts_academic` or `en_ielts_general`, only IELTS modules appear.
-  * **Zero Level Fallback**: When user selects `N4`, `N3`, `N2`, or `N1`, the view displays ONLY units and lessons authored specifically for that selected level. The system NEVER falls back to N5 content or shows duplicate foundation units across higher tiers.
+  * **Zero Level Fallback**: When user selects a specific target band tier (`Band 5.5`, `Band 6.5`, `Band 7.5`, `Band 8.5+`), the view displays ONLY units and lessons authored specifically for that selected band.
 * **Key UI Components**:
   * *Top Track Switcher Ribbon*: Explicit toggle between `Japanese (Kana & JLPT)` and `English (IELTS Academic / General)`.
-  * *Global Furigana Synchronization Indicator*:
-    * Linked directly to the primary Navbar Furigana toggle (`ふりがな: ON / OFF`).
-    * When toggled **ON**: Dynamically renders semantic `<ruby>` / `<rt>` Hiragana phonetic annotations for every Kanji character and compound across unit titles, lesson headers, vocabulary pills, and grammar descriptors.
-    * When toggled **OFF**: Renders authentic adult Japanese orthography with zero phonetic clutter.
-    * Persists globally in client state and `localStorage` (`lingua_furigana_enabled`).
-  * *おすすめの学習順序 (Guided Learning Roadmap) Stepper*:
-    * **Pedagogical Clarity Banner**: Prominently displayed at the top of the Japanese syllabus view to resolve beginner anxiety:
-      > *"何から学ぶべき？単語をすべて暗記する必要はありません。文字の土台・基本文型・生活漢字を並行して段階的に習得します。"*
-      > *(Where should I start? You do not need to memorize all words first. Master Kana, core sentence structures, and everyday Kanji in parallel.)*
-    * **Interactive 6-Stage Stepper Widget**:
-      - **Stage 1 (文字の土台)**: 46 Hiragana & 46 Katakana (Badge: `Completed (完了)` / `Current (現在)`).
-      - **Stage 2 (基本文型)**: Topic は + Polite Copula です + 15 Survival Words (Badge: `Current (現在)`).
-      - **Stage 3 (生活基本漢字 10字)**: 日, 本, 人, 一, 二, 三, 月, 木, 水, 火 (Badge: `Upcoming (次へ)`).
-      - **Stage 4 (動詞と格助詞)**: Action Verbs + を, に, で, へ + 〜ます (Badge: `Upcoming (次へ)`).
-      - **Stage 5 (短文読解と対話聴解)**: Real notices & dialogues (Badge: `Upcoming (次へ)`).
-      - **Stage 6 (語順スター実戦演習)**: JLPT Sentence Composition [★] verification gate (Badge: `Upcoming (次へ)`).
-    * **Interactive Interaction**: Clicking any unlocked stage card automatically scrolls the curriculum accordion directly to that stage's unit and highlights the next uncompleted lesson card.
-  * *Level Selector Tabs*:
-    * For Japanese Track: `Kana Syllabary`, `JLPT N5`, `JLPT N4`, `JLPT N3`, `JLPT N2`, `JLPT N1`.
-    * For English Track: `IELTS Academic (Band 5.5 / 7.0 / 8.5+)` and `IELTS General Training (CLB 5–9+)`.
-  * *Pillar Filter Chips*:
-    * Japanese: `All`, `Kana Orthography`, `Kanji & Vocabulary`, `Grammar`, `Reading Comprehension`, `Listening Comprehension`.
-    * English: `All`, `Reading`, `Writing Task 1`, `Writing Task 2`, `Listening`, `Speaking`.
-  * *Unit Accordion List*: Level-specific units displaying unit code, pedagogical synopsis, CEFR competency mapping, and completion badge (`Locked`, `Available`, `Mastered`).
-  * *Lesson Card Rows*:
-    * Distinctive lesson type badge: `Concept Lecture`, `Guided Drill`, `Interactive Kanji Canvas`, `Timed Simulation`, `SRS Vocab Deck`.
-    * Lesson title (with dynamic ruby annotation when Furigana is ON), target grammar/vocabulary/reading items, estimated duration (15–30 min), mastery stars.
-    * Action button: `"Start Lesson"` / `"Review"` / `"Practice Drills"`.
+  * *English IELTS Curriculum Matrix Toolbar*:
+    * **Target Band Selector Tabs**: `Foundation (Band 5.0–5.5)`, `Competence (Band 6.0–6.5)`, `Mastery (Band 7.0–7.5)`, `Elite / Native-Like (Band 8.0–9.0)`.
+    * **Pillar Filter Chips**: `All Pillars`, `Listening (4 Tiers)`, `Academic Reading (3 Passages)`, `Writing Task 1 (Data Synthesis)`, `Writing Task 2 (Discursive Essays)`, `Speaking (Parts 1–3)`, `AWL & Grammar`.
+    * **Lecture Module Card Structure**:
+      - Lecture Title (e.g., `lec_read_m1_02`: *True / False / Not Given Demystified*).
+      - Core Strategy Synopsis (e.g. *Demarcating explicit contradiction vs absence of verification*).
+      - Estimated Duration (e.g. `25 min lecture + 15 min diagnostic drill`).
+      - Competency Badge: `Strategy Video`, `Guided Practice Drill`, `Authentic Timed Section`.
+      - Completion Status: `Locked`, `Available`, `Mastered` (with score percentage).
+  * *Global Furigana Synchronization Indicator (Japanese Track Only)*:
+    * Linked directly to the primary Navbar Furigana toggle (`ふりがな: ON / OFF`). Active only when on the Japanese track; cleanly unmounted on the English track.
+  * *おすすめの学習順序 (Guided Learning Roadmap) Stepper (Japanese Track Only)*:
+    * Interactive 6-Stage Stepper widget with reassurance callout and stage status badges (`Current`, `Completed`, `Upcoming`).
 * **User Actions**:
-  * Toggle Furigana switch $\rightarrow$ Dynamically transforms kanji headers into ruby/subtext without page reload.
-  * Select Track & Target Level $\rightarrow$ System triggers isolated API call (`/api/curriculum?trackId=...&levelId=...`), strictly filtering records by foreign keys.
-  * Filter by skill pillar $\rightarrow$ In-memory instantaneous filtering without losing level context.
-  * Click any lesson card $\rightarrow$ Navigates directly to lesson runner.
-* **Data Displayed**:
-  * Exact level metadata: Target pass threshold (e.g. `JLPT N2: 90/180 pass, min 19/60 per section`), total unit count, and authentic level completion %.
+  * Filter IELTS modules by skill pillar $ightarrow$ In-memory instantaneous filtering without losing band context.
+  * Click any IELTS lecture card $ightarrow$ Opens the interactive video/text lecture and accompanying strategy drill runner.
+  * Click "Full Mock Exam" $ightarrow$ Launches Screen 4 in Strict Examination Mode.
 * **5 Explicit States**:
-  * *Empty*: First time visiting level $\rightarrow$ Displays authentic 0% completion bar with welcome prompt: *"Start Unit 1: Foundational Core"*.
+  * *Empty*: Handled gracefully; displays 0% completion bar with welcome prompt: *"Start Lecture L-01: Form Filling & Alphanumeric Accuracy"*.
   * *Loading*: Shimmer skeleton accordion cards matching exact level structure.
-  * *Active*: Interactive lesson tree showing unlocked and in-progress units.
-  * *Completed*: All level units mastered $\rightarrow$ Official Level Certification Mock Exam unlocked.
-  * *Error*: Network disconnect $\rightarrow$ Explicit error card with retry button.
+  * *Active*: Interactive lecture tree showing unlocked and in-progress units.
+  * *Completed*: All level units mastered $ightarrow$ Official Full-Length Simulation Exam unlocked.
+  * *Error*: Network disconnect alert with retry button.
 
 ---
 
@@ -377,42 +361,72 @@ flowchart TD
 
 ---
 
-### Screen 4: Interactive Practice & Mock Exam Runner (Level-Aware Default Resolution)
+### Screen 4: Interactive Practice & Mock Exam Runner (Full-Length IELTS & Strict Exam Engine)
 * **Route**: `/practice/:lessonId` or `/exam?track=:trackId&level=:levelId`
-* **Purpose**: Realistic simulation of official computer-delivered testing environments (IELTS on computer / JLPT exam simulation). Guarantees seamless level-aware default lesson resolution so direct clicks on "Practice Exam" from the global navigation immediately load an authentic, existing lesson for the active level without 404 or empty states.
+* **Purpose**: Realistic, computer-delivered testing environment simulating official test-center conditions for both **Computer-Delivered IELTS (CD-IELTS)** and **JLPT Exam Simulations**. Guarantees authentic full-length test administration (not superficial 3-question quizzes) paired with rigorous anti-cheating state machines and seamless level-aware default resolution.
+* **Mode Selector Ribbon**:
+  * **Practice Mode**: Untimed self-study, scrubbable audio player with speed options ($0.75	imes, 1.0	imes, 1.25	imes$), instant item feedback, and line-by-line evidence citations.
+  * **Strict Exam Mode (Full-Length Simulation)**: Enforces authentic test-center conditions:
+    - Full-screen lock (`requestFullscreen()`).
+    - Tab switch & window blur detection with a 2-strike maximum.
+    - Relentless countdown timer with automatic hard submission at `00:00`.
+    - Single-play audio for Listening (no pause, seek, or rewind).
+    - Irreversible sequential section lockouts: Listening (32 min) $ightarrow$ Reading (60 min) $ightarrow$ Writing (60 min) $ightarrow$ Speaking (14 min) with zero retroactive navigation.
 * **Deterministic Default Lesson Resolution Matrix**:
-  * When a user navigates to `/practice` or `/exam` without an explicit lesson ID parameter, the system automatically resolves the active track/level to the following canonical production lessons:
-    * **JLPT N5**: `les_n5_gram_1` (Foundational Grammar & Particles) or `les_n5_read_1` (Campus Notice Reading)
-    * **JLPT N4**: `les_n4_gram_1` (Potential Form & Modals) or `les_n4_read_1` (Apartment Notice Reading)
-    * **JLPT N3**: `les_n3_gram_1` (Contrastive Conjunctions & Star Sentence) or `les_n3_read_1` (Flextime Commentary)
-    * **JLPT N2**: `les_n2_gram_1` (Business Discourse & Author Assertion) or `les_n2_read_1` (Remote Work Commentary)
-    * **JLPT N1**: `les_n1_gram_1` (High-Register Editorial & Star Order) or `les_n1_read_1` (Dual-Text Philosophy)
-    * **IELTS Academic**: `les_ia_read_1` (Bilingualism Academic Reading)
-    * **IELTS General Training**: `les_ig_read_1` (Workplace Ergonomics & Tenant HVAC Notices)
-* **Key UI Components**:
-  * *Global Furigana Rendering*: Question instructions, passage paragraphs, multiple-choice options, and Star Reordering tokens render with phonetic `<ruby>` subtext when Furigana is ON, cleanly hidden when OFF.
-  * *Level Exam Selector Ribbon*: A prominent top bar in the Exam Runner allowing learners to switch directly between available level practice tests (`N5`, `N4`, `N3`, `N2`, `N1`, `IELTS Academic`, `IELTS General`) without returning to the Curriculum view.
-  * *Top Status Header*: Test Title, Level Badge (`JLPT N2 Mock Exam`), Mode Badge (`PRACTICE` vs `TIMED_SIMULATION`), Persistent Countdown Timer with visual amber alert at 5 minutes, "Submit Section" button.
-  * *Split-Pane Layout (Desktop)*:
-    * *Left Pane (Stimulus)*: Resizable container with Reading Passage, Audio Player widget (with playback speed `0.75x`, `1.0x`, `1.25x`, single-play enforcement for IELTS), text zoom controls (`A-` / `A+`), and text highlighter.
-    * *Right Pane (Questions & Interactive Answer Sheet)*: Scrollable list of authentic items (MCQ, True/False/Not Given, Heading Matching drag-and-drop, Star Sentence ordering, cloze fills).
-  * *Bottom Question Navigator Palette*:
-    * Numbered interactive pills ($1$ to $40$ for IELTS; $1$ to $25$ for JLPT).
-    * Status styling: Unanswered (subtle border), Answered (solid accent indigo), Flagged for Review (amber corner badge).
+  * Direct clicks on "Practice Exam" or `/exam` without URL parameters resolve deterministically to active production tests:
+    * **IELTS Academic**: `ielts_acad_mock_01` (Full-Length Academic Reading 40-item test, ~2,600 words across 3 passages)
+    * **IELTS General Training**: `ielts_gt_mock_01` (Full-Length General Training Reading test, 40 items)
+    * **JLPT N5**: `les_n5_gram_1` or `les_n5_read_1`
+    * **JLPT N4**: `les_n4_gram_1` or `les_n4_read_1`
+    * **JLPT N3**: `les_n3_gram_1` or `les_n3_read_1`
+    * **JLPT N2**: `les_n2_gram_1` or `les_n2_read_1`
+    * **JLPT N1**: `les_n1_gram_1` or `les_n1_read_1`
+* **Key UI Components (Computer-Delivered IELTS Layout)**:
+  * *Top Status Header*:
+    * Test Title: e.g. `IELTS Academic Official Mock Exam 1 (Section 2: Reading)`.
+    * Mode Badge: `STRICT EXAM SIMULATION` (amber pulsing indicator).
+    * Integrity Status Indicator: `Proctoring Active (0 Strikes)`.
+    * Persistent Relentless Countdown Timer: Synchronized high-resolution countdown with prominent amber warning at 5 minutes remaining.
+    * Section Finalize Button: `"Submit Section"`.
+  * *Split-Pane Layout (Desktop CD-IELTS Standard)*:
+    * *Left Pane (Stimulus Viewport)*:
+      - Resizable container with authentic full-length reading passages (~750–1,000 words per passage).
+      - Native Text Highlighter (Yellow, Green, Blue) and Margin Note Annotator.
+      - Text size controls (`A-` / `A+`).
+      - Tabbed passage switcher (`Passage 1`, `Passage 2`, `Passage 3`).
+    * *Right Pane (Interactive Question Workspace)*:
+      - Scrollable container rendering official question typologies:
+        * True / False / Not Given & Yes / No / Not Given (radio selection).
+        * Matching Headings & Information (interactive dropdown selection / drag-and-drop).
+        * Matching Features & Classifications (matrix radio table).
+        * Sentence & Summary Completion with Word Bank (keyboard input with strict word limit validation).
+        * Multiple Choice (Single and Multiple selection).
+        * Flowchart & Diagram Labelling (interactive hotspot callouts).
+  * *Bottom Question Navigator Palette (The Official 40-Item Ribbon)*:
+    * 40 interactive numbered pills organized into 3 passage blocks ($1$ to $13$, $14$ to $26$, $27$ to $40$).
+    * Status styling:
+      - *Unanswered*: Subtle outline.
+      - *Answered*: Solid accent background with contrast numeral.
+      - *Flagged for Review*: Corner badge indicator for quick revisitation.
+    * Review Summary Drawer: Displays total answered (e.g. `38 of 40 completed - 2 flagged`) before confirmation dialog.
+* **Strict Anti-Cheating & Integrity State Machine**:
+  * *Window Blur Event (`window.onblur`)*: Triggered when user navigates away from the window, switches tabs, or minimizes the application. Immediately freezes test interaction and displays a modal warning:
+    > *"Focus Loss Detected. You are under strict examination conditions. Strike logged (1 of 2). A second violation will automatically terminate and submit your examination."*
+  * *2-Strike Termination*: Upon the 2nd focus violation, all inputs lock, the exam is tagged with `flagged_integrity_violation`, and current answers are submitted to the scoring server.
+  * *Clipboard Lockout*: Pasting (`e.preventDefault()` on `paste`) and right-click context menus (`contextmenu`) are strictly disabled.
+  * *Irreversible Section Lockout*: Once a candidate submits a section or time runs out, answers are encrypted in local state and synced. Navigation back to earlier sections is physically blocked.
 * **User Actions**:
-  * Switch active practice exam via the Level Exam Selector Ribbon.
-  * Click question pills to jump instantly to any item.
-  * Highlight stimulus text and flag items for review.
-  * Click "Submit Section" $
-ightarrow$ Confirmation dialog indicates answered count (e.g. "23 of 25 answered. Submit now?").
-* **Data Displayed**:
-  * Formatted passage text, question stems, remaining time, sectional score projections.
+  * Click any question pill in the 40-item palette $ightarrow$ Viewport smoothly scrolls right pane to that question while maintaining passage context.
+  * Select text in the stimulus $ightarrow$ Floating popover provides "Highlight" and "New Note" options.
+  * Flag question $ightarrow$ Adds bookmark pin on the question pill in the bottom ribbon.
+  * Click "Submit Section" $ightarrow$ Modal displays warning if unanswered questions remain; on confirmation, transitions irreversibly to the next section.
 * **5 Explicit States**:
-  * *Empty*: Handled gracefully by the deterministic default resolver. If a custom lesson ID is not found, displays a friendly "Level Exam Launcher" with one-click cards for N5, N4, N3, N2, N1, and IELTS tests instead of a raw 404 error.
-  * *Loading*: Shimmer skeleton for passage stimulus and question items.
-  * *Active*: Interactive test running with autosaving to local storage every 5 seconds.
-  * *Completed (Post-Submission)*: Interactive review mode displaying raw score, projected scaled score/band, official pass/fail determination, sectional cutoff safeguard warnings, green checkmarks, and line-by-line passage evidence citations.
-  * *Error*: Network interruption alert with cached local offline storage.
+  * *Empty*: Deterministic resolver loads official mock package (`ielts_acad_mock_01`), never throwing 404 or empty states.
+  * *Loading*: Shimmer skeleton layout for stimulus passage and 40 question cards.
+  * *Active*: Interactive test running with encrypted local autosaving every 5 seconds.
+  * *Integrity Alert*: Modal dialog displaying focus violation warning with strike counter.
+  * *Completed (Post-Submission)*: Detailed diagnostic analysis showing overall band, sectional bands, raw score (/40), official 0.25/0.75 rounding computation, and line-by-line passage evidence citations.
+  * *Error*: Network disconnect alert with cached local offline storage ensuring test progress is never lost.
 
 ---
 
@@ -885,5 +899,49 @@ On mobile viewports ($< 640	ext{px}$), the desktop top-header collapses into an 
   * **Given** a learner progresses through Stages 1 to 5,
   * **When** they achieve $\ge 80\%$ on the Stage 5 applied reading and listening drills,
   * **Then** Stage 6 (`語順スター実戦演習: 文の組み立て`) unlocks with badge `Current (現在)`, and achieving 4/5 on the Star Reordering milestone drill unlocks the full JLPT N5 Official Simulation Exam.
+
+---
+
+### 4.17 Comprehensive IELTS Lecture Curriculum Hierarchy Verification
+* **Scenario 38: Exploring the Modular IELTS Lecture Series**
+  * **Given** a learner selects the English IELTS Track (`en_ielts_academic`),
+  * **When** they open the Curriculum Navigator,
+  * **Then** the view renders the comprehensive lecture matrix organized across all 4 skill pillars:
+    1. **Listening**: 16 core lecture modules across 4 tiers (Forms, Maps, Academic Colloquiums, Lectures).
+    2. **Reading**: 20 core lecture modules across 3 passages (TFNG, Matching Headings, YNNG, Summary Completion).
+    3. **Writing**: 18 core modules covering all 6 Task 1 visual data archetypes and 5 Task 2 essay archetypes.
+    4. **Speaking**: 12 strategy modules covering Parts 1, 2, and 3.
+    5. **AWL & Grammar**: Academic Word List Sublists 1–10 and high-band inversion/cleft sentence structures.
+* **Scenario 39: Filtering Curriculum by Target Band Tier**
+  * **Given** an intermediate candidate is aiming for a university requirement of Band 7.5,
+  * **When** they click the `Mastery (Band 7.0–7.5)` filter tab,
+  * **Then** the curriculum immediately filters to display advanced strategy lectures and diagnostic drills targeted specifically at Band 7.5 descriptors with zero basic introductory clutter.
+
+### 4.18 Full-Length Authentic IELTS Mock Exam with Strict Exam Integrity Verification
+* **Scenario 40: Launching Full-Length Academic Reading Mock Exam (`ielts_acad_mock_01`)**
+  * **Given** a learner initiates the Academic Reading Mock Exam in Strict Exam Mode,
+  * **When** the exam loads,
+  * **Then** the system presents:
+    1. A persistent, relentless 60-minute countdown timer operating on tamper-proof epoch time.
+    2. Three full-length authentic academic passages totaling ~2,600 words:
+       - Passage 1: *The Origins and Evolution of Chronometry* (~790 words).
+       - Passage 2: *Ecosystem Resilience and Trophic Cascades* (~870 words).
+       - Passage 3: *The Cognitive Architecture of Bilingualism* (~960 words).
+    3. Exactly 40 questions spanning True/False/Not Given, Note Completion, Flowchart Completion, Matching Headings, Matching Features, Sentence Completion, Yes/No/Not Given, Multiple Choice, and Summary Completion.
+    4. A 40-item interactive bottom question navigation palette with unanswered, answered, and review-flagged indicators.
+* **Scenario 41: Anti-Cheating Focus Loss & 2-Strike Protocol Enforcement**
+  * **Given** a candidate is actively taking an examination in Strict Exam Mode,
+  * **When** the candidate navigates away from the exam tab or switches to another desktop application,
+  * **Then** the system immediately detects `window.onblur`, displays the modal alert *"Focus Loss Detected. Strike 1 of 2 logged"*, and increments the strike counter.
+  * **When** the candidate commits a 2nd focus violation,
+  * **Then** the examination locks permanently, flags the session with `flagged_integrity_violation: true`, and automatically submits all current answers.
+* **Scenario 42: Irreversible Section Lockout & Zero Backward Navigation**
+  * **Given** a candidate has completed the 32-minute Listening module in the full mock exam package,
+  * **When** the candidate clicks "Submit Section" and confirms submission,
+  * **Then** the system permanently locks the Listening answers, transitions state to Reading, and blocks all backward navigation via browser back button or URL routing.
+* **Scenario 43: Hard Lockout and Auto-Submission at 00:00**
+  * **Given** a candidate is working on the Reading section and the countdown timer reaches `00:00`,
+  * **When** the final second elapses,
+  * **Then** the interface instantly disables all text inputs, radio buttons, and buttons with zero grace period, displays an amber *"Time Expired — Submitting..."* banner, and submits the test payload to the deterministic grading pipeline.
 
 ---

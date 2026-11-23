@@ -78,6 +78,125 @@ IELTS scores are reported on a 9-band scale in 0.5-band increments. Writing and 
 
 ---
 
+
+#### 2.1.4 Official Cambridge & British Council Standard IELTS Lecture Curriculum Architecture
+
+To eliminate shallow, fragmented test preparation, the platform synthesizes the standard pedagogical frameworks established by Cambridge Assessment English (*Cambridge IELTS 1–19*), British Council, IDP, and leading collegiate EAP (English for Academic Purposes) institutes into a comprehensive, multi-tiered lecture curriculum:
+
+```
+[ IELTS Master Curriculum Architecture ]
+  ├── 1. Listening Strategy & Skill Streams (4 Sections / 16 Core Lecture Modules)
+  │    ├── S1: Foundational Transactions (Forms, Numbers, Names, Accents, Distractors)
+  │    ├── S2: Public Orientation & Spatial Navigation (Maps, Plans, Flowcharts)
+  │    ├── S3: Academic Collaborative Tutorials (Multi-speaker consensus, Stances)
+  │    └── S4: High-Register Monologue Lectures (Signposting, Discourse Markers, Technical Notes)
+  ├── 2. Academic Reading Strategy & Skill Streams (3 Sections / 20 Core Lecture Modules)
+  │    ├── R1-R3: Core Mechanics (Skimming, Scanning, Topic Sentences, Semantic Paraphrasing)
+  │    ├── R4-R7: Verification Typologies (TFNG vs YNNG, False vs Not Given Distinction)
+  │    ├── R8-R11: Structural Typologies (Matching Headings, Information, Features, Sentence Endings)
+  │    └── R12-R16: Completion Typologies (Summary, Note, Table, Flowchart, Diagram Labelling)
+  ├── 3. Writing Mastery Streams (Task 1 Visual Data + Task 2 Discursive Argumentation / 18 Modules)
+  │    ├── W1: Academic Task 1 Data Synthesizer (Line, Bar, Pie, Table, Process, Map Archetypes)
+  │    ├── W2: Academic Task 2 Architecture (Opinion, Discussion, Outweigh, Problem-Solution, Two-Part)
+  │    └── W-GT: General Training Task 1 Letter Master (Formal, Semi-Formal, Informal Register)
+  ├── 4. Speaking Fluency & Phonological Streams (Parts 1, 2, 3 / 12 Strategy Modules)
+  │    ├── SP1: Part 1 Conversational Fluency & W-H Elaboration Formula
+  │    ├── SP2: Part 2 The 1-Minute Mind-Mapping Method & 2-Minute Monologue Pacing
+  │    └── SP3: Part 3 Abstract Societal Debate, Speculation & Counter-Argumentation
+  └── 5. Lexical Resource & Grammatical Range for IELTS (AWL & High-Band Syntactic Inversion)
+       ├── AWL: Academic Word List Mastery (Sublists 1–10 with Collocation Contexts)
+       └── GRA: Sophisticated Syntactic Structures (Cleft Sentences, Inversion, Participles, Conditionals)
+```
+
+##### 1. Listening Curriculum Stream (16 Modules Across 4 Sections)
+* **Tier 1 (Section 1: Daily Social Transactions)**:
+  * *Lecture L-01*: Numerical Accuracy, Alphanumeric Codes, Addresses & International Currency Traps.
+  * *Lecture L-02*: Identifying and Disarming Conversational Distractors ("Actually, no, let me check that...").
+  * *Lecture L-03*: Regional Accent Familiarization (Received Pronunciation, Scottish, Australian, North American).
+  * *Lecture L-04*: Single-Word and Numerical Limit Discipline (NO MORE THAN TWO WORDS AND/OR A NUMBER).
+* **Tier 2 (Section 2: Public Monologues & Social Orientation)**:
+  * *Lecture L-05*: Spatial Navigation & Compass Directions (North-East, clockwise, opposite the roundabout).
+  * *Lecture L-06*: Dynamic Map & Floor Plan Labelling (Simultaneous tracking of narrator trajectory).
+  * *Lecture L-07*: Flowchart & Process Sequencing in Informational Speeches.
+  * *Lecture L-08*: Multiple-Choice Elimination in Fast Monologues.
+* **Tier 3 (Section 3: Academic Dialogues & Multi-Speaker Discussions)**:
+  * *Lecture L-09*: Voice Attribution & Speaker Differentiation (Tutor vs Student A vs Student B).
+  * *Lecture L-10*: Recognizing Agreement, Qualified Concession, and Subtle Dissent.
+  * *Lecture L-11*: Matching Opinions to Speakers in Collaborative Research Debates.
+  * *Lecture L-12*: Note & Table Completion for Academic Project Methodologies.
+* **Tier 4 (Section 4: University Lectures & Academic Monologues)**:
+  * *Lecture L-13*: Discourse Signposting & Structural Navigation (Introduction of thesis, sub-points, digressions, summation).
+  * *Lecture L-14*: Rapid Speech Processing & Technical Lexicon Assimilation (Phonological assimilation, elision).
+  * *Lecture L-15*: Cause-and-Effect and Comparative Discourse Markers (*consequently*, *in marked contrast to*, *it follows that*).
+  * *Lecture L-16*: High-Density Sentence Completion under Single-Play Audio Constraints.
+
+##### 2. Academic Reading Curriculum Stream (20 Modules Across 3 Passages)
+* **Tier 1: Core Reading Mechanics & Foundational Speed**:
+  * *Lecture R-01*: Micro-Skimming (60-second structural appraisal of heading, sub-headings, paragraph topic sentences).
+  * *Lecture R-02*: Precision Scanning (Finger/cursor tracking for dates, proper nouns, Latin nomenclature, quantitative values).
+  * *Lecture R-03*: Semantic Paraphrasing & Lexical Shift Decoding (How the question synonymizes passage verbs and adjectives).
+* **Tier 2: Fact Verification & Writer Assertion Typologies**:
+  * *Lecture R-04*: True / False / Not Given (TFNG) Mastery: Factual verification against explicit empirical evidence.
+  * *Lecture R-05*: The Not Given Diagnostic: The crucial difference between a contradiction (False) and absence of confirmation (Not Given).
+  * *Lecture R-06*: Yes / No / Not Given (YNNG) Mastery: Identifying authorial stance, ideological claims, and evaluative tone.
+* **Tier 3: Structural & Relational Typologies**:
+  * *Lecture R-07*: Matching Headings: Discarding misleading sub-detail distractors to isolate the paragraph's primary thesis.
+  * *Lecture R-08*: Matching Information to Paragraphs: Top-down scanning for specific illustrations, definitions, or historical retrospectives.
+  * *Lecture R-09*: Matching Features: Tracking historical researchers, theories, or temporal eras across discursive prose.
+  * *Lecture R-10*: Matching Sentence Endings: Grammatical collocation and semantic coherence verification.
+* **Tier 4: Completion & Synthesis Typologies**:
+  * *Lecture R-11*: Summary Completion (Direct Text vs Word Bank Synonyms).
+  * *Lecture R-12*: Note & Table Completion: Syntactic prediction of missing parts of speech.
+  * *Lecture R-13*: Technical Flowchart & Process Completion.
+  * *Lecture R-14*: Diagram Labelling: Cross-referencing visual engineering/biological schematics with descriptive paragraphs.
+* **Tier 5: Advanced Discourse & Time Budget Management**:
+  * *Lecture R-15*: 4-Option Multiple Choice: Analyzing question stems and methodically eliminating 3 plausible distractors.
+  * *Lecture R-16*: Passage Time Budget Allocation (Passage 1: 17 min, Passage 2: 20 min, Passage 3: 23 min).
+  * *Lecture R-17*: Passage 1 Descriptive Architecture (Archaeological, historical, industrial evolution).
+  * *Lecture R-18*: Passage 2 Empirical Science Architecture (Environmental, ecological, neurobiological studies).
+  * *Lecture R-19*: Passage 3 Philosophical & Abstract Debate Architecture (Linguistic relativity, ethics, epistemology).
+  * *Lecture R-20*: Computer-Delivered Reading UI Strategies (Highlighting, note-taking, split-pane navigation).
+
+##### 3. Writing Curriculum Stream (Task 1 Visuals & Task 2 Argumentation)
+* **Academic Task 1 Visual Synthesis (6 Structural Archetypes)**:
+  * *Module W1-A*: Dynamic Line Graphs: Describing trajectories, fluctuations, plateauing, rates of acceleration (*surged*, *plummeted*, *remained plateaued*).
+  * *Module W1-B*: Comparative Bar Charts: Grouping categories, identifying significant extremes, making meaningful cross-comparisons.
+  * *Module W1-C*: Proportional Pie Charts: Expressing fractions, percentages, market share disparities (*accounted for*, *represented a negligible fraction*).
+  * *Module W1-D*: Complex Data Tables: Extracting salient patterns from dense statistical matrices without writing a tedious catalog of numbers.
+  * *Module W1-E*: Cyclic & Industrial Process Diagrams: Mastering passive voice, transitional adverbs of sequence (*subsequently*, *prior to entering*).
+  * *Module W1-F*: Comparative Maps & Urban Developments: Describing spatial metamorphosis, demolitions, expansions, and infrastructure shifts.
+  * *Module W1-G*: The High-Band Task 1 Formula: Paraphrased Introduction + Global Overview (the single most decisive factor for Band 7+) + 2 Body Detail Paragraphs.
+* **Academic Task 2 Discursive Argumentation (5 Essay Archetypes)**:
+  * *Module W2-A*: Opinion Essays (To what extent do you agree or disagree?): Formulating an unequivocal thesis and defending it consistently.
+  * *Module W2-B*: Discussion Essays (Discuss both views and give your opinion): Impartial analysis of counter-perspectives paired with a decisive personal verdict.
+  * *Module W2-C*: Advantages vs Disadvantages: Evaluating whether merits outweigh deficiencies using weighed comparative criteria.
+  * *Module W2-D*: Problem-Cause-Solution Essays: Systematic diagnosis of systemic causes and concrete, actionable policy remedies.
+  * *Module W2-E*: Direct / Two-Part Questions: Answering both prompts comprehensively with equal structural weight.
+  * *Module W2-F*: The PEEL Paragraphing Architecture: Point (Topic Sentence) $
+ightarrow$ Explanation (Causal rationale) $
+ightarrow$ Evidence (Empirical/authentic example) $
+ightarrow$ Link (Syntactic wrap-up back to the central thesis).
+
+##### 4. Speaking Curriculum Stream (Parts 1, 2, 3)
+* *Module SP-01*: Part 1 Fluency & The W-H Expansion Method (Eliminating robotic 1-sentence answers by expanding with Why, Where, When, How Often).
+* *Module SP-02*: Part 1 Idiomatic Naturalness (Appropriate colloquial collocation vs unnatural memorized idioms).
+* *Module SP-03*: Part 2 The 1-Minute Mind-Mapping Method (Past-Present-Future temporal scaffolding covering all 4 bullet points).
+* *Module SP-04*: Part 2 Monologue Pacing & The 2-Minute Ceiling (Avoiding under-time penalties and maintaining discourse momentum).
+* *Module SP-05*: Part 3 Two-Way Analytical Debate: Extending discussion from personal anecdote to universal societal impact.
+* *Module SP-06*: Part 3 Speculative Discourse: Using modals of probability (*it is highly conceivable that*, *one might speculate*).
+* *Module SP-07*: Pronunciation & Intelligibility: Mastering sentence stress for emphasis and tonal contrast.
+* *Module SP-08*: Connected Speech & Elision: Natural linking between consonant-vowel junctions.
+
+##### 5. Academic Word List (AWL) & Grammatical Range Streams
+* **AWL Mastery (Sublists 1–10)**: Formal academic lexemes (*constitute*, *arbitrate*, *derive*, *paradigm*, *empirical*, *subsequent*, *intrinsic*).
+* **High-Band Grammatical Structures**:
+  * Cleft Sentences: *"What remains uncontroversial is the sheer velocity of urbanization."*
+  * Conditional Inversions: *"Had the municipal council instituted stricter emission quotas, the atmospheric degradation could have been mitigated."*
+  * Negative Inversions: *"Rarely do environmental economists account for the full spectrum of negative externalities."*
+  * Participle Clauses: *"Having exhausted conventional energy reserves, the region pivoted decisively toward offshore wind arrays."*
+
+---
+
 ### 2.2 Japanese JLPT Framework (N5 $\rightarrow$ N4 $\rightarrow$ N3 $\rightarrow$ N2 $\rightarrow$ N1)
 
 The JLPT tests Japanese communicative, lexical, orthographic, and academic competence across 5 hierarchical levels. This platform provides full curriculum and pedagogical support across all five tiers, establishing a seamless learning corridor from foundational literacy (N5/N4) to upper-intermediate practical competence (N3) and advanced corporate/academic fluency (N2/N1).
@@ -434,6 +553,52 @@ ightarrow$ counter-perspective $
 ightarrow$ conclusion.
 * **N2**: 500–650 characters (`だ・である体` Formal Analytical). Short thesis (*Shoronbun*): pros/cons debate on social phenomena, business decisions, technology adoption.
 * **N1**: 700–900 characters (`だ・である体` Academic/Philosophical). Editorial critique: abstract conceptual argumentation, linguistic nuance, cultural critique with formal rhetoric.
+
+---
+
+
+#### 3.2.5 Full-Length Computer-Delivered IELTS Mock Exam Architecture & Strict Exam Integrity State Machine
+
+To deliver an authoritative, authentic test simulation rather than an arbitrary lightweight quiz, the platform specifies a **Full-Length Computer-Delivered IELTS Mock Exam Engine** that enforces official British Council / IDP test-center conditions.
+
+##### 1. Full-Length Section Sequencing & Time Budget Architecture
+The mock examination follows an irreversible, sequential four-stage testing pipeline:
+
+| Sequence | Module | Official Time Limit | Item Count | Strict Environmental Constraints |
+| :---: | :--- | :--- | :--- | :--- |
+| **Stage 1** | **Listening** | **32 minutes** (30 min audio + 2 min review) | 40 items | • Single-play audio stream (seek bar, pause, rewind, speed-up strictly locked).<br>• Section transition irreversible upon audio completion. |
+| **Stage 2** | **Reading** | **60 minutes** (strict countdown) | 40 items | • 3 authentic passages (~2,150–2,750 total words).<br>• Split-pane layout with native text highlighter & margin annotator.<br>• 40-item question palette with answered/unanswered tracking. |
+| **Stage 3** | **Writing** | **60 minutes** (strict countdown) | 2 tasks | • Task 1 (visual data, $\ge 150$ words) + Task 2 (discursive essay, $\ge 250$ words).<br>• Real-time character/word counter.<br>• External clipboard paste blocked. |
+| **Stage 4** | **Speaking** | **11–14 minutes** (interactive simulation) | 3 parts | • Part 1 (4–5 min familiar prompts).<br>• Part 2 (1 min scratchpad prep + 2 min recorded monologue).<br>• Part 3 (4–5 min abstract debate). |
+
+##### 2. Irreversible Section Lockout State Machine
+* **No Arbitrary Navigating Back**:
+  * In the official Computer-Delivered IELTS exam, once a section is concluded (e.g. Listening is submitted or its 32-minute timer hits zero), the student moves forward to Reading. The student **cannot navigate back** to modify answers in Listening.
+  * The examination state machine transitions strictly along directed edges:
+    $$	ext{LISTENING} \longrightarrow 	ext{READING} \longrightarrow 	ext{WRITING} \longrightarrow 	ext{SPEAKING} \longrightarrow 	ext{FINAL\_SUBMITTED}$$
+  * When a section is submitted, all input fields are cryptographically hashed and locked into immutable local state and synced to the server. Attempting to navigate back via browser `History.back()` or URL mutation redirects immediately to the active section.
+
+##### 3. Strict Anti-Cheating & Exam Integrity Protocol
+To maintain authentic exam discipline, the client-side exam container enforces active proctoring rules:
+1. **Full-Screen Enforcement**: The exam initializes in full-screen mode (`document.documentElement.requestFullscreen()`).
+2. **Window Blur & Tab Switch Detection**:
+   * Event listeners track window focus: `window.addEventListener('blur', handleBlur)`.
+   * When focus is lost (switching browser tabs, opening another application, minimizing the window), an immediate modal alert appears:
+     ```
+     [ EXAM INTEGRITY ALERT ]
+     Focus loss detected. You are in strict examination conditions.
+     Strike 1 of 2 logged. A 2nd violation will terminate and submit your exam immediately.
+     ```
+   * **2-Strike Maximum**: If `blurCount >= 2`, the examination session is immediately locked, flagged with `integrityViolation: true`, and auto-submitted with current answers.
+3. **Clipboard Interception**:
+   * Text pasting into writing areas or reading answers is disabled (`e.preventDefault()` on `paste`). External copying is blocked to prevent looking up passage text in search engines.
+4. **Developer Tools & Context Menu Suppression**:
+   * Right-click context menus (`contextmenu`) and shortcut keys (`F12`, `Ctrl+Shift+I`, `Ctrl+U`, `Alt+Tab`) are intercepted and suppressed.
+
+##### 4. Relentless Countdown Timer & Hard Auto-Submission
+* The examination timer operates on tamper-resistant high-resolution epoch time (`performance.now()` paired with server-synced deadline timestamp):
+  $$	ext{timeRemaining} = \max(0, 	ext{endTimeEpoch} - 	ext{currentTimeEpoch})$$
+* **Zero Grace Period**: When `timeRemaining == 0`, the exam interface immediately locks all inputs, displays an amber `"Time Expired — Submitting..."` banner, and triggers the deterministic grading pipeline.
 
 ---
 
@@ -1268,304 +1433,731 @@ export interface UserGuidedStageProgress {
 ```
 
 ---
+
+#### 4.2.6 Full-Length IELTS Exam & Curriculum Lecture Entity Schemas
+
+```typescript
+/**
+ * Full-Length IELTS Examination Package
+ */
+export interface IeltsExamPackage {
+  examId: string;                        // e.g. "ielts_acad_mock_01"
+  examType: 'academic' | 'general_training';
+  title: string;                         // e.g. "IELTS Academic Official Mock Test 1"
+  difficultyLevel: 'standard_official' | 'advanced_diagnostic';
+  totalDurationMinutes: 166;             // 32 (Listening) + 60 (Reading) + 60 (Writing) + 14 (Speaking)
+  sections: {
+    listening: IeltsSectionRecord<'listening'>;
+    reading: IeltsSectionRecord<'reading'>;
+    writing: IeltsSectionRecord<'writing'>;
+    speaking: IeltsSectionRecord<'speaking'>;
+  };
+  integrityRules: {
+    maxBlurStrikes: number;              // 2
+    disableClipboard: boolean;           // true
+    singlePlayAudio: boolean;            // true
+    fullscreenRequired: boolean;         // true
+  };
+}
+
+/**
+ * Section Record within an IELTS Exam Package
+ */
+export interface IeltsSectionRecord<T extends 'listening' | 'reading' | 'writing' | 'speaking'> {
+  sectionId: string;
+  pillar: T;
+  timeLimitSeconds: number;              // e.g. 3600 for Reading, 1920 for Listening
+  totalItems: number;                    // 40 for Listening/Reading, 2 for Writing, 3 for Speaking
+  passages?: IeltsReadingPassageRecord[]; // For reading (Passages 1, 2, 3)
+  tracks?: IeltsListeningTrackRecord[];   // For listening (Sections 1, 2, 3, 4)
+  writingTasks?: IeltsWritingTaskRecord[]; // Tasks 1 and 2
+  speakingPrompts?: IeltsSpeakingPartRecord[]; // Parts 1, 2, 3
+}
+
+/**
+ * Authentic IELTS Reading Passage Record
+ */
+export interface IeltsReadingPassageRecord {
+  passageNumber: 1 | 2 | 3;
+  title: string;
+  theme: string;                         // e.g. "Archaeology / Chronometry"
+  wordCount: number;                     // 750 - 1000 words
+  paragraphs: Array<{
+    paragraphLabel: string;              // "A", "B", "C" or "1", "2", "3"
+    content: string;
+  }>;
+  questions: IeltsQuestionRecord[];      // Questions allocated to this passage
+}
+
+/**
+ * Standardized 40-Item IELTS Question Record
+ */
+export interface IeltsQuestionRecord {
+  questionNumber: number;                // 1 to 40
+  typology: 
+    | 'true_false_not_given'
+    | 'yes_no_not_given'
+    | 'matching_headings'
+    | 'matching_information'
+    | 'matching_features'
+    | 'matching_sentence_endings'
+    | 'sentence_completion'
+    | 'summary_completion'
+    | 'note_completion'
+    | 'table_completion'
+    | 'flowchart_completion'
+    | 'diagram_labelling'
+    | 'multiple_choice_single'
+    | 'multiple_choice_multi';
+  stimulusReference: string;             // e.g. "Passage 1, Paragraph B"
+  prompt: string;
+  options?: string[];                    // For MCQ, Headings, Features
+  correctAnswer: string | string[];      // Deterministic validation target
+  acceptableAlternativeAnswers?: string[]; // e.g. ["two hundred", "200"]
+  wordLimit?: number;                    // e.g. 2 for "NO MORE THAN TWO WORDS"
+  explanationText: string;               // Exhaustive justification citation
+  evidenceLineSpan: string;              // Exact line or sentence span
+}
+```
+
+---
+
 ## 5. Realistic Seed Content Specification
 
-### 5.1 English IELTS Seed Curriculum
+### 5.1 English IELTS Comprehensive Master Curriculum & Full-Length Mock Exam Seed
 
-#### 5.1.1 Academic Reading: Full Passage & Item Set
-* **Module**: Academic Reading Section 3
-* **Passage Title**: *The Cognitive Architecture of Bilingualism: Executive Function, Inhibitory Control, and Late-Age Neuroplasticity*
-* **Word Count**: ~700 words
+#### 5.1.1 The Comprehensive Modular Lecture Curriculum Matrix
+
+The English IELTS track organizes pedagogy into an authentic collegiate progression covering both **Academic** and **General Training** candidates. Rather than isolated practice questions, content is anchored by structured lectures and skill-building units:
+
+| Skill Pillar | Module Code | Lecture Title | Pedagogical Objective & Core Content | Assessment / Practice Type |
+| :--- | :--- | :--- | :--- | :--- |
+| **Listening** | `lec_lis_s1_01` | *Form Filling & Alphanumeric Accuracy* | Handling names, dates, addresses, phone numbers, international currencies, and spelling traps under British/Australian speech. | Form & Note Completion (Items 1–10) |
+| **Listening** | `lec_lis_s1_02` | *Conversational Distractor Traps* | Recognizing and neutralizing mid-dialogue corrections ("Actually, the date was changed to..."). | Sentence Completion with Distractors |
+| **Listening** | `lec_lis_s2_01` | *Spatial Navigation & Map Labelling* | Tracking speaker trajectories around floor plans, public parks, campus facilities, and road junctions. | Interactive Map Labelling Drill |
+| **Listening** | `lec_lis_s3_01` | *Multi-Speaker Academic Colloquiums* | Disentangling 3–4 distinct speakers, qualified agreements, concessions, and shared project methodologies. | Multiple-Choice & Matching Speakers |
+| **Listening** | `lec_lis_s4_01` | *University Lecture Note-Taking* | Navigating academic monologues, identifying discourse signposts (*consequently*, *having established*), and dense technical summaries. | Note Completion (Items 31–40) |
+| **Reading** | `lec_read_m1_01` | *Micro-Skimming & Rapid Text Appraisal* | 60-second structural assessment of heading, sub-headings, topic sentences, and structural pivots. | 60s Passage Architecture Drill |
+| **Reading** | `lec_read_m1_02` | *True / False / Not Given Demystified* | Strict boundary demarcation between explicit contradiction (False) vs complete absence of verification (Not Given). | 10-Item Diagnostic TFNG Drill |
+| **Reading** | `lec_read_m2_01` | *Matching Headings & Thesis Extraction* | Discarding detail traps, supporting examples, and minor qualifications to isolate paragraph central thesis. | Matching Headings (Paragraphs A–G) |
+| **Reading** | `lec_read_m2_02` | *Matching Features & Scientific Claims* | Tracking historical researchers, rival theories, and temporal developments across dense academic texts. | Classification Matrix Matching |
+| **Reading** | `lec_read_m3_01` | *Yes / No / Not Given: Authorial Stance* | Evaluating writer opinions, ideological claims, and evaluative attitudes rather than pure empirical facts. | YNNG Critical Discourse Drill |
+| **Reading** | `lec_read_m3_02` | *Summary Completion with Word Bank* | Syntactic prediction of missing parts of speech and matching text concepts to higher-register synonyms. | Summary Completion Drill |
+| **Writing** | `lec_w1_dyn_01` | *Task 1: Dynamic Line Graphs & Trends* | Verbs and adverbs of acceleration, fluctuation, plateauing (*surged*, *plummeted*, *remained steady*). | 150-Word Visual Report Drill |
+| **Writing** | `lec_w1_bar_01` | *Task 1: Comparative Bar Charts* | Data grouping strategies, highlighting key extremes, and avoiding unorganized numerical catalogs. | Comparative Synthesis Drill |
+| **Writing** | `lec_w1_prc_01` | *Task 1: Cyclic & Industrial Processes* | Passive voice mechanics and chronological sequencing linkers (*subsequently*, *prior to entering the kiln*). | Process Flow Report Drill |
+| **Writing** | `lec_w1_map_01` | *Task 1: Comparative Urban Maps* | Describing spatial metamorphosis, demolitions, expansions, and directional changes across eras. | Spatial Evolution Report Drill |
+| **Writing** | `lec_w2_opn_01` | *Task 2: Opinion / Agree-Disagree Architecture* | Formulating an unequivocal thesis statement and maintaining an unbroken stance throughout all 4 paragraphs. | 250-Word Opinion Essay Drill |
+| **Writing** | `lec_w2_dis_01` | *Task 2: Discussion of Both Views + Opinion* | Impartial dissection of opposing philosophies paired with a nuanced, well-justified personal verdict. | 250-Word Balanced Essay Drill |
+| **Writing** | `lec_w2_pel_01` | *Task 2: The PEEL Paragraphing Method* | Point (Topic Sentence) -> Explanation (Causal rationale) -> Evidence (Empirical instance) -> Link (Syntactic wrap-up). | Paragraph Cohesion Drill |
+| **Speaking** | `lec_spk_p1_01` | *Part 1: The W-H Expansion Formula* | Expanding familiar prompts using Why, Where, When, How Often, eliminating stilted 1-sentence responses. | Fluency Audio Recording Drill |
+| **Speaking** | `lec_spk_p2_01` | *Part 2: The 1-Minute Mind-Mapping Method* | Structuring cue card bullet points using a temporal past-present-future timeline to ensure a full 2-minute monologue. | 2-Minute Monologue Simulator |
+| **Speaking** | `lec_spk_p3_01` | *Part 3: Abstract Societal Analysis* | Extending personal anecdotes into macro-level sociological, environmental, and technological analyses. | 5-Prompt Recorded Discourse |
+| **Lexicon** | `lec_awl_u1_01` | *Academic Word List: Sublists 1 & 2* | High-yield academic headwords (*constitute*, *derive*, *arbitrate*, *paradigm*, *empirical*, *subsequent*). | Contextual Collocation Cloze |
+| **Grammar** | `lec_gra_inv_01`| *High-Band Syntactic Inversion & Clefts* | Mastering inversion (*Hardly had...*, *Not only... but also*) and cleft sentences (*What is crucial is...*). | Complex Sentence Transformation |
+
+---
+
+#### 5.1.2 Full-Length Authentic Academic Reading Mock Exam (Exam ID: `ielts_acad_mock_01`)
+* **Total Time Limit**: 60 minutes
+* **Total Questions**: 40 questions (Items 1–40)
+* **Total Word Count**: ~2,600 words across 3 authentic academic passages
+* **Strict Exam Mode Constraints**: Two-pane split layout, relentless 60:00 countdown timer, text highlighter, margin annotator, 40-item question palette, zero backward navigation post-submission, tab switch / window blur detection.
+
+---
+
+##### Passage 1 (Questions 1–13)
+* **Passage Title**: *The Origins and Evolution of Chronometry: From Water Clocks to Atomic Resonators*
+* **Estimated Word Count**: ~790 words
 * **Stimulus Text**:
+
 ```markdown
-[Paragraph 1]
-For much of the twentieth century, conventional pedagogical consensus viewed bilingualism 
-in early childhood with overt skepticism. Educators and clinical psychologists posited 
-that simultaneous acquisition of two linguistic codes burdened the infant brain, 
-inducing syntactic interference, delayed vocabulary acquisition, and persistent cognitive 
-fatigue. However, the paradigm underwent a decisive rupture in the early 1960s with the 
-empirically controlled investigations of Elizabeth Peal and Wallace Lambert at McGill 
-University. By rigorously controlling for socioeconomic status, parental educational 
-attainment, and cultural background, their findings revealed that bilingual children 
-outperformed their unilingual peers not merely across verbal tasks, but across non-verbal 
-measures of symbol manipulation and divergent thought.
+[Paragraph A]
+The imperative to quantify the passage of time represents one of humanity's earliest and most consequential 
+intellectual endeavors. In agrarian antiquity, diurnal rhythms and seasonal shifts governed societal existence, 
+with solar shadows serving as the primary metric of daylight duration. However, the inherent limitations of 
+gnomons and sundials—rendered completely useless by nocturnal darkness or overcast skies—precipitated the 
+invention of hydraulic chronometers, or clepsydrae. Originating in second-millennium BCE Mesopotamia and 
+pharaonic Egypt, these primitive mechanisms measured duration via the regulated inflow or discharge of water 
+through calibrated stone vessels. Despite continuous refinements by Hellenistic engineers who incorporated float 
+regulators and gear trains, hydraulic timekeepers were perpetually compromised by water evaporation, ambient 
+temperature variations altering liquid viscosity, and the accumulation of mineral sediment.
 
-[Paragraph 2]
-Contemporary cognitive neuroscience attributes this mental agility to the mechanism 
-termed "Inhibitory Control" and the broader architecture of Executive Function (EF). 
-Executive Function comprises a suite of top-down cognitive processes coordinated by the 
-prefrontal cortex, including working memory updating, task switching, and selective 
-attention. When a bilingual individual communicates, both lexical systems remain 
-simultaneously activated in the sub-conscious linguistic repertoire. For example, when an 
-English-Spanish bilingual perceives the word "apple," the neural representation for 
-"manzana" also experiences sub-threshold activation. Consequently, to utter a coherent 
-sentence in one language, the brain must continually suppress the competing phonemes and 
-syntactic rules of the irrelevant language.
+[Paragraph B]
+A revolutionary conceptual leap occurred in fourteenth-century Western Europe with the genesis of the mechanical 
+escapement. By translating the continuous kinetic descent of a gravitational weight into discrete, periodic 
+oscillations, medieval clockmakers divorced horology from fluid dynamics. The verge and foliot escapement, 
+coupled with crown wheels, powered the monumental astronomical clocks that graced civic bell towers in cities 
+such as Salisbury, Milan, and Prague. These colossal iron apparatuses were not calibrated to minutes or seconds; 
+their sole function was to proclaim the canonical hours to an illiterate populace. Governed by high frictional 
+drag and the erratic inertia of uncompensated oscillating bars, early mechanical clocks routinely deviated by 
+fifteen to thirty minutes each day, necessitating daily manual recalibration against local solar noon.
 
-[Paragraph 3]
-This lifelong requirement to arbitrate between competing linguistic representations acts 
-as a high-intensity gymnasium for the dorsal lateral prefrontal cortex and the anterior 
-cingulate cortex. As Dr. Ellen Bialystok has demonstrated through extensive Flanker task 
-and Simon task experiments, bilinguals consistently display faster response latencies and 
-markedly reduced interference costs when encountering visual incongruities. Importantly, 
-this cognitive advantage is not domain-specific to linguistic challenges; it transfers 
-seamlessly to non-verbal tasks demanding rapid conflict resolution and spatial-pattern 
-reconfiguration.
+[Paragraph C]
+The transition from macroscopic civic indicators to instruments of scientific precision was accelerated by 
+the seventeenth-century natural philosopher Christiaan Huygens. Capitalizing on Galileo Galilei’s theoretical 
+discovery of the isochronism of small-angle pendulum oscillations—the principle that the period of a swinging 
+pendulum remains virtually constant regardless of its amplitude—Huygens patented the pendulum clock in 1656. 
+By drastically diminishing frictional losses and regularizing the frequency of the harmonic oscillator, Huygens’s 
+design reduced diurnal error to less than ten seconds per day. Shortly thereafter, Huygens and his English 
+contemporary Robert Hooke pioneered the balance spring (hairspring) for portable timepieces, enabling the 
+manufacture of pocket watches whose balance wheels oscillated with unprecedented regularity.
 
-[Paragraph 4]
-Perhaps the most socially consequential ramification of lifelong bilingualism manifests 
-in late adulthood, specifically within the etiology of neurodegenerative pathologies. 
-Epidemiological cohorts tracked across North America and Europe indicate that bilingual 
-individuals diagnosed with Alzheimer’s dementia manifest clinical symptoms—such as memory 
-loss and temporal disorientation—approximately four to five years later than unilingual 
-patients presenting identical neuropathological progression. Post-mortem structural 
-analyses corroborate that the brains of bilingual patients often exhibit equivalent or 
-even more advanced amyloid-beta plaque deposition and cortical atrophy despite having 
-retained independent functional living skills years longer.
+[Paragraph D]
+Notwithstanding the triumph of the pendulum on terrestrial bedrock, the profoundest crisis in chronometric 
+history emerged upon the open ocean. Maritime navigation in the eighteenth century required sailors to compute 
+both latitude and longitude; while latitude was readily deduced from the celestial altitude of Polaris or the 
+midday sun, calculating longitude necessitated knowing the exact simultaneous time at a reference meridian 
+(such as Greenwich) alongside local solar time. A disparity of a single four-second chronometric error 
+translated into a navigational deviation of one nautical mile at the equator. The catastrophic Scilly naval 
+disaster of 1707, in which four British warships foundered with the loss of over 1,400 lives, impelled the 
+British Parliament to pass the Longitude Act of 1714, offering a monumental prize of £20,000 for a practical 
+solution.
 
-[Paragraph 5]
-This discrepancy between physiological brain pathology and manifest clinical behavior 
-exemplifies "cognitive reserve"—the brain’s resilience against structural damage through 
-the recruitment of alternative neural pathways and enhanced synaptic density. It is 
-essential to underscore that bilingualism does not immunize the biological substrate 
-against cellular degeneration; rather, it provides a neuroarchitectural compensation 
-network that delays symptomatic onset. While debate persists regarding the consistency of 
-the "bilingual advantage" across younger, homogenous adult cohorts, the neuroprotective 
-dividend in geriatric cohorts remains one of the most robust findings in cognitive science.
+[Paragraph E]
+Conventional scientific dogma, championed by Sir Isaac Newton and the Astronomer Royal, maintained that the 
+longitude problem could only be unlocked through astronomical observations, specifically the painstaking method 
+of lunar distances. Defying the astronomical establishment, a Yorkshire carpenter and self-taught mechanician 
+named John Harrison dedicated three decades to engineering maritime chronometers capable of withstanding the violent 
+pitching, rolling, temperature swings, and corrosive salinity of prolonged sea voyages. Harrison’s masterpiece, 
+the pocket-watch-sized marine chronometer designated H4, completed in 1759, employed bimetallic temperature 
+compensation strips, diamond pallet jewels to eradicate friction without lubricating oils, and a high-frequency 
+balance wheel. Tested on an arduous transatlantic voyage to Jamaica in 1761–1762, the H4 lost a mere 5.1 seconds 
+over eighty-one days of ocean swell, securing safe transoceanic transit and inaugurating global commerce.
+
+[Paragraph F]
+The twentieth century bore witness to the ultimate dematerialization of horological mechanics. In 1927, 
+Warren Morrison and J.W. Horton at Bell Telephone Laboratories developed the quartz crystal clock, which exploited 
+the piezoelectric properties of crystalline quartz to generate stable electrical frequencies. This was 
+subsequently superseded in 1955 by Louis Essen’s cesium-beam atomic clock at the National Physical Laboratory in 
+the United Kingdom. Atomic resonance clocks measure time not through manufactured springs or pendulums, but 
+through the immutable quantum transitions between the hyperfine energy levels of the ground state of the 
+cesium-133 atom, which oscillates at exactly 9,192,631,770 cycles per second. This quantum benchmark forms the 
+definitional foundation of the SI second, sustaining modern satellite navigation systems, telecommunication 
+networks, and relativistic astrophysical research.
 ```
 
-##### Seed Exercise Items for Passage:
-**Item 1: Matching Headings (Paragraphs 1–4)**
-* *Options*:
-  * i. The anatomical reality of brain decay without behavioral deficits
-  * ii. Historical pedagogical fallacies and the Lambert-Peal paradigm shift
-  * iii. The constant suppression of latent lexical competitors
-  * iv. Reallocating linguistic budgets in educational systems
-  * v. Cross-domain transfer of conflict resolution agility
-  * vi. Pharmaceutical interventions in late-onset dementia
-* *Key & Mapping*:
-  * Paragraph 1 $\rightarrow$ **ii**
-  * Paragraph 2 $\rightarrow$ **iii**
-  * Paragraph 3 $\rightarrow$ **v**
-  * Paragraph 4 $\rightarrow$ **i**
+##### Questions 1–6: True / False / Not Given
+*Do the following statements agree with the information given in Reading Passage 1?*
+*In boxes 1–6 on your answer sheet, write:*
+* **TRUE** if the statement agrees with the information
+* **FALSE** if the statement contradicts the information
+* **NOT GIVEN** if there is no information on this
 
-**Item 2: True / False / Not Given (3 Questions)**
-* **Question 5**: *Elizabeth Peal and Wallace Lambert’s study contradicted the prevailing mid-twentieth-century consensus regarding bilingual language acquisition.*
-  * *Answer*: **TRUE**
-  * *Explanation*: Paragraph 1 states that the previous consensus viewed bilingualism with skepticism, but Peal and Lambert's study was a "decisive rupture" showing bilingual children outperformed unilingual peers.
-* **Question 6**: *Bilingual individuals completely deactivate their secondary language when engaging in an extended conversation in their primary tongue.*
-  * *Answer*: **FALSE**
-  * *Explanation*: Paragraph 2 explicitly states that "both lexical systems remain simultaneously activated" and when speaking one language, the other experiences "sub-threshold activation."
-* **Question 7**: *Recent neurological studies have proven that lifelong bilingualism halts the biological accumulation of amyloid-beta plaques in the brain.*
-  * *Answer*: **FALSE**
-  * *Explanation*: Paragraph 4 notes brains exhibit "equivalent or even more advanced amyloid-beta plaque deposition," and Paragraph 5 emphasizes "bilingualism does not immunize the biological substrate against cellular degeneration."
+* **Question 1**: Early hydraulic timekeepers in antiquity maintained consistent accuracy regardless of seasonal temperature fluctuations.
+* **Question 2**: Fourteenth-century European civic clocks were primarily built to provide precise minute-by-minute scheduling for scientific researchers.
+* **Question 3**: Christiaan Huygens derived inspiration for his pendulum clock from earlier theoretical observations made by Galileo Galilei.
+* **Question 4**: The British Admiralty immediately paid John Harrison the full £20,000 reward upon the completion of the H4 chronometer's first test.
+* **Question 5**: A four-second discrepancy in marine timekeeping creates an equatorial geographical error of approximately one nautical mile.
+* **Question 6**: Louis Essen’s cesium atomic clock relied on the mechanical vibration of physical springs to achieve atomic resonance.
+
+##### Questions 7–10: Note Completion
+*Complete the notes below.*
+*Choose **NO MORE THAN TWO WORDS** from the passage for each answer.*
+*Write your answers in boxes 7–10 on your answer sheet.*
+
+**The Quest for Maritime Longitude & Harrison's Breakthrough**
+* **Question 7**: While latitude could be established by measuring celestial altitude, calculating longitude required knowing the exact time at a **[7]** ____________.
+* (Context): The 1707 Scilly naval tragedy prompted the British Parliament to pass the Longitude Act offering £20,000 for a practical solution.
+* **Question 8**: Conventional scientific orthodoxy championed by Sir Isaac Newton favoured the method of **[8]** ____________ over mechanical timepieces.
+* **Question 9**: John Harrison eliminated the need for friction-inducing lubricating oils by equipping the H4 escapement with **[9]** ____________.
+* **Question 10**: Thermal expansions and contractions resulting from temperature swings were counteracted using **[10]** ____________.
+
+##### Questions 11–13: Flowchart Completion
+*Complete the flowchart below.*
+*Choose **ONE WORD AND/OR A NUMBER** from the passage for each answer.*
+*Write your answers in boxes 11–13 on your answer sheet.*
+
+**The Evolution of Modern Chronometric Precision**
+* **Question 11**: In 1927, Morrison and Horton exploited the **[11]** ____________ properties of quartz crystals to produce stable electrical frequencies.
+* (Context): In 1955, Louis Essen constructed the first operational cesium-beam atomic clock at the National Physical Laboratory.
+* **Question 12**: The official SI second is currently defined by measuring precisely **[12]** ____________ cycles of the cesium-133 ground state atom.
+* **Question 13**: High-precision atomic resonators are essential to modern satellite **[13]** ____________ networks and telecommunications.
 
 ---
 
-#### 5.1.2 Academic Writing Task 2: High-Scoring Benchmark
+##### Passage 2 (Questions 14–26)
+* **Passage Title**: *Ecosystem Resilience and Trophic Cascades: The Reintroduction of Apex Predators*
+* **Estimated Word Count**: ~870 words
+* **Stimulus Text**:
+
+```markdown
+[Paragraph A]
+For the greater part of the nineteenth and twentieth centuries, ecological paradigms were dominated by 
+"bottom-up" regulatory models. Classical biologists posited that ecosystem biomass, community diversity, and 
+population dynamics were governed predominantly by abiotic factors—namely solar insolation, soil nutrient 
+composition, precipitation levels, and primary vegetative productivity. Herbivore densities were assumed to 
+expand to the carrying capacity determined by available forage, with carnivores occupying a largely peripheral, 
+sanitary role by culling decrepit or diseased ungulates. However, in 1960, a foundational paper by Nelson 
+Hairston, Frederick Smith, and Lawrence Slobodkin challenged this dogma. Termed the "Green World Hypothesis," 
+they posited a revolutionary counter-premise: the terrestrial world remains verdant because predators suppress 
+herbivore populations, preventing consumers from denuding their botanical foundations.
+
+[Paragraph B]
+The empirical validation of the Green World Hypothesis gathered momentum through the seminal field experiments 
+of Robert Paine along the rocky intertidal shores of Washington State. By deliberately removing the predatory 
+ochre sea star (*Pisaster ochraceus*) from designated tidal zones, Paine initiated a phenomenon he designated a 
+"trophic cascade." In the absence of this apex carnivore, the common blue mussel, previously constrained by 
+starfish predation, underwent exponential population growth, outcompeting and monopolizing substrate space. 
+Within a few years, a vibrant intertidal community comprising twenty-eight species of barnacles, limpets, sponges, 
+and macroscopic algae had collapsed into an impoverished monoculture of mussels. Paine coined the term "keystone 
+species" to denote an organism whose systemic influence on ecological architecture is profoundly disproportionate 
+to its absolute abundance or biomass.
+
+[Paragraph C]
+Nowhere has the profound reverberation of a trophic cascade been demonstrated with greater geographic scale 
+than the historic reintroduction of grey wolves (*Canis lupus*) to Yellowstone National Park in 1995. Following 
+the extirpation of the park’s native wolves in the 1920s through federal predator eradication campaigns, the 
+Yellowstone ecosystem suffered severe degradation. Elk herds (*Cervus canadensis*), freed from top-down predatory 
+pressure, multiplied unimpeded. Decades of unremitting herbivory decimated riparian stands of willow, cottonwood, 
+and quaking aspen. Stream banks, stripped of the anchoring root systems of woody vegetation, succumbed to 
+accelerated hydraulic erosion, widening riverbeds, elevating water temperatures, and decimating native trout and 
+amphibian populations.
+
+[Paragraph D]
+When thirty-one wild wolves captured in western Canada were released into the park between 1995 and 1996, the 
+consequences were swift, complex, and profound. While the wolves directly reduced the bloated elk population 
+through direct mortality, their most transformative impact was behavioral—a dynamic ecologist William Ripple has 
+conceptualized as the "Ecology of Fear." Aware of their vulnerability to pack predation in confined terrain, elk 
+voluntarily abandoned high-risk browsing locales, particularly narrow valleys, river gorges, and open riparian 
+flats where escape lines were obstructed. Relieved of relentless grazing pressure, stunted willow and cottonwood 
+saplings experienced dramatic regenerative growth, quadrupling in height within seven years.
+
+[Paragraph E]
+This vegetative revitalization triggered a cascade of secondary and tertiary ecological recoveries. The resurgence 
+of lush willow stands provided essential nourishment and architectural material for North American beavers 
+(*Castor canadensis*), whose colonies in the northern range swelled from a single beleaguered family to over a 
+dozen flourishing lodges. Beaver dams created deep, slow-moving pools that attenuated seasonal flood pulses, 
+recharged subterranean aquifers, trapped sediment, and created cool micro-habitats critical for cutthroat trout. 
+Simultaneously, songbirds such as the willow flycatcher recolonized the re-established canopies, while scavengers—including 
+grizzly bears, wolverines, ravens, and bald eagles—prospered on the perennial supply of carrion left by wolf kills. 
+Remarkably, the predatory presence of wolves even altered the physical geography of Yellowstone's waterways; 
+stabilized by dense riparian root networks, rivers meandering became less erratic, channels deepened, and soil 
+loss decreased exponentially.
+
+[Paragraph F]
+Despite these compelling ecological triumphs, the reintroduction paradigm has ignited fierce geopolitical and 
+socioeconomic friction. Ranching communities bordering the Greater Yellowstone Ecosystem have raised vigorous 
+protests regarding livestock depredation, pointing to economic losses from killed cattle and sheep. Furthermore, 
+game hunters argue that predatory pressure has excessively suppressed big-game populations, diminishing recreational 
+hunting permits and tourism revenues in peripheral rural counties. Conservation biologists emphasize that trophic 
+rewilding cannot be viewed as a panacea that instantly restores an idealized pre-industrial wilderness. As Dr. 
+Arthur Middleton's ongoing research reveals, ecological recovery trajectories are non-linear; the cessation of 
+top-down control over decades creates legacy effects—such as altered soil chemistry and entrenched stream 
+incision—that cannot be reversed overnight simply by introducing a charismatic predator.
+```
+
+##### Questions 14–19: Matching Headings
+*Reading Passage 2 has six paragraphs, **A–F**.*
+*Choose the correct heading for each paragraph from the list of headings below.*
+*Write the correct number, **i–viii**, in boxes 14–19 on your answer sheet.*
+
+**List of Headings**:
+* **i.** The physical transformation of river morphology and hydrological stabilization
+* **ii.** Conflicting human economic interests and the limitations of ecological restoration
+* **iii.** The radical hypothesis challenging historical bottom-up orthodoxy
+* **iv.** The initial intertidal experiments and the coining of the keystone concept
+* **v.** Direct financial subsidies provided to regional ranching federations
+* **vi.** The collapse of riparian habitats following the eradication of an apex predator
+* **vii.** The behavioral shift induced by predator presence and botanical resurgence
+* **viii.** The global migration patterns of North American ungulates
+
+* **Question 14**: Paragraph A
+* **Question 15**: Paragraph B
+* **Question 16**: Paragraph C
+* **Question 17**: Paragraph D
+* **Question 18**: Paragraph E
+* **Question 19**: Paragraph F
+
+##### Questions 20–23: Matching Features
+*Look at the following statements (Questions 20–23) and the list of researchers below.*
+*Match each statement with the correct researcher, **A–D**.*
+*Write the correct letter, **A–D**, in boxes 20–23 on your answer sheet.*
+
+**List of Researchers**:
+* **A.** Nelson Hairston, Frederick Smith, and Lawrence Slobodkin
+* **B.** Robert Paine
+* **C.** William Ripple
+* **D.** Arthur Middleton
+
+* **Question 20**: Articulated the principle that prey animals fundamentally modify their spatial behavior and feeding zones when exposed to predatory hazard.
+* **Question 21**: Demonstrated that removing an apex consumer could cause an entire biodiverse marine ecosystem to degenerate into a monoculture.
+* **Question 22**: Cautioned that long-standing ecological damage creates persistent physical legacy effects that prevent instant recovery after predator reintroduction.
+* **Question 23**: First proposed the theoretical model arguing that the natural world is green because predators keep herbivore grazing under strict control.
+
+##### Questions 24–26: Sentence Completion
+*Complete the sentences below.*
+*Choose **NO MORE THAN TWO WORDS** from the passage for each answer.*
+*Write your answers in boxes 24–26 on your answer sheet.*
+
+* **Question 24**: Prior to 1960, conventional scientific consensus held that animal population numbers were dictated almost entirely by **[24]** ____________ factors.
+* **Question 25**: The widespread loss of woody plant roots along Yellowstone stream banks led directly to rapid **[25]** ____________ of the surrounding soil.
+* **Question 26**: Increased numbers of willows enabled the rapid resurgence of **[26]** ____________, whose engineering dams transformed regional hydrological patterns.
+
+---
+
+##### Passage 3 (Questions 27–40)
+* **Passage Title**: *The Cognitive Architecture of Bilingualism: Executive Function, Inhibitory Control, and Late-Age Neuroplasticity*
+* **Estimated Word Count**: ~960 words
+* **Stimulus Text**:
+
+```markdown
+[Paragraph A]
+For much of the twentieth century, conventional pedagogical consensus regarded childhood bilingualism with overt 
+skepticism. Psychologists and educational theorists posited that acquiring two linguistic codes simultaneously placed 
+an excessive burden on infant neural architecture, producing syntactic confusion, stunted vocabulary acquisition, 
+and chronic mental fatigue. This prevailing deficit model underwent a decisive rupture in 1962 with the publication 
+of Elizabeth Peal and Wallace Lambert’s landmark empirical investigation at McGill University. By implementing 
+stringent experimental controls for parental educational attainment, socioeconomic status, and cultural background, 
+their data revealed that bilingual children systematically outperformed their monolingual counterparts not only in 
+complex linguistic evaluations, but in non-verbal cognitive tasks requiring symbolic manipulation, spatial logic, 
+and divergent thought.
+
+[Paragraph B]
+Contemporary neuroimaging and cognitive science attribute this cognitive advantage to the continuous recruitment 
+of Executive Function (EF)—a suite of top-down mental faculties orchestrated primarily by the prefrontal cortex, 
+dorsal anterior cingulate cortex, and basal ganglia. Executive Function encompasses working memory updating, 
+inhibitory control, cognitive flexibility, and attentional focus. When a bilingual individual communicates, both 
+linguistic repertoires remain simultaneously active in the brain's sub-conscious processing centers. For instance, 
+when a Spanish-English bilingual prepares to utter the word "apple," the neural activation threshold for the 
+Spanish equivalent "manzana" is also partially elevated. To articulate a coherent utterance without cross-linguistic 
+contamination, the bilingual brain must execute continuous, high-frequency inhibitory suppression of the competing 
+code while selectively amplifying the target lexicon.
+
+[Paragraph C]
+This persistent cognitive arbitration functions as a continuous mental gymnasium. Over decades of daily linguistic 
+engagement, the repetitive execution of inhibitory control induces structural and functional neuroplastic adaptations. 
+Using functional Magnetic Resonance Imaging (fMRI), Dr. Ellen Bialystok and colleagues demonstrated that bilinguals 
+consistently exhibit enhanced efficiency in executing the Flanker and Simon tasks—standardized psychometric metrics 
+that evaluate the brain's capacity to suppress irrelevant visual and spatial interference. Whereas monolingual 
+individuals display substantial latency delays and elevated error rates when confronted with incongruent visual stimuli, 
+bilinguals resolve cognitive conflict with significantly greater velocity, expending fewer metabolic glucose reserves 
+in the frontal regions.
+
+[Paragraph D]
+Remarkably, the neural dividends of bilingualism extend far beyond childhood academic aptitude and mid-life cognitive 
+agility; they manifest as profound neuroprotective buffers in the twilight of human senescence. Epidemiological and 
+clinical studies conducted across diverse global cohorts indicate that lifelong bilinguals develop clinical symptoms 
+of neurodegenerative dementia—including Alzheimer’s disease—between four and five years later than demographically 
+matched monolingual populations. Crucially, post-mortem neuropathological examinations have illuminated a striking 
+paradox: when brains of deceased bilingual and monolingual Alzheimer’s patients are examined, bilingual individuals 
+routinely present with equivalent, and often substantially more advanced, cortical atrophy, tau neurofibrillary tangles, 
+and amyloid-beta plaque deposition.
+
+[Paragraph E]
+This biological discrepancy is explained through the paradigm of "Cognitive Reserve"—the brain’s resilience in 
+maintaining functional cognitive performance despite severe physical neuropathology. Lifelong bilingualism does not 
+confer an organic immunity that repels the biological progression of Alzheimer’s; rather, it cultivates compensatory 
+neural circuitry and denser white-matter microstructural integrity. When primary memory pathways in the hippocampus 
+and temporal lobes succumb to progressive neurodegeneration, the bilingual brain demonstrates an exceptional ability 
+to reroute cognitive processing through alternative, highly reinforced frontoparietal control networks, allowing 
+individuals to sustain professional and social independence long after identical biological damage would have 
+incapacitated a monolingual peer.
+
+[Paragraph F]
+Nevertheless, it is critical to avoid uncritical eulogizing of the "bilingual advantage." A vocal contingent of 
+contemporary psycholinguists, prominent among them Dr. Kenneth Paap, argue that reported executive function 
+disparities are often the artifact of publication bias, underpowered sample sizes, and failure to control for 
+confounding variables such as immigrant work ethic or immigrant parental expectations. Meta-analyses examining 
+young, healthy adults in elite university environments frequently fail to replicate statistically significant 
+differences between bilinguals and monolinguals on standard laboratory inhibitory tasks, suggesting that in peak 
+neural adulthood, the brain operates near optimal cognitive ceilings where additional linguistic scaffolding yields 
+marginal detectable gains.
+
+[Paragraph G]
+The ongoing scholarly debate highlights that bilingualism is neither an infallible panacea nor an isolated skill, 
+but a multifaceted environmental influence whose cognitive impact depends on factors such as age of acquisition, 
+daily language balance, interactional context, and socio-educational environment. Recent neurocomputational models 
+suggest that the brain's adaptation is dynamic: switching languages frequently in mixed conversational settings 
+trains flexible goal maintenance, whereas using two languages in segregated, strict domains (such as home versus 
+work) primarily trains sustained inhibitory suppression. Ultimately, mapping the neuroplastic consequences of 
+speaking multiple languages enhances our fundamental understanding of how environmental habits sculpt the physical 
+architecture of the human brain throughout life.
+```
+
+##### Questions 27–31: Yes / No / Not Given
+*Do the following statements agree with the claims of the writer in Reading Passage 3?*
+*In boxes 27–31 on your answer sheet, write:*
+* **YES** if the statement agrees with the claims of the writer
+* **NO** if the statement contradicts the claims of the writer
+* **NOT GIVEN** if it is impossible to say what the writer thinks about this
+
+* **Question 27**: The conclusions reached by Elizabeth Peal and Wallace Lambert in 1962 supported the traditional view that bilingualism causes cognitive delay.
+* **Question 28**: In a bilingual brain, the linguistic system of the language not being spoken remains completely dormant during conversation.
+* **Question 29**: Bilingual individuals exhibit reduced metabolic energy expenditure in prefrontal regions when resolving conflicting sensory stimuli.
+* **Question 30**: Lifelong bilingualism prevents the biological formation of amyloid-beta plaques in brain tissue.
+* **Question 31**: Kenneth Paap and other skeptical researchers argue that some reported bilingual advantages may stem from publication bias.
+
+##### Questions 32–35: Multiple Choice (Choose ONE letter, A, B, C, or D)
+*Write the correct letter in boxes 32–35 on your answer sheet.*
+
+* **Question 32**: According to Paragraph A, what was the primary methodological strength of Peal and Lambert's 1962 study?
+  * **A.** They examined children across multiple different continents simultaneously.
+  * **B.** They rigorously controlled for extraneous factors such as social class and parental education.
+  * **C.** They utilized modern magnetic resonance imaging machines.
+  * **D.** They focused exclusively on adult university professors.
+
+* **Question 33**: What does the author mean by describing bilingualism as a "mental gymnasium" in Paragraph C?
+  * **A.** Bilingual people are more likely to participate in competitive physical sports.
+  * **B.** The continuous effort of suppressing competing words strengthens executive neural networks.
+  * **C.** Language learning requires formal physical exercise to be completely effective.
+  * **D.** Children who learn two languages find standard school curriculums effortless.
+
+* **Question 34**: The neuropathological examinations described in Paragraph D revealed that:
+  * **A.** Bilingual patients with dementia had identical or even greater physical brain deterioration compared to monolinguals.
+  * **B.** Monolingual brains were completely free of tau tangles upon death.
+  * **C.** Bilingual brains possessed physical immunity against brain shrinkage and cell loss.
+  * **D.** Dementia was completely cured in individuals who spoke three or more languages.
+
+* **Question 35**: Why do some meta-analyses involving healthy young university students fail to find a significant bilingual advantage?
+  * **A.** University students are usually unable to speak two languages with true fluency.
+  * **B.** Laboratory computers lack the sensitivity to record human response times accurately.
+  * **C.** Young adults in their prime are already operating near maximum cognitive efficiency.
+  * **D.** The tests used in modern laboratories are excessively simple for university candidates.
+
+##### Questions 36–40: Summary Completion with Word Bank
+*Complete the summary below using the list of words, **A–I**, below.*
+*Write the correct letter, **A–I**, in boxes 36–40 on your answer sheet.*
+
+**The Mechanism of Cognitive Reserve**
+* **Question 36**: Lifelong bilinguals develop overt clinical manifestations of Alzheimer's between four and five years **[36]** ____________ than monolingual populations.
+* **Question 37**: This preservation of functional intellect despite biological neuropathology is known as **[37]** ____________ reserve.
+* **Question 38**: Rather than preventing biological cellular decay, the bilingual brain reroutes cognitive tasks through **[38]** ____________ neural pathways.
+* **Question 39**: Skeptical psycholinguists argue that reported cognitive gains may be artifacts of **[39]** ____________ variables like immigrant work ethic.
+* **Question 40**: Different communicative environments foster distinct forms of cognitive **[40]** ____________ across a person's lifespan.
+
+| | Word Bank Options | |
+| :--- | :--- | :--- |
+| **A.** cognitive | **B.** later | **C.** confounding |
+| **D.** alternative | **E.** biological | **F.** earlier |
+| **G.** flexibility | **H.** permanent | **I.** emotional |
+
+---
+
+##### Official Scoring Key, Citations & Explanations (Items 1–40)
+
+| Item # | Correct Answer | Question Typology | Passage Reference & Line Evidence | Pedagogical Justification & Distractor Rationale |
+| :---: | :--- | :--- | :--- | :--- |
+| **1** | **FALSE** | True/False/Not Given | Passage 1, Paragraph A: *"hydraulic timekeepers were perpetually compromised by water evaporation, ambient temperature variations..."* | Directly contradicts the assertion of consistent accuracy. |
+| **2** | **FALSE** | True/False/Not Given | Passage 1, Paragraph B: *"These colossal iron apparatuses were not calibrated to minutes or seconds; their sole function was to proclaim the canonical hours to an illiterate populace."* | Were built for public canonical bell-ringing, not precise scientific minutes. |
+| **3** | **TRUE** | True/False/Not Given | Passage 1, Paragraph C: *"Capitalizing on Galileo Galilei’s theoretical discovery of the isochronism of small-angle pendulum oscillations..."* | Explicitly confirms Huygens capitalized on Galileo's discovery. |
+| **4** | **NOT GIVEN** | True/False/Not Given | Passage 1, Paragraph E: Mentions H4 lost 5.1 seconds and secured transoceanic transit, but nowhere states whether the Admiralty paid immediately or withheld funds. | Absence of text confirmation regarding immediate payment. |
+| **5** | **TRUE** | True/False/Not Given | Passage 1, Paragraph D: *"A disparity of a single four-second chronometric error translated into a navigational deviation of one nautical mile at the equator."* | Verbatim empirical correspondence. |
+| **6** | **FALSE** | True/False/Not Given | Passage 1, Paragraph F: *"Atomic resonance clocks measure time not through manufactured springs or pendulums, but through the immutable quantum transitions..."* | Text explicitly states they do *not* use springs. |
+| **7** | **reference meridian** | Note Completion | Passage 1, Paragraph D: *"calculating longitude necessitated knowing the exact simultaneous time at a reference meridian..."* | Grammatically exact fit within 2-word limit. |
+| **8** | **lunar distances** | Note Completion | Passage 1, Paragraph E: *"Conventional scientific dogma... maintained that the longitude problem could only be unlocked through... the painstaking method of lunar distances."* | Exact nominal compound. |
+| **9** | **diamond pallet jewels** / **diamond jewels** | Note Completion | Passage 1, Paragraph E: *"employed... diamond pallet jewels to eradicate friction without lubricating oils..."* | Eliminates oil reliance. |
+| **10**| **bimetallic strips** / **compensation strips** | Note Completion | Passage 1, Paragraph E: *"employed bimetallic temperature compensation strips..."* | Thermal counteraction mechanism. |
+| **11**| **piezoelectric** | Flowchart Completion | Passage 1, Paragraph F: *"exploited the piezoelectric properties of crystalline quartz..."* | Exact property term. |
+| **12**| **9,192,631,770** | Flowchart Completion | Passage 1, Paragraph F: *"oscillates at exactly 9,192,631,770 cycles per second."* | Exact quantum benchmark value. |
+| **13**| **satellite navigation** / **navigation** | Flowchart Completion | Passage 1, Paragraph F: *"sustaining modern satellite navigation systems, telecommunication networks..."* | Exact infrastructural system. |
+| **14**| **iii** | Matching Headings | Passage 2, Paragraph A: Contrasts bottom-up models with the Green World Hypothesis challenging historical orthodoxy. | Heading iii captures the central paradigm shift. |
+| **15**| **iv** | Matching Headings | Passage 2, Paragraph B: Focuses on Robert Paine's tidal starfish removal and introduces the keystone species concept. | Heading iv explicitly summarizes Paine's experiment. |
+| **16**| **vi** | Matching Headings | Passage 2, Paragraph C: Details the devastation of riparian willows, cottonwoods, and riverbanks following wolf eradication. | Heading vi encapsulates the riparian collapse. |
+| **17**| **vii**| Matching Headings | Passage 2, Paragraph D: Emphasizes the "Ecology of Fear" behavioral shift in elk and subsequent botanical regrowth. | Heading vii captures behavioral shifts and regrowth. |
+| **18**| **i** | Matching Headings | Passage 2, Paragraph E: Culminates in physical transformation of river channels, beaver dam hydraulics, and stabilized riverbanks. | Heading i summarizes river morphology changes. |
+| **19**| **ii** | Matching Headings | Passage 2, Paragraph F: Analyzes rancher protests, hunting permit disputes, and the non-linear limits of rewilding. | Heading ii reflects human conflict and limits. |
+| **20**| **C** (William Ripple) | Matching Features | Passage 2, Paragraph D: *"a dynamic ecologist William Ripple has conceptualized as the 'Ecology of Fear.' Aware of their vulnerability... elk voluntarily abandoned high-risk browsing locales..."* | Ripple conceptualized fear-driven avoidance. |
+| **21**| **B** (Robert Paine) | Matching Features | Passage 2, Paragraph B: *"Within a few years, a vibrant intertidal community... had collapsed into an impoverished monoculture of mussels."* | Paine documented the monoculture collapse. |
+| **22**| **D** (Arthur Middleton) | Matching Features | Passage 2, Paragraph F: *"As Dr. Arthur Middleton's ongoing research reveals... the cessation of top-down control over decades creates legacy effects... that cannot be reversed overnight..."* | Middleton highlighted persistent legacy limits. |
+| **23**| **A** (Hairston, Smith, Slobodkin) | Matching Features | Passage 2, Paragraph A: *"Hairston, Smith, and Slobodkin challenged this dogma... posited a revolutionary counter-premise: the terrestrial world remains verdant because predators suppress herbivore populations..."* | Formulated the Green World Hypothesis. |
+| **24**| **abiotic** | Sentence Completion | Passage 2, Paragraph A: *"population dynamics were governed predominantly by abiotic factors..."* | Exact modifying adjective. |
+| **25**| **hydraulic erosion** / **erosion** | Sentence Completion | Passage 2, Paragraph C: *"Stream banks, stripped of the anchoring root systems... succumbed to accelerated hydraulic erosion..."* | Direct consequence of vegetative loss. |
+| **26**| **beavers** / **North American beavers** | Sentence Completion | Passage 2, Paragraph E: *"resurgence of lush willow stands provided essential nourishment... for North American beavers..."* | Keystone hydrological engineers. |
+| **27**| **NO** | Yes/No/Not Given | Passage 3, Paragraph A: Peal and Lambert's 1962 data revealed bilinguals *outperformed* monolinguals, rupturing the deficit model. | Directly contradicts the assertion of supporting delay. |
+| **28**| **NO** | Yes/No/Not Given | Passage 3, Paragraph B: *"both linguistic repertoires remain simultaneously active in the brain's sub-conscious processing centers."* | Contradicts the claim of remaining dormant. |
+| **29**| **YES** | Yes/No/Not Given | Passage 3, Paragraph C: *"bilinguals resolve cognitive conflict with significantly greater velocity, expending fewer metabolic glucose reserves in the frontal regions."* | Confirms reduced metabolic energy expenditure. |
+| **30**| **NO** | Yes/No/Not Given | Passage 3, Paragraph D: *"bilingual individuals routinely present with equivalent, and often substantially more advanced, cortical atrophy... and amyloid-beta plaque deposition."* | Contradicts the assertion of preventing biological plaques. |
+| **31**| **YES** | Yes/No/Not Given | Passage 3, Paragraph F: *"Dr. Kenneth Paap, argue that reported executive function disparities are often the artifact of publication bias..."* | Affirms Paap's criticism regarding publication bias. |
+| **32**| **B** | Multiple Choice | Passage 3, Paragraph A: *"By implementing stringent experimental controls for parental educational attainment, socioeconomic status, and cultural background..."* | Option B captures the exact methodological control. |
+| **33**| **B** | Multiple Choice | Passage 3, Paragraph C: Refers back to continuous arbitration exercising inhibitory control and inducing neuroplasticity. | Option B captures mental strengthening via inhibition. |
+| **34**| **A** | Multiple Choice | Passage 3, Paragraph D: Patients presented with equivalent or greater atrophy and tangles while surviving longer functionally. | Option A accurately reflects the paradoxical findings. |
+| **35**| **C** | Multiple Choice | Passage 3, Paragraph F: *"in peak neural adulthood, the brain operates near optimal cognitive ceilings where additional linguistic scaffolding yields marginal detectable gains."* | Option C reflects the cognitive ceiling effect. |
+| **36**| **B** (later) | Summary Completion | Passage 3, Paragraph D: Manifest symptoms *"between four and five years later than demographically matched monolingual populations."* | B matches "later". |
+| **37**| **A** (cognitive) | Summary Completion | Passage 3, Paragraph E: *"explained through the paradigm of 'Cognitive Reserve'..."* | A matches "cognitive". |
+| **38**| **D** (alternative) | Summary Completion | Passage 3, Paragraph E: *"reroute cognitive processing through alternative, highly reinforced frontoparietal control networks..."* | D matches "alternative". |
+| **39**| **C** (confounding) | Summary Completion | Passage 3, Paragraph F: *"failure to control for confounding variables such as immigrant work ethic..."* | C matches "confounding". |
+| **40**| **G** (flexibility) | Summary Completion | Passage 3, Paragraph G: *"trains flexible goal maintenance... cultivate distinct forms of cognitive flexibility..."* | G matches "flexibility". |
+
+---
+
+#### 5.1.3 Full-Length Authentic Academic Listening Mock Exam Blueprint (`ielts_listen_mock_01`)
+* **Total Time**: 30 minutes audio playback + 2 minutes review
+* **Total Items**: 40 questions across 4 sections
+* **Strict Exam Mode Constraints**: Audio stream strictly locked to single play (seek bar, pause, rewind disabled), real-time synchronized timestamping, auto-submit at 32:00.
+
+##### Section 1 (Items 1–10: Daily Social Transaction)
+* **Context**: Telephone enquiry regarding an eco-tourism student lodge reservation at Lakeview Wilderness Retreat.
+* **Typology**: Form & Notes Completion (NO MORE THAN TWO WORDS AND/OR A NUMBER).
+* **Questions & Key**:
+  * 1. *Caller's Surname*: **HEATHCOTE**
+  * 2. *Arrival Date*: **14th October** / **October 14**
+  * 3. *Accommodation Tier*: **Riverside Cabin**
+  * 4. *Number of Occupants*: **4** / **four**
+  * 5. *Dietary Preference*: **vegetarian**
+  * 6. *Vehicle Registration*: **WA72 KLU**
+  * 7. *Optional Excursion*: **guided kayaking**
+  * 8. *Equipment Hire*: **waterproof boots**
+  * 9. *Deposit Required*: **£125** / **125 pounds**
+  * 10. *Payment Confirmation Code*: **ECH-9042**
+
+##### Section 2 (Items 11–20: Public Orientation Monologue)
+* **Context**: Public presentation by the operations director of the Riverside Community Arts Complex explaining architectural features and visitor safety rules.
+* **Typology**: Map Labelling (Items 11–15) & Multiple Choice (Items 16–20).
+* **Questions & Key**:
+  * 11. *Sculpture Courtyard*: **Plan Location D** (North of Main Amphitheater)
+  * 12. *Ceramics Workshop*: **Plan Location B** (Adjacent to West Gallery)
+  * 13. *Emergency Assembly Point*: **Plan Location G** (Lawn behind East Pavilion)
+  * 14. *Café and Terrace*: **Plan Location A** (Overlooking Riverside promenade)
+  * 15. *Audio-Visual Archive*: **Plan Location F** (Lower basement level)
+  * 16. *Membership Discount Criterion*: **B** (Available to full-time students and seniors over 65)
+  * 17. *Weekend Exhibition Admission*: **C** (Free admission between 9:00 AM and 11:30 AM)
+  * 18. *Prohibited Activity*: **A** (Flash photography inside the heritage gallery)
+  * 19. *Volunteer Training Commencement*: **C** (First Tuesday of every month)
+  * 20. *Public Transport Incentive*: **B** (Free shuttle bus connecting to central train station)
+
+##### Section 3 (Items 21–30: Academic Collaborative Discussion)
+* **Context**: University tutorial discussion between an environmental engineering tutor (Dr. Henderson) and two postgraduate researchers (Marcus and Chloe) reviewing their dissertation research proposal on subterranean hydrogen storage.
+* **Typology**: Matching Opinions to Speakers (Items 21–25) & Multiple Choice (Items 26–30).
+* **Questions & Key**:
+  * 21. *Concern over geological salt cavern porosity*: **Marcus**
+  * 22. *Proposing the use of computational thermodynamic modeling*: **Chloe**
+  * 23. *Highlighting financial constraints imposed by industrial partners*: **Dr. Henderson**
+  * 24. *Suggesting field sample collection from North Sea depleted reservoirs*: **Chloe**
+  * 25. *Recommending reduction of project scope to focus on seasonal cycles*: **Dr. Henderson**
+  * 26. *Primary research hypothesis*: **B** (Hydrogen leakage rates are minimized under high-pressure cushion gas regimes)
+  * 27. *Methodological limitation identified*: **A** (Lack of empirical sensor calibration data at temperatures above 80°C)
+  * 28. *Secondary objective*: **C** (Economic cost-benefit comparison with lithium-ion grid storage)
+  * 29. *Ethics committee clearance status*: **A** (Approved subject to safety verification on pressurized canisters)
+  * 30. *Immediate next step agreed upon*: **B** (Submit revised literature review synthesis by Friday)
+
+##### Section 4 (Items 31–40: University Lecture Monologue)
+* **Context**: Faculty of Science university lecture by Prof. Eleanor Vance on Bioacoustics and Vocalization Dialects in Oceanic Cetaceans (*Orcinus orca*).
+* **Typology**: Sentence & Note Completion (NO MORE THAN TWO WORDS).
+* **Questions & Key**:
+  * 31. Echolocation clicks are generated through specialized nasal structures termed **phonic lips**.
+  * 32. Distinct pod dialects are transmitted across generations via **cultural transmission**, rather than genetic inheritance.
+  * 33. The frequency modulation of call notes acts as a vital acoustic indicator of **social cohesion**.
+  * 34. Foraging pods in the Norwegian Sea employ signature sounds to coordinate **carousel feeding** maneuvers against herring shoals.
+  * 35. Anthropogenic interference from commercial shipping produces **acoustic masking** that degrades vocal range by up to 80%.
+  * 36. Hydrophone recordings reveal that juvenile whales acquire pod calls through **vocal imitation** of maternal vocalizations.
+  * 37. Transient and resident populations exhibit starkly contrasting vocal rates because transient pods hunt **marine mammals** with acute hearing.
+  * 38. The physiological impact of sonar testing has been linked to severe **decompression sickness** and fatal beach strandings.
+  * 39. Marine protected corridors must enforce strict **speed limits** for motorized vessels during calving seasons.
+  * 40. Long-term acoustic tracking demonstrates that distinct clan dialects have remained structurally stable for more than **three decades**.
+
+---
+
+#### 5.1.4 Full-Length Authentic Writing Mock Exam (`ielts_write_mock_01`)
+* **Total Time Limit**: 60 minutes
+* **Strict Exam Mode Constraints**: Split-pane visual stimulus layout, live character & word counter, clipboard paste interception, automatic submit at 60:00.
+
+##### Task 1: Comparative Data Synthesis & Dynamic Energy Transition
+* **Suggested Time**: 20 minutes | **Minimum Word Count**: 150 words
+* **Stimulus**: A comparative composite visual consisting of a **Line Graph** and **Data Table** illustrating the proportion of total domestic electricity generated from renewable sources (wind, solar, hydroelectric) versus fossil fuels (coal, gas) in four European nations (Germany, the United Kingdom, Spain, and Poland) between 2010 and 2025, alongside projected figures for 2030.
+* **Benchmark Band 8.5 Model Answer**:
+```markdown
+The provided line graph and table delineate the transition in electricity generation from renewable 
+and fossil fuel sources across four European nations between 2010 and 2025, with projections extending to 2030.
+
+Overall, it is manifest that Germany, the United Kingdom, and Spain experienced substantial expansions in their 
+renewable energy shares over the fifteen-year period, concomitant with a pronounced retreat in fossil fuel 
+reliance. Conversely, Poland maintained an overwhelmingly fossil-dominant matrix throughout, displaying only 
+marginal renewable adoption.
+
+Examining the Western European nations, the United Kingdom witnessed the most dramatic trajectory; renewable 
+output surged from a modest 9% in 2010 to 42% by 2025, and is forecast to attain 55% by 2030. Germany exhibited 
+comparably robust momentum, climbing steadily from 18% to 51% in 2025, establishing itself as the leading 
+renewable generator. In Spain, renewable generation demonstrated an initial surge followed by a moderate plateau, 
+rising from 24% to 46% by 2025.
+
+In stark contrast, Poland remained heavily reliant on conventional hydrocarbons. In 2010, coal and natural gas 
+accounted for an overwhelming 93% of Polish power generation, declining only marginally to 78% by 2025. While 
+Germany and the UK are projected to restrict fossil fuel reliance to beneath 30% by 2030, Poland's fossil fuel 
+share is predicted to persist above 70%, highlighting an enduring regional divergence in green energy transition.
+```
+
+##### Task 2: Formal Discursive Essay
+* **Suggested Time**: 40 minutes | **Minimum Word Count**: 250 words
 * **Prompt**:
-  > *Some people believe that artificial intelligence and automation will eliminate white-collar professional careers, while others argue that AI will simply augment human labor and foster higher productivity. Discuss both views and give your own opinion.*
-
-* **Model Essay (Band 8.5 Benchmark)**:
+> *In many secondary and tertiary educational institutions worldwide, automated artificial intelligence systems are increasingly being deployed to evaluate student writing, generate lesson curricula, and deliver personalized tutoring.*
+> *While proponents argue that AI democratizes education and optimizes academic efficiency, critics contend that relying on algorithmic instruction fundamentally diminishes critical thinking and eliminates irreplaceable human mentorship.*
+> *Discuss both views and give your own reasoned opinion.*
+* **Benchmark Band 8.5 Model Answer**:
 ```markdown
-The rapid acceleration of artificial intelligence and autonomous generative systems has 
-ignited an intense debate regarding the trajectory of high-skilled labor. While technophobic 
-critics contend that algorithmic automation will render white-collar professions obsolete, 
-I contend that AI functions primarily as an augmenting force that eliminates rote tasks, 
-thereby elevating human practitioners toward higher-order strategic and ethical cognition.
+The integration of artificial intelligence into secondary and higher educational settings has ignited an 
+intense philosophical debate regarding the future of pedagogy. While technological advocates argue that automated 
+systems democratize access to customized learning, skeptics fear that delegating intellectual cultivation to 
+algorithms compromises cognitive depth and human connection. This essay will examine both perspectives before 
+arguing that while AI serves as an exceptional analytical supplement, it must never supersede the foundational 
+human mentor.
 
-On the one hand, apprehensions regarding workforce displacement are not entirely unfounded. 
-Modern machine learning models demonstrate unprecedented capabilities in parsing vast legal 
-jurisprudence, diagnosing radiological scans with superhuman precision, and generating 
-syntactically flawless software code. Consequently, entry-level analytical roles that 
-previously served as foundational training grounds for junior paralegals, financial analysts, 
-and programmers face genuine contraction. If corporations can leverage automated pipelines 
-to execute data synthesis and document collation in seconds, the conventional economic demand 
-for intermediate clerical and diagnostic personnel will diminish, potentially precipitating 
-structural white-collar unemployment in vulnerable sectors.
+On the one hand, proponents highlight the profound efficiency and personalized scaffolding that algorithmic 
+tutoring provides. In traditional classrooms burdened by elevated student-to-teacher ratios, instructors inevitably 
+struggle to tailor instruction to heterogeneous learning velocities. Intelligent adaptive platforms can instantaneously 
+diagnose micro-deficiencies in syntactic mastery or mathematical conceptualization, delivering targeted remedial 
+modules at an individualized pace. Furthermore, the automation of administrative grading liberates educators from 
+tedious marking duties, enabling institutions to allocate resources toward research and experiential workshops. 
+For students in impoverished or remote communities lacking access to elite academies, high-caliber AI tutors 
+undeniably democratize high-level academic guidance.
 
-Nevertheless, equating administrative task automation with the outright extinction of complex 
-professions reflects a fundamental misunderstanding of professional discretion. True expertise 
-in medicine, jurisprudence, and strategic management relies not merely on algorithmic 
-pattern recognition, but on ethical accountability, empathetic stakeholder negotiation, and 
-contextual wisdom. A diagnostic neural network can identify an oncological anomaly, but it 
-cannot navigate the psychological delicacy required to communicate terminal prognoses, nor 
-can it weigh moral culpability in a multifaceted court case. By unburdening professionals 
-from mundane paperwork, AI empowers clinicians, attorneys, and educators to devote their 
-mental bandwidth to individualized patient care, innovative case strategy, and bespoke 
-pedagogy.
+Conversely, detractors present compelling concerns regarding the erosion of critical intellectual autonomy and 
+pastoral care. True scholarship does not merely consist of acquiring factual data or executing formulaic algorithms; 
+it requires challenging ideological dogmas, arbitrating ambiguity, and formulating original philosophical inquiries. 
+Because generative AI models operate through probabilistic pattern prediction rather than authentic consciousness, 
+they inherently perpetuate algorithmic orthodoxies, subtly discouraging divergent, non-conformist thought. 
+Moreover, education is fundamentally a socio-emotional endeavor. An empathetic human teacher perceives subtle 
+manifestations of anxiety, inspires resilient intellectual curiosity, and imparts ethical integrity—qualities 
+that remain completely unattainable for synthetic neural networks.
 
-In conclusion, although the automation of clerical and entry-level analytical responsibilities 
-will enforce a painful restructuring of professional hierarchies, it will not obliterate 
-the human white-collar workforce. Provided educational institutions adapt by prioritizing 
-ethical judgment, creative problem-solving, and socio-emotional acumen, artificial 
-intelligence will emerge not as an existential adversary, but as an indispensable cognitive 
-collaborator.
-```
-
-##### Evaluator Rubric Breakdown (Band 8.5):
-* **Task Response (TR - Band 8.5)**: Fully addresses both sides of the prompt. Articulates a clear, consistent, and nuanced personal thesis throughout. Body paragraphs are thoroughly elaborated without speculative departures.
-* **Coherence & Cohesion (CC - Band 8.5)**: Effortless logical progression. Skilfully uses cohesive devices (*"On the one hand," "Consequently," "Nevertheless," "In conclusion"*) and referential chaining (*"this discrepancy," "such algorithmic efficiency"*). Each paragraph contains a distinct topical core.
-* **Lexical Resource (LR - Band 9.0)**: Sophisticated, precise academic vocabulary utilized naturally (*"technophobic critics," "jurisprudence," "oncological anomaly," "structural unemployment," "socio-emotional acumen"*). Zero spelling or morphological errors.
-* **Grammatical Range & Accuracy (GRA - Band 8.5)**: Extensive repertoire of complex structures (conditional clauses, passive nominalizations, participle clauses). Error-free sentence rate exceeds 90%.
-
----
-
-#### 5.1.3 Academic Writing Task 1: Comparative Data Synthesis & Process Report
-* **Stimulus Type**: Comparative Bar Chart & Process Flowchart
-* **Prompt**:
-  > *The chart below shows the proportion of energy generated from renewable versus fossil fuel sources in four European nations in 2010 and 2020. The diagram illustrates the stages in producing electricity from an offshore tidal barrage.*
-  > *Summarise the information by selecting and reporting the main features, and make comparisons where relevant.*
-* **Model Report (Band 8.5 Benchmark - 185 words)**:
-```markdown
-The bar chart details the percentage distribution of electricity generated from renewables 
-and fossil fuels across four European nations—Germany, Spain, Sweden, and Poland—between 2010 
-and 2020, while the flow diagram delineates the operational mechanism of a tidal barrage 
-system for electric power generation.
-
-Overall, Sweden and Spain witnessed substantial expansions in their renewable energy yields, 
-whereas Poland remained overwhelmingly reliant on carbon-intensive fossil fuels throughout 
-the decade. Simultaneously, the tidal mechanism relies on an alternating cyclical process 
-driven by oceanic lunar ebbs and flows.
-
-In 2010, Sweden led renewable integration at 48%, surging to 62% by 2020, while its fossil 
-share fell correspondingly to 38%. Spain experienced a comparable trajectory, nearly 
-doubling its green energy output from 22% to 41%. In sharp contrast, Poland generated 92% 
-of its electrical grid power from fossil fuels in 2010, experiencing merely a nominal decline 
-to 86% by 2020.
-
-Regarding the tidal barrage, the process commences during high tide when oceanic seawater 
-passes through one-way sluice gates into an inland estuary basin. During this ingress phase, 
-the incoming hydraulic pressure drives submerged bi-directional turbine blades connected 
-to central generator dynamos. Once peak hydrostatic equilibrium is achieved, the sluice 
-gates are locked. As the oceanic tide recedes, the trapped reservoir head-water is released 
-through outflow conduits, spinning the generator turbines a second time to produce 
-secondary grid current before dissipating into the sea.
-```
-
-##### Evaluator Rubric Breakdown (Task 1 - Band 8.5):
-* **Task Achievement (TA 8.5)**: Accurately identifies key overarching trends across all four nations, highlights critical contrasts (Sweden vs. Poland), and presents a clear step-by-step technical synthesis of the tidal inflow/outflow mechanism without speculative commentary.
-* **Coherence & Cohesion (CC 8.5)**: Logical structural segmentation into overview, comparative data analysis, and process sequencing. Fluent transitions (*"Overall," "In sharp contrast," "Regarding the tidal barrage," "During this ingress phase"*).
-* **Lexical Resource (LR 9.0)**: Exceptionally rich mechanical and analytical terminology (*"carbon-intensive," "nominal decline," "estuary basin," "hydraulic pressure," "hydrostatic equilibrium," "bi-directional turbine"*).
-* **Grammatical Range & Accuracy (GRA 8.5)**: Impeccable complex sentence architecture combining non-finite clauses, passive technical constructions, and compound comparatives.
-
----
-
-#### 5.1.4 General Training Reading: Workplace Notices & Daily Survival Texts
-* **Module**: General Training Section 1 & Section 2
-* **Stimulus 1: Workplace Ergonomics & Repetitive Strain Protocol (Section 2 - 240 words)**:
-```markdown
-MEMORANDUM: OCCUPATIONAL HEALTH & DESK ERGONOMICS PROTOCOL
-All workstation personnel must adhere to the updated occupational musculoskeletal standards:
-1. Display Positioning: Primary monitors must be positioned at direct eye level, approximately 
-   arm’s length (50–70 cm) from the user's seated position to eliminate neck flexion.
-2. Chair Adjustment: Lumbar support must be firmly aligned with the curve of the lower back. 
-   Thighs should remain parallel to the floor, with knees bent at a 90-degree angle and feet 
-   planted flat on the floor or on an approved footrest.
-3. Micro-Breaks: Under the '20-20-20 Rule', every 20 minutes, workers must look at an object 
-   at least 20 feet (6 meters) away for 20 seconds to prevent ciliary muscle eye strain. 
-   Continuous keyboard operation must not exceed 50 minutes without a mandatory 5-minute 
-   postural stretch away from the terminal.
-4. Symptom Escalation: Discomfort, persistent numbness in wrists, or lumbar ache must be 
-   formally reported to the designated Safety Officer within 48 hours for immediate ergonomic audit.
-```
-
-* **Stimulus 2: Commercial Lease Notice & Building Regulations (Section 1 - 180 words)**:
-```markdown
-TENANT NOTICE: COMMENCEMENT OF CENTRAL HVAC SERVICING & DUCT SANITIZATION
-Tenants of North Tower Floors 4–12 are hereby notified that routine quarterly servicing 
-of the central heating, ventilation, and air conditioning (HVAC) systems will commence 
-this Saturday at 07:00 and conclude by Sunday at 18:00.
-During this window, ambient office airflow will be intermittently suspended, and mild 
-acoustic resonance may emanate from ceiling vents. Access to emergency fire stairwells 
-will remain unobstructed throughout.
-Please ensure all individual desktop terminals, monitors, and sensitive paperwork are 
-covered or stowed away, as minor dust agitation may occur during duct filter replacements. 
-Direct any urgent operational concerns to Building Management Extension #4402 before 
-17:00 Friday.
-```
-
-##### Seed Exercise Items for General Training Texts:
-* **Item 1 (TFNG - Ergonomics)**: *Employees experiencing wrist numbness are permitted to delay reporting symptoms until their annual medical appraisal.*
-  * *Answer*: **FALSE** (Explicitly requires formal report to Safety Officer within 48 hours).
-* **Item 2 (Short Answer - HVAC)**: *What must tenants do to protect desktop monitors and paperwork during weekend servicing?*
-  * *Answer*: **Cover or stow away** (Duct filter replacement may cause dust agitation).
-
----
-
-#### 5.1.5 General Training Writing Task 1: Formal & Semi-Formal Correspondence
-* **Prompt**:
-  > *You recently purchased a major electrical appliance from a local store, but upon delivery, you discovered that the item was damaged and several accessories were missing. The store customer service department has failed to respond to your phone calls.*
-  > *Write a letter to the store manager. In your letter:*
-  > * Explain the details of your purchase and delivery
-  > * Describe the damage and missing accessories
-  > * State what action you expect the manager to take immediately.
-
-* **Model Letter (Band 8.5 Benchmark - Formal Register - 195 words)**:
-```markdown
-Dear Sir or Madam,
-
-I am writing to register an urgent complaint regarding a recent purchase made at your downtown 
-branch and the subsequent failure of your after-sales customer service department to address 
-the matter.
-
-On November 14th, I purchased a top-tier inverter washing machine (Model Ref: #WM-8820X, 
-Receipt #49281) with guaranteed next-day home installation. When the courier team unboxed 
-the unit on the afternoon of November 15th, I immediately discovered severe structural 
-denting along the right lateral chassis panel, accompanied by deep enamel abrasions. 
-Furthermore, the high-pressure inlet hose assembly, drainage bracket, and manufacturer’s 
-warranty registration card were entirely absent from the packaging.
-
-Despite logging four telephone inquiries with your customer support line over the past forty-eight 
-hours, each call was abruptly terminated after extended periods on hold. This acute lack of 
-accountability is unacceptable for a reputable retailer.
-
-I expect a replacement of the damaged appliance with an immaculate, fully inspected unit 
-inclusive of all missing accessories within three business days. Failing this, I shall exercise 
-my statutory rights under consumer protection regulations to demand a full monetary refund.
-
-Yours faithfully,
-
-Marcus Vance
+In conclusion, while artificial intelligence undeniably provides unprecedented diagnostic efficiency and educational 
+accessibility, its unchecked deployment risks reducing holistic mentorship into mechanical optimization. In my 
+considered estimation, the optimal pedagogical paradigm is hybrid: institutions must harness AI as a powerful 
+diagnostic aid while fiercely preserving the indispensable human teacher at the pedagogical center.
 ```
 
 ---
 
-#### 5.1.6 Speaking Part 2 & 3 Seed Module
-* **Part 2 Cue Card**:
-  > **Describe an important environmental policy or initiative you learned about.**
-  > *You should say:*
-  > * What the initiative is and who introduced it
-  > * How it operates in practice
-  > * What obstacles it faced during implementation
-  > * And explain why you believe it is effective or ineffective.
+#### 5.1.5 Full-Length Authentic Speaking Mock Exam (`ielts_speak_mock_01`)
+* **Total Time**: 11–14 minutes
+* **Format**: Computer-delivered recorded interview with visual timer, automated prompt delivery, and strict scratchpad/recording limits.
 
-* **Sample High-Band Audio Script**:
-```markdown
-"I’d like to speak about the municipal ban and tax levy on single-use plastics and non-recyclable 
-packaging that was spearheaded by our city council roughly three years ago.
+##### Part 1: Introduction & Familiar Topics (4–5 minutes)
+* **Topic Set 1: Hometown & Urban Environments**:
+  * *Prompt 1*: "Let's talk about your hometown. Where is your hometown located, and what is its most distinctive feature?"
+  * *Prompt 2*: "Has your hometown undergone significant changes in recent years?"
+  * *Prompt 3*: "Do you think your hometown is a desirable location for young professionals to establish their careers?"
+* **Topic Set 2: Technology & Daily Routine**:
+  * *Prompt 4*: "What digital devices or applications do you rely on most heavily during your daily routine?"
+  * *Prompt 5*: "Do you feel that modern technology has made your life more convenient or more stressful?"
+  * *Prompt 6*: "Are there times during the week when you consciously disconnect from your electronic devices?"
+* **Topic Set 3: Literature & Reading Habits**:
+  * *Prompt 7*: "Do you prefer reading physical printed books or digital screens, and why?"
+  * *Prompt 8*: "What genre of literature or non-fiction do you find most intellectually stimulating?"
+  * *Prompt 9*: "Did your parents or teachers encourage you to read when you were a young child?"
 
-Under this framework, local retail outlets and major supermarket chains were legally prohibited 
-from distributing free plastic bags and polystyrene containers. Instead, merchants are mandated 
-to provide either biodegradable cassava-based alternatives or charge a substantial fee for 
-reusable canvas totes. Furthermore, the policy imposed a closed-loop collection mechanism 
-where commercial eateries must return organic compostables to a regional biogas processing plant.
-
-Initially, the initiative encountered considerable public friction. Small food vendors argued 
-that compostable alternatives were cost-prohibitive, threatening their razor-thin margins. 
-Simultaneously, consumers frequently complained about the inconvenience of carrying their own 
-containers for impromptu shopping.
-
-However, after a concerted public education campaign and temporary municipal subsidies that 
-lowered wholesale packaging costs for vendors, compliance skyrocketed. In my view, the measure 
-has been remarkably effective. It shifted social norms overnight, transforming eco-conscious 
-behavior from a fringe choice into the default baseline. Most tangibly, our local waterways 
-and stormwater canals have seen a noticeable reduction in plastic debris."
+##### Part 2: Individual Long Turn (3–4 minutes)
+* **Candidate Task Card (Cue Card)**:
 ```
+Describe an environmental project, policy, or initiative in your community 
+that has made a positive impact.
 
-* **Part 3 Follow-Up Abstract Questions**:
-  1. *Do you believe international environmental agreements are genuinely enforceable, or are domestic policies the only realistic catalyst for change?*
-  2. *To what extent should high-income nations bear greater fiscal responsibility for global decarbonization compared to emerging economies?*
+You should say:
+• What the initiative or project was
+• How you first became aware of it
+• What actions were taken by the participants or authorities
+And explain why you consider this initiative to have been successful or meaningful.
+```
+* **Execution Parameters**: Exactly 1:00 preparation countdown with interactive digital scratchpad, followed by an irreversible 2:00 recording window.
+
+##### Part 3: Two-Way In-Depth Abstract Discussion (4–5 minutes)
+* **Theme**: Global Ecological Governance, Corporate Responsibility, and Individual Ethics.
+* **Abstract Questions & High-Band Model Response Strategies**:
+  * *Question 1 (Individual vs Government Responsibility)*: "To what extent should the burden of environmental preservation rest on individual citizen choices compared to sweeping government legislation?"
+  * *Question 2 (Economic Growth vs Environmental Protection)*: "Can developing economies realistically attain sustainable development without sacrificing immediate industrial expansion?"
+  * *Question 3 (Consumerism and Corporate Greenwashing)*: "How can consumers distinguish between genuine corporate environmental stewardship and superficial marketing greenwashing?"
+  * *Question 4 (International Climate Accords)*: "Why do international environmental agreements frequently face compliance hurdles among sovereign nations?"
+  * *Question 5 (Technological Innovation as an Ecological Remedy)*: "Do you believe future technological breakthroughs will completely resolve ecological degradation without requiring lifestyle sacrifices?"
 
 ---
 

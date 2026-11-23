@@ -2,6 +2,7 @@
 import { db, initDatabase } from './database';
 import { KANA_SEEDS } from './seeds/kanaSeeds';
 import { KANJI_SEEDS } from './seeds/kanjiSeeds';
+import { IELTS_MOCK_LESSON_ID, IELTS_FULL_MOCK_ITEMS } from './seeds/ieltsMockExamSeeds';
 import {
   CURRICULUM_PILLARS,
   CURRICULUM_UNITS,
@@ -14,6 +15,8 @@ export function seed() {
 
   console.log('Clearing existing tables...');
   db.exec(`
+    PRAGMA foreign_keys = OFF;
+    DELETE FROM user_lesson_completions;
     DELETE FROM submissions;
     DELETE FROM kanji_writing_attempts;
     DELETE FROM practice_sessions;
@@ -26,6 +29,7 @@ export function seed() {
     DELETE FROM tracks;
     DELETE FROM kanji_stroke_data;
     DELETE FROM users;
+    PRAGMA foreign_keys = ON;
   `);
 
   console.log('Seeding fresh zero-progress user profile...');
@@ -85,7 +89,31 @@ export function seed() {
     );
   }
 
-  console.log('Seeding Kana vector handwriting datasets (10 seed characters)...');
+  
+  console.log('Seeding official 40-question IELTS Academic Mock Exam dataset...');
+  try {
+    insertUnit.run('u_ia_mock_1', 'sp_ia_read', 'Unit 7: Full Computer-Delivered Mock Exam', 'Official 40-question timed exam simulation', 7);
+    insertLesson.run(IELTS_MOCK_LESSON_ID, 'u_ia_mock_1', 'Official Computer-Delivered IELTS Academic Practice Exam (Full 40 Questions)', 'mock_exam', 60, 1);
+  } catch (e) {
+    // Unit or lesson might exist
+  }
+
+  for (const item of IELTS_FULL_MOCK_ITEMS) {
+    insertItem.run(
+      item.id,
+      item.lessonId,
+      item.itemType,
+      item.prompt,
+      item.passageText,
+      null,
+      JSON.stringify(item.options),
+      JSON.stringify(item.correctAnswer),
+      item.explanation
+    );
+  }
+  console.log('Seeded ' + IELTS_FULL_MOCK_ITEMS.length + ' official IELTS mock exam items successfully.');
+
+console.log('Seeding Kana vector handwriting datasets (10 seed characters)...');
   const insertKanji = db.prepare(`
     INSERT INTO kanji_stroke_data (id, character, jlpt_level, on_yomi, kun_yomi, english_gloss, radical, stroke_count, stroke_paths_json, stroke_metadata_json)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)

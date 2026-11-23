@@ -38,8 +38,8 @@ export const AppContent: React.FC = () => {
           jlpt_n3: 'les_n3_gram_1',
           jlpt_n2: 'les_n2_gram_1',
           jlpt_n1: 'les_n1_gram_1',
-          ielts_academic: 'les_ia_read_1',
-          ielts_general: 'les_ig_read_1'
+          ielts_academic: 'les_ia_mock_full_1',
+          ielts_general: 'les_ia_mock_full_1'
         };
         if (DEFAULT_EXAMS[data.user.activeTrack]) {
           setCurrentExamLessonId(DEFAULT_EXAMS[data.user.activeTrack]);
@@ -62,8 +62,8 @@ export const AppContent: React.FC = () => {
       jlpt_n3: 'les_n3_gram_1',
       jlpt_n2: 'les_n2_gram_1',
       jlpt_n1: 'les_n1_gram_1',
-      ielts_academic: 'les_ia_read_1',
-      ielts_general: 'les_ig_read_1'
+      ielts_academic: 'les_ia_mock_full_1',
+      ielts_general: 'les_ia_mock_full_1'
     };
     if (DEFAULT_EXAMS[newTrack]) {
       setCurrentExamLessonId(DEFAULT_EXAMS[newTrack]);

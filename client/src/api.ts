@@ -69,12 +69,13 @@ export async function startSession(payload: {
 export async function submitSession(
   sessionId: string,
   answers: Record<string, any>,
-  timeSpentSec: number
+  timeSpentSec: number,
+  isAbandoned?: boolean
 ): Promise<any> {
   const res = await fetch(`${BASE_URL}/sessions/${sessionId}/submit`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ answers, timeSpentSec })
+    body: JSON.stringify({ answers, timeSpentSec, isAbandoned: !!isAbandoned })
   });
   return res.json();
 }

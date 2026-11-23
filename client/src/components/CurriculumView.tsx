@@ -591,6 +591,21 @@ const DYNAMIC_ROADMAPS: Record<string, GuidedStageDef[]> = {
       actionId: 'Buka Studio Task 2',
       lessonType: 'writing_task',
       lessonId: 'les_ia_write_2'
+    },
+    {
+      stage: 7,
+      badgeEn: 'Stage 7 • Official Computer-Delivered Mock Exam',
+      badgeId: 'Tahap 7 • Ujian Simulasi Resmi Computer-Delivered',
+      titleEn: 'Official Computer-Delivered IELTS Academic Mock Exam (Full 40 Questions)',
+      titleId: 'Ujian Resmi Computer-Delivered IELTS Akademik (Simulasi Lengkap 40 Soal)',
+      descEn: 'Take the full 40-question official computer-delivered IELTS simulation under strict 60-minute time constraints and proctoring.',
+      descId: 'Ikuti simulasi resmi computer-delivered IELTS 40 soal penuh dengan batas waktu 60 menit ketat dan sistem pengawasan.',
+      targetEn: 'Official 9-Band scale calculation, 3 passages, anti-cheat proctoring',
+      targetId: 'Penghitungan skor skala 9-Band resmi, 3 teks panjang, pengawasan anti-curang',
+      actionEn: 'Launch Official Mock Exam',
+      actionId: 'Mulai Ujian Simulasi Resmi',
+      lessonType: 'mock_exam',
+      lessonId: 'les_ia_mock_full_1'
     }
   ],
   ielts_general: [
@@ -683,6 +698,21 @@ const DYNAMIC_ROADMAPS: Record<string, GuidedStageDef[]> = {
       actionId: 'Buka Studio Esai Sosial',
       lessonType: 'writing_task',
       lessonId: 'les_ig_write_2'
+    },
+    {
+      stage: 7,
+      badgeEn: 'Stage 7 • Full General Training Mock Exam',
+      badgeId: 'Tahap 7 • Ujian Simulasi Lengkap General Training',
+      titleEn: 'Complete 40-Question General Training Simulation (60 Mins)',
+      titleId: 'Simulasi Lengkap 40 Soal General Training (60 Menit)',
+      descEn: 'Experience the full timed General Training examination measuring workplace and general literacy across all 3 sections.',
+      descId: 'Rasakan simulasi ujian General Training berwaktu penuh yang mengukur literasi kerja dan umum di 3 bagian.',
+      targetEn: 'Strict timed assessment with automated band score calculation',
+      targetId: 'Penilaian waktu ketat dengan kalkulasi skor band otomatis',
+      actionEn: 'Launch General Mock Exam',
+      actionId: 'Mulai Ujian General',
+      lessonType: 'mock_exam',
+      lessonId: 'les_ia_mock_full_1'
     }
   ]
 };
