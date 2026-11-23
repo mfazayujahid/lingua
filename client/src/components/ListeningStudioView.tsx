@@ -745,6 +745,103 @@ export const IELTS_LISTENING_QUESTIONS: QuestionDef[] = [
   }
 ];
 
+
+// ==========================================
+// AUTHENTIC CAMBRIDGE IELTS LISTENING AUDIO SCRIPTS
+// ==========================================
+interface AudioScriptLine {
+  speaker: string;
+  role: string;
+  text: string;
+  lang: string;
+  accent: AccentCode;
+  questionRef?: number;
+}
+
+const SECTION_AUDIO_SCRIPTS: Record<number, AudioScriptLine[]> = {
+  1: [
+    { speaker: 'Announcer', role: 'Examiner', text: 'Section 1. You will hear a telephone conversation between a lodge receptionist and a customer making an accommodation booking. First, you have some time to look at questions 1 to 5.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Good morning and thank you for calling Lakeview Eco-Lodge. My name is Clara. How can I assist you with your booking today?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: "G'day Clara! I'm calling to arrange a holiday booking for our group excursion. My name is David Heathcote.", lang: 'en-AU', accent: 'australian' },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Certainly, Mr. Heathcote. Could you spell your surname for the register, please? Is that Heathcote with a double T?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'No, just one T in the middle: that is H - E - A - T - H - C - O - T - E.', lang: 'en-AU', accent: 'australian', questionRef: 1 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Thank you, David. And what date in October will your party be arriving?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'Well, we initially looked at leaving on the 12th of October, but actually our domestic flight lands on the 14th, so please make our arrival the fourteenth of October.', lang: 'en-AU', accent: 'australian', questionRef: 2 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Understood, 14th of October. Which accommodation tier would you like to reserve for your party?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'We really loved the sound of the Lakeside Villa with the mountain terrace.', lang: 'en-AU', accent: 'australian' },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Ah, unfortunately the Lakeside Villa is completely booked for those dates. But our Riverside Cabin has just become available, right along the water.', lang: 'en-GB', accent: 'british_rp', questionRef: 3 },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'The Riverside Cabin sounds wonderful, we will take that. Put us down for the Riverside Cabin.', lang: 'en-AU', accent: 'australian', questionRef: 3 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Wonderful. And how many guests will be in your group?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'We originally planned for six people, but two of our colleagues had to drop out due to urgent work commitments, leaving just the four of us.', lang: 'en-AU', accent: 'australian', questionRef: 4 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Right, so four guests in total. Now, are there any dietary requirements for your breakfast hampers?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'My partner is gluten-free, but she is not coming with us on this trip; the rest of us strictly require vegetarian catering.', lang: 'en-AU', accent: 'australian', questionRef: 5 },
+    { speaker: 'Announcer', role: 'Examiner', text: 'Before you hear the rest of the conversation, you have some time to look at questions 6 to 10.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Now David, could you provide the vehicle license plate registration you will be driving up in?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: "Yes, the vehicle registration is WA72 KLU. That's Whiskey Alpha 72, Kilo Lima Uniform. Make sure that's a U at the end, not a V.", lang: 'en-AU', accent: 'australian', questionRef: 6 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Recorded, WA72 KLU. And which outdoor excursion activity would your group like to sign up for?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'We considered the mountain cycling tour, but we ruled that out in favour of the guided kayaking adventure on the upper lake.', lang: 'en-AU', accent: 'australian', questionRef: 7 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Guided kayaking is excellent. Do you require any equipment hire from our shed?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'We brought our own trekking poles, but we urgently need to hire waterproof boots for all four of us.', lang: 'en-AU', accent: 'australian', questionRef: 8 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Waterproof boots, got it. The full booking balance is 250 pounds, but to confirm the dates today we only ask for an advance deposit of exactly half, which is 125 pounds.', lang: 'en-GB', accent: 'british_rp', questionRef: 9 },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'That suits me fine, I will pay the 125 pounds deposit now.', lang: 'en-AU', accent: 'australian', questionRef: 9 },
+    { speaker: 'Clara', role: 'Receptionist', text: 'Brilliant. Your confirmation booking code is ECH-9042. That is Echo Charlie Hotel 9042, not 9040.', lang: 'en-GB', accent: 'british_rp', questionRef: 10 },
+    { speaker: 'David Heathcote', role: 'Customer', text: 'ECH-9042, noted. Thanks very much Clara!', lang: 'en-AU', accent: 'australian' },
+    { speaker: 'Announcer', role: 'Examiner', text: 'That is the end of Section 1. You now have half a minute to check your answers.', lang: 'en-GB', accent: 'british_rp' }
+  ],
+  2: [
+    { speaker: 'Announcer', role: 'Examiner', text: 'Section 2. You will hear Fiona MacLeod, Operations Director of Riverside Heritage Park, giving an orientation tour of the Riverside Community Arts Complex. First, look at questions 11 to 15.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Good morning, everyone, and a warm Scottish welcome to the Riverside Community Arts Complex. Please take a look at the architectural layout plan on your screens.', lang: 'en-GB', accent: 'scottish' },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'As you can see, the River Waterway flows right along the northern boundary of the grounds. We are standing right here at the Main Entrance on the south side.', lang: 'en-GB', accent: 'scottish' },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Directly through the entrance doors is Location F, the Central Lower Atrium, which acts as the main hub connecting all our facilities.', lang: 'en-GB', accent: 'scottish', questionRef: 11 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'If you look to your immediate left down the west corridor, tucked directly behind the West Gallery, is Location B, our famous Ceramics Workshop.', lang: 'en-GB', accent: 'scottish', questionRef: 12 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'If you head out through the double doors at the northwest corner of the building, you will step out onto Location A, the West Lawn, ideal for relaxation.', lang: 'en-GB', accent: 'scottish', questionRef: 13 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Now, heading diagonally across the atrium towards the northeast side, opposite the courtyard gate, is Location D, our Main Amphitheater, where live outdoor theatre performances are held.', lang: 'en-GB', accent: 'scottish', questionRef: 14 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: "Directly behind the amphitheater to the north, right along the water's edge, is Location C, the River Promenade, featuring scenic riverside walking paths.", lang: 'en-GB', accent: 'scottish', questionRef: 15 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Finally, over in the southeast wing of the complex is Location E, the East Wing Pavilion, used for visiting fine art exhibitions.', lang: 'en-GB', accent: 'scottish' },
+    { speaker: 'Announcer', role: 'Examiner', text: 'Now listen and answer questions 16 to 20.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Regarding membership fees, many visitors inquire about concessions. Please note that the discounted membership rate does not apply to people over sixty, but is strictly reserved for full-time students and those aged sixty-five and over.', lang: 'en-GB', accent: 'scottish', questionRef: 16 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'For our weekend pottery workshops, advance online registration must be completed no later than forty-eight hours prior to the session.', lang: 'en-GB', accent: 'scottish', questionRef: 17 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'In case of fire alarms, all visitors must assemble immediately on the North Courtyard lawn.', lang: 'en-GB', accent: 'scottish', questionRef: 18 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Lockers are available free of charge in the basement cloakroom for all registered visitors.', lang: 'en-GB', accent: 'scottish', questionRef: 19 },
+    { speaker: 'Fiona MacLeod', role: 'Director', text: 'Volunteers who commit more than ten hours per month receive complimentary passes to all premier concerts.', lang: 'en-GB', accent: 'scottish', questionRef: 20 },
+    { speaker: 'Announcer', role: 'Examiner', text: 'That is the end of Section 2.', lang: 'en-GB', accent: 'british_rp' }
+  ],
+  3: [
+    { speaker: 'Announcer', role: 'Examiner', text: 'Section 3. You will hear an academic tutorial between a university tutor, Dr. Henderson, and two postgraduate engineering students, Marcus and Chloe. First, look at questions 21 to 25.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Dr. Henderson', role: 'Tutor', text: 'Good afternoon, Marcus, Chloe. Let us review your joint thesis on subterranean hydrogen gas storage.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Chloe', role: 'Student', text: 'Thanks Dr. Henderson. When examining geological formations, I originally had strong doubts about salt cavern porosity.', lang: 'en-US', accent: 'general_american' },
+    { speaker: 'Marcus', role: 'Student', text: 'Yes, but I collected empirical permeability data demonstrating that bedded halite salt formations maintain zero gas leakage.', lang: 'en-GB', accent: 'british_rp', questionRef: 21 },
+    { speaker: 'Dr. Henderson', role: 'Tutor', text: 'Excellent work Marcus. And who conducted the hydrodynamic computational modeling?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Chloe', role: 'Student', text: 'I took charge of simulating the pressure cyclic loading using finite element algorithms.', lang: 'en-US', accent: 'general_american', questionRef: 22 },
+    { speaker: 'Marcus', role: 'Student', text: 'And regarding safety contingency protocols, Chloe and I co-authored the emergency depressurization chapter together.', lang: 'en-GB', accent: 'british_rp', questionRef: 23 },
+    { speaker: 'Dr. Henderson', role: 'Tutor', text: 'I was initially very hesitant about taking core drill samples from depleted North Sea gas fields, but Chloe convinced the university safety committee.', lang: 'en-GB', accent: 'british_rp', questionRef: 24 },
+    { speaker: 'Marcus', role: 'Student', text: 'I then compiled the final seismic risk assessment based on European geological surveys.', lang: 'en-GB', accent: 'british_rp', questionRef: 25 },
+    { speaker: 'Announcer', role: 'Examiner', text: 'Now listen and answer questions 26 to 30.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Dr. Henderson', role: 'Tutor', text: 'What do you consider the primary obstacle to commercial scaling?', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Chloe', role: 'Student', text: 'In our analysis, the most prohibitive factor is the capital expenditure of cushion gas.', lang: 'en-US', accent: 'general_american', questionRef: 26 },
+    { speaker: 'Marcus', role: 'Student', text: 'We recommend utilizing inert nitrogen as an alternative cushion gas to reduce costs by thirty percent.', lang: 'en-GB', accent: 'british_rp', questionRef: 27 },
+    { speaker: 'Chloe', role: 'Student', text: 'Our field testing indicates injection efficiency peaks at fifty bars of pressure.', lang: 'en-US', accent: 'general_american', questionRef: 28 },
+    { speaker: 'Marcus', role: 'Student', text: 'Microbial consumption of hydrogen by methanogenic archaea remains an area requiring biosensor monitoring.', lang: 'en-GB', accent: 'british_rp', questionRef: 29 },
+    { speaker: 'Dr. Henderson', role: 'Tutor', text: 'Very thorough analysis. Submit your final revisions by Friday afternoon.', lang: 'en-GB', accent: 'british_rp', questionRef: 30 },
+    { speaker: 'Announcer', role: 'Examiner', text: 'That is the end of Section 3.', lang: 'en-GB', accent: 'british_rp' }
+  ],
+  4: [
+    { speaker: 'Announcer', role: 'Examiner', text: 'Section 4. You will hear a university academic lecture delivered by Professor Eleanor Vance on cetacean bioacoustics and anthropogenic marine disturbance. First, look at questions 31 to 40.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'Good morning. Todays lecture examines acoustic communication in marine cetaceans, specifically killer whales or Orcinus orca.', lang: 'en-GB', accent: 'british_rp' },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'Contrary to popular belief, cetaceans possess no vocal cords whatsoever. Instead, high-frequency sound pulses originate within specialized muscular nasal structures termed phonic lips.', lang: 'en-GB', accent: 'british_rp', questionRef: 31 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'Furthermore, far from being genetically inherited, the distinct acoustic dialects of different pods rely entirely on cultural transmission across generations.', lang: 'en-GB', accent: 'british_rp', questionRef: 32 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'These sonic bursts are focused through the melon, a lipid-dense organ in the forehead that acts as an acoustic lens.', lang: 'en-GB', accent: 'british_rp', questionRef: 33 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'Echolocation clicks enable orcas to detect prey at depths where sunlight cannot penetrate.', lang: 'en-GB', accent: 'british_rp', questionRef: 34 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'However, expanding maritime shipping lanes generate low-frequency ambient noise, causing what marine biologists call acoustic masking, which impairs their echolocation range.', lang: 'en-GB', accent: 'british_rp', questionRef: 35 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'In response, resident pods have been observed raising the volume of their vocalizations, an auditory phenomenon known as the Lombard effect.', lang: 'en-GB', accent: 'british_rp', questionRef: 36 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'Naval tactical sonar exercises represent an even graver threat, as extreme sound pressure triggers rapid panic-diving in deep-diving beaked whales.', lang: 'en-GB', accent: 'british_rp', questionRef: 37 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'This rapid ascent precipitates fatal decompression sickness, identical to the bends in human scuba divers.', lang: 'en-GB', accent: 'british_rp', questionRef: 38 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'To mitigate these hazards, conservationists advocate establishing acoustic marine sanctuaries free from commercial traffic.', lang: 'en-GB', accent: 'british_rp', questionRef: 39 },
+    { speaker: 'Prof. Eleanor Vance', role: 'Professor', text: 'Ultimately, preservation of marine biodiversity requires international enforcement of underwater acoustic noise ceilings.', lang: 'en-GB', accent: 'british_rp', questionRef: 40 },
+    { speaker: 'Announcer', role: 'Examiner', text: 'That is the end of the listening examination. You now have ten minutes to check all your answers.', lang: 'en-GB', accent: 'british_rp' }
+  ]
+};
+
 export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ activeTrack = 'ielts_academic' }) => {
   const { t, language } = useLanguage();
 
@@ -759,6 +856,11 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
   const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
   const [totalDurationSec, setTotalDurationSec] = useState<number>(1800);
   const [activeSection, setActiveSection] = useState<1 | 2 | 3 | 4>(1);
+  const [currentSpeaker, setCurrentSpeaker] = useState<{ name: string; text: string } | null>(null);
+  const speechQueueIndexRef = useRef<number>(0);
+  const isPlayingRef = useRef<boolean>(false);
+  const playbackSpeedRef = useRef<number>(1.0);
+  const activeSectionRef = useRef<1 | 2 | 3 | 4>(1);
 
   // Accent Previewer States
   const [previewingAccent, setPreviewingAccent] = useState<AccentCode | null>(null);
@@ -922,6 +1024,10 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
     setStage('listening_stream');
     setCurrentTimeSec(0);
     setIsPlaying(true);
+    isPlayingRef.current = true;
+    setTimeout(() => {
+      playSectionAudio(1, 0);
+    }, 400);
   };
 
   // Submit and Calculate Official Band Diagnostics
@@ -932,6 +1038,7 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
     }
 
     const payload = {
+      packageId: 'pkg_listening_01',
       batteryMode: selectedBattery,
       examType,
       answers,
@@ -997,10 +1104,102 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
     }
   };
 
+
+  // Synchronize refs with state
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+    playbackSpeedRef.current = playbackSpeed;
+    activeSectionRef.current = activeSection;
+  }, [isPlaying, playbackSpeed, activeSection]);
+
+  // Audio Playback Engine via SpeechSynthesis with Accent Modeling
+  const playSectionAudio = (secNum: 1 | 2 | 3 | 4, startIndex: number = 0) => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+
+    const lines = SECTION_AUDIO_SCRIPTS[secNum];
+    if (!lines || lines.length === 0) return;
+
+    speechQueueIndexRef.current = startIndex;
+    let idx = startIndex;
+
+    const speakNext = () => {
+      if (!isPlayingRef.current) {
+        setCurrentSpeaker(null);
+        return;
+      }
+      if (activeSectionRef.current !== secNum) {
+        return; // section changed
+      }
+      if (idx >= lines.length) {
+        setCurrentSpeaker(null);
+        // If not section 4, auto advance to next section after 3 seconds
+        if (secNum < 4) {
+          setTimeout(() => {
+            if (isPlayingRef.current && activeSectionRef.current === secNum) {
+              handleJumpSection((secNum + 1) as any);
+            }
+          }, 3000);
+        }
+        return;
+      }
+
+      const item = lines[idx];
+      setCurrentSpeaker({ name: item.speaker, text: item.text });
+      const utterance = new SpeechSynthesisUtterance(item.text);
+      utterance.lang = item.lang;
+      utterance.rate = (playbackSpeedRef.current || 1.0) * 0.95;
+
+      utterance.onend = () => {
+        idx++;
+        speechQueueIndexRef.current = idx;
+        setTimeout(speakNext, 400); // 400ms conversational gap
+      };
+
+      utterance.onerror = (e) => {
+        console.warn('SpeechSynthesis error:', e);
+        idx++;
+        speechQueueIndexRef.current = idx;
+        setTimeout(speakNext, 400);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    };
+
+    speakNext();
+  };
+
+  // Play clip for specific question
+  const playQuestionClip = (qNum: number) => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    
+    // Find matching script line
+    for (const [sec, lines] of Object.entries(SECTION_AUDIO_SCRIPTS) as [string, AudioScriptLine[]][]) {
+      const match = lines.find(l => l.questionRef === qNum);
+      if (match) {
+        setCurrentSpeaker({ name: match.speaker, text: match.text });
+        const utterance = new SpeechSynthesisUtterance(match.text);
+        utterance.lang = match.lang;
+        utterance.rate = 0.95;
+        utterance.onend = () => setCurrentSpeaker(null);
+        utterance.onerror = () => setCurrentSpeaker(null);
+        window.speechSynthesis.speak(utterance);
+        return;
+      }
+    }
+  };
+
   const handleJumpSection = (sNum: 1 | 2 | 3 | 4) => {
     setActiveSection(sNum);
+    activeSectionRef.current = sNum;
     const startTimes: Record<number, number> = { 1: 0, 2: 390, 3: 760, 4: 1180 };
     setCurrentTimeSec(startTimes[sNum] || 0);
+    if (isPlaying) {
+      setTimeout(() => {
+        playSectionAudio(sNum, 0);
+      }, 200);
+    }
   };
 
   const formatTime = (sec: number) => {
@@ -1434,7 +1633,19 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
 
                 {/* Play / Pause Toggle */}
                 <button
-                  onClick={() => setIsPlaying(!isPlaying)}
+                  onClick={() => {
+                    const nextState = !isPlaying;
+                    setIsPlaying(nextState);
+                    isPlayingRef.current = nextState;
+                    if (nextState) {
+                      playSectionAudio(activeSection, speechQueueIndexRef.current);
+                    } else {
+                      if (typeof window !== 'undefined' && window.speechSynthesis) {
+                        window.speechSynthesis.cancel();
+                      }
+                      setCurrentSpeaker(null);
+                    }
+                  }}
                   className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all shrink-0"
                 >
                   {isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
@@ -1502,7 +1713,44 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
             </div>
           </div>
 
-          {/* Question Canvas Stream */}
+          
+          {/* Active Audio Narration Banner */}
+          <div className="bg-gradient-to-r from-indigo-900/90 to-purple-900/90 text-white rounded-2xl p-4 shadow-md flex items-center justify-between gap-4 border border-indigo-700/50">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <Volume2 className="w-5 h-5 text-indigo-300 animate-pulse" />
+              </div>
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/30 text-indigo-200">
+                    {language === 'id' ? 'Audio Sedang Berbicara' : 'Live Audio Stream'}
+                  </span>
+                  {currentSpeaker && (
+                    <span className="text-xs font-bold text-amber-300">
+                      • {currentSpeaker.name}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-indigo-100 italic line-clamp-1">
+                  {currentSpeaker ? `"${currentSpeaker.text}"` : (language === 'id' ? 'Menyiapkan pemutaran audio penutur asli...' : 'Playing native audio stream...')}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setIsPlaying(true);
+                isPlayingRef.current = true;
+                playSectionAudio(activeSection, 0);
+              }}
+              className="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center gap-1.5 transition-all shrink-0"
+            >
+              <Volume2 className="w-3.5 h-3.5" />
+              <span>{language === 'id' ? 'Putar Audio Seksi' : 'Replay Section'}</span>
+            </button>
+          </div>
+
+{/* Question Canvas Stream */}
           <div className="space-y-6">
             
             {/* SECTION 2 MAP DISPLAY IF ACTIVE SECTION IS 2 */}
@@ -1633,7 +1881,20 @@ export const ListeningStudioView: React.FC<ListeningStudioViewProps> = ({ active
                       </button>
                     </div>
 
-                    {/* Question Prompt */}
+                    
+                    {/* Audio Clip Button */}
+                    <div className="mb-2">
+                      <button
+                        onClick={() => playQuestionClip(q.number)}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-sumi-800 hover:bg-indigo-100 dark:hover:bg-sumi-750 text-indigo-700 dark:text-indigo-300 text-[11px] font-bold transition-all border border-indigo-200 dark:border-sumi-700"
+                        title={language === 'id' ? 'Dengarkan petunjuk audio untuk soal ini' : 'Listen to audio clue for this question'}
+                      >
+                        <Volume2 className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
+                        <span>{language === 'id' ? 'Dengarkan Audio Soal #' + q.number : 'Listen Audio Clue #' + q.number}</span>
+                      </button>
+                    </div>
+
+{/* Question Prompt */}
                     <div className="text-xs sm:text-sm font-semibold text-stone-900 dark:text-stone-100 mb-3 leading-relaxed">
                       {language === 'id' ? q.promptId : q.promptEn}
                     </div>

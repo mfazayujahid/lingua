@@ -233,6 +233,7 @@ export async function fetchListeningPackages(): Promise<any> {
 }
 
 export async function evaluateListening(payload: {
+  packageId?: string;
   batteryMode: string;
   examType: string;
   answers: Record<number, string>;
@@ -244,7 +245,25 @@ export async function evaluateListening(payload: {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    if (res.ok) return await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      const ev = data.evaluation || data;
+      const sectionScores = {
+        1: { correct: ev.sectionalScores?.section1?.raw ?? ev.sectionScores?.[1]?.correct ?? 0, total: ev.sectionalScores?.section1?.total ?? ev.sectionScores?.[1]?.total ?? 10 },
+        2: { correct: ev.sectionalScores?.section2?.raw ?? ev.sectionScores?.[2]?.correct ?? 0, total: ev.sectionalScores?.section2?.total ?? ev.sectionScores?.[2]?.total ?? 10 },
+        3: { correct: ev.sectionalScores?.section3?.raw ?? ev.sectionScores?.[3]?.correct ?? 0, total: ev.sectionalScores?.section3?.total ?? ev.sectionScores?.[3]?.total ?? 10 },
+        4: { correct: ev.sectionalScores?.section4?.raw ?? ev.sectionScores?.[4]?.correct ?? 0, total: ev.sectionalScores?.section4?.total ?? ev.sectionScores?.[4]?.total ?? 10 }
+      };
+      return {
+        ...ev,
+        rawScore: ev.rawScore,
+        totalQuestions: ev.totalQuestions || 40,
+        overallBand: ev.overallBand,
+        cefrLevel: ev.cefrLevel,
+        sectionScores,
+        answers: payload.answers
+      };
+    }
   } catch (err) {
     console.warn('Backend listening evaluation error, fallback to client computation', err);
   }

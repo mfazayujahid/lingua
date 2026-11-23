@@ -85,8 +85,9 @@ listeningRouter.get('/packages/:packageId', (req: Request, res: Response) => {
  * Body: { packageId: string, answers: Record<number, string>, timeSpentSeconds?: number, mode?: string, userId?: string }
  */
 listeningRouter.post('/evaluate', (req: Request, res: Response) => {
+  let { packageId } = req.body;
+  if (!packageId) packageId = 'pkg_listening_01';
   const {
-    packageId,
     answers = {},
     timeSpentSeconds = 0,
     mode = 'strict',
