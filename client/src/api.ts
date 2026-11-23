@@ -221,3 +221,32 @@ export async function evaluateSpeaking(payload: {
   });
   return res.json();
 }
+
+export async function fetchListeningPackages(): Promise<any> {
+  try {
+    const res = await fetch(`${BASE_URL}/listening/packages`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend listening packages error, fallback', err);
+  }
+  return { status: 'ok', packages: [] };
+}
+
+export async function evaluateListening(payload: {
+  batteryMode: string;
+  examType: string;
+  answers: Record<number, string>;
+  timeSpentSec: number;
+}): Promise<any> {
+  try {
+    const res = await fetch(`${BASE_URL}/listening/evaluate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend listening evaluation error, fallback to client computation', err);
+  }
+  throw new Error('Fallback to local calculation');
+}

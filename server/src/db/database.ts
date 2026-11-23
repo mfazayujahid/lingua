@@ -186,5 +186,27 @@ export function initDatabase() {
       evaluation_json TEXT,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS listening_packages (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      description TEXT,
+      level_code TEXT NOT NULL DEFAULT 'ielts_academic',
+      total_duration_seconds INTEGER DEFAULT 1920,
+      total_questions INTEGER DEFAULT 40,
+      package_data_json TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS listening_sessions (
+      id TEXT PRIMARY KEY,
+      package_id TEXT NOT NULL REFERENCES listening_packages(id),
+      user_id TEXT NOT NULL REFERENCES users(id),
+      raw_score REAL NOT NULL,
+      overall_band REAL NOT NULL,
+      sectional_scores_json TEXT NOT NULL,
+      evaluation_json TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 }

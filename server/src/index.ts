@@ -7,6 +7,7 @@ import { srsRouter } from './routes/srs';
 import { sessionsRouter } from './routes/sessions';
 import { studioRouter } from './routes/studio';
 import { speakingRouter } from './routes/speaking';
+import { listeningRouter } from './routes/listening';
 import { kanjiRouter } from './routes/kanji';
 import { analyticsRouter } from './routes/analytics';
 
@@ -36,6 +37,7 @@ app.use('/api/srs', srsRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/studio', studioRouter);
 app.use('/api/speaking', speakingRouter);
+app.use('/api/listening', listeningRouter);
 app.use('/api/kanji', kanjiRouter);
 app.use('/api/analytics', analyticsRouter);
 

@@ -1,4 +1,4 @@
-﻿// Shared Domain Interfaces & Types
+// Shared Domain Interfaces & Types
 // Dual-Track Language Platform (IELTS & JLPT N5-N1 Progression)
 
 export type TrackCode = 'ielts' | 'jlpt';
@@ -332,3 +332,166 @@ export interface SpeakingSessionRecord {
   evaluationJson?: string;
   createdAt?: string;
 }
+
+// Listening Studio & Assessment Interfaces (DOMAIN_BLUEPRINT.md §5.1.6 & §2.1.6)
+
+export type ListeningAccentCode = 'british_rp' | 'australian' | 'scottish' | 'general_american';
+
+export interface ListeningSpeaker {
+  speakerId: string;
+  name: string;
+  accent: ListeningAccentCode | string;
+  gender?: 'male' | 'female' | string;
+  role?: string;
+}
+
+export interface ListeningTimecodes {
+  introLeadIn?: { startSec: number; endSec: number };
+  preReadingPause?: { startSec: number; endSec: number };
+  dialoguePartA?: { startSec: number; endSec: number };
+  midBreakPause?: { startSec: number; endSec: number };
+  dialoguePartB?: { startSec: number; endSec: number };
+  sectionReviewPause?: { startSec: number; endSec: number };
+  [key: string]: { startSec: number; endSec: number } | undefined;
+}
+
+export interface SpatialMapHotspot {
+  letter: string;
+  label: string;
+  x: number;
+  y: number;
+  radius: number;
+}
+
+export interface SpatialMapConfig {
+  mapImageUri: string;
+  viewBox: string;
+  hotspots: SpatialMapHotspot[];
+}
+
+export interface ListeningDistractorAnalysis {
+  deceptiveTrapToken: string;
+  linguisticPivotMarker: string;
+  correctExplanation: string;
+  explanationId?: string; // Indonesian localization explanation (AC 4.23)
+  trapType?: 'spelling' | 'date_shift' | 'currency' | 'subtraction' | 'rejection' | 'cardinal_direction' | 'voice_attribution' | 'negation' | 'technical_term' | 'plural_morphology' | string;
+}
+
+export interface ListeningQuestion {
+  questionNumber: number; // 1 to 40
+  sectionNumber: number; // 1, 2, 3, 4
+  type: 
+    | 'form_completion' 
+    | 'note_completion' 
+    | 'table_completion' 
+    | 'map_labelling' 
+    | 'flowchart' 
+    | 'multiple_choice' 
+    | 'voice_attribution' 
+    | 'summary_completion';
+  prompt: string;
+  instruction?: string;
+  wordLimit?: string; // e.g. "NO MORE THAN TWO WORDS AND/OR A NUMBER", "ONE WORD ONLY"
+  options?: string[]; // for multiple choice or matching labels A-H
+  correctAnswer: string;
+  acceptedAnswers: string[];
+  audioTimestampSeconds?: number;
+  distractorAnalysis?: ListeningDistractorAnalysis;
+  targetAccent?: ListeningAccentCode | string;
+}
+
+export interface ListeningSection {
+  sectionNumber: number; // 1, 2, 3, 4
+  title: string;
+  contextDescription: string;
+  audioUrl: string;
+  durationSeconds: number;
+  speakers: ListeningSpeaker[];
+  timecodes?: ListeningTimecodes;
+  spatialMapConfig?: SpatialMapConfig;
+  voiceAttributionItems?: number[];
+  uninterruptedLecture?: boolean;
+  noteCompletionRange?: [number, number];
+  questions: ListeningQuestion[];
+}
+
+export interface IeltsListeningPackage {
+  id: string;
+  title: string;
+  description: string;
+  levelCode: LevelCode;
+  totalDurationSeconds: number;
+  totalQuestions: number;
+  sections: ListeningSection[];
+}
+
+export interface ListeningSubmission {
+  packageId: string;
+  answers: Record<number, string>;
+  timeSpentSeconds?: number;
+  mode?: 'strict' | 'practice';
+  userId?: string;
+}
+
+export interface QuestionEvaluationDetail {
+  questionNumber: number;
+  sectionNumber: number;
+  userAnswer: string;
+  correctAnswer: string;
+  acceptedAnswers: string[];
+  isCorrect: boolean;
+  errorType?: 'WORD_LIMIT_EXCEEDED' | 'PLURAL_MORPHOLOGY_MISSING' | 'SPELLING_ERROR' | 'DISTRACTOR_TRAP' | 'INCORRECT' | null;
+  audioTimestampSeconds?: number;
+  distractorAnalysis?: ListeningDistractorAnalysis;
+}
+
+export interface SectionalScore {
+  raw: number;
+  total: number;
+  percentage: number;
+}
+
+export interface AccentVulnerabilityProfile {
+  accent: ListeningAccentCode | string;
+  accentName: string;
+  sectionNumber?: number;
+  correctCount: number;
+  totalCount: number;
+  accuracyPct: number;
+  riskLevel: 'LOW' | 'MODERATE' | 'HIGH';
+  feedback: string;
+}
+
+export interface ListeningEvaluationResult {
+  rawScore: number;
+  overallBand: number;
+  cefrLevel: string;
+  competencyDescriptor: string;
+  sectionalScores: {
+    section1: SectionalScore;
+    section2: SectionalScore;
+    section3: SectionalScore;
+    section4: SectionalScore;
+  };
+  accentVulnerabilities: AccentVulnerabilityProfile[];
+  errorTypology: {
+    wordLimitViolations: number;
+    spellingErrors: number;
+    distractorTrapFailures: number;
+    singularPluralMismatches: number;
+    otherErrors: number;
+  };
+  questionResults: QuestionEvaluationDetail[];
+}
+
+export interface ListeningSessionRecord {
+  id: string;
+  packageId: string;
+  userId: string;
+  rawScore: number;
+  overallBand: number;
+  sectionalScoresJson: string;
+  evaluationJson: string;
+  createdAt?: string;
+}
+

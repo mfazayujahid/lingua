@@ -49,6 +49,8 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     // Dashboard Track Selector
     
     // IELTS Guide & Navigation
+    'nav.ielts_listening': 'Listening Studio',
+    'nav.short.listening': 'Listening',
     'nav.ielts_speaking': 'Speaking Studio',
     'nav.short.speaking': 'Speaking',
     'nav.ielts_studio': 'Writing Studio',
@@ -59,6 +61,31 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'topbar.switch_to_jp': 'Switch to Japanese (JLPT)',
     'topbar.track_jp_btn': 'Japanese (JLPT)',
     'topbar.track_en_btn': 'English (IELTS)',
+
+    // IELTS Listening Studio
+    'listening.header_badge': 'Authentic CD-IELTS Audio Streaming • Multi-Accent Matrix',
+    'listening.header_title': 'Interactive IELTS Listening Studio',
+    'listening.header_desc': 'Computer-delivered listening simulation with single-play audio constraints, real-time spatial map labelling, and 40-item diagnostic distractor auditing.',
+    'listening.battery_full_title': 'Full Mock (40 Qs)',
+    'listening.battery_social_title': 'Social Survival (20 Qs)',
+    'listening.battery_academic_title': 'Academic Focus (20 Qs)',
+    'listening.battery_full_desc': 'Comprehensive Sections 1–4 simulation matching official Cambridge test duration and multi-accent difficulty progression.',
+    'listening.battery_social_desc': 'Sections 1 & 2 covering transaction bookings, alphanumeric data, and architectural floor plan navigation.',
+    'listening.battery_academic_desc': 'Sections 3 & 4 covering collaborative academic colloquiums and technical research lectures.',
+    'listening.mode_exam_tag': 'EXAM MODE (N=1 Single-Play Locked)',
+    'listening.mode_practice_tag': 'PRACTICE MODE (Speed & Scrub Unlocked)',
+    'listening.stage1_title': 'Test Battery & Audio Protocol Selection',
+    'listening.stage1_desc': 'Select your test module and playback policy. Exam Mode enforces single-play real-time conditions.',
+    'listening.btn_proceed_audio_setup': 'Proceed to Audio Setup & Accent Preview',
+    'listening.stage2_title': 'Headphone Calibration & Regional Accent Audition',
+    'listening.stage2_desc': 'Verify clear stereo output and preview the authentic native accents featured in this test battery.',
+    'listening.btn_play_chime': 'Play Stereo Chime',
+    'listening.accents_title': 'Native Regional Accents Featured in Test',
+    'listening.btn_start_stream': 'Begin Listening Test & Audio Stream',
+    'listening.btn_finish_submit': 'Finish & Grade Test',
+    'listening.palette_title': 'Question Navigator',
+    'listening.scorecard_title': 'Official 9-Band Listening Diagnostic Scorecard',
+    'listening.btn_retake_test': 'Retake Listening Test',
 
     // IELTS Speaking Studio
     'speaking.header_badge': 'Official IELTS Voice Interview Simulation • Band 9 Matrix',
@@ -348,6 +375,8 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     // Dashboard Track Selector (100% Indonesian)
     
     // IELTS Guide & Navigation (100% Indonesian)
+    'nav.ielts_listening': 'Studio Menyimak',
+    'nav.short.listening': 'Menyimak',
     'nav.ielts_speaking': 'Studio Berbicara',
     'nav.short.speaking': 'Bicara',
     'nav.ielts_studio': 'Studio Esai',
@@ -358,6 +387,31 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'topbar.switch_to_jp': 'Beralih ke Bahasa Jepang (JLPT)',
     'topbar.track_jp_btn': 'Bahasa Jepang (JLPT)',
     'topbar.track_en_btn': 'Bahasa Inggris (IELTS)',
+
+    // IELTS Listening Studio (100% Indonesian)
+    'listening.header_badge': 'Streaming Audio CD-IELTS Resmi • Matriks Multi-Aksen',
+    'listening.header_title': 'Studio Menyimak Interaktif IELTS',
+    'listening.header_desc': 'Simulasi ujian menyimak berbasis komputer dengan kunci audio sekali putar, penandaan denah interaktif, dan analisis jebakan 40 butir soal.',
+    'listening.battery_full_title': 'Simulasi Penuh (40 Soal)',
+    'listening.battery_social_title': 'Percakapan Sosial (20 Soal)',
+    'listening.battery_academic_title': 'Konteks Akademik (20 Soal)',
+    'listening.battery_full_desc': 'Simulasi menyeluruh Bagian 1–4 sesuai standar resmi Cambridge dengan progresivitas tingkat kesulitan dan variasi aksen.',
+    'listening.battery_social_desc': 'Bagian 1 & 2 meliputi formulir pemesanan, data alfanumerik, dan navigasi denah arsitektur.',
+    'listening.battery_academic_desc': 'Bagian 3 & 4 meliputi diskusi tutorial penelitian mahasiswa dan kuliah ilmiah berbobot.',
+    'listening.mode_exam_tag': 'MODE UJIAN (Kunci Audio N=1 Sekali Putar)',
+    'listening.mode_practice_tag': 'MODE LATIHAN (Kecepatan & Geser Aktif)',
+    'listening.stage1_title': 'Pemilihan Paket Tes & Ketentuan Audio',
+    'listening.stage1_desc': 'Pilih modul latihan dan mode pemutaran. Mode Ujian memberlakukan kondisi nyata satu kali putar tanpa jeda.',
+    'listening.btn_proceed_audio_setup': 'Lanjut ke Kalibrasi Audio & Pengecekan Aksen',
+    'listening.stage2_title': 'Kalibrasi Headphone & Uji Dengar Aksen Regional',
+    'listening.stage2_desc': 'Pastikan output suara stereo jernih dan dengarkan pratinjau aksen penutur asli yang ada pada paket soal ini.',
+    'listening.btn_play_chime': 'Uji Suara Lonceng Stereo',
+    'listening.accents_title': 'Aksen Penutur Asli dalam Paket Ujian',
+    'listening.btn_start_stream': 'Mulai Ujian Menyimak & Putar Audio',
+    'listening.btn_finish_submit': 'Selesai & Nilai Hasil Ujian',
+    'listening.palette_title': 'Navigasi Butir Soal',
+    'listening.scorecard_title': 'Laporan Evaluasi Skor Band 9 Menyimak Resmi',
+    'listening.btn_retake_test': 'Ulangi Ujian Menyimak',
 
     // IELTS Speaking Studio (100% Indonesian)
     'speaking.header_badge': 'Simulasi Wawancara Lisan Resmi IELTS • Matriks Band 9',

@@ -59,4 +59,28 @@ export interface SpeakingSessionRow {
   created_at: string;
 }
 
+export interface ListeningPackageRow {
+  id: string;
+  title: string;
+  description: string;
+  level_code: string;
+  total_duration_seconds: number;
+  total_questions: number;
+  package_data_json: string;
+  created_at: string;
+}
+
+export interface ListeningSessionRow {
+  id: string;
+  package_id: string;
+  user_id: string;
+  raw_score: number;
+  overall_band: number;
+  sectional_scores_json: string;
+  evaluation_json: string;
+  created_at: string;
+}
+
 export type { SpeakingExamPackage, SpeakingSessionRecord };
+export type { IeltsListeningPackage, ListeningSessionRecord, ListeningEvaluationResult } from '../types';
+

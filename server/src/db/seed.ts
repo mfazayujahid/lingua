@@ -4,6 +4,7 @@ import { KANA_SEEDS } from './seeds/kanaSeeds';
 import { KANJI_SEEDS } from './seeds/kanjiSeeds';
 import { IELTS_MOCK_LESSON_ID, IELTS_FULL_MOCK_ITEMS } from './seeds/ieltsMockExamSeeds';
 import { SPEAKING_PACKAGES_SEED } from './seeds/speakingSeeds';
+import { LISTENING_PACKAGES_SEED } from './seeds/listeningSeeds';
 import {
   CURRICULUM_PILLARS,
   CURRICULUM_UNITS,
@@ -17,6 +18,8 @@ export function seed() {
   console.log('Clearing existing tables...');
   db.exec(`
     PRAGMA foreign_keys = OFF;
+    DELETE FROM listening_sessions;
+    DELETE FROM listening_packages;
     DELETE FROM speaking_sessions;
     DELETE FROM speaking_packages;
     DELETE FROM user_lesson_completions;
@@ -170,8 +173,27 @@ console.log('Seeding Kana vector handwriting datasets (10 seed characters)...');
   }
   console.log(`Seeded ${SPEAKING_PACKAGES_SEED.length} IELTS speaking exam packages.`);
 
+  console.log('Seeding IELTS listening exam packages...');
+  const insertListeningPackage = db.prepare(`
+    INSERT INTO listening_packages (id, title, description, level_code, total_duration_seconds, total_questions, package_data_json)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const pkg of LISTENING_PACKAGES_SEED) {
+    insertListeningPackage.run(
+      pkg.id,
+      pkg.title,
+      pkg.description,
+      pkg.levelCode,
+      pkg.totalDurationSeconds,
+      pkg.totalQuestions,
+      JSON.stringify(pkg)
+    );
+  }
+  console.log(`Seeded ${LISTENING_PACKAGES_SEED.length} IELTS listening exam packages.`);
+
   console.log('Seeding completed successfully!');
-  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages.`);
+  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages, ${LISTENING_PACKAGES_SEED.length} listening packages.`);
 }
 
 // Execute directly if run as main
