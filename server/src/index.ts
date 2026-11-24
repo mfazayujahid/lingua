@@ -10,6 +10,7 @@ import { speakingRouter } from './routes/speaking';
 import { listeningRouter } from './routes/listening';
 import { kanjiRouter } from './routes/kanji';
 import { analyticsRouter } from './routes/analytics';
+import { examsRouter } from './routes/exams';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,7 +41,9 @@ app.use('/api/speaking', speakingRouter);
 app.use('/api/listening', listeningRouter);
 app.use('/api/kanji', kanjiRouter);
 app.use('/api/analytics', analyticsRouter);
+app.use('/api/exams', examsRouter);
 
-app.listen(PORT, () => {
+export const server = app.listen(PORT, () => {
   console.log(`[LinguaMastery API] Server listening on http://localhost:${PORT}`);
 });
+export default app;
