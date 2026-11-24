@@ -9,8 +9,14 @@ import {
   SpeakingExamPackage,
   MasterExamPackageSummary,
   UserExamAttemptRecord,
-  ExamBatteryTrajectoryResult
+  ExamBatteryTrajectoryResult,
+  IELTSWritingTaskType,
+  IELTSWritingPromptStimulus,
+  SentenceAnnotation,
+  DiagnosticScorecardResult,
+  EssaySubmissionPayload
 } from '../../shared/types';
+import { AUTHENTIC_WRITING_PROMPTS, analyzeEssayLocally } from './data/writingPromptsData';
 
 const BASE_URL = '/api';
 
@@ -966,4 +972,94 @@ export async function fetchExamTrajectory(track: LevelCode): Promise<ExamBattery
     progressionTrend: trend
   };
 }
+
+// ==========================================
+// Phase 4: Production Writing Studio API
+// ==========================================
+
+export async function fetchWritingPrompts(taskType?: IELTSWritingTaskType): Promise<{ prompts: IELTSWritingPromptStimulus[] }> {
+  try {
+    const url = taskType ? `${BASE_URL}/writing/prompts?taskType=${taskType}` : `${BASE_URL}/writing/prompts`;
+    const res = await fetch(url);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.prompts && data.prompts.length > 0) return data;
+    }
+  } catch (err) {
+    console.warn('Backend fetchWritingPrompts error, fallback to defaults', err);
+  }
+
+  const filtered = taskType
+    ? AUTHENTIC_WRITING_PROMPTS.filter(p => p.taskType === taskType)
+    : AUTHENTIC_WRITING_PROMPTS;
+  return { prompts: filtered };
+}
+
+export async function evaluateWritingSubmission(payload: EssaySubmissionPayload): Promise<DiagnosticScorecardResult> {
+  try {
+    const res = await fetch(`${BASE_URL}/writing/evaluate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.overallBand !== undefined) {
+        saveLocalWritingSubmission(data);
+        return data;
+      }
+    }
+  } catch (err) {
+    console.warn('Backend evaluateWritingSubmission error, analyzing locally', err);
+  }
+
+  const prompt = AUTHENTIC_WRITING_PROMPTS.find(p => p.promptId === payload.promptId) || AUTHENTIC_WRITING_PROMPTS[0];
+  const localResult = analyzeEssayLocally(payload, prompt);
+  saveLocalWritingSubmission(localResult);
+  return localResult;
+}
+
+function getLocalWritingSubmissions(): DiagnosticScorecardResult[] {
+  try {
+    const raw = localStorage.getItem('lingua_writing_submissions');
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalWritingSubmission(result: DiagnosticScorecardResult) {
+  try {
+    const existing = getLocalWritingSubmissions();
+    const updated = [result, ...existing.filter(s => s.submissionId !== result.submissionId)];
+    localStorage.setItem('lingua_writing_submissions', JSON.stringify(updated));
+  } catch (err) {
+    console.warn('Failed to save writing submission to localStorage', err);
+  }
+}
+
+export async function fetchWritingSubmissions(): Promise<{ submissions: DiagnosticScorecardResult[] }> {
+  try {
+    const res = await fetch(`${BASE_URL}/writing/submissions`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.submissions) return data;
+    }
+  } catch (err) {
+    console.warn('Backend fetchWritingSubmissions error, fallback to local', err);
+  }
+  return { submissions: getLocalWritingSubmissions() };
+}
+
+export async function fetchWritingSubmissionById(id: string): Promise<DiagnosticScorecardResult | null> {
+  try {
+    const res = await fetch(`${BASE_URL}/writing/submissions/${id}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend fetchWritingSubmissionById error', err);
+  }
+  const local = getLocalWritingSubmissions().find(s => s.submissionId === id);
+  return local || null;
+}
+
 

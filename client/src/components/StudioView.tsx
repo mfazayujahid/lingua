@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useFurigana } from '../context/FuriganaContext';
 import { useLanguage } from '../context/LanguageContext';
+import { WritingStudioView } from './WritingStudioView';
 
 interface StudioViewProps {
   activeTrack?: LevelCode;
@@ -116,6 +117,10 @@ const LEVEL_BADGES_ID: Record<string, string> = {
 export const StudioView: React.FC<StudioViewProps> = ({
   activeTrack = 'jlpt_n5'
 }) => {
+  if (activeTrack.startsWith('ielts_')) {
+    return <WritingStudioView activeTrack={activeTrack} />;
+  }
+
   const { renderFurigana } = useFurigana();
   const { t, language } = useLanguage();
 
