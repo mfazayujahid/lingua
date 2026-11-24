@@ -792,7 +792,7 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({
   const pillars = curriculum?.pillars || [];
   const level = curriculum?.level;
 
-  const completedLessonIds = new Set<string>();
+  const completedLessonIds = new Set<string>(curriculum?.completedLessonIds || []);
   pillars.forEach((p: any) => {
     p.units?.forEach((u: any) => {
       u.lessons?.forEach((l: any) => {

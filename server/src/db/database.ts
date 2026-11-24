@@ -287,6 +287,22 @@ export function initDatabase() {
     CREATE INDEX IF NOT EXISTS idx_writing_submissions_prompt ON writing_submissions(prompt_id);
     CREATE INDEX IF NOT EXISTS idx_writing_submissions_user ON writing_submissions(user_id);
   `);
+
+  try {
+    const unitExists = db.prepare('SELECT id FROM units WHERE id = ?').get('u_n5_vocab_1');
+    if (unitExists) {
+      db.prepare(`
+        INSERT OR IGNORE INTO lessons (id, unit_id, title, lesson_type, estimated_minutes, order_index)
+        VALUES (?, 'u_n5_vocab_1', ?, 'kanji_writing', 15, ?)
+      `).run('kana_a_h', 'Kana Literacy: Hiragana & Katakana (92 Characters)', 0);
+      db.prepare(`
+        INSERT OR IGNORE INTO lessons (id, unit_id, title, lesson_type, estimated_minutes, order_index)
+        VALUES (?, 'u_n5_vocab_1', ?, 'kanji_writing', 15, ?)
+      `).run('kanji_n5_01_nichi', 'Foundational Daily Kanji (日, 本, 人, etc.)', 2);
+    }
+  } catch (e) {
+    // Ignore if tables are not yet seeded
+  }
 }
 
 export function getAllWritingPrompts(taskType?: string): WritingPromptRow[] {

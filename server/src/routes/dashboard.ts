@@ -80,16 +80,31 @@ dashboardRouter.get('/', (req: Request, res: Response) => {
     ORDER BY started_at DESC LIMIT 5
   `).all(userId);
 
-  // Recommended next lessons filtered by active level
-  const recommendedLessons = db.prepare(`
-    SELECT l.id, l.title, l.lesson_type, l.estimated_minutes, u.title as unit_title, sp.title as pillar_title
+  // Recommended next lessons filtered by active level, excluding already completed lessons
+  let recommendedLessons = db.prepare(`
+    SELECT l.id, l.title, l.lesson_type, l.estimated_minutes, l.order_index as orderIndex, u.title as unit_title, sp.title as pillar_title
     FROM lessons l
     JOIN units u ON l.unit_id = u.id
     JOIN skill_pillars sp ON u.skill_pillar_id = sp.id
     JOIN levels lvl ON sp.level_id = lvl.id
-    WHERE lvl.code = ?
+    WHERE lvl.code = ? AND l.id NOT IN (SELECT lesson_id FROM user_lesson_completions WHERE user_id = ?)
+    ORDER BY u.order_index ASC, l.order_index ASC
     LIMIT 3
-  `).all(levelCode);
+  `).all(levelCode, userId) as any[];
+
+  // Fallback to top / first lesson if all lessons in the level/track are completed
+  if (recommendedLessons.length === 0) {
+    recommendedLessons = db.prepare(`
+      SELECT l.id, l.title, l.lesson_type, l.estimated_minutes, l.order_index as orderIndex, u.title as unit_title, sp.title as pillar_title
+      FROM lessons l
+      JOIN units u ON l.unit_id = u.id
+      JOIN skill_pillars sp ON u.skill_pillar_id = sp.id
+      JOIN levels lvl ON sp.level_id = lvl.id
+      WHERE lvl.code = ?
+      ORDER BY u.order_index ASC, l.order_index ASC
+      LIMIT 1
+    `).all(levelCode) as any[];
+  }
 
   res.json({
     user: {

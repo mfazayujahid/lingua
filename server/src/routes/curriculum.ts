@@ -91,6 +91,7 @@ curriculumRouter.get('/', (req: Request, res: Response) => {
     levelProgressPct,
     completedLessonsCount,
     totalLessonsCount,
+    completedLessonIds: Array.from(completionMap.keys()),
     pillars: curriculum
   });
 });

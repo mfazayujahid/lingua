@@ -203,6 +203,24 @@ kanjiRouter.post('/schedule-srs', (req: Request, res: Response) => {
   });
 });
 
+function recordLessonCompletion(userId: string, lessonId: string, title?: string) {
+  const existing = db.prepare('SELECT id FROM lessons WHERE id = ?').get(lessonId);
+  if (!existing) {
+    const unit = db.prepare('SELECT id FROM units WHERE id = ?').get('u_n5_vocab_1');
+    if (unit) {
+      db.prepare(`
+        INSERT OR IGNORE INTO lessons (id, unit_id, title, lesson_type, estimated_minutes, order_index)
+        VALUES (?, 'u_n5_vocab_1', ?, 'kanji_writing', 15, 0)
+      `).run(lessonId, title || lessonId);
+    }
+  }
+
+  db.prepare(`
+    INSERT OR REPLACE INTO user_lesson_completions (user_id, lesson_id, completed_at, score, max_score, accuracy_pct)
+    VALUES (?, ?, datetime('now'), 100, 100, 100)
+  `).run(userId, lessonId);
+}
+
 // Record completed handwriting practice session (Kana or Kanji)
 kanjiRouter.post('/record-practice', (req: Request, res: Response) => {
   const {
@@ -230,11 +248,26 @@ kanjiRouter.post('/record-practice', (req: Request, res: Response) => {
 
   // 2. Insert writing attempt
   const attemptId = `kwa_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
-  db.prepare(`
-    INSERT INTO kanji_writing_attempts (
-      id, session_id, user_id, kanji_id, mode, stroke_order_compliance_pct, geometry_similarity_pct, composite_score, mastery_badge, time_spent_sec
-    ) VALUES (?, ?, ?, ?, 'guided', ?, ?, ?, 'MASTERED', ?)
-  `).run(attemptId, sessionId, userId, kanjiId || character, strokeOrderCompliance, geometrySimilarity, score, timeSpentSec);
+  const resolvedKanjiId = kanjiId || character;
+  const strokeData = db.prepare('SELECT id, character, jlpt_level FROM kanji_stroke_data WHERE id = ? OR character = ?').get(resolvedKanjiId, resolvedKanjiId) as any;
+  const targetKanjiStrokeId = strokeData?.id || kanjiId || character;
+
+  try {
+    db.prepare(`
+      INSERT INTO kanji_writing_attempts (
+        id, session_id, user_id, kanji_id, mode, stroke_order_compliance_pct, geometry_similarity_pct, composite_score, mastery_badge, time_spent_sec
+      ) VALUES (?, ?, ?, ?, 'guided', ?, ?, ?, 'MASTERED', ?)
+    `).run(attemptId, sessionId, userId, targetKanjiStrokeId, strokeOrderCompliance, geometrySimilarity, score, timeSpentSec);
+  } catch (err) {
+    // If kanji_stroke_data foreign key fails, fallback with strokeData?.id if available
+    if (strokeData?.id && targetKanjiStrokeId !== strokeData.id) {
+      db.prepare(`
+        INSERT INTO kanji_writing_attempts (
+          id, session_id, user_id, kanji_id, mode, stroke_order_compliance_pct, geometry_similarity_pct, composite_score, mastery_badge, time_spent_sec
+        ) VALUES (?, ?, ?, ?, 'guided', ?, ?, ?, 'MASTERED', ?)
+      `).run(attemptId, sessionId, userId, strokeData.id, strokeOrderCompliance, geometrySimilarity, score, timeSpentSec);
+    }
+  }
 
   // 3. Increment user streak
   const user = db.prepare('SELECT streak_days FROM users WHERE id = ?').get(userId) as any;
@@ -268,6 +301,37 @@ kanjiRouter.post('/record-practice', (req: Request, res: Response) => {
     `).run(srsId, userId, character, character, JSON.stringify({ character, syllabary }));
   }
 
+  // 5. Sync to user_lesson_completions
+  const effectiveSyllabary = (syllabary || strokeData?.jlpt_level || '').toUpperCase();
+  const isKana =
+    effectiveSyllabary === 'HIRAGANA' ||
+    effectiveSyllabary === 'KATAKANA' ||
+    Boolean(resolvedKanjiId && resolvedKanjiId.startsWith('kana_'));
+
+  const isKanji =
+    ['N5', 'N4', 'N3', 'N2', 'N1', 'KANJI'].includes(effectiveSyllabary) ||
+    Boolean(
+      (resolvedKanjiId && (
+        resolvedKanjiId.toLowerCase().includes('nichi') ||
+        resolvedKanjiId.toLowerCase().includes('n5') ||
+        resolvedKanjiId.toLowerCase().includes('kanji')
+      )) ||
+      (character && character === '日') ||
+      (strokeData && ['N5', 'N4', 'N3', 'N2', 'N1'].includes(strokeData.jlpt_level))
+    );
+
+  if (isKana) {
+    recordLessonCompletion(userId, 'kana_a_h', 'Kana Literacy: Hiragana & Katakana (92 Characters)');
+  }
+
+  if (isKanji) {
+    recordLessonCompletion(userId, 'kanji_n5_01_nichi', 'Foundational Daily Kanji (日, 本, 人, etc.)');
+    const lesVocab1 = db.prepare('SELECT id FROM lessons WHERE id = ?').get('les_n5_vocab_1');
+    if (lesVocab1) {
+      recordLessonCompletion(userId, 'les_n5_vocab_1', 'Kana & Kanji Foundation: 日・本・人 (Vector Stroke Practice)');
+    }
+  }
+
   // Calculate new completed sessions & progressPct
   const sessionCountRow = db.prepare(`SELECT COUNT(*) as sessionCount FROM practice_sessions WHERE user_id = ? AND pass_status != 'pending'`).get(userId) as any;
   const completedSessions = sessionCountRow ? sessionCountRow.sessionCount : 1;
@@ -284,6 +348,26 @@ kanjiRouter.post('/record-practice', (req: Request, res: Response) => {
     streakDays: newStreak,
     xpGained: 25,
     message: `Karakter 「${character}」 berhasil dikuasai! Progres kesiapan meningkat menjadi ${progressPct}%.`
+  });
+});
+
+// GET /api/kanji/mastered-characters
+kanjiRouter.get('/mastered-characters', (req: Request, res: Response) => {
+  const userId = (req.query.userId as string) || 'user_001';
+
+  const rows = db.prepare(`
+    SELECT DISTINCT kwa.kanji_id, ksd.character, kwa.composite_score 
+    FROM kanji_writing_attempts kwa
+    LEFT JOIN kanji_stroke_data ksd ON kwa.kanji_id = ksd.id
+    WHERE kwa.user_id = ? AND (kwa.mastery_badge = 'MASTERED' OR kwa.composite_score >= 80)
+  `).all(userId) as any[];
+
+  const masteredIds = Array.from(new Set(rows.map(r => r.kanji_id).filter(Boolean)));
+  const masteredCharacters = Array.from(new Set(rows.map(r => r.character || r.kanji_id).filter(Boolean)));
+
+  res.json({
+    masteredIds,
+    masteredCharacters
   });
 });
 
@@ -334,10 +418,10 @@ kanjiRouter.get('/:kanjiId', (req: Request, res: Response) => {
 });
 
 kanjiRouter.post('/:kanjiId/attempt', (req: Request, res: Response) => {
-  const { kanjiId } = req.params;
-  const { score = 100, completedInMs = 5000, strokesAttempted = 1, userId = 'user_001' } = req.body;
+  const kanjiId = (req.params.kanjiId as string) || '';
+  const { score = 100, completedInMs = 5000, strokesAttempted = 1, userId = 'user_001', syllabary } = req.body;
 
-  // Also record to practice_sessions so readiness updates
+  // 1. Also record to practice_sessions so readiness updates
   const sessionId = `sess_attempt_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
   db.prepare(`
     INSERT INTO practice_sessions (
@@ -345,8 +429,61 @@ kanjiRouter.post('/:kanjiId/attempt', (req: Request, res: Response) => {
     ) VALUES (?, ?, 'kanji_writing', 'jlpt', 'n5', datetime('now', '-10 seconds'), datetime('now'), ?, ?, ?, ?, 'passed')
   `).run(sessionId, userId, Math.round(completedInMs / 1000), score, score, 80);
 
-  // Update streak
+  // 2. Also record to kanji_writing_attempts
+  const strokeData = db.prepare('SELECT id, character, jlpt_level FROM kanji_stroke_data WHERE id = ? OR character = ?').get(kanjiId, kanjiId) as any;
+  const validKanjiId = strokeData?.id || (db.prepare('SELECT id FROM kanji_stroke_data WHERE id = ?').get(kanjiId) ? kanjiId : null);
+  if (validKanjiId) {
+    const attemptId = `kwa_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+    db.prepare(`
+      INSERT INTO kanji_writing_attempts (
+        id, session_id, user_id, kanji_id, mode, stroke_order_compliance_pct, geometry_similarity_pct, composite_score, mastery_badge, time_spent_sec
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      attemptId,
+      sessionId,
+      userId,
+      validKanjiId,
+      req.body.mode || 'guided',
+      req.body.hitsujunOrderPct ?? req.body.strokeOrderCompliance ?? 100,
+      req.body.geometrySimilarityPct ?? req.body.geometrySimilarity ?? 95,
+      score,
+      score >= 80 ? 'MASTERED' : 'PRACTICED',
+      Math.round(completedInMs / 1000)
+    );
+  }
+
+  // 3. Update streak
   db.prepare(`UPDATE users SET streak_days = MAX(1, streak_days + 1), last_active_at = datetime('now') WHERE id = ?`).run(userId);
+
+  // 4. Sync to user_lesson_completions
+  const effectiveSyllabary = ((syllabary as string) || strokeData?.jlpt_level || '').toUpperCase();
+  const isKana =
+    effectiveSyllabary === 'HIRAGANA' ||
+    effectiveSyllabary === 'KATAKANA' ||
+    Boolean(kanjiId && kanjiId.startsWith('kana_'));
+
+  const isKanji =
+    ['N5', 'N4', 'N3', 'N2', 'N1', 'KANJI'].includes(effectiveSyllabary) ||
+    Boolean(
+      (kanjiId && (
+        kanjiId.toLowerCase().includes('nichi') ||
+        kanjiId.toLowerCase().includes('n5') ||
+        kanjiId.toLowerCase().includes('kanji')
+      )) ||
+      (strokeData && ['N5', 'N4', 'N3', 'N2', 'N1'].includes(strokeData.jlpt_level))
+    );
+
+  if (isKana) {
+    recordLessonCompletion(userId, 'kana_a_h', 'Kana Literacy: Hiragana & Katakana (92 Characters)');
+  }
+
+  if (isKanji) {
+    recordLessonCompletion(userId, 'kanji_n5_01_nichi', 'Foundational Daily Kanji (日, 本, 人, etc.)');
+    const lesVocab1 = db.prepare('SELECT id FROM lessons WHERE id = ?').get('les_n5_vocab_1');
+    if (lesVocab1) {
+      recordLessonCompletion(userId, 'les_n5_vocab_1', 'Kana & Kanji Foundation: 日・本・人 (Vector Stroke Practice)');
+    }
+  }
 
   res.json({
     status: 'recorded',

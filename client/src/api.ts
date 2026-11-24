@@ -150,6 +150,14 @@ export async function fetchKanjiDetail(kanjiId: string): Promise<KanjiStrokeData
   return res.json();
 }
 
+export async function fetchMasteredCharacters(userId = 'user_001'): Promise<{
+  masteredIds: string[];
+  masteredCharacters: string[];
+}> {
+  const res = await fetch(`${BASE_URL}/kanji/mastered-characters?userId=${userId}`);
+  return res.json();
+}
+
 export async function saveKanjiAttempt(
   kanjiId: string,
   data: {

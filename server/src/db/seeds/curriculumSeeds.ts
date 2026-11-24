@@ -607,12 +607,28 @@ export const CURRICULUM_LESSONS: SeedLesson[] = [
     "orderIndex": 1
   },
   {
+    "id": "kana_a_h",
+    "unitId": "u_n5_vocab_1",
+    "title": "Kana Literacy: Hiragana & Katakana (92 Characters)",
+    "lessonType": "kanji_writing",
+    "estimatedMinutes": 15,
+    "orderIndex": 0
+  },
+  {
     "id": "les_n5_vocab_1",
     "unitId": "u_n5_vocab_1",
     "title": "Kana & Kanji Foundation: 日・本・人 (Vector Stroke Practice)",
     "lessonType": "kanji_writing",
     "estimatedMinutes": 20,
     "orderIndex": 1
+  },
+  {
+    "id": "kanji_n5_01_nichi",
+    "unitId": "u_n5_vocab_1",
+    "title": "Foundational Daily Kanji (日, 本, 人, etc.)",
+    "lessonType": "kanji_writing",
+    "estimatedMinutes": 15,
+    "orderIndex": 2
   },
   {
     "id": "les_n5_gram_1",
