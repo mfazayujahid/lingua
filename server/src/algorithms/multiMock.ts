@@ -478,6 +478,9 @@ export function computeBatteryTrajectory(
     ? 'Belum ada baterai simulasi yang selesai. Selesaikan Paket 1 untuk menetapkan diagnostik awal.'
     : `Menyelesaikan ${m}/5 Paket Baterai. Indeks Kesiapan Terbobot (WRI): ${isIelts ? `Band ${roundedWri.toFixed(1)} (Tepat: ${wri.toFixed(2)})` : `${roundedWri}/180 poin`}. Margin Kesiapan: ${headroomStr} terhadap target acuan ${passThresholdScore}. Kandidat ${isReady ? 'SIAP untuk performa hari ujian resmi' : 'sedang berkembang menuju sertifikasi'}.`;
 
+  const progressionTrend: 'ascending' | 'stable' | 'needs_reinforcement' = 
+    readinessMargin > 0 ? 'ascending' : readinessMargin === 0 ? 'stable' : 'needs_reinforcement';
+
   return {
     userId: attempts[0]?.user_id || 'user_001',
     levelCode,
@@ -489,6 +492,24 @@ export function computeBatteryTrajectory(
     isReadyForExam: isReady,
     trajectory,
     diagnosticSummaryEn,
-    diagnosticSummaryId
+    diagnosticSummaryId,
+    attempts: attempts.map(a => ({
+      id: a.id,
+      userId: a.user_id,
+      packageId: a.package_id,
+      levelCode: a.level_code as any,
+      packNumber: a.pack_number,
+      rawScore: a.raw_score,
+      totalQuestions: a.total_questions,
+      scaledScore: a.scaled_score,
+      passed: Boolean(a.passed),
+      sectionalBreakdown: typeof a.sectional_breakdown === 'string' ? JSON.parse(a.sectional_breakdown || '{}') : (a.sectional_breakdown || {}),
+      timeSpentSeconds: a.time_spent_seconds,
+      completedAt: a.completed_at
+    })),
+    targetThreshold: passThresholdScore,
+    predictedScore: roundedWri,
+    totalAttemptsCount: attempts.length,
+    progressionTrend
   };
 }

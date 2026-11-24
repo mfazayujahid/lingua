@@ -571,8 +571,8 @@ export interface ExamPackageAttemptSummary {
 
 export interface MasterExamPackageSummary {
   id: string;
-  levelCode: LevelCode | string;
-  packNumber: 1 | 2 | 3 | 4 | 5 | number;
+  levelCode: LevelCode;
+  packNumber: 1 | 2 | 3 | 4 | 5;
   titleEn: string;
   titleId: string;
   thematicFocusEn: string;
@@ -580,7 +580,7 @@ export interface MasterExamPackageSummary {
   difficultyTier: ExamDifficultyTier | string;
   totalDurationMinutes: number;
   passThresholdScore: number;
-  totalQuestions: number;
+  totalQuestions?: number;
   questionCount?: number;
   completed?: boolean;
   bestScore?: number | null;
@@ -594,7 +594,7 @@ export interface UserExamAttemptRecord {
   id: string;
   userId: string;
   packageId: string;
-  levelCode: LevelCode | string;
+  levelCode: LevelCode;
   packNumber: number;
   rawScore: number;
   totalQuestions: number;
@@ -650,23 +650,23 @@ export interface ExamTrajectoryPoint {
 }
 
 export interface ExamBatteryTrajectoryResult {
-  userId: string;
-  levelCode: string;
-  totalCompletedPacks: number;
+  attempts: UserExamAttemptRecord[];
   weightedReadinessIndex: number;
-  roundedWeightedReadinessIndex: number;
-  passThresholdScore: number;
   readinessMargin: number;
-  isReadyForExam: boolean;
-  trajectory: ExamTrajectoryPoint[];
+  targetThreshold: number;
+  predictedScore: number;
+  totalAttemptsCount: number;
+  progressionTrend: 'ascending' | 'stable' | 'needs_reinforcement';
+  userId?: string;
+  levelCode?: string;
+  totalCompletedPacks?: number;
+  roundedWeightedReadinessIndex?: number;
+  passThresholdScore?: number;
+  isReadyForExam?: boolean;
+  trajectory?: ExamTrajectoryPoint[];
   sectionalTrends?: Record<string, number>;
-  diagnosticSummaryEn: string;
-  diagnosticSummaryId: string;
-  attempts?: UserExamAttemptRecord[];
-  targetThreshold?: number;
-  predictedScore?: number;
-  totalAttemptsCount?: number;
-  progressionTrend?: 'ascending' | 'stable' | 'needs_reinforcement';
+  diagnosticSummaryEn?: string;
+  diagnosticSummaryId?: string;
 }
 
 export interface ExamSubmissionPayload {

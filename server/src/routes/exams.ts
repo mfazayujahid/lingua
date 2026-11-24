@@ -6,6 +6,7 @@ import {
   computeBatteryTrajectory
 } from '../algorithms/multiMock';
 import {
+  LevelCode,
   ExamPackageContent,
   MasterExamPackageSummary,
   UserExamAttemptRow,
@@ -100,8 +101,8 @@ examsRouter.get('/packages', (req: Request, res: Response) => {
 
       return {
         id: r.id,
-        levelCode: r.level_code,
-        packNumber: r.pack_number,
+        levelCode: r.level_code as LevelCode,
+        packNumber: r.pack_number as 1 | 2 | 3 | 4 | 5,
         titleEn: r.title_en,
         titleId: r.title_id,
         thematicFocusEn: r.thematic_focus_en,
