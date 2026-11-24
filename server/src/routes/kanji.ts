@@ -367,7 +367,8 @@ kanjiRouter.get('/mastered-characters', (req: Request, res: Response) => {
 
   res.json({
     masteredIds,
-    masteredCharacters
+    masteredCharacters,
+    characters: masteredCharacters
   });
 });
 

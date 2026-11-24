@@ -20,7 +20,7 @@ import {
 interface DashboardViewProps {
   data: any;
   activeTrack?: LevelCode;
-  onNavigate: (view: string) => void;
+  onNavigate: (view: string, options?: { category?: 'HIRAGANA' | 'KATAKANA' | 'KANJI'; level?: string }) => void;
   onTrackChange: (track: LevelCode) => void;
 }
 
@@ -187,7 +187,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </p>
               </div>
               <button
-                onClick={() => onNavigate('kanji')}
+                onClick={() => onNavigate('kanji', { category: 'HIRAGANA' })}
                 className="w-full py-2 rounded-lg bg-vermilion-500 hover:bg-vermilion-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
               >
                 <span>{t('dashboard.step1_btn')}</span>
@@ -233,7 +233,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </p>
               </div>
               <button
-                onClick={() => onNavigate('kanji')}
+                onClick={() => onNavigate('kanji', { category: 'KANJI', level: 'N5' })}
                 className="w-full py-2 rounded-lg bg-stone-800 dark:bg-stone-200 text-white dark:text-stone-900 hover:bg-stone-900 font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
               >
                 <span>{t('dashboard.step3_btn')}</span>
