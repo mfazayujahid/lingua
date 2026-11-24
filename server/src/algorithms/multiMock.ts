@@ -451,13 +451,23 @@ export function computeBatteryTrajectory(
   const { wri, roundedWri } = calculateWeightedReadinessIndex(scores, isIelts);
 
   // Determine pass threshold
-  let passThresholdScore = targetScoreOverride ?? (isIelts ? 7.5 : 90);
-  if (!targetScoreOverride && !isIelts) {
-    if (normLevel.includes('n1')) passThresholdScore = 100;
-    else if (normLevel.includes('n3')) passThresholdScore = 95;
-    else if (normLevel.includes('n4')) passThresholdScore = 90;
-    else if (normLevel.includes('n5')) passThresholdScore = 80;
-    else passThresholdScore = 90;
+  let passThresholdScore: number;
+  if (isIelts) {
+    if (targetScoreOverride !== undefined && targetScoreOverride <= 9.0) {
+      passThresholdScore = targetScoreOverride;
+    } else {
+      passThresholdScore = 7.0; // Benchmark Band 7.0 for IELTS
+    }
+  } else {
+    if (targetScoreOverride !== undefined && targetScoreOverride > 9.0) {
+      passThresholdScore = targetScoreOverride;
+    } else {
+      if (normLevel.includes('n1')) passThresholdScore = 100;
+      else if (normLevel.includes('n3')) passThresholdScore = 95;
+      else if (normLevel.includes('n4')) passThresholdScore = 90;
+      else if (normLevel.includes('n5')) passThresholdScore = 80;
+      else passThresholdScore = 90;
+    }
   }
 
   const { readinessMargin, isReady } = calculateReadinessMargin(

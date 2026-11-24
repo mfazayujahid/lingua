@@ -784,13 +784,31 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
           {(packages.length > 0 ? packages : (DEFAULT_EXAM_PACKAGES[activeTrack] || DEFAULT_EXAM_PACKAGES.ielts_academic)).map(pkg => {
             const isSelected = pkg.packNumber === selectedPackNumber;
             const tierColors: Record<string, string> = {
+    diagnostic_baseline: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
+    core_competence: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
+    advanced_academic: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20',
+    high_density: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20',
+    final_readiness: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20',
               diagnostic: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
               standard: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
               challenging: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20',
               advanced: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20',
               mastery: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'
             };
-            const tierLabel = t(`exam.difficulty_${pkg.difficultyTier}`) || pkg.difficultyTier;
+            const difficultyKey = (pkg.difficultyTier || '').toLowerCase();
+            const tierMap: Record<string, string> = {
+              diagnostic: language === 'id' ? 'Diagnostik Awal' : 'Diagnostic Baseline',
+              diagnostic_baseline: language === 'id' ? 'Diagnostik Awal' : 'Diagnostic Baseline',
+              standard: language === 'id' ? 'Kompetensi Inti' : 'Core Competence',
+              core_competence: language === 'id' ? 'Kompetensi Inti' : 'Core Competence',
+              challenging: language === 'id' ? 'Wacana Khusus' : 'Specialized Discourse',
+              advanced_academic: language === 'id' ? 'Akademik Lanjut' : 'Advanced Academic',
+              advanced: language === 'id' ? 'Kepadatan Tinggi' : 'High Density',
+              high_density: language === 'id' ? 'Kepadatan Tinggi' : 'High Density',
+              mastery: language === 'id' ? 'Kinerja Puncak' : 'Peak Mastery',
+              final_readiness: language === 'id' ? 'Kesiapan Akhir' : 'Final Readiness'
+            };
+            const tierLabel = tierMap[difficultyKey] || t(`exam.difficulty_${difficultyKey}`) || pkg.difficultyTier;
 
             return (
               <button
