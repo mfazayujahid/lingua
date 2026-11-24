@@ -146,29 +146,51 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    WStart([Launch Writing or Speaking Studio]) --> PromptLoad[Display Official Prompt & Stimulus]
+    WStart([Launch Studio: /studio/writing or /studio/speaking]) --> TrackDetect{Active Track}
     
-    PromptLoad --> TaskType{Task Format}
-    TaskType -->|Writing Task 1 / 2| EditorMode[Rich Text Editor with Live Word Count]
-    TaskType -->|Speaking Part 1-3| AudioMode[WebAudio Recorder with Waveform & Timer]
+    TrackDetect -->|ja_jlpt| JapStudio[Japanese Writing Studio: N5-N1 Sakubun/Shoronbun with Genko Yoshi]
+    TrackDetect -->|en_ielts Writing| IELTSWriteStudio[IELTS Writing Studio: Task 1 Visuals or Task 2 Discursive]
+    TrackDetect -->|en_ielts Speaking| IELTSSpeakStudio[IELTS Speaking Studio: Parts 1, 2, 3 Simulation]
     
-    EditorMode --> DraftInput[Learner Types Essay with Minimum Word Guard]
-    AudioMode --> PrepTimer[1-Min Prep Countdown $\rightarrow$ Record Audio]
+    IELTSWriteStudio --> SplitLayout[Render Split-Pane: Visual Stimulus/Prompt Left | Editor Right]
+    SplitLayout --> ModeToggle{Mode Selection}
+    ModeToggle -->|Timed Mode| SetTimer[Start 20m / 40m Countdown + Periodic Autosave]
+    ModeToggle -->|Untimed Mode| FreePractice[Deliberate Practice Mode: No Auto-Submit]
     
-    DraftInput --> UserSubmit[User Submits Response]
-    AudioMode --> UserSubmit
+    SetTimer --> LiveEditor[Candidate Drafts Essay]
+    FreePractice --> LiveEditor
     
-    UserSubmit --> PreCheck{Meets Minimum Threshold?}
-    PreCheck -->|Words < 100 or Audio < 20s| WarnModal[Warning: Response too short for valid evaluation]
-    WarnModal --> DraftInput
+    LiveEditor --> WordGuard[Real-Time Tokenizer & Threshold Monitor]
+    WordGuard -->|W < 150/250w| AmberBadge[Amber Indicator: Underlength Penalty Active]
+    WordGuard -->|W >= 150/250w| GreenBadge[Emerald Badge: Compliant Word Count]
     
-    PreCheck -->|Valid| EvaluationQueue[Push to Rubric AI Evaluation Worker]
-    EvaluationQueue --> CriteriaGrading[Evaluate 4 Criteria: TR/TA, CC, LR, GRA or FC, LR, GRA, PR]
+    AmberBadge --> SubmitAction[Candidate Clicks 'Kirim untuk Evaluasi']
+    GreenBadge --> SubmitAction
     
-    CriteriaGrading --> AggregateBand[Compute Sectional Band Score with Weighting]
-    AggregateBand --> RenderReport[Display Diagnostic Report: Criteria Breakdown, Lexical Highlights, Grammar Corrections]
-    RenderReport --> SaveHistory[(Store Assessment Record in Database)]
-    SaveHistory --> WEnd([Learner Reviews Feedback & Applies Revision])
+    SubmitAction --> LengthCheck{Meets Minimum Threshold?}
+    LengthCheck -->|W < 100 words| BlockModal[Confirmation Modal: Severe Penalty Warning]
+    BlockModal -->|Revise| LiveEditor
+    BlockModal -->|Proceed Anyway| DispatchWorker[Submit Payload to AI Assessment Engine]
+    LengthCheck -->|W >= 100 words| DispatchWorker
+    
+    DispatchWorker --> NLPParser[Tokenization, Dependency Parsing, Sentence Segmentation & AWL Matching]
+    NLPParser --> CriteriaEvaluation[Score 4 Cambridge Criteria: TA/TR, CC, LR, GRA]
+    NLPParser --> DiagnosticAnnotator[Generate Sentence-Level Annotations: Grammar, Collocation, Vocab, Cohesion]
+    NLPParser --> MetricCalculator[Compute Quantitative Metrics: AWL%, EFSR%, TTR, CSR]
+    
+    CriteriaEvaluation --> ScoreAggregator[Apply 1/3 Task 1 + 2/3 Task 2 Weighting & 0.25/0.75 Cambridge Rounding]
+    DiagnosticAnnotator --> ScorecardAssembly[Assemble Diagnostic Report]
+    MetricCalculator --> ScorecardAssembly
+    ScoreAggregator --> ScorecardAssembly
+    
+    ScorecardAssembly --> RenderReport[Display Diagnostic Scorecard & Interactive Diff Review]
+    RenderReport --> RadarView[Render 4-Criteria Radar Chart & Overall Band Badge]
+    RenderReport --> AnnotatedCanvas[Render Highlighted Essay Text with Color-Coded Spans]
+    RenderReport --> ModelDiff[Render Side-by-Side Band 8.5 Model Answer Comparison]
+    
+    AnnotatedCanvas --> PopoverClick[Learner Clicks Highlighted Span]
+    PopoverClick --> ShowPopover[Open Floating Inline Feedback Popover: Rule Rationale & 1-Click Replace]
+    ShowPopover --> ReDraft([Learner Applies Feedback in Revision])
 ```
 
 ---
@@ -473,7 +495,12 @@ ightarrow$ Modal displays warning if unanswered questions remain; on confirmatio
 
 ---
 
-#### 5A. Production Writing Studio (`/studio/writing`)
+#### 5A. Production Writing Studio & AI Diagnostic Essay Assessment Engine (`/studio/writing`)
+
+The Production Writing Studio provides an authentic, high-fidelity computer-delivered environment mirroring Cambridge/IDP exam testing conditions alongside an AI Diagnostic Essay Assessment Engine.
+
+##### 5A.1 Writing Studio Interface (`/studio/writing/editor`)
+
 * **Contextual Track & Level Mode Switching**:
   * **When Active Track = `ja_jlpt` (or `ja_kana`)**:
     * Displays **Japanese Writing Studio (作文・小論文スタジオ)**.
@@ -486,15 +513,75 @@ ightarrow$ Modal displays warning if unanswered questions remain; on confirmatio
     * Evaluates against the 4 Japanese Writing Criteria: Task Fulfillment (TL), Grammar & Sentence Complexity (GRA), Orthography & Register (ORK), and Lexical Richness (LR).
     * Zero IELTS Task 1 or Task 2 prompts are ever visible.
   * **When Active Track = `en_ielts_academic` or `en_ielts_general`**:
-    * Displays **IELTS Writing Studio (Academic Task 1/2 or General Training Letters)**.
-    * Word count thresholds (150 words for Task 1; 250 words for Task 2) and official 4-criterion rubrics (TR/TA, CC, LR, GRA).
+    * Displays **IELTS Writing Studio (Academic Task 1 Visuals, GT Letters, and Task 2 Discursive Essays)**.
+    * Word count thresholds: 150 words for Task 1; 250 words for Task 2.
     * Zero Japanese prompts or genko yoshi formatting are ever visible.
-* **Key UI Components**:
-  * *Level Task Selector Ribbon*: Switcher allowing the user to select their target level writing prompt without navigating away.
-  * *Prompt & Guideline Card*: Full task instructions, target character/word count range, stylistic register guide, and key grammatical checkpoints.
-  * *Writing Input Canvas*: Clean, distraction-free text editor with real-time character/word counter and live color progress bar (Amber = underlength, Green = target, Gray = overlength).
-  * *Model Benchmark Drawer*: Allows learners to compare their drafts against verified high-scoring benchmark compositions (Band 8.5 for IELTS; Master level for JLPT N5–N1).
-  * *Automated Diagnostic Feedback Panel*: 4 criterion sub-scores (0–100% or 0–9.0 band), overall projected badge, and inline annotations (Red = grammar, Blue = register, Green = lexical collocations).
+
+* **Split-Pane Ergonomic Layout (Dual-Column Workspace)**:
+  * **Left Pane (Prompt & Stimulus Visual)**:
+    - *Task Header*: Displays Task Number (Task 1 or Task 2), Suggested Time (20 min or 40 min), Minimum Word Count (150w or 250w), and Official Task Weighting (1/3 for Task 1, 2/3 for Task 2).
+    - *Visual Stimulus Canvas*: For Academic Task 1, renders interactive high-resolution SVG/vector visuals (Line Graphs, Bar Charts, Proportional Pie Charts, Data Tables, Process Flowcharts, or Chronological Maps) with zoom and pan controls.
+    - *Prompt Directive & Key Requirements*: Highlighted question prompt, essential bullet points (for GT letters), and key instructional reminders (*"Summarise the information by selecting and reporting the main features, and make comparisons where relevant"*).
+  * **Right Pane (Distraction-Free Writing Canvas)**:
+    - *Header Toolbar*:
+      - **Timed / Untimed Toggle**: Switch between official timed exam simulation (20-min countdown for Task 1; 40-min countdown for Task 2) with persistent digital timer, and untimed deliberate practice mode.
+      - **Autosave Heartbeat**: Displays `"Tersimpan otomatis"` (Autosaved) indicator, caching keystrokes to browser storage every 15 seconds.
+    - *Real-Time Word Counter with Minimum Threshold Indicator*:
+      - Prominent badge displaying live word count, character count, and paragraph count.
+      - **Threshold Compliance State Machine**:
+        * **Underlength (< 150w for T1 or < 250w for T2)**: Badge glows in soft Amber with alert: *"Kurang dari 150 kata (Potensi penalti TA: -0.5 Band)"* / *"Kurang dari 250 kata (Potensi penalti TR: -0.5 Band)"*, displaying the remaining words required to avoid penalty.
+        * **Compliant (>= 150w for T1 or >= 250w for T2)**: Badge transitions smoothly to Emerald Green: *"Target kata terpenuhi: 178 kata (Bebas penalti)"*.
+    - *Rich Writing Input Area*: Ergonomic monospace/sans font stack with comfortable line-height ($1.6$), clipboard paste interception guard in strict exam mode, and smooth scrolling.
+    - *Action Footer*:
+      - `"Bersihkan Draft"` (Reset Draft) with confirmation guard.
+      - `"Simpan Sebagai Draf"` (Save as Draft).
+      - `"Kirim untuk Evaluasi AI"` (Submit for AI Evaluation). If word count is severely deficient ($< 100$ words), triggers a pre-submission modal: *"Peringatan Panjang Esai: Tulisan Anda hanya memiliki 84 kata. Evaluasi resmi Cambridge memotong skor secara drastis untuk esai di bawah batas minimum. Tetap kirimkan?"*.
+
+##### 5A.2 Diagnostic Scorecard & Interactive Diff Review (`/studio/writing/report/:submissionId`)
+
+Upon submitting an essay, the candidate is transitioned to the comprehensive Diagnostic Scorecard:
+
+* **1. Master Band Banner & Cambridge 4-Criteria Radar Chart**:
+  * *Overall Projected Band Badge*: Large typography hero displaying the projected official Writing Band (e.g., `Band 7.0 (Good User)`), CEFR equivalent (`C1`), and breakdown formula: `Score = 1/3(Task 1) + 2/3(Task 2)`.
+  * *4-Criteria Diagnostic Radar Chart*:
+    - Interactive 4-axis SVG/Canvas radar visualization:
+      * **Axis 1**: Task Achievement (TA) / Task Response (TR) (0.0 to 9.0)
+      * **Axis 2**: Coherence & Cohesion (CC) (0.0 to 9.0)
+      * **Axis 3**: Lexical Resource (LR) (0.0 to 9.0)
+      * **Axis 4**: Grammatical Range & Accuracy (GRA) (0.0 to 9.0)
+    - Plotted Polygons: Candidate's Current Attempt (Indigo polygon) vs Target Requirement (Emerald reference ring, e.g., 7.5) vs Global Cohort Average (Dotted gray).
+
+* **2. Criterion Breakdown Deep-Dive Accordion**:
+  * Four collapsible cards corresponding to each criterion:
+    - *Sub-score Pill*: Exact score (e.g., `7.5 / 9.0`).
+    - *Official Cambridge Descriptor Citation*: Direct quote from Cambridge band rubric explaining why this level was awarded.
+    - *Key Strengths Identified*: Bulleted list of positive elements observed in candidate's submission.
+    - *Actionable Growth Vectors*: Explicit structural or lexical fixes required to ascend to the next half-band.
+
+* **3. Diagnostic Metric Badges Panel**:
+  * **Academic Word List (AWL) Density**: Quantitative badge displaying percentage (e.g., `8.7% - Sangat Baik (C1/C2)`), comparing against the $8.5\%$ benchmark for Band 7.5+.
+  * **Error-Free Sentence Ratio (EFSR)**: Percentage of sentences completely free of syntactic or punctuation errors (e.g., `68.4% (13 dari 19 kalimat bebas kesalahan)`).
+  * **Lexical Diversity (Type-Token Ratio & Guiraud's Index)**: Guiraud Index $R$ (e.g., `R = 8.9 - Variasi kosakata tinggi`).
+  * **Complex Sentence Ratio (CSR)**: Proportion of complex vs simple sentences (e.g., `62.5%`).
+
+* **4. Interactive Annotated Essay Canvas & Diff Review**:
+  * The full candidate essay is rendered in a clean document view, with errors, stylistic improvements, and lexical upgrades highlighted inline using a 4-color categorization scheme:
+    - **Red Underline (`category: 'grammar_error'`)**: Subject-verb agreement errors, tense shifts, missing articles, comma splices.
+    - **Yellow Highlight (`category: 'collocation_suggestion'`)**: Awkward L1 literal phrasing, unnatural adjective-noun or verb-noun partnerships.
+    - **Purple Dashed (`category: 'vocabulary_enhancement'`)**: Basic/generic terms eligible for Academic Word List (AWL) or C1/C2 elevation.
+    - **Blue Dotted (`category: 'cohesive_marker_feedback'`)**: Overused mechanical linkers (*"Firstly"*, *"In a nutshell"*), ambiguous pronoun references, missing logical transitions.
+  * **Interactive Floating Inline Feedback Popover**:
+    - Clicking any highlighted span opens a floating popover card positioned dynamically above the target token:
+      * *Category Badge*: Displays category tag (e.g., `Tata Bahasa`, `Kolokasi Alami`, `Peningkatan Kosakata AWL`, `Kohesi & Transisi`).
+      * *Original vs Suggested Diff*: Side-by-side or strikethrough preview (e.g., `shows` $\rightarrow$ `show` or `a lot` $\rightarrow$ `substantially`).
+      * *Pedagogical Rationale*: Clear explanation of the underlying linguistic rule in both English and Indonesian.
+      * *1-Click Action*: `"Pratinjau Penggantian"` (Preview Replacement) button that temporarily applies the suggested correction inline so the candidate can observe the improved sentence cadence.
+
+* **5. Side-by-Side Model Answer Comparison Drawer**:
+  * Collapsible side-by-side or tabbed comparator:
+    - *Left Tab*: Candidate's Annotated Submission.
+    - *Right Tab*: Verified Band 8.5 Cambridge Benchmark Model Answer with highlighted thesis statements, topic sentences, and advanced concessive clauses.
+    - *Structural Comparison Notes*: Highlights the architectural divergence between the candidate's draft and the benchmark response.
 
 ---
 
@@ -687,7 +774,8 @@ ightarrow$ Explicit error card with browser permission guide and cached recordin
   * *Multi-Mock Progression Trajectory Card (Packs 1 -> 5 Growth Graph)*:
     - Step-line chart mapping score evolution from initial baseline (Pack 1) to final readiness (Pack 5).
     - Longitudinal comparison table displaying:
-      * Pack Number & Battery Title (e.g. `Pack 1: Baseline` $ightarrow$ `Pack 3: Advanced Discourse`).
+      * Pack Number & Battery Title (e.g. `Pack 1: Baseline` $
+ightarrow$ `Pack 3: Advanced Discourse`).
       * Test Date & Time Spent.
       * Final Score & Target Delta ($\Delta_{	ext{target}}$): e.g. `Band 6.5 (+0.0) -> Band 7.0 (+0.5) -> Band 7.5 (+1.0)`.
       * Weighted Readiness Index ($WRI$): Exponentially recency-weighted projection estimating official test-day performance.
@@ -1264,5 +1352,70 @@ On mobile viewports ($< 640	ext{px}$), the desktop top-header collapses into an 
     - *"Indeks Kesiapan Terbobot (Weighted Readiness Index): Band 7.5"*
     - *"Peringatan Ambang Batas Minimal: Bahasa Jepang Bagian Pengetahuan Bahasa memenuhi batas kelulusan 19/60."*
     - Zero untranslated English or Japanese strings in UI chrome.
+
+### 4.27 Writing Studio Interface, Stimulus Layout & Real-Time Word Count Constraints
+* **Scenario 62: Split-Pane Stimulus Layout & Word Count Threshold Guard**
+  * **Given** an IELTS Academic candidate launches Writing Studio for Task 1 (`/studio/writing?task=task1_academic`),
+  * **When** viewing the interface,
+  * **Then** the screen renders a responsive split-pane layout:
+    1. Left Pane: Displays the visual stimulus (Bar Chart / Line Graph / Table) with pan/zoom controls and full task instructions.
+    2. Right Pane: Displays the text canvas, real-time word counter badge, and timed/untimed toggle.
+  * **And when** the candidate types 120 words,
+  * **Then** the word counter displays an Amber warning badge: *"Kurang dari 150 kata (30 kata lagi untuk batas aman)"*.
+  * **And when** the word count reaches 150 words,
+  * **Then** the badge turns Emerald Green: *"Target kata terpenuhi: 150 kata (Bebas penalti)"*.
+
+* **Scenario 63: Timed Exam Mode vs Untimed Practice Mode Toggle**
+  * **Given** a learner opens Task 2 Discursive Essay in Timed Mode,
+  * **When** the session starts,
+  * **Then** a 40:00 countdown timer activates in the top ribbon, pulses amber at 5:00, turns red with an alert chime at 1:00, and auto-submits the essay at 00:00.
+  * **And when** the learner toggles to Untimed Mode,
+  * **Then** the countdown timer is replaced with an elapsed time counter, and no auto-submission lockout occurs.
+
+### 4.28 Cambridge 4-Criteria Diagnostic Scoring & Radar Chart Visualization
+* **Scenario 64: Official Cambridge 4-Criteria Band Calculation & 1/3 + 2/3 Aggregation**
+  * **Given** a candidate submits both Task 1 (Score: 6.75) and Task 2 (Score: 7.25),
+  * **When** the assessment engine compiles the diagnostic report,
+  * **Then** it calculates the weighted score $\text{Writing}_{\text{raw}} = \frac{1}{3}(6.75) + \frac{2}{3}(7.25) = 7.0833$, applies Cambridge 0.25/0.75 rounding rule ($0.0833 < 0.25$), and awards an **Overall Writing Band 7.0**.
+* **Scenario 65: Interactive 4-Criteria Radar Chart Rendering**
+  * **Given** the Diagnostic Scorecard loads at `/studio/writing/report/:submissionId`,
+  * **When** viewing the performance overview,
+  * **Then** an interactive SVG radar chart renders four distinct axes: Task Achievement / Response, Coherence & Cohesion, Lexical Resource, and Grammatical Range & Accuracy, plotting the candidate's score polygon against a target Band 7.5 reference boundary and cohort average.
+
+### 4.29 Sentence-Level Diagnostic Annotation & Interactive Diff Popover Review
+* **Scenario 66: Four-Category Sentence-Level Diagnostic Highlights**
+  * **Given** an essay contains grammar slips, colloquial terms, basic vocabulary, and mechanical transitions,
+  * **When** viewing the Annotated Essay Canvas in the diagnostic scorecard,
+  * **Then** each token span is highlighted according to its taxonomy:
+    1. Grammar errors are marked with a Red underline (`grammar_error`).
+    2. Unnatural collocations are marked with a Yellow highlight (`collocation_suggestion`).
+    3. Basic words are marked with a Purple dashed underline (`vocabulary_enhancement`).
+    4. Mechanical connectors are marked with a Blue dotted border (`cohesive_marker_feedback`).
+* **Scenario 67: Floating Inline Feedback Popover & 1-Click Replacement Preview**
+  * **Given** a learner clicks on the highlighted token `"shows"` with subject-verb agreement error,
+  * **When** the popover opens,
+  * **Then** it displays:
+    1. Error category badge: `"Tata Bahasa (Subject-Verb Agreement)"`.
+    2. Original vs Suggested text: `shows` $\rightarrow$ `show`.
+    3. Linguistic explanation: *"Compound subject 'The provided line graph and table' requires the plural verb 'show'."*.
+    4. Action button `"Pratinjau Penggantian"`.
+  * **And when** the user clicks `"Pratinjau Penggantian"`,
+  * **Then** the canvas temporarily substitutes the recommended word in place with a green highlight indicator.
+
+### 4.30 Complete Indonesian Localization of AI Writing Diagnostic Engine
+* **Scenario 68: 100% Indonesian Interface in Writing Studio & Diagnostic Scorecard**
+  * **Given** a user activates `Mode Bahasa Indonesia` (`mode: 'id'`),
+  * **When** interacting with the Writing Studio and reviewing the Diagnostic Scorecard,
+  * **Then** all UI chrome, button labels, threshold warnings, criteria titles, and feedback explanations render in natural Indonesian:
+    - *"Studio Penulisan IELTS Resmi"*
+    - *"Pencapaian Tugas (Task Achievement)"*
+    - *"Respon Tugas (Task Response)"*
+    - *"Koherensi & Kohesi"*
+    - *"Kekayaan Kosakata (Lexical Resource)"*
+    - *"Rentang & Akurasi Tata Bahasa"*
+    - *"Peringatan Batas Minimum Kata: Kurang dari 150/250 kata"*
+    - *"Kepadatan Daftar Kosakata Akademik (AWL): 8.7%"*
+    - *"Rasio Kalimat Bebas Kesalahan: 68.4%"*
+    - Zero English or Japanese leakage in UI controls and diagnostic labels.
 
 ---

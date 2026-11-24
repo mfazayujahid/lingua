@@ -46,16 +46,144 @@ IELTS is administered in two distinct test versions:
 #### 2.1.2 Official Band Descriptors & 4 Assessment Criteria
 IELTS scores are reported on a 9-band scale in 0.5-band increments. Writing and Speaking are assessed across four equally weighted criteria (each scored 0–9):
 
-##### Writing Assessment Criteria (Task 1 & Task 2)
-1. **Task Achievement (TA - Task 1) / Task Response (TR - Task 2)**:
-   * *Task 1*: Complete coverage of key features, accurate data synthesis, clear overview without irrelevant details.
-   * *Task 2*: Clear position throughout, fully developed central ideas, addresses all parts of the prompt, supported arguments without overgeneralization.
-2. **Coherence and Cohesion (CC)**:
-   * Logical progression of ideas, clear paragraphing (one central topic per paragraph), varied and accurate cohesive devices without mechanical overuse or underuse, accurate referential pronouns.
-3. **Lexical Resource (LR)**:
-   * Breadth of vocabulary, precision in word choice, natural collocation, awareness of style and register, control of spelling and word formation, ability to paraphrase without distorting meaning.
-4. **Grammatical Range and Accuracy (GRA)**:
-   * Balance between simple and complex sentence structures, flexibility of clauses (relative, adverbial, conditional, passive), frequency of error-free sentences, accurate punctuation and tense consistency.
+##### Writing Assessment Criteria (Official Cambridge / British Council 9-Band Matrix)
+
+The Writing examination evaluates candidate written discourse across four equally weighted criteria (each scored 0.0 to 9.0 in 0.5-band increments). Performance descriptors are calibrated to official Cambridge ESOL / British Council / IDP public band descriptors:
+
+```
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| Band      | Task Achievement (TA) / TR      | Coherence & Cohesion (CC)       | Lexical Resource (LR)           | Grammatical Range & Acc (GRA)   |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 9.0       | • T1: Fully satisfies all task  | • Effortless, seamless cohesion | • Wide, sophisticated lexical   | • Full flexibility & precision  |
+| (Expert)  |   requirements; clear overview  |   guiding reader naturally.     |   repertoire; rare minor slips  |   of complex structures.        |
+|           |   and insightful data synthesis.| • Flawless paragraphing with    |   as 'slips' only.              | • Consistently error-free       |
+|           | • T2: Fully developed position; |   single clear central focus.   | • Masterful idiomatic control   |   sentences; impeccable         |
+|           |   compelling, nuanced arguments.| • Natural cohesive flow.        |   and stylistic register.       |   punctuation throughout.       |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 8.0       | • T1: Covers all requirements;  | • Sequences information and     | • Wide vocabulary resource;     | • Wide grammatical flexibility; |
+| (Very     |   presents clear overview and   |   ideas logically throughout.   |   fluent, flexible deployment   |   majority of sentences         |
+|  Good)    |   highlights key features well. | • Manages all aspects of        |   of uncommon lexical items.    |   are completely error-free.    |
+|           | • T2: Well-developed response   |   cohesion skillfully.          | • Skillful collocations;        | • Only rare, non-systematic     |
+|           |   with relevant, extended ideas.| • Paragraphs clearly developed. |   occasional minor inaccuracies.|   errors or minor slips.        |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 7.0       | • T1: Covers requirements;      | • Logically organizes info     | • Sufficient lexical range to   | • Uses a variety of complex     |
+| (Good)    |   clear overview with trends;   |   and ideas; clear progression. |   allow flexibility & precision.|   structures (subordination).   |
+|           |   key features highlighted.     | • Uses varied cohesive devices  | • Uses less common lexical      | • Frequently produces           |
+|           | • T2: Clear position throughout;|   appropriately; minor lapses.  |   items; awareness of style.    |   error-free complex clauses.   |
+|           |   addresses all prompt parts.   | • Clear central topic per para. | • Occasional errors in choice.  | • Good control of grammar/punct.|
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 6.0       | • T1: Addresses requirements;   | • Arranges info coherently;     | • Adequate vocabulary for task; | • Uses mix of simple & complex  |
+| (Competent|   overview present; data details|   clear overall progression.    |   attempts less common words.   |   sentence forms.               |
+|           |   may lack precision/relevance. | • Cohesive devices used but     | • Noticeable errors in spelling | • Errors in complex structures; |
+|           | • T2: Addresses all prompt parts|   may be mechanical or faulty.  |   or word formation; does not   |   rarely impede overall         |
+|           |   though some inadequately.     | • Paragraphing not always logic.|   impede communication.         |   communication.                |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| 5.0       | • T1: Generally addresses task; | • Presents information with     | • Limited vocabulary; minimally | • Only limited range of         |
+| (Modest)  |   overview missing or unclear;  |   some organization; lack of    |   adequate for task.            |   structures; overuses simple.  |
+|           |   recounts detail mechanically. |   overall progression.          | • Frequent errors in spelling   | • Complex sentences attempted   |
+|           | • T2: Addresses prompt partially| • Inaccurate or repetitive      |   and word formation; causes    |   but contain systematic errors;|
+|           |   position unclear/unsupported. |   connectives; poor paragraphing|   some reader strain.           |   frequent punctuation errors.  |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+| <= 4.0    | • T1: Fails to address task;    | • Minimal organization;         | • Extremely restricted word     | • Sentence forms severely       |
+| (Limited) |   ignores key data / distorted. |   cohesion severely broken;     |   pool; repetitive tokens;      |   restricted; pervasive errors; |
+|           | • T2: Minimal response; off-    |   no logical paragraphing.      |   severe errors impede basic    |   punctuation largely           |
+|           |   topic or largely copied.      | • Relationship unclear.         |   meaning transmission.         |   absent or erratic.            |
++-----------+---------------------------------+---------------------------------+---------------------------------+---------------------------------+
+```
+
+##### 1. IELTS Writing Task 1 Typology & Task Achievement (TA) Mechanics
+
+Task 1 requires candidates to produce a factual, objective report of at least 150 words within a suggested timeframe of 20 minutes. Candidates are strictly evaluated on their ability to identify salient patterns, synthesise complex data, and formulate a clear overarching overview without subjective interpretation.
+
+* **Academic Task 1 Visual Typologies**:
+  1. *Line Graphs (Chronological Trends & Volatility)*: Depicting continuous variables over time. Requires tracking trajectories, rates of change (acceleration, plateau, plunge), inflection points, and key convergences/divergences across series.
+  2. *Bar Charts (Categorical & Cross-Sectional Comparison)*: Comparing discrete categories across entities or discrete time slices. Demands ranking, grouping related categories, and highlighting extremes (maxima and minima).
+  3. *Pie Charts & Proportional Displays (Compositional Dynamics)*: Representing percentage allocations of a fixed total ($100\%$). Requires reporting dominant segments, minor proportions, and structural shifts between comparison years.
+  4. *Data Tables (High-Density Numerical Matrices)*: Multi-row, multi-column numerical tables. Candidates must resist the trap of transcribing every number; they must synthesize prominent highlights, anomalous outliers, and categorical aggregates.
+  5. *Process Diagrams & Industrial Flowcharts (Sequential & Cyclic Operations)*: Illustrating mechanical manufacturing lines, natural biological cycles, or civic infrastructure systems. Requires identifying sequential stages from raw inputs to final outputs, cyclic feedback loops, and accurate deployment of passive voice constructions and sequential linking adverbials (*subsequently, initially, following which, thereupon*).
+  6. *Comparative Spatial & Chronological Maps (Urban Redevelopment & Geographical Evolution)*: Depicting a town, facility, or geographical area at two or three distinct points in time (e.g., 1990 vs present day vs projected 2035). Requires using cardinal directional references (*to the northeast of*, *situated along the western perimeter*) and transformative urban development vocabulary (*demolished to make way for*, *expanded exponentially*, *repurposed into*, *modernised*).
+
+* **General Training Task 1 Letter Typologies**:
+  1. *Formal Letters (To Institutions, Municipal Authorities, or Unfamiliar Entities)*:
+     - Register: Impersonal, formal, objective.
+     - Salutation & Sign-off: `Dear Sir or Madam,` $\rightarrow$ `Yours faithfully,` or `Dear Mr./Ms. [Surname],` $\rightarrow$ `Yours sincerely,`.
+     - Phrasing: *"I am writing to formally express my dissatisfaction regarding...", "I would be immensely grateful if your department could investigate..."*.
+  2. *Semi-Formal Letters (To Colleagues, Landlords, or Professional Acquaintances)*:
+     - Register: Courteous, professional, respectful, but less rigid.
+     - Salutation & Sign-off: `Dear Mr. Henderson,` $\rightarrow$ `Warm regards,` / `Best regards,`.
+  3. *Informal Letters (To Close Friends or Relatives)*:
+     - Register: Warm, personal, conversational, idiomatic.
+     - Salutation & Sign-off: `Dear Liam,` $\rightarrow$ `Warmly,` / `Best wishes,`.
+     - Phrasing: *"I hope you're doing well! I wanted to catch you up on...", "Can't wait to see you next month!"*.
+
+* **Task Achievement (TA) Core Evaluative Criteria**:
+  - *Mandatory Synthesis Overview*: The essay must contain a prominent, clearly articulated overview paragraph summarizing the primary trends, overarching contrasts, or main stages without enumerating granular data. Omitting an overview restricts TA to a maximum of **Band 5.0**.
+  - *Key Feature Selection*: High-band performance requires extracting 3 to 5 salient features rather than reciting mechanical lists.
+  - *Factual Precision & Data Citation*: Numerical data must be cited accurately with appropriate units ($m^3$, $\%$, millions of tonnes). Inaccurate figures undermine TA.
+  - *Zero Subjective Speculation*: Candidates must report only what is explicitly illustrated. Speculating on external causes (*"Car sales declined because of the global recession"*) when not shown in the stimulus constitutes an irrelevance penalty.
+  - *Minimum Word Count Threshold*: Must meet or exceed 150 words. Underlength submissions incur systematic band deductions.
+
+##### 2. IELTS Writing Task 2 Essay Archetypes & Task Response (TR) Mechanics
+
+Task 2 requires candidates to compose a formal academic discursive essay of at least 250 words within a suggested timeframe of 40 minutes, addressing a contemporary societal, scientific, environmental, or cultural issue.
+
+* **Discursive Essay Archetypes**:
+  1. *Opinion Essay (Agree or Disagree / To What Extent Do You Agree)*: Demands a clear, unambiguous thesis stated in the introduction, defended through coherent arguments across body paragraphs, and reaffirmed in the conclusion. Concession paragraphs must be carefully framed so the candidate's personal position remains resolute.
+  2. *Discussion Essay (Discuss Both Views and Give Your Own Opinion)*: Mandates balanced examination of two contrasting perspectives. The candidate must allocate substantive, objective paragraphs to each viewpoint before or while articulating their own reasoned judgment. Neglecting one viewpoint caps TR at **Band 5.0**.
+  3. *Problem & Solution / Cause & Effect Essay*: Requires identifying underlying systemic root causes and proposing feasible, concrete remediation strategies. Solutions must directly correspond to the diagnosed problems.
+  4. *Advantages & Disadvantages Essay (Do Advantages Outweigh Disadvantages?)*: Requires evaluating both benefits and drawbacks, establishing a weighted evaluative criterion, and demonstrating why one side possesses greater long-term significance.
+  5. *Two-Part Direct Question Essay*: Directly answers two distinct, interrelated inquiry prompts, allocating proportional depth to each inquiry without conflating them.
+
+* **Task Response (TR) Core Evaluative Criteria**:
+  - *Clear Position Throughout*: The author's central stance must be unmistakable from introduction to conclusion. A shifting, ambivalent, or unstated position limits TR to **Band 6.0**.
+  - *Comprehensive Prompt Coverage*: Every element and sub-clause of the prompt must be directly engaged.
+  - *Extended, Well-Supported Ideas*: Arguments must not be superficial assertions. Each core claim must be supported through logical elaboration, real-world examples, or empirical parallels, avoiding sweeping overgeneralizations.
+  - *Minimum Word Count Threshold*: Must meet or exceed 250 words. Underlength essays trigger algorithmic penalties.
+
+##### 3. Coherence and Cohesion (CC) Deep Mechanics
+
+* **Macro-Discourse Structure & Paragraphing Architecture**:
+  - Exactly one central governing idea per body paragraph, encapsulated in a lucid topic sentence.
+  - Standard 4-paragraph or 5-paragraph structure:
+    $$\text{Introduction (Context + Thesis)} \rightarrow \text{Body Para 1 (Point A + Elaboration + Evidence)} \rightarrow \text{Body Para 2 (Point B + Elaboration + Evidence)} \rightarrow \text{Conclusion (Synthesis + Forward Stance)}$$
+  - Single-sentence paragraphs or unsegmented text blocks severely degrade CC to **Band 4.0–5.0**.
+* **Cohesive Devices & Transition Hierarchy**:
+  - *Contrast & Concession*: *Whereas*, *Conversely*, *In stark contrast*, *Notwithstanding the aforementioned benefits*, *Albeit*, *While it is readily acknowledged that*.
+  - *Causation & Consequence*: *Consequently*, *As an inevitable corollary*, *Precipitated by*, *Stemming from this dynamic*.
+  - *Exemplification & Evidence*: *To substantiate this assertion*, *A salient illustration of this phenomenon is*, *As evidenced by empirical data in*.
+  - *Mechanical Overuse Penalty*: Over-relying on basic sequential markers (*Firstly, Secondly, Furthermore, In addition, In a nutshell, Last but not least*) flags mechanical cohesion and caps CC at **Band 6.0**.
+* **Referential Cohesion (Anaphora & Cataphora)**:
+  - Skillful deployment of demonstrative determiners, relative pronouns, and nominal substitutions (*this paradigm*, *such disparities*, *the former... the latter*) to establish unbroken syntactic chaining without monotonous repetition.
+
+##### 4. Lexical Resource (LR) Deep Mechanics
+
+* **Academic Word List (AWL) Density**:
+  - Assessment measures the proportion of lexical tokens originating from Averil Coxhead's 570 Academic Word List sub-families. High-band writing (Band 7.5–9.0) maintains an AWL density $\ge 8.5\%$, demonstrating command of formal scholarly discourse (*paradigm, exacerbate, mitigate, empirical, aggregate, infrastructure, substantiate*).
+* **Collocational Naturalness & Register Integrity**:
+  - High-band essays exhibit authentic native lexical partnerships:
+    - *Adjective-Noun*: *profound implications*, *pressing dilemma*, *glaring disparity*, *pervasive phenomenon*, *myopic strategy*.
+    - *Verb-Noun*: *catalyze economic growth*, *exert undue pressure*, *alleviate hardship*, *harbour deep reservations*, *perpetuate inequalities*.
+  - Clunky direct translations from first languages (e.g., *"make a research"*, *"big danger"*, *"give attention"*) are flagged and penalized.
+* **Lexical Variation & Type-Token Ratio (TTR)**:
+  - Robust lexical variety measured via Guiraud's Index $R = \frac{|V|}{\sqrt{N}}$ prevents repetitive vocabulary and rewards sophisticated contextual paraphrasing over mechanical thesaurus-swapping.
+* **Orthographical & Morphological Precision**:
+  - Consistent spelling across UK/US conventions and error-free derivation (prefixes, suffixes, nominalizations: *sustainable $\rightarrow$ sustainability*, *deter $\rightarrow$ deterrent*).
+
+##### 5. Grammatical Range and Accuracy (GRA) Deep Mechanics
+
+* **Syntactic Complexity & Clause Architecture**:
+  - Band 7+ writing demonstrates a mastery of varied clause types:
+    - *Subordinate Adverbial Clauses*: Temporal, conditional, concessive, and causal clauses (*Although municipal authorities have introduced incentives, uptake remains sluggish...*).
+    - *Relative Clauses*: Defining and non-defining clauses with accurate comma boundaries (*...which inevitably exacerbates socioeconomic stratification*).
+    - *Advanced Inversions*: Emphatic structures (*Seldom do such interventions yield immediate results...*, *Not only does automation elevate productivity, but it also...*).
+    - *Reduced Participial Clauses*: Concise academic framing (*Faced with escalating urban congestion, city planners have shifted...*).
+    - *Objective Passive Voice*: Depersonalized academic stance (*It is widely acknowledged that...*, *Substantial investments were allocated toward...*).
+* **Error-Free Sentence Ratio (EFSR)**:
+  - Quantifies the proportion of sentences containing zero grammatical, punctuation, or morphological defects:
+    $$EFSR = \frac{S_{\text{error-free}}}{S_{\text{total}}} \times 100\%$$
+  - Band 8+ requires $EFSR \ge 75\%$; Band 7 requires $50\% \le EFSR < 75\%$.
+* **Punctuation Discipline & Tense Consistency**:
+  - Accurate use of semicolons to link independent clauses, colons to introduce explanatory expansions, and commas to prevent run-on comma splices.
 
 ##### Speaking Assessment Criteria (Official Cambridge / British Council 9-Band Matrix)
 
@@ -878,6 +1006,113 @@ When a learner completes multiple mock exams ($k \in \{1, 2, 3, 4, 5\}$), the pl
 * **Readiness Margin Calculation**:
   - For JLPT: $\Delta_{\text{pass}} = WRI - S_{\text{cutoff}}$ (where $S_{\text{cutoff}} = 90$ for N2, 100 for N1, 95 for N3, 90 for N4, 80 for N5).
   - For IELTS: $\Delta_{\text{target}} = WRI - B_{\text{target}}$ (e.g., $7.5 - 7.0 = +0.5$ Band headroom).
+
+#### 3.2.8 AI Diagnostic Essay Assessment & Scoring Engine (IELTS Writing Task 1 & Task 2)
+
+The platform incorporates an automated, domain-calibrated AI Diagnostic Essay Assessment Engine that evaluates candidate essays against official Cambridge Assessment / British Council band descriptors with mathematical rigor, deterministic penalty bounds, and sentence-level diagnostic diagnostics.
+
+##### 1. Official Cambridge Weighting & Overall Writing Band Aggregation
+
+In the official IELTS examination, Task 2 carries **double the weighting** of Task 1. The diagnostic scoring engine computes task-level scores and aggregates them into the official module band score through the following canonical pipeline:
+
+1. **Criterion Band Calculation**:
+   For each task $T \in \{\text{Task 1}, \text{Task 2}\}$, four criteria are evaluated on a continuous scale $[1.0, 9.0]$ and rounded to the nearest half-band ($0.5$):
+   - For Task 1: Task Achievement ($TA$), Coherence & Cohesion ($CC$), Lexical Resource ($LR$), Grammatical Range & Accuracy ($GRA$).
+   - For Task 2: Task Response ($TR$), Coherence & Cohesion ($CC$), Lexical Resource ($LR$), Grammatical Range & Accuracy ($GRA$).
+
+2. **Task Arithmetic Average**:
+   $$\text{Score}_{\text{Task1}} = \frac{TA + CC + LR + GRA}{4}$$
+   $$\text{Score}_{\text{Task2}} = \frac{TR + CC + LR + GRA}{4}$$
+
+3. **Weighted Writing Module Raw Score**:
+   $$\text{Writing}_{\text{raw}} = \frac{1}{3} \times \text{Score}_{\text{Task1}} + \frac{2}{3} \times \text{Score}_{\text{Task2}}$$
+
+4. **Official Cambridge Rounding (The 0.25 / 0.75 Rule)**:
+   Let fractional remainder $r = \text{Writing}_{\text{raw}} - \lfloor \text{Writing}_{\text{raw}} \rfloor$:
+   - If $r < 0.25 \implies \text{Overall Writing Band} = \lfloor \text{Writing}_{\text{raw}} \rfloor$
+   - If $0.25 \le r < 0.75 \implies \text{Overall Writing Band} = \lfloor \text{Writing}_{\text{raw}} \rfloor + 0.5$
+   - If $r \ge 0.75 \implies \text{Overall Writing Band} = \lceil \text{Writing}_{\text{raw}} \rceil$
+
+*Deterministic Benchmark Example*:
+- Task 1: $TA=7.0, CC=7.0, LR=6.5, GRA=6.5 \implies \text{Score}_{\text{Task1}} = 6.75$
+- Task 2: $TR=7.5, CC=7.5, LR=7.0, GRA=7.0 \implies \text{Score}_{\text{Task2}} = 7.25$
+- Raw Weighted: $\text{Writing}_{\text{raw}} = \frac{1}{3}(6.75) + \frac{2}{3}(7.25) = 2.25 + 4.8333 = 7.0833$
+- Remainder $r = 0.0833 < 0.25 \implies$ **Overall Writing Band: 7.0**.
+
+##### 2. Word Count Threshold & Underlength Penalty Engine
+
+Official IELTS examiners apply systematic penalties when candidates fail to meet minimum length boundaries. The platform enforces exact penalty deduction functions:
+
+* **Task 1 Underlength Function ($W_{\text{min}} = 150$ words)**:
+  - If $W \ge 150$: $\text{Penalty}_{TA} = 0.0$ (Compliant)
+  - If $140 \le W < 150$: $\text{Penalty}_{TA} = -0.5$ Band on TA.
+  - If $100 \le W < 140$: $\text{Penalty}_{TA} = -1.0$ Band and $TA_{\text{max}} = 5.0$ (Hard ceiling).
+  - If $W < 100$: $TA_{\text{max}} = 4.0$ (Severe truncation ceiling).
+
+* **Task 2 Underlength Function ($W_{\text{min}} = 250$ words)**:
+  - If $W \ge 250$: $\text{Penalty}_{TR} = 0.0$ (Compliant)
+  - If $230 \le W < 250$: $\text{Penalty}_{TR} = -0.5$ Band on TR.
+  - If $175 \le W < 230$: $\text{Penalty}_{TR} = -1.0$ Band and $TR_{\text{max}} = 5.0$ (Hard ceiling).
+  - If $W < 175$: $TR_{\text{max}} = 4.0$ (Severe truncation ceiling).
+
+##### 3. Quantitative Diagnostic Metric Formulations
+
+To provide transparent, actionable analytics alongside holistic AI scoring, the assessment engine calculates four quantitative linguistic metrics:
+
+1. **Academic Word List (AWL) Density**:
+   $$AWL_{\text{density}} = \frac{N_{\text{AWL}}}{N_{\text{total}}} \times 100\%$$
+   Where $N_{\text{AWL}}$ is the count of words matching Coxhead's 570 Academic Word List families.
+   - $\ge 8.5\% \implies$ Band 8.0–9.0 caliber
+   - $6.5\% - 8.4\% \implies$ Band 7.0–7.5 caliber
+   - $4.5\% - 6.4\% \implies$ Band 6.0–6.5 caliber
+   - $< 4.5\% \implies$ Band $\le 5.5$ caliber
+
+2. **Lexical Diversity (Type-Token Ratio & Guiraud's Index)**:
+   $$\text{TTR} = \frac{|V|}{N_{\text{total}}}, \quad R = \frac{|V|}{\sqrt{N_{\text{total}}}}$$
+   Where $|V|$ represents distinct unique word lemma tokens. Guiraud's Index $R \ge 8.5$ indicates strong academic lexical variety independent of document length.
+
+3. **Error-Free Sentence Ratio (EFSR)**:
+   $$EFSR = \frac{S_{\text{error-free}}}{S_{\text{total}}} \times 100\%$$
+   - $EFSR \ge 75\% \implies$ Band 8.0–9.0
+   - $50\% \le EFSR < 75\% \implies$ Band 7.0–7.5
+   - $30\% \le EFSR < 50\% \implies$ Band 6.0
+   - $EFSR < 30\% \implies$ Band $\le 5.0$
+
+4. **Complex Sentence Ratio (CSR)**:
+   $$CSR = \frac{S_{\text{complex}}}{S_{\text{total}}} \times 100\%$$
+   Where a sentence is classified as complex if it contains at least one dependent subordinate clause, non-finite participial phrase, or relative clause. Benchmark target for Band 7.0+ is $CSR \ge 60\%$.
+
+##### 4. Sentence-Level Diagnostic Annotation Taxonomy
+
+Every submitted essay undergoes deep syntactic parsing and token-span diagnostic alignment. The engine assigns actionable feedback annotations across four primary taxonomic categories:
+
+```
++-----------------------------------+-----------------------------------+-----------------------------------+
+| Taxonomy Category                 | Subcategories & Error Codes       | Pedagogical Remediation Objective |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| 1. grammar_error                  | • SUBJECT_VERB_AGREEMENT          | Eliminate systematic syntactic    |
+|    (Red underline highlight)      | • TENSE_INCONSISTENCY             | defects and raise Error-Free      |
+|                                   | • ARTICLE_DETERMINER              | Sentence Ratio (EFSR).            |
+|                                   | • PREPOSITION_ERROR               |                                   |
+|                                   | • RELATIVE_CLAUSE_PUNCTUATION     |                                   |
+|                                   | • RUN_ON_OR_FRAGMENT              |                                   |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| 2. collocation_suggestion         | • UNNATURAL_VERB_NOUN             | Replace awkward L1 translations   |
+|    (Yellow highlight)             | • UNNATURAL_ADJ_NOUN              | with authentic idiomatic academic |
+|                                   | • L1_DIRECT_TRANSLATION_ARTIFACT  | partnerships.                     |
+|                                   | • AWKWARD_PREPOSITIONAL_PHRASE    |                                   |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| 3. vocabulary_enhancement         | • BASIC_TO_AWL_UPGRADE            | Elevate lexical sophistication by |
+|    (Purple dashed highlight)      | • IMPRECISE_REGISTER              | substituting C1/C2 & AWL terms    |
+|                                   | • LEXICAL_OVERUSE_REPETITION      | for generic or informal words.    |
+|                                   | • CLICHE_OR_INFORMAL_SLANG        |                                   |
++-----------------------------------+-----------------------------------+-----------------------------------+
+| 4. cohesive_marker_feedback       | • MECHANICAL_CONNECTOR_OVERUSE    | Eradicate formulaic connectives   |
+|    (Blue dotted highlight)        | • INFORMAL_CONVERSATIONAL_LINK    | and deploy subtle referential and |
+|                                   | • MISSING_LOGICAL_SIGNPOST        | concessive discourse markers.     |
+|                                   | • AMBIGUOUS_REFERENTIAL_PRONOUN   |                                   |
++-----------------------------------+-----------------------------------+-----------------------------------+
+```
 
 ---
 
@@ -1974,6 +2209,121 @@ export interface UserExamAttemptRecord {
 }
 ```
 
+#### 4.2.9 AI Diagnostic Essay Assessment & Writing Studio Schemas
+
+The following TypeScript schemas codify task definitions, essay submissions, sentence-level diagnostic annotations, and multi-criteria diagnostic evaluation results:
+
+```typescript
+export type IELTSWritingTaskType = 'task1_academic' | 'task1_general' | 'task2_discursive';
+
+export type AnnotationCategory = 
+  | 'grammar_error' 
+  | 'collocation_suggestion' 
+  | 'vocabulary_enhancement' 
+  | 'cohesive_marker_feedback';
+
+export type AnnotationSeverity = 'critical' | 'warning' | 'info';
+
+export interface IELTSWritingPromptStimulus {
+  promptId: string;
+  taskType: IELTSWritingTaskType;
+  title: string;
+  titleId: string; // Indonesian title
+  promptText: string;
+  promptTextId: string; // Indonesian instructions
+  minimumWords: number; // 150 for T1, 250 for T2
+  suggestedMinutes: number; // 20 for T1, 40 for T2
+  visualType?: 'line_graph' | 'bar_chart' | 'pie_chart' | 'data_table' | 'process_diagram' | 'map';
+  visualAssetUrl?: string;
+  visualDataPoints?: Record<string, any>;
+  guidanceNotes: string[];
+  guidanceNotesId: string[];
+}
+
+export interface SentenceAnnotation {
+  id: string;
+  sentenceIndex: number;
+  charStart: number;
+  charEnd: number;
+  category: AnnotationCategory;
+  subCategory: string; // e.g., 'SUBJECT_VERB_AGREEMENT', 'BASIC_TO_AWL_UPGRADE'
+  severity: AnnotationSeverity;
+  originalText: string;
+  suggestedReplacement: string;
+  explanationEn: string;
+  explanationId: string;
+}
+
+export interface CriterionDiagnosticDetail {
+  score: number; // 0.0 - 9.0 (0.5 steps)
+  nameEn: string; // e.g. 'Task Response'
+  nameId: string; // e.g. 'Pencapaian Tugas'
+  strengthsEn: string[];
+  strengthsId: string[];
+  weaknessesEn: string[];
+  weaknessesId: string[];
+  cambridgeBandDescriptorCitation: string;
+}
+
+export interface DiagnosticScorecardResult {
+  submissionId: string;
+  userId: string;
+  promptId: string;
+  taskType: IELTSWritingTaskType;
+  submittedAt: string;
+  durationSeconds: number;
+  isTimedExam: boolean;
+  
+  // Aggregate Scores
+  overallBand: number; // e.g. 7.0
+  cefrLevel: 'B1' | 'B2' | 'C1' | 'C2';
+  criteriaScores: {
+    taskAchievementOrResponse: CriterionDiagnosticDetail;
+    coherenceAndCohesion: CriterionDiagnosticDetail;
+    lexicalResource: CriterionDiagnosticDetail;
+    grammaticalRangeAndAccuracy: CriterionDiagnosticDetail;
+  };
+  
+  // Quantitative Metrics
+  wordCountMetrics: {
+    totalWords: number;
+    targetMinimum: number;
+    isUnderlength: boolean;
+    penaltyApplied: number; // e.g. 0.0 or -0.5
+    characterCount: number;
+    paragraphCount: number;
+  };
+  linguisticMetrics: {
+    awlDensityPercentage: number; // e.g. 8.7
+    awlWordCount: number;
+    typeTokenRatio: number; // e.g. 0.58
+    guiraudIndex: number; // e.g. 8.9
+    errorFreeSentenceRatio: number; // e.g. 68.4
+    complexSentenceRatio: number; // e.g. 62.5
+  };
+  
+  // Sentence-Level Annotations
+  annotations: SentenceAnnotation[];
+  
+  // Model Comparison
+  modelAnswerComparison: {
+    benchmarkBand: number; // 8.5
+    modelText: string;
+    modelKeyStrengthsEn: string[];
+    modelKeyStrengthsId: string[];
+  };
+}
+
+export interface EssaySubmissionPayload {
+  promptId: string;
+  taskType: IELTSWritingTaskType;
+  essayContent: string;
+  durationSeconds: number;
+  isTimedMode: boolean;
+  locale: 'en' | 'id';
+}
+```
+
 ---
 
 ## 5. Realistic Seed Content Specification
@@ -2975,6 +3325,101 @@ To guarantee zero task duplication and provide a 5-stage progression trajectory,
   - Questions 27–32: Yes / No / Not Given (Author stance on flash crashes, spoofing algorithms, market microstructure).
   - Questions 33–36: Multiple Choice (Latency arbitrage and dark pool liquidity).
   - Questions 37–40: Matching Sentence Endings.
+
+#### 5.1.8 Diagnostic Essay Assessment Benchmark Corpus & Annotated Seed Pairs
+
+To ensure immediate functional readiness and rigorous dogfooding verification of the AI Diagnostic Essay Assessment Engine, the platform provides authentic, calibrated student essay drafts, complete sentence-level diagnostic annotations across the 4 taxonomic categories, and verified Band 8.5 model answers:
+
+##### Seed Pair 1: IELTS Academic Task 1 (Urbanisation & Renewable Energy Transition)
+* **Prompt ID**: `ielts_write_t1_acad_seed01`
+* **Stimulus**: A composite Bar Chart and Data Table depicting the proportion of electricity generated from renewable sources across Germany, the UK, Spain, and Poland between 2010 and 2025.
+* **Target Minimum**: 150 words.
+* **Candidate Draft (Band 6.0 Diagnostic Assessment)**:
+```markdown
+The provided line graph and table shows the changes in electricity generation from renewable and fossil fuels in four countries from 2010 to 2025.
+
+Overall, it can clearly be seen that Germany and UK increased their renewable energy a lot, while Poland still used mostly fossil fuels. 
+
+Looking at the Western nations, the UK had a big growth. In 2010, renewable energy was only 9%, but in 2025 it became 42%. Germany also showed good progress, rising from 18% to 51% in 2025, which made it the biggest renewable producer. In Spain, renewable generation was 24% at first and then went up to 46% by 2025.
+
+On the other hand, Poland was very different. In 2010, coal and gas made 93% of energy, and in 2025 it only dropped to 78%. In conclusion, western countries are doing much better than eastern countries in clean energy.
+```
+* **Engine Diagnostic Metrics**:
+  - Word Count: $154$ words (Compliant, $\ge 150w$).
+  - $AWL_{\text{density}} = 5.2\%$ (Band 6.0 range).
+  - $EFSR = 44.4\%$ (4 of 9 sentences error-free).
+  - $TTR = 0.54$.
+* **Diagnostic Sentence Annotations**:
+  1. `[Index 0, Span: 38-43]`: `category: 'grammar_error'`, subCategory: `SUBJECT_VERB_AGREEMENT`, original: `"shows"`, suggested: `"show"`, explanation: *"Compound subject 'The provided line graph and table' requires the plural verb 'show'."*
+  2. `[Index 1, Span: 184-190]`: `category: 'vocabulary_enhancement'`, subCategory: `BASIC_TO_AWL_UPGRADE`, original: `"a lot"`, suggested: `"substantially / significantly"`, explanation: *"Colloquial phrase 'a lot' should be upgraded to formal academic adverbials."*
+  3. `[Index 2, Span: 260-272]`: `category: 'collocation_suggestion'`, subCategory: `UNNATURAL_VERB_NOUN`, original: `"had a big growth"`, suggested: `"experienced substantial expansion / witnessed rapid growth"`, explanation: *"Phrasing 'had a big growth' is clunky; deploy natural verb-noun collocations."*
+  4. `[Index 3, Span: 360-373]`: `category: 'vocabulary_enhancement'`, subCategory: `BASIC_TO_AWL_UPGRADE`, original: `"good progress"`, suggested: `"robust momentum / marked progression"`, explanation: *"Vague evaluative adjective 'good' diminishes academic tone."*
+  5. `[Index 4, Span: 530-546]`: `category: 'cohesive_marker_feedback'`, subCategory: `MECHANICAL_CONNECTOR_OVERUSE`, original: `"On the other hand"`, suggested: `"In stark contrast / Conversely"`, explanation: *"Replace overused conversational transitional markers with high-register contrasts."*
+  6. `[Index 5, Span: 645-658]`: `category: 'cohesive_marker_feedback'`, subCategory: `INFORMAL_CONVERSATIONAL_LINK`, original: `"In conclusion"`, suggested: *"[Omit or reframe as Overview]"*, explanation: *"Task 1 is an objective report requiring an 'Overall' overview, not an argumentative 'In conclusion'."*
+* **Criterion Scores**: $TA: 6.0, CC: 6.0, LR: 6.0, GRA: 6.0 \implies$ **Overall Band 6.0**.
+
+---
+
+##### Seed Pair 2: IELTS General Training Task 1 (Formal Letter to Municipal Transit Authority)
+* **Prompt ID**: `ielts_write_t1_gen_seed01`
+* **Prompt**: You regularly use a public bus service to commute to work. Recently, the bus schedule was altered without notice, causing major delays for commuters. Write a formal letter to the Transit Manager. In your letter: explain the situation, describe how this disruption affects your daily commute, and propose constructive changes to the timetable.
+* **Target Minimum**: 150 words.
+* **Candidate Draft (Band 6.0 Diagnostic Assessment)**:
+```markdown
+Dear Sir or Madam,
+
+I am writing this letter to complain about the sudden change in the 42B bus timetable which happened last Monday without any warning.
+
+Every day I take this bus to travel to my office in the city centre. Previously, the bus arrived at 8:15 AM which was very convenient for reaching my workplace before 9:00 AM. However, the new schedule moved the departure to 8:40 AM. Because of heavy morning traffic, I have been late for work three times this week. This is causing big troubles with my manager.
+
+To solve this problem, I suggest that the transit department should bring back the 8:15 AM service or add another bus between 8:00 AM and 8:30 AM. Furthermore, it would be very nice if you put notices at bus stops before making changes.
+
+I hope you will take action quickly.
+
+Yours faithfully,
+John Davies
+```
+* **Diagnostic Sentence Annotations**:
+  1. `[Index 0, Span: 20-56]`: `category: 'vocabulary_enhancement'`, subCategory: `IMPRECISE_REGISTER`, original: `"to complain about the sudden change"`, suggested: `"to formally register my concern regarding the abrupt alteration"`, explanation: *"Elevates the opening statement to formal administrative correspondence register."*
+  2. `[Index 2, Span: 380-394]`: `category: 'collocation_suggestion'`, subCategory: `UNNATURAL_ADJ_NOUN`, original: `"big troubles"`, suggested: `"considerable friction / serious inconvenience"`, explanation: *"Colloquial 'big troubles' replaced with precise formal noun phrase."*
+  3. `[Index 3, Span: 425-435]`: `category: 'vocabulary_enhancement'`, subCategory: `BASIC_TO_AWL_UPGRADE`, original: `"bring back"`, suggested: `"reinstate / restore"`, explanation: *"Phrasal verb 'bring back' upgraded to formal administrative verb 'reinstate'."*
+  4. `[Index 3, Span: 510-523]`: `category: 'vocabulary_enhancement'`, subCategory: `IMPRECISE_REGISTER`, original: `"very nice if you"`, suggested: `"highly advantageous if the authority could"`, explanation: *"Eliminates overly casual conversational idiom."*
+  5. `[Index 4, Span: 580-610]`: `category: 'cohesive_marker_feedback'`, subCategory: `FORMAL_CLOSING_DISCIPLINE`, original: `"I hope you will take action quickly."`, suggested: `"I would appreciate your prompt attention to this matter."`, explanation: *"Standard formal closing formula."*
+* **Criterion Scores**: $TA: 6.5, CC: 6.0, LR: 6.0, GRA: 6.0 \implies$ **Overall Band 6.0**.
+
+---
+
+##### Seed Pair 3: IELTS Task 2 Discursive Essay (AI & Academic Instruction)
+* **Prompt ID**: `ielts_write_t2_disc_seed01`
+* **Prompt**: In secondary and higher education, automated artificial intelligence tools are increasingly utilized to evaluate essays, generate curriculum materials, and tutor students. While some believe this optimizes pedagogical efficiency, others argue it undermines critical thinking and irreplaceable human mentorship. Discuss both views and give your own opinion.
+* **Target Minimum**: 250 words.
+* **Candidate Draft (Band 6.0 Diagnostic Assessment)**:
+```markdown
+Nowadays, artificial intelligence is becoming very popular in schools and universities. While some people believe that AI helps students learn faster and makes education efficient, others think that it destroys critical thinking and removes the teacher's role. In this essay, I will discuss both sides and give my opinion.
+
+On the one hand, AI has many benefits for modern education. Firstly, automated tutoring systems can give instant feedback to students. For example, when students write an essay, software can find grammar mistakes immediately. Secondly, teachers do not have enough time to check every student's work because classes are very big. Therefore, AI can help teachers by grading papers quickly, which saves a lot of time. Also, students in poor areas can access good learning materials online without paying expensive tuition fees.
+
+On the other hand, relying too much on AI can create serious problems. Firstly, if students always ask AI for answers, their brains will become lazy and they will not develop critical thinking skills. Secondly, education is not only about learning facts, but also about emotional connection. A human teacher can encourage a student who feels stressed, while an AI machine has no feelings. In my opinion, human mentorship is something that technology cannot replace.
+
+In conclusion, although AI tools provide great convenience and efficiency, they should not replace real teachers. I believe that institutions should use AI only as an assistant while keeping human educators in control.
+```
+* **Engine Diagnostic Metrics**:
+  - Word Count: $253$ words (Compliant, $\ge 250w$).
+  - $AWL_{\text{density}} = 5.9\%$ (Band 6.0–6.5 range).
+  - $EFSR = 46.1\%$ (6 of 13 sentences error-free).
+  - $CSR = 53.8\%$.
+  - $TTR = 0.52$.
+* **Diagnostic Sentence Annotations**:
+  1. `[Index 0, Span: 0-8]`: `category: 'cohesive_marker_feedback'`, subCategory: `CLICHE_OR_INFORMAL_SLANG`, original: `"Nowadays"`, suggested: `"In contemporary society / Over recent years"`, explanation: *"Overused generic cliché opening. Begin with substantive context."*
+  2. `[Index 0, Span: 40-52]`: `category: 'vocabulary_enhancement'`, subCategory: `BASIC_TO_AWL_UPGRADE`, original: `"very popular"`, suggested: `"increasingly ubiquitous / pervasive"`, explanation: *"Upgrades colloquial adjective to high-register academic descriptor."*
+  3. `[Index 1, Span: 180-188]`: `category: 'cohesive_marker_feedback'`, subCategory: `MECHANICAL_CONNECTOR_OVERUSE`, original: `"Firstly,"`, suggested: *"Primarily, / In the first instance,"*, explanation: *"Formulaic enumeration marker penalizes Coherence & Cohesion."*
+  4. `[Index 2, Span: 340-355]`: `category: 'vocabulary_enhancement'`, subCategory: `BASIC_TO_AWL_UPGRADE`, original: `"saves a lot of time"`, suggested: `"optimizes institutional efficiency / liberates valuable instructional bandwidth"`, explanation: *"Replaces conversational idiom with scholarly academic prose."*
+  5. `[Index 3, Span: 410-414]`: `category: 'cohesive_marker_feedback'`, subCategory: `INFORMAL_CONVERSATIONAL_LINK`, original: `"Also,"`, suggested: `"Furthermore, / Moreover,"`, explanation: *"Conversational coordinator 'Also' should not introduce major academic claims."*
+  6. `[Index 4, Span: 510-545]`: `category: 'vocabulary_enhancement'`, subCategory: `IMPRECISE_REGISTER`, original: `"their brains will become lazy"`, suggested: `"cognitive atrophy and intellectual passivity may ensue"`, explanation: *"Informal phrasing replaced with precise psychological terminology."*
+  7. `[Index 5, Span: 630-642]`: `category: 'collocation_suggestion'`, subCategory: `UNNATURAL_ADJ_NOUN`, original: `"AI machine"`, suggested: `"algorithmic framework / artificial system"`, explanation: *"Tautological phrasing; replace with natural academic designation."*
+  8. `[Index 6, Span: 680-725]`: `category: 'cohesive_marker_feedback'`, subCategory: `THESIS_DEVELOPMENT`, original: `"human mentorship is something that technology cannot replace."`, suggested: `"the nuanced ethical guidance and pastoral mentorship of human educators remain irreplaceable."`, explanation: *"Strengthens concluding thesis statement."*
+* **Criterion Scores**: $TR: 6.0, CC: 6.0, LR: 6.0, GRA: 6.0 \implies$ **Overall Band 6.0**.
+* **Band 8.5 Model Answer Benchmark**: Full benchmark essay provided in §5.1.4 (demonstrating $AWL_{\text{density}} = 10.4\%, EFSR = 92.8\%, CSR = 85.7\%$).
 
 ---
 
