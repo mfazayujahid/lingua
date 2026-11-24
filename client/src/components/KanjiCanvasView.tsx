@@ -102,6 +102,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   // Stroke State Machine
   const [currentStrokeIdx, setCurrentStrokeIdx] = useState<number>(1);
   const [acceptedStrokes, setAcceptedStrokes] = useState<number[]>([]);
+  const [userDrawnStrokes, setUserDrawnStrokes] = useState<Record<number, StrokePoint[]>>({});
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [feedback, setFeedback] = useState<ValidationOutcome | null>(null);
   const [completedModal, setCompletedModal] = useState<any>(null);
@@ -258,6 +259,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     setCompletedModal(null);
     setCurrentStrokeIdx(1);
     setAcceptedStrokes([]);
+    setUserDrawnStrokes({});
     isAnimatingRef.current = false;
 
     try {
@@ -300,7 +302,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
 
   useEffect(() => {
     redrawCanvas();
-  }, [acceptedStrokes, kanjiData, theme]);
+  }, [acceptedStrokes, userDrawnStrokes, kanjiData, theme]);
 
   const redrawCanvas = () => {
     const canvas = canvasRef.current;
@@ -312,18 +314,31 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     ctx.clearRect(0, 0, 1000, 1000);
 
     acceptedStrokes.forEach(strokeIndex => {
+      const userPoints = userDrawnStrokes[strokeIndex];
       const strokeDef = kanjiData.strokeMetadata?.find(s => s.strokeIndex === strokeIndex);
-      if (!strokeDef) return;
 
       ctx.save();
       ctx.strokeStyle = theme === 'dark' ? '#F6F5F0' : '#14161A';
-      ctx.fillStyle = theme === 'dark' ? '#F6F5F0' : '#14161A';
       ctx.lineWidth = 26;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      const p = new Path2D(strokeDef.svgPath);
-      ctx.stroke(p);
+      if (userPoints && userPoints.length > 1) {
+        // Render user's authentic hand-drawn stroke with smooth quadratic curve interpolation
+        ctx.beginPath();
+        ctx.moveTo(userPoints[0].x, userPoints[0].y);
+        for (let i = 1; i < userPoints.length - 1; i++) {
+          const xc = (userPoints[i].x + userPoints[i + 1].x) / 2;
+          const yc = (userPoints[i].y + userPoints[i + 1].y) / 2;
+          ctx.quadraticCurveTo(userPoints[i].x, userPoints[i].y, xc, yc);
+        }
+        ctx.lineTo(userPoints[userPoints.length - 1].x, userPoints[userPoints.length - 1].y);
+        ctx.stroke();
+      } else if (strokeDef) {
+        // Fallback for demonstration playback or pre-rendered strokes
+        const p = new Path2D(strokeDef.svgPath);
+        ctx.stroke(p);
+      }
       ctx.restore();
     });
   };
@@ -402,6 +417,10 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     if (outcome.isValid) {
       playStrokeSuccessSound();
       const nextStrokeIdx = currentStrokeIdx + 1;
+      setUserDrawnStrokes(prev => ({
+        ...prev,
+        [currentStrokeIdx]: [...rawPoints]
+      }));
       setAcceptedStrokes(prev => [...prev, currentStrokeIdx]);
       setCurrentStrokeIdx(nextStrokeIdx);
 
@@ -488,6 +507,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     if (!kanjiData?.strokeMetadata || kanjiData.strokeMetadata.length === 0) return;
     isAnimatingRef.current = true;
     setAcceptedStrokes([]);
+    setUserDrawnStrokes({});
     setCurrentStrokeIdx(1);
     setFeedback(null);
     setCompletedModal(null);
@@ -510,6 +530,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   const handleResetCanvas = () => {
     setCurrentStrokeIdx(1);
     setAcceptedStrokes([]);
+    setUserDrawnStrokes({});
     setFeedback(null);
     setCompletedModal(null);
     redrawCanvas();
