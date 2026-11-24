@@ -32,6 +32,17 @@ export const AppContent: React.FC = () => {
   const [srsDueCount, setSrsDueCount] = useState<number>(0);
   const [currentExamLessonId, setCurrentExamLessonId] = useState<string>("les_n5_gram_1");
   const [currentLectureLessonId, setCurrentLectureLessonId] = useState<string | undefined>();
+  const [kanjiNavOptions, setKanjiNavOptions] = useState<{ category?: 'HIRAGANA' | 'KATAKANA' | 'KANJI'; level?: string }>({
+    category: 'HIRAGANA',
+    level: 'N5'
+  });
+
+  const handleNavigate = (view: string, options?: { category?: 'HIRAGANA' | 'KATAKANA' | 'KANJI'; level?: string }) => {
+    if (view === 'kanji' && options) {
+      setKanjiNavOptions(options);
+    }
+    setActiveView(view);
+  };
 
   // Initial load
   useEffect(() => {
@@ -143,7 +154,7 @@ export const AppContent: React.FC = () => {
           <DashboardView
             data={dashboardData}
             activeTrack={activeTrack}
-            onNavigate={setActiveView}
+            onNavigate={handleNavigate}
             onTrackChange={handleTrackChange}
           />
         )}
@@ -199,7 +210,10 @@ export const AppContent: React.FC = () => {
         )}
 
         {activeView === 'kanji' && (
-          <KanjiCanvasView />
+          <KanjiCanvasView
+            initialCategory={kanjiNavOptions.category}
+            initialLevel={kanjiNavOptions.level}
+          />
         )}
 
         {activeView === 'analytics' && (

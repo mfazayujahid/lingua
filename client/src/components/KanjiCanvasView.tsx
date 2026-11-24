@@ -6,7 +6,8 @@ import {
   fetchKanjiCatalog,
   fetchJoyoDetail,
   scheduleKanjiSrs,
-  recordKanjiPractice
+  recordKanjiPractice,
+  fetchMasteredCharacters
 } from '../api';
 import {
   resampleStroke,
@@ -55,11 +56,21 @@ const KANA_ROW_MAP: Record<string, string[]> = {
   'wa': ['わ', 'を', 'ん', 'ワ', 'ヲ', 'ン']
 };
 
-export const KanjiCanvasView: React.FC = () => {
+export interface KanjiCanvasViewProps {
+  initialCategory?: 'HIRAGANA' | 'KATAKANA' | 'KANJI';
+  initialLevel?: string;
+  onMasteryUpdate?: (character: string) => void;
+}
+
+export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
+  initialCategory,
+  initialLevel = 'N5',
+  onMasteryUpdate
+}) => {
   const { theme } = useTheme();
   const { t, language } = useLanguage();
   const [kanjiList, setKanjiList] = useState<any[]>([]);
-  const [category, setCategory] = useState<'HIRAGANA' | 'KATAKANA' | 'KANJI'>('HIRAGANA');
+  const [category, setCategory] = useState<'HIRAGANA' | 'KATAKANA' | 'KANJI'>(initialCategory || 'HIRAGANA');
   const [subFilter, setSubFilter] = useState<string>('ALL');
   const [currentKanjiId, setCurrentKanjiId] = useState<string>('kana_a_h');
   const [kanjiData, setKanjiData] = useState<KanjiStrokeData | null>(null);
@@ -71,8 +82,11 @@ export const KanjiCanvasView: React.FC = () => {
   const [joyoTotal, setJoyoTotal] = useState<number>(2136);
   const [joyoStats, setJoyoStats] = useState<Record<string, number>>({});
   const [kanjiSearch, setKanjiSearch] = useState<string>('');
-  const [kanjiLevelFilter, setKanjiLevelFilter] = useState<string>('ALL');
+  const [kanjiLevelFilter, setKanjiLevelFilter] = useState<string>(initialCategory === 'KANJI' ? (initialLevel || 'N5') : 'ALL');
   const [catalogLoading, setCatalogLoading] = useState<boolean>(false);
+
+  // Visual Mastery State
+  const [masteredCharacters, setMasteredCharacters] = useState<Set<string>>(new Set());
 
   // 4-Step Formula Tabs
   const [activeStepTab, setActiveStepTab] = useState<'step1' | 'step2' | 'step3' | 'step4'>('step1');
@@ -98,9 +112,29 @@ export const KanjiCanvasView: React.FC = () => {
   const isAnimatingRef = useRef<boolean>(false);
 
   useEffect(() => {
+    loadMasteredCharacters();
     loadKanjiList();
-    loadJoyoCatalog('ALL', '');
+    const targetLvl = initialCategory === 'KANJI' ? (initialLevel || 'N5') : 'ALL';
+    loadJoyoCatalog(targetLvl, '', initialCategory === 'KANJI');
   }, []);
+
+  // Sync when initialCategory or initialLevel props change dynamically
+  useEffect(() => {
+    if (initialCategory) {
+      setCategory(initialCategory);
+      if (initialCategory === 'KANJI') {
+        const lvl = initialLevel || 'N5';
+        setKanjiLevelFilter(lvl);
+        loadJoyoCatalog(lvl, '', true);
+      } else {
+        setSubFilter('ALL');
+        const firstKana = kanjiList.find(k => k.jlpt_level === initialCategory);
+        if (firstKana) {
+          setCurrentKanjiId(firstKana.id);
+        }
+      }
+    }
+  }, [initialCategory, initialLevel]);
 
   useEffect(() => {
     if (currentKanjiId) {
@@ -108,26 +142,51 @@ export const KanjiCanvasView: React.FC = () => {
     }
   }, [currentKanjiId]);
 
+  const loadMasteredCharacters = async () => {
+    try {
+      const chars = await fetchMasteredCharacters();
+      setMasteredCharacters(new Set(chars));
+    } catch (err) {
+      console.warn('Failed to load mastered characters list', err);
+    }
+  };
+
   const loadKanjiList = async () => {
     try {
       const list = await fetchKanjiList();
       setKanjiList(list);
-      const firstKana = list.find((k: any) => k.jlpt_level === 'HIRAGANA');
-      if (firstKana && !currentKanjiId) {
-        setCurrentKanjiId(firstKana.id);
+      if (initialCategory === 'KANJI') {
+        // If initial category is KANJI, prioritize selecting N5 kanji (like '日' or first N5)
+        const nichi = list.find((k: any) => k.character === '日');
+        const n5Kanji = list.find((k: any) => k.jlpt_level === 'N5');
+        const target = nichi || n5Kanji;
+        if (target) {
+          setCurrentKanjiId(target.id);
+        }
+      } else {
+        const targetCat = initialCategory || 'HIRAGANA';
+        const firstKana = list.find((k: any) => k.jlpt_level === targetCat);
+        if (firstKana && !currentKanjiId) {
+          setCurrentKanjiId(firstKana.id);
+        }
       }
     } catch (err) {
       console.error('Failed to load kanji list', err);
     }
   };
 
-  const loadJoyoCatalog = async (level: string, search: string) => {
+  const loadJoyoCatalog = async (level: string, search: string, autoSelectFirst = false) => {
     setCatalogLoading(true);
     try {
       const res = await fetchKanjiCatalog(level === 'ALL' ? undefined : level, search, 60, 0);
-      setJoyoCatalog(res.items || []);
+      const items = res.items || [];
+      setJoyoCatalog(items);
       setJoyoTotal(res.total || 0);
       if (res.stats) setJoyoStats(res.stats);
+      if (autoSelectFirst && items.length > 0) {
+        const nichi = items.find((item: any) => item.character === '日');
+        handleSelectJoyoKanji(nichi || items[0]);
+      }
     } catch (err) {
       console.error('Failed to load joyo catalog', err);
     } finally {
@@ -357,7 +416,7 @@ export const KanjiCanvasView: React.FC = () => {
     }
   };
 
-    const handleCharacterComplete = async () => {
+  const handleCharacterComplete = async () => {
     if (!kanjiData) return;
 
     playCharacterCompleteSound();
@@ -367,6 +426,22 @@ export const KanjiCanvasView: React.FC = () => {
       origin: { y: 0.6 },
       colors: ['#C83C23', '#242424', '#DCD9CD']
     });
+
+    // Instantly mark as mastered in local state for immediate visual badge feedback
+    const completedChar = kanjiData.character;
+    const completedId = kanjiData.id;
+    setMasteredCharacters(prev => {
+      const updated = new Set(prev);
+      if (completedChar) updated.add(completedChar);
+      if (completedId) updated.add(completedId);
+      try {
+        localStorage.setItem('lingua_mastered_characters', JSON.stringify(Array.from(updated)));
+      } catch (e) {}
+      return updated;
+    });
+    if (onMasteryUpdate && completedChar) {
+      onMasteryUpdate(completedChar);
+    }
 
     try {
       const res = await recordKanjiPractice({
@@ -538,19 +613,37 @@ export const KanjiCanvasView: React.FC = () => {
                 const allowed = KANA_ROW_MAP[subFilter] || [];
                 return allowed.includes(k.character);
               })
-              .map(charItem => (
-                <button
-                  key={charItem.id}
-                  onClick={() => setCurrentKanjiId(charItem.id)}
-                  className={`w-9 h-9 rounded-lg font-jp text-base font-medium flex items-center justify-center transition-all ${
-                    currentKanjiId === charItem.id
-                      ? 'bg-vermilion-500 text-white font-bold shadow-md scale-105'
-                      : 'bg-washi-100 dark:bg-sumi-850 hover:bg-washi-200 dark:hover:bg-sumi-750 text-stone-800 dark:text-stone-200 border border-washi-200 dark:border-sumi-800'
-                  }`}
-                >
-                  {charItem.character}
-                </button>
-              ))}
+              .map(charItem => {
+                const isSelected = currentKanjiId === charItem.id;
+                const isMastered = masteredCharacters.has(charItem.character) || masteredCharacters.has(charItem.id);
+                return (
+                  <button
+                    key={charItem.id}
+                    onClick={() => setCurrentKanjiId(charItem.id)}
+                    className={`relative w-9 h-9 rounded-lg font-jp text-base font-medium flex items-center justify-center transition-all ${
+                      isSelected
+                        ? 'bg-vermilion-500 text-white font-bold shadow-md scale-105'
+                        : isMastered
+                          ? 'bg-emerald-50/90 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border-2 border-emerald-500/70 hover:bg-emerald-100/80 dark:hover:bg-emerald-900/50'
+                          : 'bg-washi-100 dark:bg-sumi-850 hover:bg-washi-200 dark:hover:bg-sumi-750 text-stone-800 dark:text-stone-200 border border-washi-200 dark:border-sumi-800'
+                    }`}
+                    title={`${charItem.character}${isMastered ? (language === 'id' ? ' • Selesai Dikuasai ✓' : ' • Mastered ✓') : ''}`}
+                  >
+                    <span>{charItem.character}</span>
+                    {isMastered && (
+                      <span
+                        className={`absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-extrabold shadow-sm ${
+                          isSelected
+                            ? 'bg-white text-vermilion-600 ring-1 ring-vermilion-600'
+                            : 'bg-emerald-500 text-white ring-1 ring-white dark:ring-sumi-900'
+                        }`}
+                      >
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
           </div>
         </div>
       ) : (
@@ -601,19 +694,33 @@ export const KanjiCanvasView: React.FC = () => {
             ) : (
               joyoCatalog.map(joyoItem => {
                 const isSelected = (kanjiData?.character || joyoDetail?.character) === joyoItem.character;
+                const isMastered = masteredCharacters.has(joyoItem.character) || masteredCharacters.has(joyoItem.id);
                 return (
                   <button
                     key={joyoItem.id}
                     onClick={() => handleSelectJoyoKanji(joyoItem)}
-                    className={`px-2 py-1 rounded-lg font-jp text-sm flex items-center gap-1.5 transition-all ${
+                    className={`relative px-2.5 py-1 rounded-lg font-jp text-sm flex items-center gap-1.5 transition-all ${
                       isSelected
                         ? 'bg-vermilion-500 text-white font-bold shadow-md scale-105'
-                        : 'bg-washi-100 dark:bg-sumi-850 hover:bg-washi-200 dark:hover:bg-sumi-750 text-stone-800 dark:text-stone-200 border border-washi-200 dark:border-sumi-800'
+                        : isMastered
+                          ? 'bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border border-emerald-500/60 dark:border-emerald-500/50 hover:bg-emerald-100/80 shadow-sm'
+                          : 'bg-washi-100 dark:bg-sumi-850 hover:bg-washi-200 dark:hover:bg-sumi-750 text-stone-800 dark:text-stone-200 border border-washi-200 dark:border-sumi-800'
                     }`}
-                    title={`${joyoItem.meanings.join(', ')} • ${joyoItem.jlptLevel} • ${joyoItem.strokeCount} strokes`}
+                    title={`${joyoItem.meanings.join(', ')} • ${joyoItem.jlptLevel} • ${joyoItem.strokeCount} strokes${isMastered ? (language === 'id' ? ' • Selesai Dikuasai ✓' : ' • Mastered ✓') : ''}`}
                   >
                     <span className="font-bold">{joyoItem.character}</span>
                     <span className="text-[10px] opacity-75">{joyoItem.meanings[0]}</span>
+                    {isMastered && (
+                      <span
+                        className={`text-[10px] font-extrabold px-1 rounded ${
+                          isSelected
+                            ? 'bg-white/30 text-white'
+                            : 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
+                        }`}
+                      >
+                        ✓
+                      </span>
+                    )}
                   </button>
                 );
               })
@@ -644,6 +751,12 @@ export const KanjiCanvasView: React.FC = () => {
                     {(kanjiData?.radical || joyoDetail?.primaryRadical) && (
                       <span className="text-xs px-2 py-0.5 rounded bg-washi-200 dark:bg-sumi-800 text-stone-700 dark:text-stone-300">
                         部首: {kanjiData?.radical || joyoDetail?.primaryRadical}
+                      </span>
+                    )}
+                    {(masteredCharacters.has(kanjiData?.character || '') || masteredCharacters.has(joyoDetail?.character || '')) && (
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500 text-white flex items-center gap-1 shadow-sm">
+                        <Check className="w-3 h-3" />
+                        <span>{language === 'id' ? 'Telah Dikuasai' : 'Mastered'}</span>
                       </span>
                     )}
                   </div>

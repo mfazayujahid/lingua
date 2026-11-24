@@ -197,6 +197,30 @@ export async function recordKanjiPractice(data: {
   return res.json();
 }
 
+export async function fetchMasteredCharacters(userId = 'user_001'): Promise<string[]> {
+  try {
+    const res = await fetch(`${BASE_URL}/kanji/mastered-characters?userId=${userId}`);
+    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+    const data = await res.json();
+    const characters: string[] = data.characters || [];
+    try {
+      const local = JSON.parse(localStorage.getItem('lingua_mastered_characters') || '[]');
+      const combined = Array.from(new Set([...characters, ...local]));
+      localStorage.setItem('lingua_mastered_characters', JSON.stringify(combined));
+      return combined;
+    } catch {
+      return characters;
+    }
+  } catch (err) {
+    console.warn('Fallback to local mastered characters', err);
+    try {
+      return JSON.parse(localStorage.getItem('lingua_mastered_characters') || '[]');
+    } catch {
+      return [];
+    }
+  }
+}
+
 export async function fetchAnalytics(userId = 'user_001'): Promise<DiagnosticAnalytics> {
   const res = await fetch(`${BASE_URL}/analytics?userId=${userId}`);
   return res.json();

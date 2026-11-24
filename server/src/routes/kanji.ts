@@ -287,6 +287,27 @@ kanjiRouter.post('/record-practice', (req: Request, res: Response) => {
   });
 });
 
+// Mastered characters endpoint (Kana and Kanji)
+kanjiRouter.get('/mastered-characters', (req: Request, res: Response) => {
+  const userId = (req.query.userId as string) || 'user_001';
+  try {
+    const attempts = db.prepare(`
+      SELECT DISTINCT kanji_id FROM kanji_writing_attempts WHERE user_id = ? AND mastery_badge = 'MASTERED'
+    `).all(userId) as any[];
+    const srsItems = db.prepare(`
+      SELECT DISTINCT prompt FROM srs_items WHERE user_id = ? AND item_type = 'character'
+    `).all(userId) as any[];
+    const characters = Array.from(new Set([
+      ...attempts.map(a => a.kanji_id),
+      ...srsItems.map(s => s.prompt)
+    ])).filter(Boolean);
+    res.json({ characters });
+  } catch (err) {
+    console.error('Failed to fetch mastered characters:', err);
+    res.json({ characters: [] });
+  }
+});
+
 // Standard list for canvas handwriting engine
 kanjiRouter.get('/', (req: Request, res: Response) => {
   const level = req.query.level as string;
