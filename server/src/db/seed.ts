@@ -5,6 +5,7 @@ import { KANJI_SEEDS } from './seeds/kanjiSeeds';
 import { IELTS_MOCK_LESSON_ID, IELTS_FULL_MOCK_ITEMS } from './seeds/ieltsMockExamSeeds';
 import { SPEAKING_PACKAGES_SEED } from './seeds/speakingSeeds';
 import { LISTENING_PACKAGES_SEED } from './seeds/listeningSeeds';
+import { seedExamPackages, ALL_EXAM_PACKAGES_SEED } from './seeds/examPackageSeeds';
 import {
   CURRICULUM_PILLARS,
   CURRICULUM_UNITS,
@@ -18,6 +19,8 @@ export function seed() {
   console.log('Clearing existing tables...');
   db.exec(`
     PRAGMA foreign_keys = OFF;
+    DELETE FROM user_exam_attempts;
+    DELETE FROM exam_packages;
     DELETE FROM listening_sessions;
     DELETE FROM listening_packages;
     DELETE FROM speaking_sessions;
@@ -43,6 +46,11 @@ export function seed() {
     INSERT INTO users (id, username, email, active_track, baseline_score, target_score, daily_goal_minutes, streak_days)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `).run('user_001', 'Elena & Marcus', 'scholar@lingua.io', 'jlpt_n5', 0, 80, 20, 0);
+
+  db.prepare(`
+    INSERT INTO users (id, username, email, active_track, baseline_score, target_score, daily_goal_minutes, streak_days)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `).run('user_002', 'Test Candidate', 'test@lingua.io', 'ielts_academic', 6.0, 7.5, 30, 0);
 
   console.log('Seeding tracks and full 5-tier + IELTS levels...');
   const insertTrack = db.prepare(`INSERT INTO tracks (id, code, title, description) VALUES (?, ?, ?, ?)`);
@@ -192,8 +200,10 @@ console.log('Seeding Kana vector handwriting datasets (10 seed characters)...');
   }
   console.log(`Seeded ${LISTENING_PACKAGES_SEED.length} IELTS listening exam packages.`);
 
+  seedExamPackages(db);
+
   console.log('Seeding completed successfully!');
-  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages, ${LISTENING_PACKAGES_SEED.length} listening packages.`);
+  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages, ${LISTENING_PACKAGES_SEED.length} listening packages, ${ALL_EXAM_PACKAGES_SEED.length} multi-mock exam packages.`);
 }
 
 // Execute directly if run as main

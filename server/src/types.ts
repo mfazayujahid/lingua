@@ -496,52 +496,218 @@ export interface ListeningSessionRecord {
 }
 
 // ==========================================
-// Phase 3: Multi-Mock Exam Engine (Packs 1-5)
+// Phase 3: Multi-Mock Exam Progression & Diagnostic Trajectory (Packs 1-5)
 // ==========================================
 
-export type ExamDifficultyTier = 'diagnostic' | 'standard' | 'challenging' | 'advanced' | 'mastery';
+export type ExamDifficultyTier = 
+  | 'diagnostic'
+  | 'standard'
+  | 'challenging'
+  | 'advanced'
+  | 'mastery'
+  | 'diagnostic_baseline' 
+  | 'core_competence' 
+  | 'advanced_academic' 
+  | 'high_density' 
+  | 'final_readiness';
 
-export interface MasterExamPackageSummary {
+export interface ExamDistractorAnalysis {
+  deceptiveTrapToken?: string;
+  linguisticPivotMarker?: string;
+  correctExplanation: string;
+  explanationId?: string;
+  trapType?: 'spelling' | 'rejection' | 'negation' | 'date_shift' | 'currency' | 'subtraction' | 'opposite_meaning' | 'unwarranted_generalization' | 'out_of_scope' | 'grammatical_mismatch' | string;
+}
+
+export interface ExamQuestionItem {
   id: string;
-  levelCode: LevelCode;
-  packNumber: 1 | 2 | 3 | 4 | 5;
+  questionNumber: number;
+  sectionNumber: number;
+  itemType: 'mcq' | 'tfng' | 'matching_headings' | 'sentence_completion' | 'star_sentence' | 'summary_completion' | string;
+  prompt: string;
+  passagePart?: number;
+  passageTitle?: string;
+  passageText?: string;
+  options?: string[];
+  correctAnswer: string | number | string[];
+  acceptedAnswers?: string[];
+  explanation: string;
+  explanationId?: string;
+  distractorAnalysis?: ExamDistractorAnalysis;
+}
+
+export interface ExamPassage {
+  partNumber: number;
+  title: string;
+  titleId?: string;
+  wordCount: number;
+  text: string;
+}
+
+export interface ExamPackageContent {
+  id: string;
+  levelCode: LevelCode | string;
+  packNumber: number;
   titleEn: string;
   titleId: string;
   thematicFocusEn: string;
   thematicFocusId: string;
-  difficultyTier: ExamDifficultyTier;
+  difficultyTier: ExamDifficultyTier | string;
   totalDurationMinutes: number;
   passThresholdScore: number;
-  questionCount: number;
+  totalQuestions: number;
+  passages?: ExamPassage[];
+  questions: ExamQuestionItem[];
+}
+
+export interface ExamPackageAttemptSummary {
+  attemptsCount: number;
+  bestScore: number | null;
+  latestScore: number | null;
+  latestScaledScore: number | null;
+  passed: boolean;
+  lastAttemptedAt: string | null;
+}
+
+export interface MasterExamPackageSummary {
+  id: string;
+  levelCode: LevelCode | string;
+  packNumber: 1 | 2 | 3 | 4 | 5 | number;
+  titleEn: string;
+  titleId: string;
+  thematicFocusEn: string;
+  thematicFocusId: string;
+  difficultyTier: ExamDifficultyTier | string;
+  totalDurationMinutes: number;
+  passThresholdScore: number;
+  totalQuestions: number;
+  questionCount?: number;
   completed?: boolean;
-  bestScore?: number;
+  bestScore?: number | null;
   bestBand?: number;
   lastAttemptAt?: string;
+  attemptSummary?: ExamPackageAttemptSummary | null;
+  createdAt?: string;
 }
 
 export interface UserExamAttemptRecord {
   id: string;
   userId: string;
   packageId: string;
-  levelCode: LevelCode;
+  levelCode: LevelCode | string;
   packNumber: number;
   rawScore: number;
   totalQuestions: number;
   scaledScore: number;
   passed: boolean;
-  sectionalBreakdown: Record<string, { correct: number; total: number; percentage: number }>;
+  sectionalBreakdown: Record<string, any>;
   timeSpentSeconds: number;
   completedAt: string;
 }
 
-export interface ExamBatteryTrajectoryResult {
-  attempts: UserExamAttemptRecord[];
-  weightedReadinessIndex: number;
-  readinessMargin: number;
-  targetThreshold: number;
-  predictedScore: number;
-  totalAttemptsCount: number;
-  progressionTrend: 'ascending' | 'stable' | 'needs_reinforcement';
+export interface ExamPackageRow {
+  id: string;
+  level_code: string;
+  pack_number: number;
+  title_en: string;
+  title_id: string;
+  thematic_focus_en: string;
+  thematic_focus_id: string;
+  difficulty_tier: string;
+  total_duration_minutes: number;
+  pass_threshold_score: number;
+  total_questions?: number;
+  package_data_json: string;
+  created_at: string;
 }
 
+export interface UserExamAttemptRow {
+  id: string;
+  user_id: string;
+  package_id: string;
+  level_code: string;
+  pack_number: number;
+  raw_score: number;
+  total_questions: number;
+  scaled_score: number;
+  passed: number;
+  sectional_breakdown: string;
+  time_spent_seconds: number;
+  completed_at: string;
+}
 
+export interface ExamTrajectoryPoint {
+  packNumber: number;
+  packageId: string;
+  titleEn: string;
+  titleId?: string;
+  rawScore: number;
+  totalQuestions: number;
+  scaledScore: number;
+  passed: boolean;
+  completedAt: string;
+  recencyWeight: number;
+}
+
+export interface ExamBatteryTrajectoryResult {
+  userId: string;
+  levelCode: string;
+  totalCompletedPacks: number;
+  weightedReadinessIndex: number;
+  roundedWeightedReadinessIndex: number;
+  passThresholdScore: number;
+  readinessMargin: number;
+  isReadyForExam: boolean;
+  trajectory: ExamTrajectoryPoint[];
+  sectionalTrends?: Record<string, number>;
+  diagnosticSummaryEn: string;
+  diagnosticSummaryId: string;
+  attempts?: UserExamAttemptRecord[];
+  targetThreshold?: number;
+  predictedScore?: number;
+  totalAttemptsCount?: number;
+  progressionTrend?: 'ascending' | 'stable' | 'needs_reinforcement';
+}
+
+export interface ExamSubmissionPayload {
+  packageId: string;
+  userId?: string;
+  answers: Record<string | number, string>;
+  timeSpentSeconds?: number;
+}
+
+export interface QuestionDistractorAudit {
+  questionNumber: number;
+  sectionNumber: number;
+  userAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+  errorType?: 'DISTRACTOR_TRAP' | 'SPELLING_ERROR' | 'UNANSWERED' | 'INCORRECT' | null;
+  distractorAnalysis?: ExamDistractorAnalysis;
+  explanation: string;
+  explanationId?: string;
+}
+
+export interface ExamSubmissionEvaluationResult {
+  attemptId: string;
+  packageId: string;
+  userId: string;
+  levelCode: string;
+  packNumber: number;
+  rawScore: number;
+  totalQuestions: number;
+  scaledScore: number;
+  passed: boolean;
+  passThresholdScore: number;
+  timeSpentSeconds: number;
+  sectionalBreakdown: Record<string, any>;
+  distractorAudit: {
+    distractorTrapFailures: number;
+    spellingErrors: number;
+    unansweredCount: number;
+    otherErrors: number;
+    questionAudits: QuestionDistractorAudit[];
+  };
+  statusDescriptionEn: string;
+  statusDescriptionId: string;
+}

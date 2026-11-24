@@ -208,5 +208,41 @@ export function initDatabase() {
       evaluation_json TEXT NOT NULL,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS exam_packages (
+      id TEXT PRIMARY KEY,
+      level_code TEXT NOT NULL,
+      pack_number INTEGER NOT NULL,
+      title_en TEXT NOT NULL,
+      title_id TEXT NOT NULL,
+      thematic_focus_en TEXT NOT NULL,
+      thematic_focus_id TEXT NOT NULL,
+      difficulty_tier TEXT NOT NULL,
+      total_duration_minutes INTEGER NOT NULL,
+      pass_threshold_score REAL NOT NULL,
+      total_questions INTEGER DEFAULT 40,
+      package_data_json TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS user_exam_attempts (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id),
+      package_id TEXT NOT NULL REFERENCES exam_packages(id),
+      level_code TEXT NOT NULL,
+      pack_number INTEGER NOT NULL,
+      raw_score REAL NOT NULL,
+      total_questions INTEGER NOT NULL,
+      scaled_score REAL NOT NULL,
+      passed INTEGER NOT NULL DEFAULT 0,
+      sectional_breakdown TEXT NOT NULL,
+      time_spent_seconds INTEGER DEFAULT 0,
+      completed_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_user_exam_attempts_user_level ON user_exam_attempts(user_id, level_code);
+    CREATE INDEX IF NOT EXISTS idx_user_exam_attempts_user_package ON user_exam_attempts(user_id, package_id);
+    CREATE INDEX IF NOT EXISTS idx_exam_packages_level ON exam_packages(level_code);
+    CREATE INDEX IF NOT EXISTS idx_exam_packages_level_pack ON exam_packages(level_code, pack_number);
   `);
 }

@@ -81,6 +81,48 @@ export interface ListeningSessionRow {
   created_at: string;
 }
 
+export interface ExamPackageRow {
+  id: string;
+  level_code: string;
+  pack_number: number;
+  title_en: string;
+  title_id: string;
+  thematic_focus_en: string;
+  thematic_focus_id: string;
+  difficulty_tier: string;
+  total_duration_minutes: number;
+  pass_threshold_score: number;
+  total_questions?: number;
+  package_data_json: string;
+  created_at: string;
+}
+
+export interface UserExamAttemptRow {
+  id: string;
+  user_id: string;
+  package_id: string;
+  level_code: string;
+  pack_number: number;
+  raw_score: number;
+  total_questions: number;
+  scaled_score: number;
+  passed: number; // 0 | 1
+  sectional_breakdown: string;
+  time_spent_seconds: number;
+  completed_at: string;
+}
+
 export type { SpeakingExamPackage, SpeakingSessionRecord };
 export type { IeltsListeningPackage, ListeningSessionRecord, ListeningEvaluationResult } from '../types';
+export type {
+  MasterExamPackageSummary,
+  UserExamAttemptRecord,
+  ExamBatteryTrajectoryResult,
+  ExamPackageContent,
+  ExamQuestionItem,
+  ExamPassage,
+  ExamSubmissionPayload,
+  ExamSubmissionEvaluationResult
+} from '../types';
+
 
