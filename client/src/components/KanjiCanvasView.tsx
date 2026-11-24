@@ -230,6 +230,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
           strokeMetadata: []
         });
         setAcceptedStrokes([]);
+        setUserDrawnStrokes({});
         setCurrentStrokeIdx(1);
         setFeedback(null);
       }
@@ -404,9 +405,28 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     if (rawPoints.length < 2) return;
 
     if (!kanjiData.strokeMetadata || kanjiData.strokeMetadata.length === 0) {
-      // Freeform recognition
-
+      // Freeform recognition & stroke progress tracking
       playStrokeSuccessSound();
+      const nextStrokeIdx = currentStrokeIdx + 1;
+      setUserDrawnStrokes(prev => ({
+        ...prev,
+        [currentStrokeIdx]: [...rawPoints]
+      }));
+      setAcceptedStrokes(prev => [...prev, currentStrokeIdx]);
+      setCurrentStrokeIdx(nextStrokeIdx);
+
+      setFeedback({
+        isValid: true,
+        status: 'accepted',
+        message: language === 'id'
+          ? `Goresan ${currentStrokeIdx} dari ${kanjiData.strokeCount || 1} diterima!`
+          : `Stroke ${currentStrokeIdx} of ${kanjiData.strokeCount || 1} accepted!`,
+        geometryScore: 95
+      });
+
+      if (nextStrokeIdx > (kanjiData.strokeCount || 1)) {
+        handleCharacterComplete();
+      }
       return;
     }
 
@@ -504,7 +524,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   };
 
   const playDemonstration = () => {
-    if (!kanjiData?.strokeMetadata || kanjiData.strokeMetadata.length === 0) return;
+    if (!kanjiData) return;
     isAnimatingRef.current = true;
     setAcceptedStrokes([]);
     setUserDrawnStrokes({});

@@ -249,7 +249,28 @@ kanjiRouter.post('/record-practice', (req: Request, res: Response) => {
   // 2. Insert writing attempt
   const attemptId = `kwa_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
   const resolvedKanjiId = kanjiId || character;
-  const strokeData = db.prepare('SELECT id, character, jlpt_level FROM kanji_stroke_data WHERE id = ? OR character = ?').get(resolvedKanjiId, resolvedKanjiId) as any;
+  let strokeData = db.prepare('SELECT id, character, jlpt_level FROM kanji_stroke_data WHERE id = ? OR character = ?').get(resolvedKanjiId, resolvedKanjiId) as any;
+
+  if (!strokeData) {
+    const joyo = db.prepare('SELECT * FROM joyo_kanji WHERE id = ? OR character = ?').get(resolvedKanjiId, resolvedKanjiId) as any;
+    if (joyo) {
+      db.prepare(`
+        INSERT OR IGNORE INTO kanji_stroke_data (id, character, jlpt_level, on_yomi, kun_yomi, english_gloss, radical, stroke_count, stroke_paths_json, stroke_metadata_json)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, '[]', '[]')
+      `).run(
+        joyo.id,
+        joyo.character,
+        joyo.jlpt_level || 'N5',
+        JSON.parse(joyo.on_yomi_json || '[]').join('、'),
+        JSON.parse(joyo.kun_yomi_json || '[]').join('、'),
+        JSON.parse(joyo.meanings_json || '[]').join(', '),
+        joyo.primary_radical,
+        joyo.stroke_count || 1
+      );
+      strokeData = { id: joyo.id, character: joyo.character, jlpt_level: joyo.jlpt_level || 'N5' };
+    }
+  }
+
   const targetKanjiStrokeId = strokeData?.id || kanjiId || character;
 
   try {
@@ -391,31 +412,51 @@ kanjiRouter.get('/', (req: Request, res: Response) => {
 kanjiRouter.get('/:kanjiId', (req: Request, res: Response) => {
   const { kanjiId } = req.params;
 
-  const row = db.prepare(`
+  let row = db.prepare(`
     SELECT * FROM kanji_stroke_data WHERE id = ? OR character = ?
   `).get(kanjiId, kanjiId) as any;
 
-  if (!row) {
-    return res.status(404).json({ error: 'Kanji not found' });
+  if (row) {
+    const strokePaths: string[] = JSON.parse(row.stroke_paths_json);
+    const strokeMetadata: StrokeDefinition[] = JSON.parse(row.stroke_metadata_json);
+
+    const kanjiData: KanjiStrokeData = {
+      id: row.id,
+      character: row.character,
+      jlptLevel: row.jlpt_level,
+      onYomi: row.on_yomi,
+      kunYomi: row.kun_yomi,
+      englishGloss: row.english_gloss,
+      radical: row.radical,
+      strokeCount: row.stroke_count,
+      strokePaths,
+      strokeMetadata
+    };
+    return res.json(kanjiData);
   }
 
-  const strokePaths: string[] = JSON.parse(row.stroke_paths_json);
-  const strokeMetadata: StrokeDefinition[] = JSON.parse(row.stroke_metadata_json);
+  // Fallback to joyo_kanji catalog if not pre-seeded in stroke data
+  const joyoRow = db.prepare(`
+    SELECT * FROM joyo_kanji WHERE id = ? OR character = ?
+  `).get(kanjiId, kanjiId) as any;
 
-  const kanjiData: KanjiStrokeData = {
-    id: row.id,
-    character: row.character,
-    jlptLevel: row.jlpt_level,
-    onYomi: row.on_yomi,
-    kunYomi: row.kun_yomi,
-    englishGloss: row.english_gloss,
-    radical: row.radical,
-    strokeCount: row.stroke_count,
-    strokePaths,
-    strokeMetadata
-  };
+  if (joyoRow) {
+    const kanjiData: KanjiStrokeData = {
+      id: joyoRow.id,
+      character: joyoRow.character,
+      jlptLevel: joyoRow.jlpt_level || 'N5',
+      onYomi: JSON.parse(joyoRow.on_yomi_json || '[]').join('、'),
+      kunYomi: JSON.parse(joyoRow.kun_yomi_json || '[]').join('、'),
+      englishGloss: JSON.parse(joyoRow.meanings_json || '[]').join(', '),
+      radical: joyoRow.primary_radical,
+      strokeCount: joyoRow.stroke_count || 1,
+      strokePaths: [],
+      strokeMetadata: []
+    };
+    return res.json(kanjiData);
+  }
 
-  res.json(kanjiData);
+  return res.status(404).json({ error: 'Kanji not found' });
 });
 
 kanjiRouter.post('/:kanjiId/attempt', (req: Request, res: Response) => {
@@ -431,7 +472,26 @@ kanjiRouter.post('/:kanjiId/attempt', (req: Request, res: Response) => {
   `).run(sessionId, userId, Math.round(completedInMs / 1000), score, score, 80);
 
   // 2. Also record to kanji_writing_attempts
-  const strokeData = db.prepare('SELECT id, character, jlpt_level FROM kanji_stroke_data WHERE id = ? OR character = ?').get(kanjiId, kanjiId) as any;
+  let strokeData = db.prepare('SELECT id, character, jlpt_level FROM kanji_stroke_data WHERE id = ? OR character = ?').get(kanjiId, kanjiId) as any;
+  if (!strokeData) {
+    const joyo = db.prepare('SELECT * FROM joyo_kanji WHERE id = ? OR character = ?').get(kanjiId, kanjiId) as any;
+    if (joyo) {
+      db.prepare(`
+        INSERT OR IGNORE INTO kanji_stroke_data (id, character, jlpt_level, on_yomi, kun_yomi, english_gloss, radical, stroke_count, stroke_paths_json, stroke_metadata_json)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, '[]', '[]')
+      `).run(
+        joyo.id,
+        joyo.character,
+        joyo.jlpt_level || 'N5',
+        JSON.parse(joyo.on_yomi_json || '[]').join('、'),
+        JSON.parse(joyo.kun_yomi_json || '[]').join('、'),
+        JSON.parse(joyo.meanings_json || '[]').join(', '),
+        joyo.primary_radical,
+        joyo.stroke_count || 1
+      );
+      strokeData = { id: joyo.id, character: joyo.character, jlpt_level: joyo.jlpt_level || 'N5' };
+    }
+  }
   const validKanjiId = strokeData?.id || (db.prepare('SELECT id FROM kanji_stroke_data WHERE id = ?').get(kanjiId) ? kanjiId : null);
   if (validKanjiId) {
     const attemptId = `kwa_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;

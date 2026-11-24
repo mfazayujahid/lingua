@@ -15,6 +15,1083 @@ export interface KanjiCharacterSeed {
 }
 
 export const KANJI_SEEDS: KanjiCharacterSeed[] = [
+  {
+    id: 'kanji_n5_ichi',
+    character: '一',
+    jlptLevel: 'N5',
+    onYomi: 'イチ, イツ',
+    kunYomi: 'ひと, ひと・つ',
+    englishGloss: 'One, 1',
+    radical: '一',
+    strokeCount: 1,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 180,510 L 820,500',
+        startPoint: [180, 510],
+        endPoint: [820, 500],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Single bold horizontal stroke drawn firmly from left to right.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_ni',
+    character: '二',
+    jlptLevel: 'N5',
+    onYomi: 'ニ, ジ',
+    kunYomi: 'ふた, ふた・つ',
+    englishGloss: 'Two, 2',
+    radical: '二',
+    strokeCount: 2,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 280,380 L 720,370',
+        startPoint: [280, 380],
+        endPoint: [720, 370],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Top horizontal bar, shorter than base.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 180,680 L 820,670',
+        startPoint: [180, 680],
+        endPoint: [820, 670],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom horizontal baseline, wider foundation.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_san',
+    character: '三',
+    jlptLevel: 'N5',
+    onYomi: 'サン, ゾウ',
+    kunYomi: 'み, み・つ, みっ・つ',
+    englishGloss: 'Three, 3',
+    radical: '一',
+    strokeCount: 3,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 260,320 L 740,310',
+        startPoint: [260, 320],
+        endPoint: [740, 310],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Top horizontal bar of medium length.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 320,510 L 680,505',
+        startPoint: [320, 510],
+        endPoint: [680, 505],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Middle horizontal bar, shortest of the three.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 160,720 L 840,710',
+        startPoint: [160, 720],
+        endPoint: [840, 710],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom horizontal bar, longest base foundation.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_yon',
+    character: '四',
+    jlptLevel: 'N5',
+    onYomi: 'シ',
+    kunYomi: 'よ, よ・つ, よっ・つ, よん',
+    englishGloss: 'Four, 4',
+    radical: '囗',
+    strokeCount: 5,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 240,240 L 240,820',
+        startPoint: [240, 240],
+        endPoint: [240, 820],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Left vertical upright boundary of enclosure.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 240,240 L 760,240 L 760,820',
+        startPoint: [240, 240],
+        endPoint: [760, 820],
+        primaryAngleDeg: 0,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right, then Top to Bottom',
+        pedagogicalRule: 'Top horizontal across, bending down right vertical frame.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 380,380 Q 360,560 300,680',
+        startPoint: [380, 380],
+        endPoint: [300, 680],
+        primaryAngleDeg: 240,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal curve',
+        pedagogicalRule: 'Inner left curved branch.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 560,360 L 560,580 L 660,620',
+        startPoint: [560, 360],
+        endPoint: [660, 620],
+        primaryAngleDeg: 90,
+        strokeType: 'hook',
+        directionalHint: 'Top to Bottom, bending slightly right',
+        pedagogicalRule: 'Inner right stroke bending slightly.'
+      },
+      {
+        strokeIndex: 5,
+        svgPath: 'M 230,820 L 770,820',
+        startPoint: [230, 820],
+        endPoint: [770, 820],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom horizontal bar securely sealing the enclosure.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_go',
+    character: '五',
+    jlptLevel: 'N5',
+    onYomi: 'ゴ',
+    kunYomi: 'いつ, いつ・つ',
+    englishGloss: 'Five, 5',
+    radical: '二',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 240,280 L 760,270',
+        startPoint: [240, 280],
+        endPoint: [760, 270],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Top horizontal crossbar.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 480,280 L 400,740',
+        startPoint: [480, 280],
+        endPoint: [400, 740],
+        primaryAngleDeg: 100,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom-left slant',
+        pedagogicalRule: 'Slanted central vertical stroke.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 400,510 L 680,510 L 680,740',
+        startPoint: [400, 510],
+        endPoint: [680, 740],
+        primaryAngleDeg: 0,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right, then down',
+        pedagogicalRule: 'Middle horizontal bending down right.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 200,750 L 800,740',
+        startPoint: [200, 750],
+        endPoint: [800, 740],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom stabilizing horizontal foundation bar.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_roku',
+    character: '六',
+    jlptLevel: 'N5',
+    onYomi: 'ロク, リク',
+    kunYomi: 'む, む・つ, むっ・つ, むい',
+    englishGloss: 'Six, 6',
+    radical: '八',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 500,200 L 500,320',
+        startPoint: [500, 200],
+        endPoint: [500, 320],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Top central dot/dash.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 180,360 L 820,350',
+        startPoint: [180, 360],
+        endPoint: [820, 350],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Wide horizontal crossbar.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 420,480 Q 340,660 220,800',
+        startPoint: [420, 480],
+        endPoint: [220, 800],
+        primaryAngleDeg: 235,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal sweep',
+        pedagogicalRule: 'Left diagonal sweep.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 580,480 Q 660,650 780,800',
+        startPoint: [580, 480],
+        endPoint: [780, 800],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Right diagonal slant.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_nana',
+    character: '七',
+    jlptLevel: 'N5',
+    onYomi: 'シチ',
+    kunYomi: 'なな, なな・つ, なの',
+    englishGloss: 'Seven, 7',
+    radical: '一',
+    strokeCount: 2,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 200,520 L 800,460',
+        startPoint: [200, 520],
+        endPoint: [800, 460],
+        primaryAngleDeg: 355,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right slightly rising',
+        pedagogicalRule: 'Slightly rising horizontal crossbar.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 480,260 L 480,680 Q 480,760 620,760 L 720,740',
+        startPoint: [480, 260],
+        endPoint: [720, 740],
+        primaryAngleDeg: 90,
+        strokeType: 'hook',
+        directionalHint: 'Top to Bottom bending right upward',
+        pedagogicalRule: 'Vertical dropping down, bending smoothly right with slight upturn.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_hachi',
+    character: '八',
+    jlptLevel: 'N5',
+    onYomi: 'ハチ',
+    kunYomi: 'や, や・つ, やっ・つ, よう',
+    englishGloss: 'Eight, 8',
+    radical: '八',
+    strokeCount: 2,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 420,300 Q 340,550 240,780',
+        startPoint: [420, 300],
+        endPoint: [240, 780],
+        primaryAngleDeg: 240,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal sweep',
+        pedagogicalRule: 'Left diagonal stroke sweeping down-left.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 560,240 Q 640,540 780,780',
+        startPoint: [560, 240],
+        endPoint: [780, 780],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Right diagonal stroke starting higher and sweeping down-right.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_kyuu',
+    character: '九',
+    jlptLevel: 'N5',
+    onYomi: 'キュウ, ク',
+    kunYomi: 'ここの, ここの・つ',
+    englishGloss: 'Nine, 9',
+    radical: '乙',
+    strokeCount: 2,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 480,220 Q 420,520 280,820',
+        startPoint: [480, 220],
+        endPoint: [280, 820],
+        primaryAngleDeg: 245,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal curve',
+        pedagogicalRule: 'Left downward curve slicing diagonally.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 340,400 L 700,380 L 680,660 Q 680,780 580,780',
+        startPoint: [340, 400],
+        endPoint: [580, 780],
+        primaryAngleDeg: 0,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right, bend down and hook left',
+        pedagogicalRule: 'Horizontal cross bending down into hook.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_juu',
+    character: '十',
+    jlptLevel: 'N5',
+    onYomi: 'ジュウ, ジッ',
+    kunYomi: 'とお, と',
+    englishGloss: 'Ten, 10',
+    radical: '十',
+    strokeCount: 2,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 180,500 L 820,500',
+        startPoint: [180, 500],
+        endPoint: [820, 500],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Horizontal crossbeam drawn first.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 500,200 L 500,820',
+        startPoint: [500, 200],
+        endPoint: [500, 820],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Vertical central spine bisecting the horizontal.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_tsuki',
+    character: '月',
+    jlptLevel: 'N5',
+    onYomi: 'ゲツ, ガツ',
+    kunYomi: 'つき',
+    englishGloss: 'Moon, month',
+    radical: '月',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 300,220 L 300,820',
+        startPoint: [300, 220],
+        endPoint: [300, 820],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Left vertical upright stroke.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 300,220 L 720,220 L 720,820',
+        startPoint: [300, 220],
+        endPoint: [720, 820],
+        primaryAngleDeg: 0,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right, then Top to Bottom with hook',
+        pedagogicalRule: 'Top horizontal across, bending down right vertical with hook.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 310,420 L 710,420',
+        startPoint: [310, 420],
+        endPoint: [710, 420],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Upper interior horizontal bar.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 310,610 L 710,610',
+        startPoint: [310, 610],
+        endPoint: [710, 610],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Lower interior horizontal bar.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_ki',
+    character: '木',
+    jlptLevel: 'N5',
+    onYomi: 'モク, ボク',
+    kunYomi: 'き, こ-',
+    englishGloss: 'Tree, wood',
+    radical: '木',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 200,360 L 800,350',
+        startPoint: [200, 360],
+        endPoint: [800, 350],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Horizontal branch crossbar.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 500,180 L 500,820',
+        startPoint: [500, 180],
+        endPoint: [500, 820],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Central vertical trunk.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 500,370 Q 360,560 220,740',
+        startPoint: [500, 370],
+        endPoint: [220, 740],
+        primaryAngleDeg: 230,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal sweep',
+        pedagogicalRule: 'Left diagonal root.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 500,370 Q 640,560 780,740',
+        startPoint: [500, 370],
+        endPoint: [780, 740],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Right diagonal root.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_mizu',
+    character: '水',
+    jlptLevel: 'N5',
+    onYomi: 'スイ',
+    kunYomi: 'みず',
+    englishGloss: 'Water',
+    radical: '水',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 500,180 L 500,760 Q 500,830 430,800',
+        startPoint: [500, 180],
+        endPoint: [430, 800],
+        primaryAngleDeg: 90,
+        strokeType: 'hook',
+        directionalHint: 'Top to Bottom, hooked at end',
+        pedagogicalRule: 'Central vertical hooked spine.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 320,380 L 220,540',
+        startPoint: [320, 380],
+        endPoint: [220, 540],
+        primaryAngleDeg: 235,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal',
+        pedagogicalRule: 'Upper left diagonal stroke.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 220,740 L 380,560',
+        startPoint: [220, 740],
+        endPoint: [380, 560],
+        primaryAngleDeg: 50,
+        strokeType: 'dot',
+        directionalHint: 'Up-right diagonal flick',
+        pedagogicalRule: 'Lower left rising stroke.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 620,320 L 780,740',
+        startPoint: [620, 320],
+        endPoint: [780, 740],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Right downward stroke.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_hi',
+    character: '火',
+    jlptLevel: 'N5',
+    onYomi: 'カ',
+    kunYomi: 'ひ, -び, ほ-',
+    englishGloss: 'Fire',
+    radical: '火',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 300,420 L 220,560',
+        startPoint: [300, 420],
+        endPoint: [220, 560],
+        primaryAngleDeg: 240,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left dot',
+        pedagogicalRule: 'Left flame spark.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 700,380 L 780,520',
+        startPoint: [700, 380],
+        endPoint: [780, 520],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right dot',
+        pedagogicalRule: 'Right flame spark.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 500,200 Q 450,550 260,820',
+        startPoint: [500, 200],
+        endPoint: [260, 820],
+        primaryAngleDeg: 240,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left sweeping spine',
+        pedagogicalRule: 'Central sweeping spine.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 480,480 Q 640,660 780,820',
+        startPoint: [480, 480],
+        endPoint: [780, 820],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal leg',
+        pedagogicalRule: 'Right supporting leg.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_tsuchi',
+    character: '土',
+    jlptLevel: 'N5',
+    onYomi: 'ド, ト',
+    kunYomi: 'つち',
+    englishGloss: 'Soil, earth, ground',
+    radical: '土',
+    strokeCount: 3,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 260,420 L 740,410',
+        startPoint: [260, 420],
+        endPoint: [740, 410],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Top horizontal crossbar.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 500,200 L 500,760',
+        startPoint: [500, 200],
+        endPoint: [500, 760],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Vertical central stem.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 180,760 L 820,750',
+        startPoint: [180, 760],
+        endPoint: [820, 750],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom wide baseline foundation.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_kin',
+    character: '金',
+    jlptLevel: 'N5',
+    onYomi: 'キン, コン',
+    kunYomi: 'かね, かな-',
+    englishGloss: 'Gold, money, metal',
+    radical: '金',
+    strokeCount: 8,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 500,160 Q 400,320 250,440',
+        startPoint: [500, 160],
+        endPoint: [250, 440],
+        primaryAngleDeg: 235,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal sweep',
+        pedagogicalRule: 'Top left sweeping roof.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 500,160 Q 600,320 750,440',
+        startPoint: [500, 160],
+        endPoint: [750, 440],
+        primaryAngleDeg: 305,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Top right sweeping roof.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 320,440 L 680,430',
+        startPoint: [320, 440],
+        endPoint: [680, 430],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Upper horizontal bar.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 260,570 L 740,560',
+        startPoint: [260, 570],
+        endPoint: [740, 560],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Middle horizontal bar.'
+      },
+      {
+        strokeIndex: 5,
+        svgPath: 'M 500,440 L 500,780',
+        startPoint: [500, 440],
+        endPoint: [500, 780],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Central vertical spine.'
+      },
+      {
+        strokeIndex: 6,
+        svgPath: 'M 380,640 L 320,720',
+        startPoint: [380, 640],
+        endPoint: [320, 720],
+        primaryAngleDeg: 235,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left dot',
+        pedagogicalRule: 'Left inner spark.'
+      },
+      {
+        strokeIndex: 7,
+        svgPath: 'M 620,640 L 680,720',
+        startPoint: [620, 640],
+        endPoint: [680, 720],
+        primaryAngleDeg: 305,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right dot',
+        pedagogicalRule: 'Right inner spark.'
+      },
+      {
+        strokeIndex: 8,
+        svgPath: 'M 180,780 L 820,770',
+        startPoint: [180, 780],
+        endPoint: [820, 770],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom baseline bar.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_dai',
+    character: '大',
+    jlptLevel: 'N5',
+    onYomi: 'ダイ, タイ',
+    kunYomi: 'おお-, おお・きい, -おお・いに',
+    englishGloss: 'Big, large',
+    radical: '大',
+    strokeCount: 3,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 180,380 L 820,370',
+        startPoint: [180, 380],
+        endPoint: [820, 370],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Horizontal arms spread wide.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 500,180 Q 450,550 240,840',
+        startPoint: [500, 180],
+        endPoint: [240, 840],
+        primaryAngleDeg: 240,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal sweep',
+        pedagogicalRule: 'Central sweeping spine to bottom left.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 480,420 Q 640,650 800,840',
+        startPoint: [480, 420],
+        endPoint: [800, 840],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Right diagonal leg sweeping down right.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_naka',
+    character: '中',
+    jlptLevel: 'N5',
+    onYomi: 'チュウ',
+    kunYomi: 'なか, うち, あた・る',
+    englishGloss: 'Middle, in, inside',
+    radical: '丨',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 260,320 L 260,620',
+        startPoint: [260, 320],
+        endPoint: [260, 620],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Left vertical box wall.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 260,320 L 740,320 L 740,620',
+        startPoint: [260, 320],
+        endPoint: [740, 620],
+        primaryAngleDeg: 0,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right, then Top to Bottom',
+        pedagogicalRule: 'Top horizontal across and right vertical box wall.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 260,620 L 740,620',
+        startPoint: [260, 620],
+        endPoint: [740, 620],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom horizontal box closure.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 500,160 L 500,840',
+        startPoint: [500, 160],
+        endPoint: [500, 840],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Central piercing vertical spine.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_chii',
+    character: '小',
+    jlptLevel: 'N5',
+    onYomi: 'ショウ',
+    kunYomi: 'ちい・さい, こ-, お-',
+    englishGloss: 'Small, little',
+    radical: '小',
+    strokeCount: 3,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 500,180 L 500,760 Q 500,830 430,800',
+        startPoint: [500, 180],
+        endPoint: [430, 800],
+        primaryAngleDeg: 90,
+        strokeType: 'hook',
+        directionalHint: 'Top to Bottom with upward hook',
+        pedagogicalRule: 'Central vertical hook.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 320,420 Q 260,560 220,680',
+        startPoint: [320, 420],
+        endPoint: [220, 680],
+        primaryAngleDeg: 240,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal dot',
+        pedagogicalRule: 'Left diagonal dot.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 680,420 Q 740,560 780,680',
+        startPoint: [680, 420],
+        endPoint: [780, 680],
+        primaryAngleDeg: 310,
+        strokeType: 'right_fall',
+        directionalHint: 'Down-right diagonal slant',
+        pedagogicalRule: 'Right diagonal slant.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_yama',
+    character: '山',
+    jlptLevel: 'N5',
+    onYomi: 'サン, セン',
+    kunYomi: 'やま',
+    englishGloss: 'Mountain',
+    radical: '山',
+    strokeCount: 3,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 500,200 L 500,780',
+        startPoint: [500, 200],
+        endPoint: [500, 780],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Central highest mountain peak.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 260,450 L 260,780 L 740,780',
+        startPoint: [260, 450],
+        endPoint: [740, 780],
+        primaryAngleDeg: 90,
+        strokeType: 'hook',
+        directionalHint: 'Top to Bottom, then Left to Right',
+        pedagogicalRule: 'Left ridge descending and horizontal connecting valley.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 740,450 L 740,780',
+        startPoint: [740, 450],
+        endPoint: [740, 780],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Right mountain ridge.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_kawa',
+    character: '川',
+    jlptLevel: 'N5',
+    onYomi: 'セン',
+    kunYomi: 'かわ',
+    englishGloss: 'River, stream',
+    radical: '川',
+    strokeCount: 3,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 280,240 L 280,680 Q 280,760 220,800',
+        startPoint: [280, 240],
+        endPoint: [220, 800],
+        primaryAngleDeg: 90,
+        strokeType: 'left_fall',
+        directionalHint: 'Top to Bottom bending slightly left',
+        pedagogicalRule: 'Left river stream bending gently left.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 500,280 L 500,720',
+        startPoint: [500, 280],
+        endPoint: [500, 720],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Middle shorter river stream.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 720,200 L 720,800',
+        startPoint: [720, 200],
+        endPoint: [720, 800],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Right straight long river stream.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_en',
+    character: '円',
+    jlptLevel: 'N5',
+    onYomi: 'エン',
+    kunYomi: 'まる・い',
+    englishGloss: 'Yen, circle, round',
+    radical: '冂',
+    strokeCount: 4,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 260,240 L 260,820',
+        startPoint: [260, 240],
+        endPoint: [260, 820],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Left vertical upright boundary.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 260,240 L 740,240 L 740,820',
+        startPoint: [260, 240],
+        endPoint: [740, 820],
+        primaryAngleDeg: 0,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right, then Top to Bottom',
+        pedagogicalRule: 'Top horizontal across and right vertical frame.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 500,250 L 500,680',
+        startPoint: [500, 250],
+        endPoint: [500, 680],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Interior vertical divider.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 260,680 L 740,680',
+        startPoint: [260, 680],
+        endPoint: [740, 680],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Interior baseline horizontal.'
+      }
+    ]
+  },
+  {
+    id: 'kanji_n5_nen',
+    character: '年',
+    jlptLevel: 'N5',
+    onYomi: 'ネン',
+    kunYomi: 'とし',
+    englishGloss: 'Year',
+    radical: '干',
+    strokeCount: 6,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 420,180 L 320,300',
+        startPoint: [420, 180],
+        endPoint: [320, 300],
+        primaryAngleDeg: 235,
+        strokeType: 'left_fall',
+        directionalHint: 'Down-left diagonal',
+        pedagogicalRule: 'Top left short diagonal.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 280,310 L 720,300',
+        startPoint: [280, 310],
+        endPoint: [720, 300],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'First horizontal bar.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 380,440 L 360,560',
+        startPoint: [380, 440],
+        endPoint: [360, 560],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Short inner vertical stem.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 240,560 L 760,550',
+        startPoint: [240, 560],
+        endPoint: [760, 550],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Second horizontal bar.'
+      },
+      {
+        strokeIndex: 5,
+        svgPath: 'M 180,680 L 820,670',
+        startPoint: [180, 680],
+        endPoint: [820, 670],
+        primaryAngleDeg: 0,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Long base horizontal crossbeam.'
+      },
+      {
+        strokeIndex: 6,
+        svgPath: 'M 500,310 L 500,850',
+        startPoint: [500, 310],
+        endPoint: [500, 850],
+        primaryAngleDeg: 90,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Central long vertical spine piercing all levels.'
+      }
+    ]
+  },
+
   // ─── JLPT N5 (3 Characters) ──────────────────────────────────
   {
     id: 'kanji_n5_nichi',
