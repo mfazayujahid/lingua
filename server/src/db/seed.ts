@@ -6,6 +6,7 @@ import { IELTS_MOCK_LESSON_ID, IELTS_FULL_MOCK_ITEMS } from './seeds/ieltsMockEx
 import { SPEAKING_PACKAGES_SEED } from './seeds/speakingSeeds';
 import { LISTENING_PACKAGES_SEED } from './seeds/listeningSeeds';
 import { seedExamPackages, ALL_EXAM_PACKAGES_SEED } from './seeds/examPackageSeeds';
+import { seedWritingPrompts, WRITING_PROMPTS_SEEDS } from './seeds/writingSeeds';
 import {
   CURRICULUM_PILLARS,
   CURRICULUM_UNITS,
@@ -19,6 +20,8 @@ export function seed() {
   console.log('Clearing existing tables...');
   db.exec(`
     PRAGMA foreign_keys = OFF;
+    DELETE FROM writing_submissions;
+    DELETE FROM writing_prompts;
     DELETE FROM user_exam_attempts;
     DELETE FROM exam_packages;
     DELETE FROM listening_sessions;
@@ -202,8 +205,12 @@ console.log('Seeding Kana vector handwriting datasets (10 seed characters)...');
 
   seedExamPackages(db);
 
+  console.log('Seeding IELTS writing exam prompts...');
+  seedWritingPrompts(db);
+  console.log(`Seeded ${WRITING_PROMPTS_SEEDS.length} IELTS writing prompts.`);
+
   console.log('Seeding completed successfully!');
-  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages, ${LISTENING_PACKAGES_SEED.length} listening packages, ${ALL_EXAM_PACKAGES_SEED.length} multi-mock exam packages.`);
+  console.log(`Summary: ${CURRICULUM_PILLARS.length} pillars, ${CURRICULUM_UNITS.length} units, ${CURRICULUM_LESSONS.length} lessons, ${CURRICULUM_EXERCISE_ITEMS.length} exercises, ${KANA_SEEDS.length} kana, ${KANJI_SEEDS.length} kanji, ${SPEAKING_PACKAGES_SEED.length} speaking packages, ${LISTENING_PACKAGES_SEED.length} listening packages, ${ALL_EXAM_PACKAGES_SEED.length} multi-mock exam packages, ${WRITING_PROMPTS_SEEDS.length} writing prompts.`);
 }
 
 // Execute directly if run as main

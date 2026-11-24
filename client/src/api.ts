@@ -9,7 +9,10 @@ import {
   SpeakingExamPackage,
   MasterExamPackageSummary,
   UserExamAttemptRecord,
-  ExamBatteryTrajectoryResult
+  ExamBatteryTrajectoryResult,
+  DiagnosticScorecardResult,
+  IELTSWritingPromptStimulus,
+  EssaySubmissionPayload
 } from '../../shared/types';
 
 const BASE_URL = '/api';
@@ -965,5 +968,39 @@ export async function fetchExamTrajectory(track: LevelCode): Promise<ExamBattery
     totalAttemptsCount: K,
     progressionTrend: trend
   };
+}
+
+// ==========================================
+// Phase 4: IELTS Writing Assessment API
+// ==========================================
+
+export async function fetchWritingPrompts(taskType?: string): Promise<{ prompts: IELTSWritingPromptStimulus[] }> {
+  const url = taskType ? `${BASE_URL}/writing/prompts?taskType=${encodeURIComponent(taskType)}` : `${BASE_URL}/writing/prompts`;
+  const res = await fetch(url);
+  return res.json();
+}
+
+export async function fetchWritingPromptById(id: string): Promise<{ prompt: IELTSWritingPromptStimulus }> {
+  const res = await fetch(`${BASE_URL}/writing/prompts/${encodeURIComponent(id)}`);
+  return res.json();
+}
+
+export async function submitWritingEssayForDiagnostic(payload: EssaySubmissionPayload): Promise<DiagnosticScorecardResult> {
+  const res = await fetch(`${BASE_URL}/writing/evaluate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}
+
+export async function fetchWritingSubmissions(userId = 'user_001'): Promise<{ submissions: any[] }> {
+  const res = await fetch(`${BASE_URL}/writing/submissions?userId=${encodeURIComponent(userId)}`);
+  return res.json();
+}
+
+export async function fetchWritingSubmissionById(id: string): Promise<{ submission: any; scorecard: DiagnosticScorecardResult }> {
+  const res = await fetch(`${BASE_URL}/writing/submissions/${encodeURIComponent(id)}`);
+  return res.json();
 }
 

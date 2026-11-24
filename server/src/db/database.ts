@@ -1,6 +1,7 @@
 // SQLite Database Connection & Schema Definition
 import Database from 'better-sqlite3';
 import path from 'path';
+import { WritingPromptRow, WritingSubmissionRow } from './schema';
 
 const DB_PATH = path.join(__dirname, '../../lingua_mastery.db');
 
@@ -244,5 +245,103 @@ export function initDatabase() {
     CREATE INDEX IF NOT EXISTS idx_user_exam_attempts_user_package ON user_exam_attempts(user_id, package_id);
     CREATE INDEX IF NOT EXISTS idx_exam_packages_level ON exam_packages(level_code);
     CREATE INDEX IF NOT EXISTS idx_exam_packages_level_pack ON exam_packages(level_code, pack_number);
+
+    CREATE TABLE IF NOT EXISTS writing_prompts (
+      id TEXT PRIMARY KEY,
+      task_type TEXT NOT NULL,
+      category TEXT,
+      prompt_title TEXT NOT NULL,
+      prompt_text TEXT NOT NULL,
+      visual_asset_url TEXT,
+      visual_data_points TEXT,
+      time_limit_minutes INTEGER NOT NULL DEFAULT 20,
+      target_word_count INTEGER NOT NULL DEFAULT 150,
+      model_band_8_response TEXT NOT NULL,
+      guidance_notes TEXT,
+      title_id TEXT,
+      prompt_text_id TEXT,
+      guidance_notes_id TEXT,
+      model_strengths_en TEXT,
+      model_strengths_id TEXT,
+      benchmark_band REAL DEFAULT 8.5,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS writing_submissions (
+      id TEXT PRIMARY KEY,
+      prompt_id TEXT NOT NULL REFERENCES writing_prompts(id),
+      user_id TEXT NOT NULL DEFAULT 'user_001',
+      essay_text TEXT NOT NULL,
+      time_spent_seconds INTEGER NOT NULL DEFAULT 0,
+      word_count INTEGER NOT NULL DEFAULT 0,
+      overall_band REAL NOT NULL,
+      ta_tr_band REAL NOT NULL,
+      cc_band REAL NOT NULL,
+      lr_band REAL NOT NULL,
+      gra_band REAL NOT NULL,
+      evaluation_json TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_writing_prompts_task_type ON writing_prompts(task_type);
+    CREATE INDEX IF NOT EXISTS idx_writing_submissions_prompt ON writing_submissions(prompt_id);
+    CREATE INDEX IF NOT EXISTS idx_writing_submissions_user ON writing_submissions(user_id);
   `);
+}
+
+export function getAllWritingPrompts(taskType?: string): WritingPromptRow[] {
+  if (taskType) {
+    const raw = taskType.toLowerCase().trim();
+    // Normalize task_1 / task1_academic / task1 / task_2 etc.
+    let searchPattern = `%${raw}%`;
+    if (raw === 'task_1' || raw === 'task1') {
+      searchPattern = '%task%1%';
+    } else if (raw === 'task_2' || raw === 'task2') {
+      searchPattern = '%task%2%';
+    }
+    return db.prepare(`
+      SELECT * FROM writing_prompts 
+      WHERE LOWER(task_type) LIKE ? OR LOWER(id) LIKE ?
+      ORDER BY id ASC
+    `).all(searchPattern, searchPattern) as WritingPromptRow[];
+  }
+  return db.prepare(`SELECT * FROM writing_prompts ORDER BY id ASC`).all() as WritingPromptRow[];
+}
+
+export function getWritingPromptById(id: string): WritingPromptRow | undefined {
+  return db.prepare(`SELECT * FROM writing_prompts WHERE id = ?`).get(id) as WritingPromptRow | undefined;
+}
+
+export function saveWritingSubmission(sub: WritingSubmissionRow): void {
+  db.prepare(`
+    INSERT INTO writing_submissions (
+      id, prompt_id, user_id, essay_text, time_spent_seconds, word_count,
+      overall_band, ta_tr_band, cc_band, lr_band, gra_band, evaluation_json, created_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+    sub.id,
+    sub.prompt_id,
+    sub.user_id,
+    sub.essay_text,
+    sub.time_spent_seconds,
+    sub.word_count,
+    sub.overall_band,
+    sub.ta_tr_band,
+    sub.cc_band,
+    sub.lr_band,
+    sub.gra_band,
+    sub.evaluation_json,
+    sub.created_at || new Date().toISOString()
+  );
+}
+
+export function getWritingSubmissions(userId?: string): WritingSubmissionRow[] {
+  if (userId) {
+    return db.prepare(`SELECT * FROM writing_submissions WHERE user_id = ? ORDER BY created_at DESC`).all(userId) as WritingSubmissionRow[];
+  }
+  return db.prepare(`SELECT * FROM writing_submissions ORDER BY created_at DESC`).all() as WritingSubmissionRow[];
+}
+
+export function getWritingSubmissionById(id: string): WritingSubmissionRow | undefined {
+  return db.prepare(`SELECT * FROM writing_submissions WHERE id = ?`).get(id) as WritingSubmissionRow | undefined;
 }

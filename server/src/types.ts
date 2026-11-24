@@ -711,3 +711,122 @@ export interface ExamSubmissionEvaluationResult {
   statusDescriptionEn: string;
   statusDescriptionId: string;
 }
+
+// ==========================================
+// Phase 4: AI Diagnostic Essay Assessment Types
+// ==========================================
+
+export type IELTSWritingTaskType = 'task1_academic' | 'task1_general' | 'task2_discursive' | 'task_1' | 'task_2';
+
+export type AnnotationCategory = 
+  | 'grammar_error' 
+  | 'collocation_suggestion' 
+  | 'vocabulary_enhancement' 
+  | 'cohesive_marker_feedback';
+
+export type AnnotationSeverity = 'critical' | 'warning' | 'info';
+
+export interface IELTSWritingPromptStimulus {
+  promptId: string;
+  taskType: IELTSWritingTaskType;
+  title: string;
+  titleId: string;
+  promptText: string;
+  promptTextId: string;
+  minimumWords: number;
+  suggestedMinutes: number;
+  category?: string;
+  visualType?: 'line_graph' | 'bar_chart' | 'pie_chart' | 'data_table' | 'process_diagram' | 'map';
+  visualAssetUrl?: string;
+  visualDataPoints?: Record<string, any>;
+  guidanceNotes: string[];
+  guidanceNotesId: string[];
+  benchmarkBand?: number;
+  modelAnswer?: string;
+  modelStrengthsEn?: string[];
+  modelStrengthsId?: string[];
+}
+
+export interface SentenceAnnotation {
+  id: string;
+  sentenceIndex: number;
+  charStart: number;
+  charEnd: number;
+  category: AnnotationCategory;
+  subCategory: string;
+  severity: AnnotationSeverity;
+  originalText: string;
+  suggestedReplacement: string;
+  explanationEn: string;
+  explanationId: string;
+}
+
+export interface CriterionDiagnosticDetail {
+  score: number;
+  nameEn: string;
+  nameId: string;
+  strengthsEn: string[];
+  strengthsId: string[];
+  weaknessesEn: string[];
+  weaknessesId: string[];
+  cambridgeBandDescriptorCitation: string;
+}
+
+export interface DiagnosticScorecardResult {
+  submissionId: string;
+  userId: string;
+  promptId: string;
+  taskType: IELTSWritingTaskType;
+  submittedAt: string;
+  durationSeconds: number;
+  isTimedExam: boolean;
+  
+  // Aggregate Scores
+  overallBand: number;
+  cefrLevel: 'B1' | 'B2' | 'C1' | 'C2';
+  criteriaScores: {
+    taskAchievementOrResponse: CriterionDiagnosticDetail;
+    coherenceAndCohesion: CriterionDiagnosticDetail;
+    lexicalResource: CriterionDiagnosticDetail;
+    grammaticalRangeAndAccuracy: CriterionDiagnosticDetail;
+  };
+  
+  // Quantitative Metrics
+  wordCountMetrics: {
+    totalWords: number;
+    targetMinimum: number;
+    isUnderlength: boolean;
+    penaltyApplied: number;
+    characterCount: number;
+    paragraphCount: number;
+  };
+  linguisticMetrics: {
+    awlDensityPercentage: number;
+    awlWordCount: number;
+    typeTokenRatio: number;
+    guiraudIndex: number;
+    errorFreeSentenceRatio: number;
+    complexSentenceRatio: number;
+  };
+  
+  // Sentence-Level Annotations
+  annotations: SentenceAnnotation[];
+  
+  // Model Comparison
+  modelAnswerComparison: {
+    benchmarkBand: number;
+    modelText: string;
+    modelKeyStrengthsEn: string[];
+    modelKeyStrengthsId: string[];
+  };
+}
+
+export interface EssaySubmissionPayload {
+  promptId: string;
+  taskType: IELTSWritingTaskType;
+  essayContent: string;
+  durationSeconds: number;
+  isTimedMode: boolean;
+  locale?: 'en' | 'id';
+  userId?: string;
+}
