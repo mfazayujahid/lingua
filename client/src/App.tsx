@@ -204,7 +204,12 @@ export const AppContent: React.FC = () => {
 
         {activeView === 'analytics' && (
           <AnalyticsView
+            activeTrack={activeTrack}
             onPracticeWeakSpot={() => setActiveView('exam')}
+            onNavigateToExam={(packageId) => {
+              if (packageId) setCurrentExamLessonId(packageId);
+              setActiveView('exam');
+            }}
           />
         )}
       </main>

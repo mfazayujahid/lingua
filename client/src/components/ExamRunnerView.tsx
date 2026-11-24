@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { fetchLesson, startSession, submitSession } from '../api';
-import { LevelCode } from '../../../shared/types';
+import {
+  fetchLesson,
+  startSession,
+  submitSession,
+  fetchExamPackages,
+  fetchExamPackageById,
+  submitExamAttempt,
+  DEFAULT_EXAM_PACKAGES
+} from '../api';
+import { LevelCode, MasterExamPackageSummary } from '../../../shared/types';
+import { generateIeltsAcademicPackItems, generateJlptN5PackItems } from '../data/multiMockExamPacks';
 import {
   Clock,
   CheckCircle2,
@@ -255,6 +264,11 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [result, setResult] = useState<any>(null);
 
+  // Phase 3 Multi-Mock Engine State
+  const [packages, setPackages] = useState<MasterExamPackageSummary[]>([]);
+  const [selectedPackNumber, setSelectedPackNumber] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [examMode, setExamMode] = useState<'strict' | 'practice'>('strict');
+
   // CD-IELTS state
   const [fontSizeLevel, setFontSizeLevel] = useState<'sm' | 'base' | 'lg'>('base');
   const [showExitConfirmModal, setShowExitConfirmModal] = useState<boolean>(false);
@@ -265,8 +279,25 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
 
   const passageScrollRef = useRef<HTMLDivElement>(null);
 
-  const isFullMockExam = currentLessonId === 'les_ia_mock_full_1' || items.length >= 40;
+  const isFullMockExam = currentLessonId.includes('mock') || currentLessonId === 'les_ia_mock_full_1' || items.length >= 40;
   const isIELTSTrack = !isJapaneseTrack;
+
+  const loadPackages = async () => {
+    try {
+      const res = await fetchExamPackages(activeTrack);
+      if (res && res.packages && res.packages.length > 0) {
+        setPackages(res.packages);
+      } else {
+        setPackages(DEFAULT_EXAM_PACKAGES[activeTrack] || DEFAULT_EXAM_PACKAGES.ielts_academic);
+      }
+    } catch {
+      setPackages(DEFAULT_EXAM_PACKAGES[activeTrack] || DEFAULT_EXAM_PACKAGES.ielts_academic);
+    }
+  };
+
+  useEffect(() => {
+    loadPackages();
+  }, [activeTrack]);
 
   useEffect(() => {
     if (lessonId && lessonId !== 'les_n5_grammar_1') {
@@ -280,9 +311,9 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
     initExam(currentLessonId);
   }, [currentLessonId]);
 
-  // Tab switching / Proctoring violation detection
+  // Tab switching / Proctoring violation detection (Strict Mode only)
   useEffect(() => {
-    if (loading || result) return;
+    if (loading || result || examMode !== 'strict') return;
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -309,7 +340,7 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
       window.removeEventListener('blur', handleBlur);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [loading, result]);
+  }, [loading, result, examMode]);
 
   const initExam = async (idToLoad: string) => {
     setLoading(true);
@@ -323,36 +354,98 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
     setShowTabWarningModal(false);
 
     try {
-      const lessonData = await fetchLesson(idToLoad);
-      setLessonInfo(lessonData.lesson);
-      const loadedItems = (lessonData.items || []).map((it: any) => ({
-        ...it,
-        passageText: it.passageText || it.passage_text,
-        itemType: it.itemType || it.item_type,
-        options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
-        correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
-      }));
+      let loadedItems: any[] = [];
+      let loadedLessonInfo: any = null;
+
+      const isIeltsMockPack = idToLoad.startsWith('ielts_acad_mock_');
+      const isJlptMockPack = idToLoad.startsWith('jlpt_n5_mock_');
+
+      if (isIeltsMockPack) {
+        const packNum = (parseInt(idToLoad.replace('ielts_acad_mock_0', '').replace('ielts_acad_mock_', '')) || selectedPackNumber) as 1 | 2 | 3 | 4 | 5;
+        setSelectedPackNumber(packNum);
+        if (packNum === 1) {
+          try {
+            const lessonData = await fetchLesson('les_ia_mock_full_1');
+            loadedLessonInfo = lessonData.lesson;
+            loadedItems = (lessonData.items || []).map((it: any) => ({
+              ...it,
+              passageText: it.passageText || it.passage_text,
+              itemType: it.itemType || it.item_type,
+              options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+              correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+            }));
+          } catch {
+            loadedItems = generateIeltsAcademicPackItems(1);
+          }
+        } else {
+          loadedItems = generateIeltsAcademicPackItems(packNum);
+        }
+      } else if (isJlptMockPack) {
+        const packNum = (parseInt(idToLoad.replace('jlpt_n5_mock_0', '').replace('jlpt_n5_mock_', '')) || selectedPackNumber) as 1 | 2 | 3 | 4 | 5;
+        setSelectedPackNumber(packNum);
+        if (packNum === 1) {
+          try {
+            const lessonData = await fetchLesson('les_n5_gram_1');
+            loadedLessonInfo = lessonData.lesson;
+            loadedItems = (lessonData.items || []).map((it: any) => ({
+              ...it,
+              passageText: it.passageText || it.passage_text,
+              itemType: it.itemType || it.item_type,
+              options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+              correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+            }));
+          } catch {
+            loadedItems = generateJlptN5PackItems(1);
+          }
+        } else {
+          loadedItems = generateJlptN5PackItems(packNum);
+        }
+      } else {
+        try {
+          const lessonData = await fetchLesson(idToLoad);
+          loadedLessonInfo = lessonData.lesson;
+          loadedItems = (lessonData.items || []).map((it: any) => ({
+            ...it,
+            passageText: it.passageText || it.passage_text,
+            itemType: it.itemType || it.item_type,
+            options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+            correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+          }));
+        } catch {
+          if (!isJapaneseTrack) {
+            loadedItems = generateIeltsAcademicPackItems(selectedPackNumber);
+          } else {
+            loadedItems = generateJlptN5PackItems(selectedPackNumber);
+          }
+        }
+      }
+
+      setLessonInfo(loadedLessonInfo);
       setItems(loadedItems);
 
-      const duration = (idToLoad === 'les_ia_mock_full_1' || loadedItems.length >= 40)
+      const duration = (idToLoad.includes('mock') || loadedItems.length >= 40)
         ? 3600
-        : (lessonData.lesson?.estimatedMinutes || 20) * 60;
+        : (loadedLessonInfo?.estimatedMinutes || 25) * 60;
       setTimeRemaining(duration);
       setInitialDuration(duration);
 
-      const isJLPT = idToLoad.includes('n5') || idToLoad.includes('n4') || idToLoad.includes('n3') || idToLoad.includes('n2') || idToLoad.includes('n1');
+      const isJLPT = idToLoad.includes('n5') || idToLoad.includes('n4') || idToLoad.includes('n3') || idToLoad.includes('n2') || idToLoad.includes('n1') || isJapaneseTrack;
       const trackCode = isJLPT ? 'jlpt' : 'ielts';
       const levelCode = isJLPT
         ? (idToLoad.includes('n5') ? 'n5' : idToLoad.includes('n4') ? 'n4' : idToLoad.includes('n3') ? 'n3' : idToLoad.includes('n2') ? 'n2' : 'n1')
         : (idToLoad.includes('gen') ? 'general' : 'academic');
 
-      const session = await startSession({
-        userId: 'user_001',
-        trackCode,
-        levelCode,
-        sessionType: loadedItems.length >= 40 ? 'official_mock_exam' : 'exam_simulation'
-      });
-      setSessionId(session.sessionId);
+      try {
+        const session = await startSession({
+          userId: 'user_001',
+          trackCode,
+          levelCode,
+          sessionType: loadedItems.length >= 40 ? 'official_mock_exam' : 'exam_simulation'
+        });
+        setSessionId(session.sessionId);
+      } catch {
+        setSessionId(`local_session_${Date.now()}`);
+      }
       setLoading(false);
     } catch (err) {
       console.error('Failed to init exam session', err);
@@ -386,13 +479,86 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
   };
 
   const handleSubmit = async (isAbandoned = false) => {
-    if (!sessionId || result) return;
+    if (result) return;
     try {
       const timeSpent = Math.max(1, initialDuration - timeRemaining);
-      const submissionResult = await submitSession(sessionId, answers, timeSpent, isAbandoned);
+      let submissionResult: any = null;
+      if (sessionId && !sessionId.startsWith('local_')) {
+        try {
+          submissionResult = await submitSession(sessionId, answers, timeSpent, isAbandoned);
+        } catch (e) {
+          console.warn('Backend submitSession failed, computing fallback', e);
+        }
+      }
+
+      // Local fallback calculation if server failed or offline
+      if (!submissionResult) {
+        const correctCount = items.filter(it => answers[it.id] === it.correctAnswer).length;
+        const totalCount = items.length || 40;
+        const pct = Math.round((correctCount / totalCount) * 100);
+        let band = 0;
+        if (!isJapaneseTrack) {
+          if (correctCount >= 39) band = 9.0;
+          else if (correctCount >= 37) band = 8.5;
+          else if (correctCount >= 35) band = 8.0;
+          else if (correctCount >= 32) band = 7.5;
+          else if (correctCount >= 30) band = 7.0;
+          else if (correctCount >= 26) band = 6.5;
+          else if (correctCount >= 23) band = 6.0;
+          else if (correctCount >= 19) band = 5.5;
+          else if (correctCount >= 15) band = 5.0;
+          else band = 4.5;
+        } else {
+          band = Math.round((correctCount / totalCount) * 180);
+        }
+
+        submissionResult = {
+          sessionId: sessionId || `session_${Date.now()}`,
+          rawScore: correctCount,
+          totalQuestions: totalCount,
+          percentage: pct,
+          estimatedScore: band,
+          band: band,
+          verdict: (isJapaneseTrack ? band >= 80 : band >= 6.5) ? 'PASSED' : 'NEEDS_REVIEW',
+          answers,
+          itemAnalyses: items.map(it => ({
+            itemId: it.id,
+            userAnswer: answers[it.id] || '',
+            correctAnswer: it.correctAnswer,
+            isCorrect: answers[it.id] === it.correctAnswer,
+            explanation: it.explanation
+          }))
+        };
+      }
+
       setResult(submissionResult);
       setShowFinishConfirmModal(false);
       setShowExitConfirmModal(false);
+
+      // Record to multi-mock exam attempt store
+      try {
+        const activeList = packages.length > 0 ? packages : (DEFAULT_EXAM_PACKAGES[activeTrack] || DEFAULT_EXAM_PACKAGES.ielts_academic);
+        const currentPkg = activeList.find(p => p.packNumber === selectedPackNumber) || activeList[0];
+        const rawScore = submissionResult.rawScore || 0;
+        const totalQ = items.length || 40;
+        const scaled = submissionResult.estimatedScore || submissionResult.band || 0;
+        await submitExamAttempt({
+          packageId: currentPkg?.id || currentLessonId,
+          levelCode: activeTrack || 'ielts_academic',
+          packNumber: selectedPackNumber,
+          rawScore,
+          totalQuestions: totalQ,
+          scaledScore: scaled,
+          passed: submissionResult.verdict === 'PASSED' || scaled >= (currentPkg?.passThresholdScore || 6.5),
+          sectionalBreakdown: {
+            reading: { correct: rawScore, total: totalQ, percentage: Math.round((rawScore / totalQ) * 100) }
+          },
+          timeSpentSeconds: timeSpent
+        });
+        loadPackages();
+      } catch (err) {
+        console.warn('Failed to record exam attempt for trajectory', err);
+      }
     } catch (err) {
       console.error('Failed to submit exam', err);
     }
@@ -546,27 +712,60 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
         </div>
       )}
 
-      {/* Module Selector Banner */}
-      <div className="bg-washi-50 dark:bg-sumi-900 border border-washi-300 dark:border-sumi-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-washi-200 dark:border-sumi-800 pb-3">
+      {/* Master Mock Battery Selector Hub (Screen 4) */}
+      <div className="bg-washi-50 dark:bg-sumi-900 border border-washi-300 dark:border-sumi-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+        {/* Hub Header & Mode Toggle Ribbon */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-washi-200 dark:border-sumi-800 pb-4">
           <div>
-            <div className="flex items-center gap-2 text-vermilion-600 dark:text-vermilion-400 text-xs font-bold mb-0.5">
+            <div className="flex items-center gap-2 text-vermilion-600 dark:text-vermilion-400 text-xs font-bold uppercase tracking-wider mb-1">
               <Layers className="w-4 h-4" />
-              <span>{t('exam.select_module', { track: trackKey.toUpperCase() })}</span>
+              <span>{t('exam.hub_title')}</span>
             </div>
-            <p className="text-xs text-stone-600 dark:text-stone-400">
-              {language === 'id' ? 'Pilihlah salah satu modul latihan berstandar internasional berikut untuk memulai evaluasi:' : 'Select any official standardized practice module below to begin testing:'}
+            <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100">
+              {language === 'id' ? 'Pusat Baterai Simulasi Ujian Resmi (Paket 1–5)' : 'Official Standardized Mock Batteries (Packs 1–5)'}
+            </h2>
+            <p className="text-xs text-stone-500 mt-0.5">
+              {t('exam.hub_subtitle')}
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-vermilion-500/10 text-vermilion-600 dark:text-vermilion-400 border border-vermilion-500/20">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Mode Switcher Toggle */}
+            <div className="flex items-center rounded-xl bg-washi-200 dark:bg-sumi-800 p-1 border border-washi-300 dark:border-sumi-700">
+              <button
+                type="button"
+                onClick={() => setExamMode('strict')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  examMode === 'strict'
+                    ? 'bg-amber-500 text-white shadow-sm'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                }`}
+              >
+                <ShieldAlert className="w-3.5 h-3.5" />
+                <span>{t('exam.strict_mode')}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setExamMode('practice')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  examMode === 'practice'
+                    ? 'bg-vermilion-500 text-white shadow-sm'
+                    : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>{t('exam.practice_mode')}</span>
+              </button>
+            </div>
+
+            <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-vermilion-500/10 text-vermilion-600 dark:text-vermilion-400 border border-vermilion-500/20">
               {trackKey.toUpperCase()}
             </span>
+
             {onNavigateBack && (
               <button
                 onClick={() => {
-                  if (!result && items.length > 0) {
+                  if (!result && items.length > 0 && answeredCount > 0) {
                     setShowExitConfirmModal(true);
                   } else {
                     onNavigateBack();
@@ -580,46 +779,95 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
           </div>
         </div>
 
-        {/* Carousel / Grid of Available Exam Presets */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1">
-          {presetsForLevel.map(preset => {
-            const isSelected = preset.id === currentLessonId;
+        {/* 5-Pack Carousel / Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-1">
+          {(packages.length > 0 ? packages : (DEFAULT_EXAM_PACKAGES[activeTrack] || DEFAULT_EXAM_PACKAGES.ielts_academic)).map(pkg => {
+            const isSelected = pkg.packNumber === selectedPackNumber;
+            const tierColors: Record<string, string> = {
+              diagnostic: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
+              standard: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
+              challenging: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20',
+              advanced: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20',
+              mastery: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'
+            };
+            const tierLabel = t(`exam.difficulty_${pkg.difficultyTier}`) || pkg.difficultyTier;
+
             return (
               <button
-                key={preset.id}
+                key={pkg.id || pkg.packNumber}
+                type="button"
                 onClick={() => {
-                  if (!result && items.length > 0 && currentLessonId !== preset.id) {
+                  if (!result && items.length > 0 && answeredCount > 0 && pkg.packNumber !== selectedPackNumber) {
                     setShowExitConfirmModal(true);
                     return;
                   }
-                  setCurrentLessonId(preset.id);
-                  if (onSelectExam) onSelectExam(preset.id);
+                  setSelectedPackNumber(pkg.packNumber);
+                  const newId = pkg.id || (isJapaneseTrack ? `jlpt_n5_mock_0${pkg.packNumber}` : `ielts_acad_mock_0${pkg.packNumber}`);
+                  setCurrentLessonId(newId);
+                  if (onSelectExam) onSelectExam(newId);
                 }}
-                className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
+                className={`p-3.5 rounded-xl border text-left transition-all flex flex-col justify-between relative group ${
                   isSelected
-                    ? 'bg-vermilion-500 text-white border-vermilion-600 shadow-md ring-2 ring-vermilion-500/20'
-                    : 'bg-white dark:bg-sumi-850 border-washi-200 dark:border-sumi-800 text-stone-700 dark:text-stone-300 hover:border-vermilion-500/40'
+                    ? 'bg-white dark:bg-sumi-850 border-vermilion-500 shadow-md ring-2 ring-vermilion-500/20'
+                    : 'bg-white dark:bg-sumi-850 border-washi-200 dark:border-sumi-800 hover:border-vermilion-500/40'
                 }`}
               >
-                <div>
-                  <div className="flex items-center justify-between gap-1 text-[11px] mb-1">
-                    <span className={`font-mono font-bold px-1.5 py-0.5 rounded text-[10px] ${
-                      isSelected ? 'bg-white/20 text-white' : 'bg-washi-200 dark:bg-sumi-800 text-stone-600 dark:text-stone-400'
-                    }`}>
-                      {preset.estMin} min • {preset.itemsCount} {language === 'id' ? 'soal' : 'items'}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-1 text-[11px]">
+                    <span className="font-mono font-black text-xs text-stone-900 dark:text-stone-100 flex items-center gap-1">
+                      <span>{language === 'id' ? `Paket ${pkg.packNumber}` : `Pack ${pkg.packNumber}`}</span>
+                      {isSelected && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-vermilion-500 animate-ping" />
+                      )}
                     </span>
-                    {isSelected && (
-                      <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-white text-vermilion-600">
-                        {language === 'id' ? 'Aktif' : 'Active'}
+                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border uppercase tracking-wider ${tierColors[pkg.difficultyTier] || tierColors.standard}`}>
+                      {tierLabel}
+                    </span>
+                  </div>
+
+                  <h4 className="font-bold text-xs text-stone-900 dark:text-stone-100 line-clamp-1">
+                    {language === 'id' ? pkg.titleId : pkg.titleEn}
+                  </h4>
+
+                  <p className="text-[10px] text-stone-500 dark:text-stone-400 line-clamp-2 leading-relaxed">
+                    {language === 'id' ? pkg.thematicFocusId : pkg.thematicFocusEn}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-washi-200 dark:border-sumi-800 mt-2 space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] text-stone-400 font-mono">
+                    <span>{pkg.totalDurationMinutes} min</span>
+                    <span>{pkg.questionCount} {language === 'id' ? 'soal' : 'items'}</span>
+                  </div>
+
+                  {/* Past Attempt Status Badge */}
+                  <div className="flex items-center justify-between">
+                    {pkg.completed ? (
+                      <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" />
+                        <span>{language === 'id' ? `Selesai: ${pkg.bestScore || pkg.bestBand}` : `Done: ${pkg.bestScore || pkg.bestBand}`}</span>
+                      </span>
+                    ) : isSelected && answeredCount > 0 ? (
+                      <span className="text-[10px] font-bold text-amber-500 flex items-center gap-1">
+                        <Clock className="w-3 h-3 animate-spin" />
+                        <span>{t('exam.status_in_progress')}</span>
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-stone-400">
+                        {t('exam.status_unattempted')}
                       </span>
                     )}
+
+                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                      isSelected
+                        ? 'bg-vermilion-500 text-white'
+                        : 'bg-washi-100 dark:bg-sumi-800 text-stone-600 dark:text-stone-400'
+                    }`}>
+                      {isSelected
+                        ? (examMode === 'strict' ? t('exam.start_official_exam') : t('exam.start_practice'))
+                        : (language === 'id' ? 'Pilih' : 'Select')}
+                    </span>
                   </div>
-                  <h4 className={`font-bold text-xs line-clamp-1 ${isSelected ? 'text-white' : 'text-stone-900 dark:text-stone-100 font-jp'}`}>
-                    {renderFurigana(language === 'id' ? preset.titleId : preset.titleEn)}
-                  </h4>
-                  <p className={`text-[11px] line-clamp-2 mt-1 ${isSelected ? 'text-white/90' : 'text-stone-500 dark:text-stone-400'}`}>
-                    {language === 'id' ? preset.subId : preset.subEn}
-                  </p>
                 </div>
               </button>
             );

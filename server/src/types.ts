@@ -495,3 +495,53 @@ export interface ListeningSessionRecord {
   createdAt?: string;
 }
 
+// ==========================================
+// Phase 3: Multi-Mock Exam Engine (Packs 1-5)
+// ==========================================
+
+export type ExamDifficultyTier = 'diagnostic' | 'standard' | 'challenging' | 'advanced' | 'mastery';
+
+export interface MasterExamPackageSummary {
+  id: string;
+  levelCode: LevelCode;
+  packNumber: 1 | 2 | 3 | 4 | 5;
+  titleEn: string;
+  titleId: string;
+  thematicFocusEn: string;
+  thematicFocusId: string;
+  difficultyTier: ExamDifficultyTier;
+  totalDurationMinutes: number;
+  passThresholdScore: number;
+  questionCount: number;
+  completed?: boolean;
+  bestScore?: number;
+  bestBand?: number;
+  lastAttemptAt?: string;
+}
+
+export interface UserExamAttemptRecord {
+  id: string;
+  userId: string;
+  packageId: string;
+  levelCode: LevelCode;
+  packNumber: number;
+  rawScore: number;
+  totalQuestions: number;
+  scaledScore: number;
+  passed: boolean;
+  sectionalBreakdown: Record<string, { correct: number; total: number; percentage: number }>;
+  timeSpentSeconds: number;
+  completedAt: string;
+}
+
+export interface ExamBatteryTrajectoryResult {
+  attempts: UserExamAttemptRecord[];
+  weightedReadinessIndex: number;
+  readinessMargin: number;
+  targetThreshold: number;
+  predictedScore: number;
+  totalAttemptsCount: number;
+  progressionTrend: 'ascending' | 'stable' | 'needs_reinforcement';
+}
+
+

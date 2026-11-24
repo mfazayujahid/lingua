@@ -6,7 +6,10 @@ import {
   DiagnosticAnalytics,
   LevelCode,
   SpeakingDiagnosticEvaluationResult,
-  SpeakingExamPackage
+  SpeakingExamPackage,
+  MasterExamPackageSummary,
+  UserExamAttemptRecord,
+  ExamBatteryTrajectoryResult
 } from '../../shared/types';
 
 const BASE_URL = '/api';
@@ -269,3 +272,698 @@ export async function evaluateListening(payload: {
   }
   throw new Error('Fallback to local calculation');
 }
+
+// ==========================================
+// Phase 3: Multi-Mock Exam API Service
+// ==========================================
+
+export const DEFAULT_EXAM_PACKAGES: Record<string, MasterExamPackageSummary[]> = {
+  ielts_academic: [
+    {
+      id: 'ielts_acad_mock_01',
+      levelCode: 'ielts_academic',
+      packNumber: 1,
+      titleEn: 'IELTS Academic Official Simulation Pack 1',
+      titleId: 'Simulasi Resmi IELTS Akademik Paket 1',
+      thematicFocusEn: 'Chronometry, Trophic Cascades & Bilingualism',
+      thematicFocusId: 'Kronometri, Kaskade Trofik & Kedwibahasaan',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 60,
+      passThresholdScore: 6.5,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_acad_mock_02',
+      levelCode: 'ielts_academic',
+      packNumber: 2,
+      titleEn: 'IELTS Academic Official Simulation Pack 2',
+      titleId: 'Simulasi Resmi IELTS Akademik Paket 2',
+      thematicFocusEn: 'Deep Tunnel Sewerage, Oceanic Paleoclimatology & High-Frequency Trading',
+      thematicFocusId: 'Sistem Terowongan Pembuangan Dalam, Paleoklimatologi Laut & Perdagangan Frekuensi Tinggi',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 60,
+      passThresholdScore: 7.0,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_acad_mock_03',
+      levelCode: 'ielts_academic',
+      packNumber: 3,
+      titleEn: 'IELTS Academic Official Simulation Pack 3',
+      titleId: 'Simulasi Resmi IELTS Akademik Paket 3',
+      thematicFocusEn: 'Maize Domestication, Linguistic Relativity & Epigenetic Inheritance',
+      thematicFocusId: 'Domestikasi Jagung Purba, Relativitas Linguistik & Warisan Epigenetika',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 60,
+      passThresholdScore: 7.5,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_acad_mock_04',
+      levelCode: 'ielts_academic',
+      packNumber: 4,
+      titleEn: 'IELTS Academic Official Simulation Pack 4',
+      titleId: 'Simulasi Resmi IELTS Akademik Paket 4',
+      thematicFocusEn: 'Acoustic Ecology, Ancient Metallurgical Networks & Cognitive Neuromorphic AI',
+      thematicFocusId: 'Ekologi Akustik, Jaringan Metalurgi Kuno & AI Neuromorfik Kognitif',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 60,
+      passThresholdScore: 7.5,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_acad_mock_05',
+      levelCode: 'ielts_academic',
+      packNumber: 5,
+      titleEn: 'IELTS Academic Official Simulation Pack 5',
+      titleId: 'Simulasi Resmi IELTS Akademik Paket 5',
+      thematicFocusEn: 'Antarctic Glaciology, Urban Microclimate Thermodynamics & Quantum Metrology',
+      thematicFocusId: 'Glasiologi Antartika, Termodinamika Perkotaan & Metrologi Kuantum',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 60,
+      passThresholdScore: 8.0,
+      questionCount: 40
+    }
+  ],
+  ielts_general: [
+    {
+      id: 'ielts_gt_mock_01',
+      levelCode: 'ielts_general',
+      packNumber: 1,
+      titleEn: 'IELTS General Training Mock Exam Pack 1',
+      titleId: 'Simulasi Resmi IELTS General Training Paket 1',
+      thematicFocusEn: 'DSE Workplace Ergonomics & Emergency HVAC Protocols',
+      thematicFocusId: 'Ergonomi Tempat Kerja DSE & Protokol Darurat HVAC',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 60,
+      passThresholdScore: 6.0,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_gt_mock_02',
+      levelCode: 'ielts_general',
+      packNumber: 2,
+      titleEn: 'IELTS General Training Mock Exam Pack 2',
+      titleId: 'Simulasi Resmi IELTS General Training Paket 2',
+      thematicFocusEn: 'Statutory Parental Leave Entitlements & HR Grievances',
+      thematicFocusId: 'Hak Cuti Orang Tua Resmi & Prosedur Pengaduan HR',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 60,
+      passThresholdScore: 6.5,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_gt_mock_03',
+      levelCode: 'ielts_general',
+      packNumber: 3,
+      titleEn: 'IELTS General Training Mock Exam Pack 3',
+      titleId: 'Simulasi Resmi IELTS General Training Paket 3',
+      thematicFocusEn: 'Municipal Waste Sorting By-Laws & Public Transit Circulars',
+      thematicFocusId: 'Peraturan Pemilahan Sampah Kotamadya & Edaran Transit Publik',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 60,
+      passThresholdScore: 7.0,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_gt_mock_04',
+      levelCode: 'ielts_general',
+      packNumber: 4,
+      titleEn: 'IELTS General Training Mock Exam Pack 4',
+      titleId: 'Simulasi Resmi IELTS General Training Paket 4',
+      thematicFocusEn: 'Commercial Tenancy Lease Agreements & Workplace Mediation',
+      thematicFocusId: 'Perjanjian Sewa Komersial & Mediasi Tempat Kerja',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 60,
+      passThresholdScore: 7.5,
+      questionCount: 40
+    },
+    {
+      id: 'ielts_gt_mock_05',
+      levelCode: 'ielts_general',
+      packNumber: 5,
+      titleEn: 'IELTS General Training Mock Exam Pack 5',
+      titleId: 'Simulasi Resmi IELTS General Training Paket 5',
+      thematicFocusEn: 'Occupational Safety Regulations & Environmental Compliance',
+      thematicFocusId: 'Regulasi Keselamatan Kerja & Kepatuhan Lingkungan',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 60,
+      passThresholdScore: 8.0,
+      questionCount: 40
+    }
+  ],
+  jlpt_n5: [
+    {
+      id: 'jlpt_n5_mock_01',
+      levelCode: 'jlpt_n5',
+      packNumber: 1,
+      titleEn: 'JLPT N5 Official Simulation Pack 1',
+      titleId: 'Simulasi Resmi JLPT N5 Paket 1',
+      thematicFocusEn: 'Essential Verbal Conjugations & Campus Daily Schedules',
+      thematicFocusId: 'Konjugasi Dasar Kata Kerja & Jadwal Harian Kampus',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 20,
+      passThresholdScore: 80,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n5_mock_02',
+      levelCode: 'jlpt_n5',
+      packNumber: 2,
+      titleEn: 'JLPT N5 Official Simulation Pack 2',
+      titleId: 'Simulasi Resmi JLPT N5 Paket 2',
+      thematicFocusEn: 'Te-Form Chains, Sequential Actions & Department Store Shopping',
+      thematicFocusId: 'Rangkaian Bentuk Te, Urutan Tindakan & Belanja Toserba',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 25,
+      passThresholdScore: 80,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n5_mock_03',
+      levelCode: 'jlpt_n5',
+      packNumber: 3,
+      titleEn: 'JLPT N5 Official Simulation Pack 3',
+      titleId: 'Simulasi Resmi JLPT N5 Paket 3',
+      thematicFocusEn: 'Short Notice Board Bulletins & Train Transfer Information',
+      thematicFocusId: 'Papan Pengumuman Singkat & Informasi Transit Kereta',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 25,
+      passThresholdScore: 90,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n5_mock_04',
+      levelCode: 'jlpt_n5',
+      packNumber: 4,
+      titleEn: 'JLPT N5 Official Simulation Pack 4',
+      titleId: 'Simulasi Resmi JLPT N5 Paket 4',
+      thematicFocusEn: 'Star Sentence Reordering (★) & Social Gathering Invitations',
+      thematicFocusId: 'Rekonstruksi Kalimat Bintang (★) & Undangan Pertemuan',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 30,
+      passThresholdScore: 95,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n5_mock_05',
+      levelCode: 'jlpt_n5',
+      packNumber: 5,
+      titleEn: 'JLPT N5 Official Simulation Pack 5',
+      titleId: 'Simulasi Resmi JLPT N5 Paket 5',
+      thematicFocusEn: 'Full-Length Standardized JEES Diagnostic Simulation',
+      thematicFocusId: 'Simulasi Komprehensif Penuh Standar JEES N5',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 35,
+      passThresholdScore: 100,
+      questionCount: 30
+    }
+  ],
+  jlpt_n4: [
+    {
+      id: 'jlpt_n4_mock_01',
+      levelCode: 'jlpt_n4',
+      packNumber: 1,
+      titleEn: 'JLPT N4 Official Simulation Pack 1',
+      titleId: 'Simulasi Resmi JLPT N4 Paket 1',
+      thematicFocusEn: 'Complex Clause Connectors & Giving/Receiving Verbs',
+      thematicFocusId: 'Penghubung Klausa Majemuk & Verba Memberi/Menerima',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 25,
+      passThresholdScore: 90,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n4_mock_02',
+      levelCode: 'jlpt_n4',
+      packNumber: 2,
+      titleEn: 'JLPT N4 Official Simulation Pack 2',
+      titleId: 'Simulasi Resmi JLPT N4 Paket 2',
+      thematicFocusEn: 'Conditional Forms (〜たら, 〜ば) & Workplace Circulars',
+      thematicFocusId: 'Bentuk Pengandaian & Surat Edaran Kerja',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 30,
+      passThresholdScore: 90,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n4_mock_03',
+      levelCode: 'jlpt_n4',
+      packNumber: 3,
+      titleEn: 'JLPT N4 Official Simulation Pack 3',
+      titleId: 'Simulasi Resmi JLPT N4 Paket 3',
+      thematicFocusEn: 'Daily Practical Notices & Neighborhood Waste Guidelines',
+      thematicFocusId: 'Pengumuman Praktis Harian & Aturan Pemilahan Sampah',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 30,
+      passThresholdScore: 95,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n4_mock_04',
+      levelCode: 'jlpt_n4',
+      packNumber: 4,
+      titleEn: 'JLPT N4 Official Simulation Pack 4',
+      titleId: 'Simulasi Resmi JLPT N4 Paket 4',
+      thematicFocusEn: 'Complex Sentence Synthesis & Star Drills (★)',
+      thematicFocusId: 'Sintesis Kalimat Majemuk & Latihan Bintang (★)',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 35,
+      passThresholdScore: 100,
+      questionCount: 25
+    },
+    {
+      id: 'jlpt_n4_mock_05',
+      levelCode: 'jlpt_n4',
+      packNumber: 5,
+      titleEn: 'JLPT N4 Official Simulation Pack 5',
+      titleId: 'Simulasi Resmi JLPT N4 Paket 5',
+      thematicFocusEn: 'Full Standardized JEES N4 Simulation',
+      thematicFocusId: 'Simulasi Standar Penuh JEES N4',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 40,
+      passThresholdScore: 105,
+      questionCount: 30
+    }
+  ],
+  jlpt_n3: [
+    {
+      id: 'jlpt_n3_mock_01',
+      levelCode: 'jlpt_n3',
+      packNumber: 1,
+      titleEn: 'JLPT N3 Official Simulation Pack 1',
+      titleId: 'Simulasi Resmi JLPT N3 Paket 1',
+      thematicFocusEn: 'Nuanced Contrastive Grammar & Intermediate Modality',
+      thematicFocusId: 'Tata Bahasa Kontras Bernuansa & Modalitas Menengah',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 30,
+      passThresholdScore: 95,
+      questionCount: 28
+    },
+    {
+      id: 'jlpt_n3_mock_02',
+      levelCode: 'jlpt_n3',
+      packNumber: 2,
+      titleEn: 'JLPT N3 Official Simulation Pack 2',
+      titleId: 'Simulasi Resmi JLPT N3 Paket 2',
+      thematicFocusEn: 'Passive, Causative & Formal Written Registers',
+      thematicFocusId: 'Bentuk Pasif, Kausatif & Ragam Tulis Formal',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 35,
+      passThresholdScore: 95,
+      questionCount: 28
+    },
+    {
+      id: 'jlpt_n3_mock_03',
+      levelCode: 'jlpt_n3',
+      packNumber: 3,
+      titleEn: 'JLPT N3 Official Simulation Pack 3',
+      titleId: 'Simulasi Resmi JLPT N3 Paket 3',
+      thematicFocusEn: 'Editorial Articles & Complex Paragraph Cohesion',
+      thematicFocusId: 'Artikel Tajuk Rencana & Kohesi Paragraf Kompleks',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 35,
+      passThresholdScore: 100,
+      questionCount: 28
+    },
+    {
+      id: 'jlpt_n3_mock_04',
+      levelCode: 'jlpt_n3',
+      packNumber: 4,
+      titleEn: 'JLPT N3 Official Simulation Pack 4',
+      titleId: 'Simulasi Resmi JLPT N3 Paket 4',
+      thematicFocusEn: 'Advanced Sentence Order (★) & Conversational Subtleties',
+      thematicFocusId: 'Urutan Kalimat Lanjutan (★) & Nuansa Percakapan',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 40,
+      passThresholdScore: 105,
+      questionCount: 28
+    },
+    {
+      id: 'jlpt_n3_mock_05',
+      levelCode: 'jlpt_n3',
+      packNumber: 5,
+      titleEn: 'JLPT N3 Official Simulation Pack 5',
+      titleId: 'Simulasi Resmi JLPT N3 Paket 5',
+      thematicFocusEn: 'Full Official N3 JEES Examination Simulation',
+      thematicFocusId: 'Simulasi Resmi Ujian JEES N3 Lengkap',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 45,
+      passThresholdScore: 110,
+      questionCount: 32
+    }
+  ],
+  jlpt_n2: [
+    {
+      id: 'jlpt_n2_mock_01',
+      levelCode: 'jlpt_n2',
+      packNumber: 1,
+      titleEn: 'JLPT N2 Official Simulation Pack 1',
+      titleId: 'Simulasi Resmi JLPT N2 Paket 1',
+      thematicFocusEn: 'Professional Keigo Registers & Business Communication',
+      thematicFocusId: 'Ragam Keigo Profesional & Komunikasi Bisnis',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 35,
+      passThresholdScore: 90,
+      questionCount: 30
+    },
+    {
+      id: 'jlpt_n2_mock_02',
+      levelCode: 'jlpt_n2',
+      packNumber: 2,
+      titleEn: 'JLPT N2 Official Simulation Pack 2',
+      titleId: 'Simulasi Resmi JLPT N2 Paket 2',
+      thematicFocusEn: 'Formal Discourse Markers & Abstract Exposition',
+      thematicFocusId: 'Penanda Wacana Formal & Eksposisi Abstrak',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 40,
+      passThresholdScore: 95,
+      questionCount: 30
+    },
+    {
+      id: 'jlpt_n2_mock_03',
+      levelCode: 'jlpt_n2',
+      packNumber: 3,
+      titleEn: 'JLPT N2 Official Simulation Pack 3',
+      titleId: 'Simulasi Resmi JLPT N2 Paket 3',
+      thematicFocusEn: 'Critical Essay Argumentation & Editorial Critiques',
+      thematicFocusId: 'Argumentasi Esai Kritis & Kritik Redaksional',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 45,
+      passThresholdScore: 100,
+      questionCount: 30
+    },
+    {
+      id: 'jlpt_n2_mock_04',
+      levelCode: 'jlpt_n2',
+      packNumber: 4,
+      titleEn: 'JLPT N2 Official Simulation Pack 4',
+      titleId: 'Simulasi Resmi JLPT N2 Paket 4',
+      thematicFocusEn: 'High-Speed Academic Listening & Dokkai Synthesis',
+      thematicFocusId: 'Menyimak Akademik Cepat & Sintesis Dokkai',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 45,
+      passThresholdScore: 105,
+      questionCount: 30
+    },
+    {
+      id: 'jlpt_n2_mock_05',
+      levelCode: 'jlpt_n2',
+      packNumber: 5,
+      titleEn: 'JLPT N2 Official Simulation Pack 5',
+      titleId: 'Simulasi Resmi JLPT N2 Paket 5',
+      thematicFocusEn: 'Full Official N2 JEES Exam Benchmark',
+      thematicFocusId: 'Tolok Ukur Ujian Resmi Penuh JEES N2',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 50,
+      passThresholdScore: 110,
+      questionCount: 35
+    }
+  ],
+  jlpt_n1: [
+    {
+      id: 'jlpt_n1_mock_01',
+      levelCode: 'jlpt_n1',
+      packNumber: 1,
+      titleEn: 'JLPT N1 Official Simulation Pack 1',
+      titleId: 'Simulasi Resmi JLPT N1 Paket 1',
+      thematicFocusEn: 'Supreme Literary Syntactic Ordering & Classical Registers',
+      thematicFocusId: 'Rekonstruksi Sintaksis Sastra Puncak & Ragam Klasik',
+      difficultyTier: 'diagnostic',
+      totalDurationMinutes: 40,
+      passThresholdScore: 100,
+      questionCount: 32
+    },
+    {
+      id: 'jlpt_n1_mock_02',
+      levelCode: 'jlpt_n1',
+      packNumber: 2,
+      titleEn: 'JLPT N1 Official Simulation Pack 2',
+      titleId: 'Simulasi Resmi JLPT N1 Paket 2',
+      thematicFocusEn: 'Philosophical Discourse & Abstract Epistemology',
+      thematicFocusId: 'Wacana Filosofis & Epistemologi Abstrak',
+      difficultyTier: 'standard',
+      totalDurationMinutes: 45,
+      passThresholdScore: 100,
+      questionCount: 32
+    },
+    {
+      id: 'jlpt_n1_mock_03',
+      levelCode: 'jlpt_n1',
+      packNumber: 3,
+      titleEn: 'JLPT N1 Official Simulation Pack 3',
+      titleId: 'Simulasi Resmi JLPT N1 Paket 3',
+      thematicFocusEn: 'Socio-Legal Commentaries & Juridical Critiques',
+      thematicFocusId: 'Komentar Sosio-Hukum & Kritik Yuridis',
+      difficultyTier: 'challenging',
+      totalDurationMinutes: 50,
+      passThresholdScore: 105,
+      questionCount: 32
+    },
+    {
+      id: 'jlpt_n1_mock_04',
+      levelCode: 'jlpt_n1',
+      packNumber: 4,
+      titleEn: 'JLPT N1 Official Simulation Pack 4',
+      titleId: 'Simulasi Resmi JLPT N1 Paket 4',
+      thematicFocusEn: 'Advanced Cultural Discourse & High Cognitive Chokai',
+      thematicFocusId: 'Wacana Kultural Lanjut & Chokai Kognitif Tinggi',
+      difficultyTier: 'advanced',
+      totalDurationMinutes: 50,
+      passThresholdScore: 110,
+      questionCount: 32
+    },
+    {
+      id: 'jlpt_n1_mock_05',
+      levelCode: 'jlpt_n1',
+      packNumber: 5,
+      titleEn: 'JLPT N1 Official Simulation Pack 5',
+      titleId: 'Simulasi Resmi JLPT N1 Paket 5',
+      thematicFocusEn: 'Full Official N1 JEES Mastery Simulation',
+      thematicFocusId: 'Simulasi Penguasaan Mutlak Resmi JEES N1',
+      difficultyTier: 'mastery',
+      totalDurationMinutes: 55,
+      passThresholdScore: 115,
+      questionCount: 35
+    }
+  ]
+};
+
+function getLocalStoredAttempts(): UserExamAttemptRecord[] {
+  try {
+    const raw = localStorage.getItem('lingua_user_exam_attempts');
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalStoredAttempt(attempt: UserExamAttemptRecord) {
+  try {
+    const existing = getLocalStoredAttempts();
+    const updated = [attempt, ...existing.filter(a => a.id !== attempt.id)];
+    localStorage.setItem('lingua_user_exam_attempts', JSON.stringify(updated));
+  } catch (err) {
+    console.warn('Failed to save attempt to localStorage', err);
+  }
+}
+
+export async function fetchExamPackages(track: LevelCode): Promise<{ packages: MasterExamPackageSummary[] }> {
+  try {
+    const res = await fetch(`${BASE_URL}/exams/packages?track=${track}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.packages && data.packages.length > 0) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.warn('Backend fetchExamPackages error, fallback to defaults', err);
+  }
+
+  // Fallback defaults decorated with local attempts
+  const basePackages = DEFAULT_EXAM_PACKAGES[track] || DEFAULT_EXAM_PACKAGES.ielts_academic;
+  const attempts = getLocalStoredAttempts().filter(a => a.levelCode === track);
+
+  const decorated = basePackages.map(pkg => {
+    const pkgAttempts = attempts.filter(a => a.packageId === pkg.id || a.packNumber === pkg.packNumber);
+    if (pkgAttempts.length > 0) {
+      const best = pkgAttempts.reduce((prev, curr) => curr.scaledScore > prev.scaledScore ? curr : prev, pkgAttempts[0]);
+      return {
+        ...pkg,
+        completed: true,
+        bestScore: best.scaledScore,
+        bestBand: best.scaledScore,
+        lastAttemptAt: best.completedAt
+      };
+    }
+    return pkg;
+  });
+
+  return { packages: decorated };
+}
+
+export async function fetchExamPackageById(packageId: string): Promise<any> {
+  try {
+    const res = await fetch(`${BASE_URL}/exams/packages/${packageId}`);
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('Backend fetchExamPackageById error, fallback', err);
+  }
+
+  // Fallback: If it's an IELTS mock package, map to lesson or mock items
+  if (packageId.startsWith('ielts_acad_mock') || packageId === 'les_ia_mock_full_1') {
+    return {
+      package: {
+        id: packageId,
+        titleEn: 'Official Computer-Delivered IELTS Academic Practice Exam',
+        titleId: 'Ujian Resmi Computer-Delivered IELTS Akademik',
+        levelCode: 'ielts_academic',
+        totalDurationMinutes: 60,
+        questionCount: 40
+      }
+    };
+  }
+
+  return {
+    package: {
+      id: packageId,
+      levelCode: 'jlpt_n5',
+      totalDurationMinutes: 25,
+      questionCount: 25
+    }
+  };
+}
+
+export async function submitExamAttempt(payload: {
+  packageId: string;
+  levelCode: LevelCode;
+  packNumber: number;
+  rawScore: number;
+  totalQuestions: number;
+  scaledScore: number;
+  passed: boolean;
+  sectionalBreakdown: Record<string, { correct: number; total: number; percentage: number }>;
+  timeSpentSeconds: number;
+}): Promise<UserExamAttemptRecord> {
+  const record: UserExamAttemptRecord = {
+    id: `attempt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    userId: 'default_user',
+    packageId: payload.packageId,
+    levelCode: payload.levelCode,
+    packNumber: payload.packNumber,
+    rawScore: payload.rawScore,
+    totalQuestions: payload.totalQuestions,
+    scaledScore: payload.scaledScore,
+    passed: payload.passed,
+    sectionalBreakdown: payload.sectionalBreakdown,
+    timeSpentSeconds: payload.timeSpentSeconds,
+    completedAt: new Date().toISOString()
+  };
+
+  saveLocalStoredAttempt(record);
+
+  try {
+    const res = await fetch(`${BASE_URL}/exams/submit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record)
+    });
+    if (res.ok) {
+      const serverResult = await res.json();
+      return serverResult.attempt || serverResult || record;
+    }
+  } catch (err) {
+    console.warn('Backend submitExamAttempt error, saved locally', err);
+  }
+
+  return record;
+}
+
+export async function fetchExamTrajectory(track: LevelCode): Promise<ExamBatteryTrajectoryResult> {
+  try {
+    const res = await fetch(`${BASE_URL}/exams/trajectory?track=${track}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && (data.attempts || data.weightedReadinessIndex !== undefined)) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.warn('Backend fetchExamTrajectory error, calculating locally', err);
+  }
+
+  // Local calculation based on recorded attempts
+  const allAttempts = getLocalStoredAttempts()
+    .filter(a => a.levelCode === track)
+    .sort((a, b) => new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime());
+
+  const isIelts = track.startsWith('ielts');
+  const targetThreshold = isIelts ? 7.0 : (track === 'jlpt_n5' ? 80 : 90);
+
+  if (allAttempts.length === 0) {
+    return {
+      attempts: [],
+      weightedReadinessIndex: 0,
+      readinessMargin: 0,
+      targetThreshold,
+      predictedScore: 0,
+      totalAttemptsCount: 0,
+      progressionTrend: 'stable'
+    };
+  }
+
+  const K = allAttempts.length;
+  // Exponential recency weighting: w_k = e^(0.5*(k-1)) / sum(e^(0.5*(j-1)))
+  let sumWeight = 0;
+  const weights: number[] = [];
+  for (let k = 0; k < K; k++) {
+    const w = Math.exp(0.5 * k);
+    weights.push(w);
+    sumWeight += w;
+  }
+
+  let weightedSum = 0;
+  for (let k = 0; k < K; k++) {
+    const normWeight = weights[k] / sumWeight;
+    weightedSum += normWeight * allAttempts[k].scaledScore;
+  }
+
+  let finalWRI = weightedSum;
+  if (isIelts) {
+    // Standard IELTS 0.25/0.75 rounding
+    const floor = Math.floor(finalWRI);
+    const frac = finalWRI - floor;
+    if (frac < 0.25) finalWRI = floor;
+    else if (frac < 0.75) finalWRI = floor + 0.5;
+    else finalWRI = floor + 1.0;
+  } else {
+    finalWRI = Math.round(finalWRI);
+  }
+
+  const margin = isIelts
+    ? Math.round((finalWRI - targetThreshold) * 10) / 10
+    : Math.round(finalWRI - targetThreshold);
+
+  const firstScore = allAttempts[0].scaledScore;
+  const lastScore = allAttempts[K - 1].scaledScore;
+  let trend: 'ascending' | 'stable' | 'needs_reinforcement' = 'stable';
+  if (lastScore > firstScore + (isIelts ? 0.25 : 5)) {
+    trend = 'ascending';
+  } else if (lastScore < firstScore - (isIelts ? 0.25 : 5)) {
+    trend = 'needs_reinforcement';
+  }
+
+  return {
+    attempts: allAttempts,
+    weightedReadinessIndex: finalWRI,
+    readinessMargin: margin,
+    targetThreshold,
+    predictedScore: finalWRI,
+    totalAttemptsCount: K,
+    progressionTrend: trend
+  };
+}
+
