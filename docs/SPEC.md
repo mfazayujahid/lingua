@@ -1,120 +1,116 @@
-# Technical Specification: Phase 3 Expanded Multi-Mock Exam Engine (5 Distinct Official Mock Exams)
+# Technical Specification: Phase 4 AI Diagnostic Essay Assessment Engine (IELTS Writing Task 1 & Task 2)
 
-## 1. Objective & Architecture Overview
-This specification translates `docs/DOMAIN_BLUEPRINT.md` (§5.1.7, §5.2.10, §3.2.7) and `docs/USER_FLOWS.md` (Screen 4 & Screen 6) into concrete database schemas, API contracts, algorithms, and frontend components.
+## 1. Architectural Scope & Objectives
+This specification translates `docs/DOMAIN_BLUEPRINT.md` (§2.1.2, §3.2.8, §4.2.9, §5.1.8) and `docs/USER_FLOWS.md` (Screen 5A.1 & Screen 5A.2, AC 4.27–4.30) into concrete database schemas, API contracts, analytical algorithms, and frontend components.
 
-Phase 3 establishes:
-1. **5 Complete Distinct Official Mock Exam Batteries for IELTS & JLPT**:
-   - Zero Task Duplication across Exam Packs 1–5.
-   - Distinct reading passages (~2,600 to ~2,800 words each for IELTS Reading), listening manifests, writing tasks, and speaking prompts.
-   - Standard official time allocations (e.g. 60 min for IELTS Reading 40 items, 32 min for IELTS Listening 40 items).
-2. **Master Exam Battery Selector Hub (`/exam` & `ExamRunnerView.tsx`)**:
-   - Pack selection tabs (Pack 1 to 5) with difficulty ratings, thematic titles, section breakdowns, and completion status.
-   - Seamless loading of the selected exam package without hardcoded single-exam assumptions.
-3. **Longitudinal Attempt History & Weighted Readiness Index ($WRI$)**:
-   - Exponential recency weighting ($w_k = \frac{e^{0.5 \times (k-1)}}{\sum e^{0.5 \times (j-1)}}$) for predicting test-day readiness.
-   - Score trajectory tracking across attempts stored in SQLite table `user_exam_attempts`.
-4. **100% Indonesian Localization**:
-   - Full dictionary keys under `exam.*` and `analytics.*` in `LanguageContext.tsx`.
+Phase 4 establishes:
+1. **Authentic Task 1 & Task 2 Prompt Engine**:
+   - Task 1 Academic (Visual data descriptions: line graph, bar chart, pie chart, process diagram, map) with 150-word minimum threshold.
+   - Task 1 General Training (Formal, semi-formal, informal transactional letter) with 150-word minimum threshold.
+   - Task 2 Discursive Essay (Opinion/Agree-Disagree, Discussion, Problem-Solution, Advantages-Disadvantages, Two-Part Questions) with 250-word minimum threshold.
+2. **Deterministic Cambridge 4-Criteria Evaluation Algorithm**:
+   - Task Achievement / Task Response (TA/TR): Word count compliance, penalty curves, prompt coverage.
+   - Coherence & Cohesion (CC): Paragraph progression, discourse marker frequency, referential clarity.
+   - Lexical Resource (LR): Academic Word List (AWL) density (>= 8.5% for Band 8+), Type-Token Ratio (TTR), Guiraud Index.
+   - Grammatical Range & Accuracy (GRA): Error-Free Sentence Ratio (EFSR >= 75%), clause subordination density, modal collocations.
+   - Weighted overall calculation: 1/3 Task 1 + 2/3 Task 2 with Cambridge 0.25 / 0.75 half-band rounding rule.
+3. **Sentence-Level Diagnostic Annotation Engine**:
+   - 4-Category Taxonomy: `grammar_error`, `collocation_suggestion`, `vocabulary_enhancement`, `cohesive_marker_feedback`.
+   - Character span offsets (`charStart`, `charEnd`), severity (`critical`, `warning`, `info`), and 1-click replacement suggestions.
+4. **Interactive Writing Studio UI/UX (`/studio/writing` & `WritingStudioView.tsx`)**:
+   - Split-screen workspace: Left panel with prompt & visual stimulus; Right panel with responsive text editor.
+   - Live word counter with amber/green threshold progress indicator.
+   - Timed Exam Mode (20m / 40m countdown) vs Practice Mode (untimed with autosave).
+   - Post-submission Diagnostic Scorecard: 4-criteria radar chart, sentence-level color-coded diff canvas with floating popover annotations, model answer side-by-side comparison.
+5. **100% Indonesian Localization**:
+   - Zero English leakage in UI chrome, criteria descriptors, and diagnostic explanations when `language = 'id'`.
 
 ---
 
 ## 2. Database Schema & Data Models
 
-### 2.1 Table: `exam_packages`
+### 2.1 Table: `writing_prompts`
 ```sql
-CREATE TABLE IF NOT EXISTS exam_packages (
-  id TEXT PRIMARY KEY,               -- e.g. 'ielts_acad_mock_01', 'jlpt_n5_mock_01'
-  level_code TEXT NOT NULL,          -- e.g. 'ielts_academic', 'jlpt_n5'
-  pack_number INTEGER NOT NULL,      -- 1, 2, 3, 4, 5
+CREATE TABLE IF NOT EXISTS writing_prompts (
+  id TEXT PRIMARY KEY,               -- e.g. 'ielts_write_t1_acad_seed01'
+  task_type TEXT NOT NULL,           -- 'task1_academic', 'task1_general', 'task2_discursive'
   title_en TEXT NOT NULL,
   title_id TEXT NOT NULL,
-  thematic_focus_en TEXT NOT NULL,
-  thematic_focus_id TEXT NOT NULL,
-  difficulty_tier TEXT NOT NULL,     -- 'diagnostic', 'standard', 'challenging', 'advanced', 'mastery'
-  total_duration_minutes INTEGER NOT NULL,
-  pass_threshold_score REAL NOT NULL,
+  prompt_text_en TEXT NOT NULL,
+  prompt_text_id TEXT NOT NULL,
+  minimum_words INTEGER NOT NULL,    -- 150 or 250
+  suggested_minutes INTEGER NOT NULL,-- 20 or 40
+  visual_type TEXT,                  -- 'bar_chart', 'line_graph', 'pie_chart', 'data_table', 'process_diagram', 'map'
+  visual_asset_url TEXT,
+  visual_data_points TEXT,           -- JSON string of data series or table
+  guidance_notes_en TEXT,            -- JSON array of strings
+  guidance_notes_id TEXT,            -- JSON array of strings
+  benchmark_band REAL DEFAULT 8.5,
+  model_text TEXT NOT NULL,
+  model_strengths_en TEXT,           -- JSON array of strings
+  model_strengths_id TEXT,           -- JSON array of strings
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
-### 2.2 Table: `user_exam_attempts`
+### 2.2 Table: `writing_submissions`
 ```sql
-CREATE TABLE IF NOT EXISTS user_exam_attempts (
+CREATE TABLE IF NOT EXISTS writing_submissions (
   id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL DEFAULT 'default_user',
-  package_id TEXT NOT NULL,
-  level_code TEXT NOT NULL,
-  pack_number INTEGER NOT NULL,
-  raw_score INTEGER NOT NULL,
-  total_questions INTEGER NOT NULL,
-  scaled_score REAL NOT NULL,        -- Band (e.g. 7.5) or JLPT Score (e.g. 135/180)
-  passed INTEGER NOT NULL DEFAULT 0,
-  sectional_breakdown TEXT NOT NULL, -- JSON string
-  time_spent_seconds INTEGER NOT NULL,
-  completed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (package_id) REFERENCES exam_packages(id)
+  prompt_id TEXT NOT NULL,
+  task_type TEXT NOT NULL,
+  essay_content TEXT NOT NULL,
+  overall_band REAL NOT NULL,
+  cefr_level TEXT NOT NULL,           -- 'B1', 'B2', 'C1', 'C2'
+  ta_score REAL NOT NULL,
+  cc_score REAL NOT NULL,
+  lr_score REAL NOT NULL,
+  gra_score REAL NOT NULL,
+  word_count INTEGER NOT NULL,
+  is_underlength INTEGER NOT NULL,    -- 0 or 1
+  awl_density REAL NOT NULL,
+  error_free_ratio REAL NOT NULL,
+  annotations_json TEXT NOT NULL,     -- JSON array of SentenceAnnotation
+  full_scorecard_json TEXT NOT NULL,  -- JSON string of DiagnosticScorecardResult
+  duration_seconds INTEGER NOT NULL,
+  is_timed_mode INTEGER NOT NULL,     -- 0 or 1
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
 ---
 
-## 3. Shared API Types (`shared/types.ts`)
-```typescript
-export interface MasterExamPackageSummary {
-  id: string;
-  levelCode: LevelCode;
-  packNumber: 1 | 2 | 3 | 4 | 5;
-  titleEn: string;
-  titleId: string;
-  thematicFocusEn: string;
-  thematicFocusId: string;
-  difficultyTier: 'diagnostic' | 'standard' | 'challenging' | 'advanced' | 'mastery';
-  totalDurationMinutes: number;
-  passThresholdScore: number;
-  questionCount: number;
-  completed?: boolean;
-  bestScore?: number;
-  bestBand?: number;
-  lastAttemptAt?: string;
-}
+## 3. REST API Contracts
 
-export interface UserExamAttemptRecord {
-  id: string;
-  userId: string;
-  packageId: string;
-  levelCode: LevelCode;
-  packNumber: number;
-  rawScore: number;
-  totalQuestions: number;
-  scaledScore: number;
-  passed: boolean;
-  sectionalBreakdown: Record<string, { correct: number; total: number; percentage: number }>;
-  timeSpentSeconds: number;
-  completedAt: string;
-}
+### 3.1 `GET /api/writing/prompts`
+Returns array of available prompts filtered optionally by `taskType`.
 
-export interface ExamBatteryTrajectoryResult {
-  attempts: UserExamAttemptRecord[];
-  weightedReadinessIndex: number;
-  readinessMargin: number;
-  targetThreshold: number;
-  predictedScore: number;
-  totalAttemptsCount: number;
-  progressionTrend: 'ascending' | 'stable' | 'needs_reinforcement';
+### 3.2 `POST /api/writing/evaluate`
+Payload:
+```json
+{
+  "promptId": "ielts_write_t1_acad_seed01",
+  "taskType": "task1_academic",
+  "essayContent": "The provided line graph and table shows...",
+  "durationSeconds": 1140,
+  "isTimedMode": true,
+  "locale": "id"
 }
 ```
+Response:
+Returns `DiagnosticScorecardResult` as defined in `shared/types.ts`.
+
+### 3.3 `GET /api/writing/submissions`
+Returns list of user's past essay diagnostic submissions.
+
+### 3.4 `GET /api/writing/submissions/:id`
+Returns full `DiagnosticScorecardResult` for the specified submission ID.
 
 ---
 
-## 4. API Endpoints (`server/src/routes/exams.ts`)
-1. `GET /api/exams/packages?track=:levelCode`: Returns list of 5 exam packages for the active track with user attempt summaries.
-2. `GET /api/exams/packages/:packageId`: Returns full package questions and passage data.
-3. `POST /api/exams/submit`: Records an attempt and evaluates score/band with distractor audit.
-4. `GET /api/exams/trajectory?track=:levelCode`: Computes and returns the Weighted Readiness Index ($WRI$) and attempt history.
-
----
-
-## 5. Delegation Strategy
-- **Backend Engineer**: Create schema migrations, database queries, seed packages 1–5, scoring algorithm with WRI formula, and REST endpoints.
-- **Frontend Engineer**: Update `ExamRunnerView.tsx` with 5-Pack Selector Grid, integrate with `/api/exams`, update `AnalyticsView.tsx` with progression trajectory chart, and wire 100% Indonesian localization.
+## 4. Verification & QA Standard
+1. Zero Task Duplication across all prompts and mock datasets.
+2. 100% Indonesian localization in `id` mode with zero raw translation keys or English bleed in UI labels.
+3. Accurate real-time word counter with amber/green threshold indicators.
+4. Clean headless browser interaction with screenshot proofs in `docs/proof/`.
