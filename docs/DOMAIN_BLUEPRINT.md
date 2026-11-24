@@ -853,6 +853,34 @@ Where $\text{round}_{\text{IELTS}}$ applies the official Cambridge rounding rule
 * $\text{remainder} \ge 0.75 \implies \text{round up to next integer}$.
 ---
 
+
+#### 3.2.7 Master Multi-Mock Exam Progression & Diagnostic Trajectory Engine
+
+To provide valid, predictive readiness evaluations without content saturation or practice effect contamination, the platform architects an **Expanded Multi-Mock Battery Architecture** containing **5 completely distinct official exam batteries (Packs 1–5)** per track.
+
+##### 1. Strict Zero Task Duplication Rule (完全非重複・独立試験設計)
+* **Zero Question or Stimulus Leakage**: Every mock exam pack (Pack 1 through Pack 5) must contain 100% unique reading passages, distinct audio scripts, independent question items, and isolated distractor trap matrices.
+* **Prohibition of Shuffling/Repurposing**: Under no circumstances may an item, passage, or audio asset from Pack $i$ appear in Pack $j$ ($i \ne j$).
+* **Standardized Difficulty Equivalence Across Batteries**:
+  Each exam pack is calibrated to official CEFR and JEES specifications with identical aggregate difficulty indexes ($\mu_{\text{difficulty}} = 0.0 \pm 0.05$ on latent logit scale):
+  - **Pack 1**: *Diagnostic Baseline Battery* (Standard difficulty, broad topical coverage, benchmark diagnostic baseline).
+  - **Pack 2**: *Core Competence Battery* (Standard difficulty, tests mid-frequency lexical collocations and complex syntax).
+  - **Pack 3**: *Advanced Academic / Specialized Discourse Battery* (High-register vocabulary, nuanced distractor traps).
+  - **Pack 4**: *High-Cognitive-Load & High-Density Battery* (Fast conversational shifts, complex multi-data tables, dense abstract arguments).
+  - **Pack 5**: *Final Readiness & Peak Performance Battery* (Authentic exam-day difficulty simulation with strict timing and scoring parity).
+
+##### 2. Multi-Attempt Progression & Trajectory Analytics Formula
+When a learner completes multiple mock exams ($k \in \{1, 2, 3, 4, 5\}$), the platform tracks their longitudinal growth:
+
+* **Weighted Readiness Index ($WRI$)**:
+  $$WRI = \sum_{k=1}^{M} w_k \times S_k \quad \text{where } w_k = \frac{e^{0.5 \times (k - 1)}}{\sum_{j=1}^{M} e^{0.5 \times (j - 1)}}$$
+  Where $M \le 5$ is total packs completed, $S_k$ is the scaled score or IELTS band for Pack $k$, and exponential recency weights $w_k$ prioritize recent performance over initial baseline diagnostics.
+* **Readiness Margin Calculation**:
+  - For JLPT: $\Delta_{\text{pass}} = WRI - S_{\text{cutoff}}$ (where $S_{\text{cutoff}} = 90$ for N2, 100 for N1, 95 for N3, 90 for N4, 80 for N5).
+  - For IELTS: $\Delta_{\text{target}} = WRI - B_{\text{target}}$ (e.g., $7.5 - 7.0 = +0.5$ Band headroom).
+
+---
+
 ### 3.3 JLPT Scaled Scoring & Pass/Fail Determination Logic
 
 #### 3.3.1 IRT Scaled Score Simulation
@@ -1886,6 +1914,68 @@ export interface SpeakingDiagnosticEvaluationResult {
 
 ---
 
+
+#### 4.2.8 Multi-Mock Exam Battery & Attempt Tracking Schemas
+
+```typescript
+/**
+ * Master Mock Exam Battery Metadata Record
+ */
+export interface MasterExamBatteryPackage {
+  batteryId: string;                     // e.g. "ielts_mock_pack_01" or "jlpt_n2_mock_pack_03"
+  trackId: 'ja_jlpt' | 'en_ielts_academic' | 'en_ielts_general';
+  levelId: 'N5' | 'N4' | 'N3' | 'N2' | 'N1' | 'Band_6.5' | 'Band_7.5' | 'Band_8.5';
+  packNumber: 1 | 2 | 3 | 4 | 5;         // 1 to 5 distinct packages
+  batteryTitleEn: string;                // e.g. "IELTS Academic Official Simulation Pack 3"
+  batteryTitleId: string;                // e.g. "Simulasi Resmi IELTS Akademik Paket 3"
+  batteryTitleJa?: string;               // e.g. "JLPT N2 公式実戦模試 第3回"
+  difficultyProfile: 'diagnostic_baseline' | 'core_competence' | 'advanced_discourse' | 'high_cognitive_density' | 'final_readiness';
+  thematicFocus: string[];               // e.g. ["Neuroscience", "Marine Ecology", "Urban Economics"]
+  totalDurationMinutes: number;          // e.g. 166 for IELTS, 155 for JLPT N1/N2
+  totalItems: number;                    // 40 for IELTS Reading/Listening, authentic item count for JLPT
+  sections: Array<{
+    sectionKey: string;                  // "listening" | "reading" | "writing" | "speaking" | "language_knowledge"
+    timeLimitSeconds: number;
+    itemCount: number;
+    rawMaxScore: number;
+  }>;
+  passingCriteria: {
+    minOverallScore: number;             // e.g. 90/180 for N2, 6.5 Band for IELTS
+    sectionalCutoffs?: Record<string, number>; // e.g. { "language_knowledge": 19, "reading": 19, "listening": 19 }
+  };
+}
+
+/**
+ * Longitudinal Exam Attempt & Performance History
+ */
+export interface UserExamAttemptRecord {
+  attemptId: string;
+  userId: string;
+  batteryId: string;
+  packNumber: 1 | 2 | 3 | 4 | 5;
+  startedAt: string;
+  submittedAt: string;
+  timeSpentSeconds: number;
+  isIntegrityFlagged: boolean;           // true if 2+ blur strikes occurred
+  rawScore: number;
+  finalScaledScore: number;              // Scaled points (0-180 for JLPT) or Band (0-9.0 for IELTS)
+  passed: boolean;
+  sectionalBreakdown: Record<string, {
+    rawCorrect: number;
+    rawTotal: number;
+    scaledScore: number;
+    passedCutoff: boolean;
+  }>;
+  analyticsSnapshot: {
+    wpmOrLatency?: number;
+    errorTaxonomyCount: Record<string, number>; // e.g. { "WORD_LIMIT_EXCEEDED": 2, "DISTRACTOR_TRAP": 4 }
+    weakestSubSkill: string;
+  };
+}
+```
+
+---
+
 ## 5. Realistic Seed Content Specification
 
 ### 5.1 English IELTS Comprehensive Master Curriculum & Full-Length Mock Exam Seed
@@ -2829,6 +2919,65 @@ The table below delineates the exact conversational trap mechanics across all 4 
 
 ---
 
+#### 5.1.7 Master Inventory of 5 Distinct Official IELTS Mock Exam Batteries (Packs 1–5)
+
+To guarantee zero task duplication and provide a 5-stage progression trajectory, the platform specifies 5 completely distinct, non-overlapping IELTS Exam Packages:
+
+```
+[ Master Inventory: 5 Distinct Full-Length IELTS Mock Batteries ]
+  ├── Pack 1 (ielts_acad_mock_01): "Chronometry & Trophic Rewilding" (Baseline Diagnostic)
+  │    ├── Reading: Chronometry Evolution / Trophic Cascades / Bilingual Neuroplasticity (~2,600 words, 40 items)
+  │    ├── Listening: Eco-Lodge / Arts Complex Map / Hydrogen Storage / Orca Bioacoustics (40 items)
+  │    ├── Writing: Renewable Energy Transition (T1) + AI in Education Mentorship (T2)
+  │    └── Speaking: Hometown, Habits / Cue Card 1A & 1B / Education & Mentorship Part 3
+  ├── Pack 2 (ielts_acad_mock_02): "Civil Engineering & Oceanic Paleoclimatology" (Core Competence)
+  │    ├── Reading:
+  │    │    • Passage 1: Subterranean Megastructures: Deep Tunnel Sewerage Systems (~810 words)
+  │    │    • Passage 2: Oceanic Paleoclimatology & Deep-Sea Sediment Ice Cores (~890 words)
+  │    │    • Passage 3: Algorithmic Economics: High-Frequency Trading & Market Fragility (~970 words)
+  │    ├── Listening: Airport Hotel Booking / Botanic Garden Map / Sustainable Concrete / Solar Flare Meteorology (40 items)
+  │    ├── Writing: Global Desalination Output (T1) + Universal Basic Income & Labor Incentive (T2)
+  │    └── Speaking: Technology & Gadgets / Cue Card 2A & 2B (Sanctuary / Ancient City) / Urbanization Part 3
+  ├── Pack 3 (ielts_acad_mock_03): "Linguistic Relativity & Cognitive Semiotics" (Advanced Academic)
+  │    ├── Reading:
+  │    │    • Passage 1: The Domestication of Maize in Mesoamerica: Phytolith Archaeology (~820 words)
+  │    │    • Passage 2: Linguistic Relativity and Spatial Cognition in Aboriginal Dialects (~910 words)
+  │    │    • Passage 3: Epigenetic Inheritance: Transgenerational Environmental Epigenomics (~980 words)
+  │    ├── Listening: Community Gym Registration / Marine Science Center Map / Offshore Wind Farm / Mycelium Bio-Packaging (40 items)
+  │    ├── Writing: Electric Vehicle Adoption by Continent (T1) + Space Exploration vs Terrestrial Poverty (T2)
+  │    └── Speaking: Reading & Literature / Cue Card 3A & 3B (Gadget / Ancestral Artifact) / Consumerism Part 3
+  ├── Pack 4 (ielts_acad_mock_04): "Quantum Cryptography & Macro-Ecological Economics" (High-Density Challenge)
+  │    ├── Reading:
+  │    │    • Passage 1: The Architectural Physics of Gothic Cathedrals: Vault Dynamics (~830 words)
+  │    │    • Passage 2: Microplastics in Atmospheric Jet Streams and Cloud Condensation (~920 words)
+  │    │    • Passage 3: Quantum Cryptography and Post-RSA Quantum Key Distribution (~1,010 words)
+  │    ├── Listening: Vehicle Rental Agency / Heritage Industrial Museum Map / Drone Reforestation / Neurobiology of Sleep (40 items)
+  │    ├── Writing: Global Lithium-Ion Battery Manufacturing (T1) + Compulsory Youth Civic Military Service (T2)
+  │    └── Speaking: Daily Routine & Food / Cue Card 4A & 4B (Challenge / Community Cleanup) / Civic Responsibility Part 3
+  └── Pack 5 (ielts_acad_mock_05): "Astrobiology & Synthetic Biomaterials" (Final Readiness Simulation)
+       ├── Reading:
+       │    • Passage 1: Ancient Hydrotechnics of the Indus Valley Civilization: Mohenjo-Daro Docks (~840 words)
+       │    • Passage 2: Astrobiological Biosignatures on Enceladus Cryovolcanic Plumes (~930 words)
+       │    • Passage 3: De-Extinction Ethics and Genome Editing in Pleistocene Megafauna (~1,020 words)
+       ├── Listening: University Conference Registration / Public Transit Interchange Map / CRISPR Gene Editing / Deep-Sea Hydrothermal Chemosynthesis (40 items)
+       ├── Writing: Global Air Travel Passenger Traffic Recovery (T1) + Central Bank Digital Currencies vs Privacy (T2)
+       └── Speaking: Sports & Physical Fitness / Comprehensive Part 2 Random Cue Card / Global Governance Part 3
+```
+
+##### Detailed Blueprint: Pack 2 Reading Passages & Stimuli Summary (`ielts_acad_mock_02`)
+* **Passage 1**: *Subterranean Megastructures: Deep Tunnel Sewerage Systems* (~810 words)
+  - Questions 1–7: True / False / Not Given (Focus: geotechnical drilling, slurry shield tunneling, hydraulic gravity flow).
+  - Questions 8–13: Diagram Labelling (Cross-section of drop shaft, aeration chambers, and deep pumping stations).
+* **Passage 2**: *Oceanic Paleoclimatology & Deep-Sea Sediment Ice Cores* (~890 words)
+  - Questions 14–19: Matching Headings (Paragraphs A–F on foraminifera shells, oxygen isotope ratios $\delta^{18}\text{O}$, Milankovitch cycles).
+  - Questions 20–26: Summary Completion with Word Bank (Marine isotopic stages and glacial-interglacial cycles).
+* **Passage 3**: *Algorithmic Economics: High-Frequency Trading & Market Fragility* (~970 words)
+  - Questions 27–32: Yes / No / Not Given (Author stance on flash crashes, spoofing algorithms, market microstructure).
+  - Questions 33–36: Multiple Choice (Latency arbitrage and dark pool liquidity).
+  - Questions 37–40: Matching Sentence Endings.
+
+---
+
 ### 5.2 Japanese Kana & JLPT Curriculum (Kana $\rightarrow$ N5 $\rightarrow$ N1)
 
 #### 5.2.1 Foundational Japanese Kana Syllabary Curriculum (Hiragana & Katakana)
@@ -3503,6 +3652,56 @@ To immediately resolve learner confusion upon first launch, the database seeds t
 ```
 
 ---
+### 5.2.10 Master Inventory of 5 Distinct Official JLPT Mock Exam Batteries (Packs 1–5 Across N5–N1)
+
+To ensure comprehensive examination readiness across all 5 JLPT levels (N5 through N1) with strict zero task duplication, the platform provisions 5 fully populated, non-overlapping Mock Exam Batteries per level:
+
+```
+[ Master Inventory: 5 Distinct Full-Length JLPT Mock Batteries per Level ]
+  ├── Pack 1 (jlpt_mock_pack_01): "Foundational Diagnostic Baseline" (公式実戦模試 第1回)
+  │    ├── N5: 25 Moji/Goi + 20 Bunpou (Star Reordering) + 3 Dokkai + 10 Chokai
+  │    ├── N4: 30 Moji/Goi + 25 Bunpou + 4 Dokkai (Apartment Notice) + 15 Chokai
+  │    ├── N3: 35 Moji/Goi + 30 Bunpou + 6 Dokkai (Corporate Flextime) + 20 Chokai
+  │    ├── N2: 32 Moji/Goi + 22 Bunpou + 9 Dokkai (Remote Work Commentary) + 25 Chokai
+  │    └── N1: 35 Moji/Goi + 25 Bunpou + 10 Dokkai (Dual-Text Philosophy & Editorial) + 28 Chokai
+  ├── Pack 2 (jlpt_mock_pack_02): "Societal & Civic Discourse Battery" (公式実戦模試 第2回)
+  │    ├── N5: Shopping, Classroom Directions, Transport Timetable Notices, Basic Star Questions
+  │    ├── N4: Workplace Safety Guidelines, Community Recycling Rules, Giving/Receiving Verbs
+  │    ├── N3: Traditional Artisan Culture, Environmental Packaging, Honorific Form (Keigo)
+  │    ├── N2: Corporate Sustainability, Urban Demographics, Concessive Discourse Markers
+  │    └── N1: Epistemology of Aesthetics, Economic Structural Reform, Complex Double Negations
+  ├── Pack 3 (jlpt_mock_pack_03): "Humanities & Applied Technology Battery" (公式実戦模試 第3回)
+  │    ├── N5: Hospital Registration, Family Routine, Simple Particle Contrast (は vs が, に vs で)
+  │    ├── N4: Travel Itinerary, Weather Warnings, Causative/Passive Verb Inflections
+  │    ├── N3: Consumer Psychology, Telecommunication Etiquette, Star Reordering Syntactic Traps
+  │    ├── N2: Artificial Intelligence & Labor Displacement, Renewable Energy Transition
+  │    └── N1: Linguistic Relativity in Classical Literature, Biomedical Ethics, Implicit Stance
+  ├── Pack 4 (jlpt_mock_pack_04): "Nuance Traps & High-Speed Comprehension" (公式実戦模試 第4回)
+  │    ├── N5: Campus Calendar, Lost Property Forms, Polite Copula Conjugations
+  │    ├── N4: Rental Lease Clauses, Hotel Booking Inquiries, Potential Form Nuance
+  │    ├── N3: Media Literacy, Regional Dialects, Conditional Constructions (たら, なら, ば, と)
+  │    ├── N2: Behavioral Economics, Industrial Automation, Subtle Author Assertions
+  │    └── N1: Cognitive Neuroscience of Memory, Meta-Ethics, High-Register Archaic Expressions
+  └── Pack 5 (jlpt_mock_pack_05): "Final Exam-Day Simulation Battery" (公式実戦模試 第5回)
+       ├── N5: Full Time-Strict Simulation (Language Knowledge 25 min + Dokkai 25 min + Chokai 30 min)
+       ├── N4: Full Time-Strict Simulation (Language Knowledge 30 min + Dokkai 35 min + Chokai 35 min)
+       ├── N3: Full Time-Strict Simulation (Language Knowledge 30 min + Dokkai 40 min + Chokai 40 min)
+       ├── N2: Full Time-Strict Simulation (Language Knowledge & Dokkai 105 min + Chokai 50 min)
+       └── N1: Full Time-Strict Simulation (Language Knowledge & Dokkai 110 min + Chokai 60 min)
+```
+
+##### Full Specification: JLPT N2 Mock Exam Battery Matrix (Packs 1–5 Detailed Content)
+
+| Battery Pack | Language Knowledge (Moji/Goi) Seed Focus | Grammar & Star Sentence Themes | Reading Passages (Dokkai) Focus | Listening (Chokai) Audio Contexts |
+| :---: | :--- | :--- | :--- | :--- |
+| **Pack 1** | Business, employment, contracts (`把握`, `契機`, `是正`, `妥協`) | `〜にほかならない`, `〜ざるを得ない`, `〜を契機に` | Remote work productivity, environmental greenwashing notices | Department store meeting, railway disruption announcement |
+| **Pack 2** | Civic life, legal guidelines, municipal policies (`措置`, `緩和`, `遵守`) | `〜どころか`, `〜反面`, `〜からといって` | Urban gentrification, traditional craft apprenticeships | University tutorial dispute, public library renovation guide |
+| **Pack 3** | Technology, economic volatility, resources (`枯渇`, `凌駕`, `顕著`) | `〜に相違ない`, `〜をめぐって`, `〜まい` | Corporate AI ethics, renewable offshore wind feasibility | Supply chain conference call, technical manufacturing briefing |
+| **Pack 4** | Psychology, human relations, societal attitudes (`懸念`, `模索`, `躊躇`) | `〜っこない`, `〜つつある`, `〜わりに` | Consumer cognitive biases, multigenerational living arrangements | Customer complaint resolution, architectural exhibition audio |
+| **Pack 5** | Peak comprehensive review across all official 382 N2 kanji | Full synthesis of all 180 N2 grammar patterns | Comparative author stances on cultural globalization | Full authentic 50-minute JEES speed and acoustic distractor simulation |
+
+---
+
 ## 6. Engineering Hand-off & Architecture Notes
 
 1. **Deterministic Grading Separation**:

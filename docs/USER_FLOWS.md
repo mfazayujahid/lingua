@@ -369,9 +369,26 @@ ightarrow$ Official Full-Length Simulation Exam unlocked.
 
 ---
 
-### Screen 4: Interactive Practice & Mock Exam Runner (Full-Length IELTS & Strict Exam Engine)
-* **Route**: `/practice/:lessonId` or `/exam?track=:trackId&level=:levelId`
-* **Purpose**: Realistic, computer-delivered testing environment simulating official test-center conditions for both **Computer-Delivered IELTS (CD-IELTS)** and **JLPT Exam Simulations**. Guarantees authentic full-length test administration (not superficial 3-question quizzes) paired with rigorous anti-cheating state machines and seamless level-aware default resolution.
+### Screen 4: Interactive Practice & Mock Exam Runner (Multi-Mock Battery Engine: Packs 1–5)
+* **Routes**:
+  * Practice Drill: `/practice/:lessonId`
+  * Mock Exam Hub: `/exam?track=:trackId&level=:levelId`
+  * Active Battery Runner: `/exam/runner?batteryId=:batteryId`
+* **Purpose**: Realistic, computer-delivered testing environment simulating official test-center conditions for both **Computer-Delivered IELTS (CD-IELTS)** and **JLPT Exam Simulations**. Provides a master inventory of **5 completely distinct official mock exam batteries (Packs 1–5)** per level, strictly enforcing the **Zero Task Duplication Rule**, rigorous anti-cheating proctoring, and full Indonesian localization in ID mode.
+* **The Master Mock Battery Selector Hub (`/exam`)**:
+  * **Interactive Battery Grid**: Displays 5 distinct mock exam cards per track/level:
+    1. **Pack 1**: *Diagnostic Baseline Battery* (`ielts_mock_pack_01` / `jlpt_mock_pack_01`) — Baseline diagnostic assessment.
+    2. **Pack 2**: *Core Competence Battery* (`ielts_mock_pack_02` / `jlpt_mock_pack_02`) — Evaluates core grammatical flexibility and lexical breadth.
+    3. **Pack 3**: *Advanced Academic & Specialized Discourse Battery* (`ielts_mock_pack_03` / `jlpt_mock_pack_03`) — Focuses on complex humanities, technology, and specialized terminology.
+    4. **Pack 4**: *High-Cognitive-Density Battery* (`ielts_mock_pack_04` / `jlpt_mock_pack_04`) — Fast conversational shifts, intricate tables, and subtle distractor traps.
+    5. **Pack 5**: *Final Readiness & Peak Performance Battery* (`ielts_mock_pack_05` / `jlpt_mock_pack_05`) — Authentic exam-day difficulty simulation with strict official timing.
+  * **Rich Battery Package Metadata Card**:
+    - Title: e.g. `IELTS Academic Official Simulation Pack 3` (in ID mode: `Simulasi Resmi IELTS Akademik Paket 3`).
+    - Thematic Badges: e.g. `Phytolith Archaeology`, `Linguistic Relativity`, `Epigenetics`.
+    - Total Duration & Items: `166 min | 40 Reading + 40 Listening + 2 Writing + 3 Speaking`.
+    - Difficulty Profile & CEFR Alignment: `Advanced Academic (C1 / Band 7.5 Target)`.
+    - Previous Attempt History Badge: `Unattempted (Belum Dikerjakan)`, `In Progress (Sedang Berjalan)`, or `Completed (Selesai: Band 7.5 / 142/180)`.
+    - Action CTA: Primary button `"Mulai Ujian Resmi (Start Official Simulation)"` with full-screen warning prompt.
 * **Mode Selector Ribbon**:
   * **Practice Mode**: Untimed self-study, scrubbable audio player with speed options ($0.75	imes, 1.0	imes, 1.25	imes$), instant item feedback, and line-by-line evidence citations.
   * **Strict Exam Mode (Full-Length Simulation)**: Enforces authentic test-center conditions:
@@ -663,10 +680,17 @@ ightarrow$ Explicit error card with browser permission guide and cached recordin
 
 ---
 
-### Screen 6: Mastery & Readiness Analytics
+### Screen 6: Mastery & Readiness Analytics (Longitudinal Multi-Mock Progression Cockpit)
 * **Route**: `/analytics`
-* **Purpose**: Comprehensive diagnostic cockpit tracking official score trajectories, sectional strengths/vulnerabilities, JLPT cutoff safeguards, and SRS retention curves.
+* **Purpose**: Comprehensive diagnostic cockpit tracking official score trajectories, sectional strengths/vulnerabilities, JLPT cutoff safeguards, longitudinal multi-mock progression across Packs 1–5, and SRS retention curves.
 * **Key UI Components**:
+  * *Multi-Mock Progression Trajectory Card (Packs 1 -> 5 Growth Graph)*:
+    - Step-line chart mapping score evolution from initial baseline (Pack 1) to final readiness (Pack 5).
+    - Longitudinal comparison table displaying:
+      * Pack Number & Battery Title (e.g. `Pack 1: Baseline` $ightarrow$ `Pack 3: Advanced Discourse`).
+      * Test Date & Time Spent.
+      * Final Score & Target Delta ($\Delta_{	ext{target}}$): e.g. `Band 6.5 (+0.0) -> Band 7.0 (+0.5) -> Band 7.5 (+1.0)`.
+      * Weighted Readiness Index ($WRI$): Exponentially recency-weighted projection estimating official test-day performance.
   * *Score Trajectory Chart*: Multi-line historical graph showing official projected band (or JLPT scaled points) over the past 30/60/90 days against target benchmark.
   * *JLPT Sectional Safeguard Gauge*: 3 horizontal progress bars for Language Knowledge, Reading, and Listening. Highlights the critical 19-point cutoff threshold with an amber warning zone if projected score $< 25$.
   * *Skill Radar Chart*: 5-axis polygonal visualization comparing student mastery against Band 7.5 / N1 standard across discrete competencies.
@@ -1202,5 +1226,43 @@ On mobile viewports ($< 640	ext{px}$), the desktop top-header collapses into an 
   * **When** clicking on the distractor analysis drawer,
   * **Then** the system presents an exhaustive explanation in Indonesian:
     > *"Analisis Jebakan Percakapan: Anda memilih '12 Oktober', namun pembicara meralat jadwal dengan menyatakan bahwa penerbangan mereka mendarat pada tanggal 14 Oktober ('Actually, our flight lands on the 14th'). Jawaban yang benar adalah 14 Oktober."*
+
+---
+
+### 4.24 Multi-Mock Exam Battery Inventory & Zero Task Duplication Verification
+* **Scenario 57: Distinct Stimuli and Question Isolation Across Packs 1 to 5**
+  * **Given** an IELTS Academic candidate inspects the Reading sections of Mock Packs 1, 2, and 3,
+  * **When** evaluating the reading passages and question pools,
+  * **Then** the system verifies that:
+    1. Pack 1 presents *Chronometry*, *Trophic Cascades*, and *Bilingualism* (~2,600 words).
+    2. Pack 2 presents *Deep Tunnel Sewerage*, *Oceanic Paleoclimatology*, and *High-Frequency Trading* (~2,670 words).
+    3. Pack 3 presents *Maize Domestication*, *Linguistic Relativity*, and *Epigenetic Inheritance* (~2,710 words).
+    4. There is 0% question overlap, 0% stimulus repetition, and 100% unique distractor matrices across all 5 packs.
+* **Scenario 58: JLPT Track 5-Battery Inventory Across All 5 Levels (N5 to N1)**
+  * **Given** an N2 learner accesses the Exam Battery Selector Hub,
+  * **When** viewing available batteries for N2,
+  * **Then** the hub displays 5 distinct packages (`jlpt_n2_mock_pack_01` to `05`) spanning unique Moji/Goi sets, distinct Dokkai commentary articles, and independent Chokai audio situations with zero duplicate questions.
+
+### 4.25 Exam Battery Selector Hub & Longitudinal Trajectory Tracking Verification
+* **Scenario 59: Selecting and Launching an Official Exam Package**
+  * **Given** a learner opens `/exam?track=en_ielts_academic&level=Band_7.5`,
+  * **When** viewing the Battery Selector Hub,
+  * **Then** each card displays rich metadata (difficulty profile, themes, item count, duration, and completion status), and clicking `"Mulai Ujian Resmi"` for Pack 3 launches the test runner in full-screen Strict Exam Mode with Pack 3 assets pre-cached.
+* **Scenario 60: Longitudinal Multi-Attempt Progression Tracking**
+  * **Given** a candidate has completed Pack 1 (Band 6.5) and Pack 2 (Band 7.0), and subsequently completes Pack 3 (Band 7.5),
+  * **When** navigating to `/analytics`,
+  * **Then** the Multi-Mock Progression Trajectory card renders the 3-point progression curve, calculates the Weighted Readiness Index ($WRI = 7.18 \implies \text{Band } 7.5$), and displays a positive readiness headroom of $+0.5$ Band over the target requirement.
+
+### 4.26 Complete Indonesian Localization of Multi-Mock Hub & Results in ID Mode
+* **Scenario 61: 100% Indonesian Interface in Battery Hub & Diagnostic Scorecard**
+  * **Given** a learner selects `Mode Bahasa Indonesia` (`mode: 'id'`),
+  * **When** viewing the Exam Hub and exam results,
+  * **Then** all titles, difficulty labels, themes, sectional reviews, and error analysis cards render in natural Indonesian:
+    - *"Paket 1: Baterai Diagnostik Awal (Baseline)"*
+    - *"Paket 2: Baterai Kompetensi Inti"*
+    - *"Paket 3: Wacana Akademik Lanjutan"*
+    - *"Indeks Kesiapan Terbobot (Weighted Readiness Index): Band 7.5"*
+    - *"Peringatan Ambang Batas Minimal: Bahasa Jepang Bagian Pengetahuan Bahasa memenuhi batas kelulusan 19/60."*
+    - Zero untranslated English or Japanese strings in UI chrome.
 
 ---
