@@ -974,12 +974,13 @@ export async function fetchExamTrajectory(track: LevelCode): Promise<ExamBattery
 }
 
 // ==========================================
+// ==========================================
 // Phase 4: Production Writing Studio API
 // ==========================================
 
-export async function fetchWritingPrompts(taskType?: IELTSWritingTaskType): Promise<{ prompts: IELTSWritingPromptStimulus[] }> {
+export async function fetchWritingPrompts(taskType?: IELTSWritingTaskType | string): Promise<{ prompts: IELTSWritingPromptStimulus[] }> {
   try {
-    const url = taskType ? `${BASE_URL}/writing/prompts?taskType=${taskType}` : `${BASE_URL}/writing/prompts`;
+    const url = taskType ? `${BASE_URL}/writing/prompts?taskType=${encodeURIComponent(taskType)}` : `${BASE_URL}/writing/prompts`;
     const res = await fetch(url);
     if (res.ok) {
       const data = await res.json();
@@ -993,6 +994,20 @@ export async function fetchWritingPrompts(taskType?: IELTSWritingTaskType): Prom
     ? AUTHENTIC_WRITING_PROMPTS.filter(p => p.taskType === taskType)
     : AUTHENTIC_WRITING_PROMPTS;
   return { prompts: filtered };
+}
+
+export async function fetchWritingPromptById(id: string): Promise<{ prompt: IELTSWritingPromptStimulus }> {
+  try {
+    const res = await fetch(`${BASE_URL}/writing/prompts/${encodeURIComponent(id)}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.prompt) return data;
+    }
+  } catch (err) {
+    console.warn('Backend fetchWritingPromptById error, fallback to defaults', err);
+  }
+  const prompt = AUTHENTIC_WRITING_PROMPTS.find(p => p.promptId === id) || AUTHENTIC_WRITING_PROMPTS[0];
+  return { prompt };
 }
 
 export async function evaluateWritingSubmission(payload: EssaySubmissionPayload): Promise<DiagnosticScorecardResult> {
@@ -1019,6 +1034,10 @@ export async function evaluateWritingSubmission(payload: EssaySubmissionPayload)
   return localResult;
 }
 
+export async function submitWritingEssayForDiagnostic(payload: EssaySubmissionPayload): Promise<DiagnosticScorecardResult> {
+  return evaluateWritingSubmission(payload);
+}
+
 function getLocalWritingSubmissions(): DiagnosticScorecardResult[] {
   try {
     const raw = localStorage.getItem('lingua_writing_submissions');
@@ -1038,9 +1057,9 @@ function saveLocalWritingSubmission(result: DiagnosticScorecardResult) {
   }
 }
 
-export async function fetchWritingSubmissions(): Promise<{ submissions: DiagnosticScorecardResult[] }> {
+export async function fetchWritingSubmissions(userId = 'user_001'): Promise<{ submissions: any[] }> {
   try {
-    const res = await fetch(`${BASE_URL}/writing/submissions`);
+    const res = await fetch(`${BASE_URL}/writing/submissions?userId=${encodeURIComponent(userId)}`);
     if (res.ok) {
       const data = await res.json();
       if (data.submissions) return data;
@@ -1051,9 +1070,9 @@ export async function fetchWritingSubmissions(): Promise<{ submissions: Diagnost
   return { submissions: getLocalWritingSubmissions() };
 }
 
-export async function fetchWritingSubmissionById(id: string): Promise<DiagnosticScorecardResult | null> {
+export async function fetchWritingSubmissionById(id: string): Promise<any> {
   try {
-    const res = await fetch(`${BASE_URL}/writing/submissions/${id}`);
+    const res = await fetch(`${BASE_URL}/writing/submissions/${encodeURIComponent(id)}`);
     if (res.ok) return await res.json();
   } catch (err) {
     console.warn('Backend fetchWritingSubmissionById error', err);
@@ -1061,5 +1080,3 @@ export async function fetchWritingSubmissionById(id: string): Promise<Diagnostic
   const local = getLocalWritingSubmissions().find(s => s.submissionId === id);
   return local || null;
 }
-
-

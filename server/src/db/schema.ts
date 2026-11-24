@@ -112,6 +112,43 @@ export interface UserExamAttemptRow {
   completed_at: string;
 }
 
+export interface WritingPromptRow {
+  id: string;
+  task_type: string;
+  category?: string | null;
+  prompt_title: string;
+  prompt_text: string;
+  visual_asset_url?: string | null;
+  visual_data_points?: string | null;
+  time_limit_minutes: number;
+  target_word_count: number;
+  model_band_8_response: string;
+  guidance_notes?: string | null;
+  title_id?: string | null;
+  prompt_text_id?: string | null;
+  guidance_notes_id?: string | null;
+  model_strengths_en?: string | null;
+  model_strengths_id?: string | null;
+  benchmark_band?: number | null;
+  created_at: string;
+}
+
+export interface WritingSubmissionRow {
+  id: string;
+  prompt_id: string;
+  user_id: string;
+  essay_text: string;
+  time_spent_seconds: number;
+  word_count: number;
+  overall_band: number;
+  ta_tr_band: number;
+  cc_band: number;
+  lr_band: number;
+  gra_band: number;
+  evaluation_json: string;
+  created_at: string;
+}
+
 export type { SpeakingExamPackage, SpeakingSessionRecord };
 export type { IeltsListeningPackage, ListeningSessionRecord, ListeningEvaluationResult } from '../types';
 export type {
@@ -122,7 +159,16 @@ export type {
   ExamQuestionItem,
   ExamPassage,
   ExamSubmissionPayload,
-  ExamSubmissionEvaluationResult
+  ExamSubmissionEvaluationResult,
+  IELTSWritingTaskType,
+  AnnotationCategory,
+  AnnotationSeverity,
+  IELTSWritingPromptStimulus,
+  SentenceAnnotation,
+  CriterionDiagnosticDetail,
+  DiagnosticScorecardResult,
+  EssaySubmissionPayload
 } from '../types';
+
 
 
