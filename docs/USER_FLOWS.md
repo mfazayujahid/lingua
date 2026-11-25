@@ -1419,3 +1419,69 @@ On mobile viewports ($< 640	ext{px}$), the desktop top-header collapses into an 
     - Zero English or Japanese leakage in UI controls and diagnostic labels.
 
 ---
+
+### 4.31 JLPT Official 5-Tier Mock Exam Engine (N5 through N1)
+* **Scenario 69: JLPT Mock Exam Hub & 5-Level Selector (N5–N1)**
+  * **Given** a learner accesses the Exam Hub on the Japanese Track (`ja_jlpt`),
+  * **When** the page renders,
+  * **Then** the hub displays 5 official JLPT level cards (N5, N4, N3, N2, N1), each indicating:
+    1. Official session durations (e.g. N1: 110m + 60m, N5: 20m + 40m + 30m).
+    2. Official Pass Mark (N1: 100/180, N2: 90/180, N3: 95/180, N4: 90/180, N5: 80/180).
+    3. Sectional Cutoff Safeguard: *"Batas Minimum: 19/60 poin tiap seksi (Wajib lolos seluruh seksi)"*.
+    4. Action button to launch exam battery.
+
+* **Scenario 70: Dual-Mode Examination (Timed Official Simulation vs Practice Drill)**
+  * **Given** an examinee selects JLPT N5 Mock Exam Battery,
+  * **When** choosing between *"Simulasi Resmi (Strict Timed)"* and *"Mode Latihan Bebas (Untimed Drill)"*,
+  * **Then**:
+    1. In **Official Simulation Mode**: A strict countdown timer locks to official session minutes, auto-submits upon expiry, forbids viewing answer keys during the test, and enforces sequential session progression.
+    2. In **Practice Drill Mode**: The timer is advisory/relaxed, candidates can reveal grammatical explanations and distractor rationales per question, and pause/resume at will.
+
+* **Scenario 71: Digital Optical Mark Sheet (マークシート) Interaction**
+  * **Given** an examinee is answering questions in the JLPT Exam Runner,
+  * **When** interacting with the test questions,
+  * **Then** an Optical Mark Sheet (マークシート) sidebar displays:
+    1. Interactive bubble sheet with 4 bubbles `[1] [2] [3] [4]` for each item.
+    2. Selecting an option in the question area instantly fills the corresponding bubble on the mark sheet in $< 1\text{ms}$.
+    3. Clicking a bubble directly on the mark sheet jumps the viewport to that question and sets the selected answer.
+    4. A "Ragu-ragu (Flag for Review)" toggle pins an amber indicator on both the question card and mark sheet grid.
+
+* **Scenario 72: Interactive Star Reordering (★ 星マーク並べ替え)**
+  * **Given** an examinee reaches a Sentence Grammar 2 (文の組み立て) question (e.g., `＿＿＿　＿＿＿　★　＿＿＿`),
+  * **When** viewing the 4 scrambled grammatical chunks,
+  * **Then**:
+    1. Candidates can tap or drag chunks into the 4 numbered slots in order.
+    2. The 3rd slot is prominently highlighted with a gold star badge (`★`).
+    3. The answer submitted is automatically mapped to whichever chunk occupies the `★` slot.
+    4. A 1-click "Reset Susunan" button restores chunks to the unassigned tray.
+
+* **Scenario 73: Split-Pane Reading Comprehension (読解)**
+  * **Given** an examinee enters the Dokkai (読解) section,
+  * **When** rendering long or medium passages (and comparative dual-texts in N2/N1),
+  * **Then**:
+    1. The UI displays a split-pane layout: Left pane renders the full Japanese passage with line/paragraph numbers, and Right pane renders the question and options.
+    2. On mobile viewports ($< 768\text{px}$), a responsive tab toggle allows seamless switching between *"Teks Bacaan (Passage)"* and *"Soal Ujian (Questions)"*.
+    3. Text selection triggers an optional highlighter tool (Yellow/Green).
+
+* **Scenario 74: Listening Audio Chime & Single-Play Audio Stimulus (聴解)**
+  * **Given** an examinee begins the Chokai (聴解) section,
+  * **When** an item starts,
+  * **Then**:
+    1. An official JLPT chime sound plays, followed by the question prompt.
+    2. Under official test conditions, audio streams once without replay or pause.
+    3. Visual waveform and timer indicate remaining audio duration.
+
+* **Scenario 75: Official 180-Point Scaled Score Report (合否結果通知書)**
+  * **Given** an examinee submits an official JLPT mock exam,
+  * **When** the scoring engine evaluates the submission,
+  * **Then** the report card displays:
+    1. Official Verdict: **合格 (LULUS / PASSED)** or **不合格 (TIDAK LULUS / FAILED)**.
+    2. Overall Scaled Score out of 180 points vs Level Pass Mark.
+    3. Sectional Scaled Score Breakdown:
+       - Language Knowledge (0–60 pts)
+       - Reading Comprehension (0–60 pts)
+       - Listening Comprehension (0–60 pts)
+       *(For N4/N5: Combined Lang Knowledge/Reading 0–120 pts, Listening 0–60 pts)*.
+    4. **Sectional Cutoff Safeguard Alert**: If any section scored $< 19$ points, the report displays a prominent red warning: *"Gagal memenuhi batas minimum seksi (19/60) - Ujian dinyatakan Tidak Lulus meskipun skor total mencukupi."*
+    5. Sub-criteria diagnostics with radar chart: Vocabulary Breadth, Grammar Accuracy, Reading Speed & Inference, Listening Precision.
+    6. Comprehensive question review with correct answers, candidate answers, and linguistic explanations.
