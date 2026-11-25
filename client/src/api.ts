@@ -18,7 +18,7 @@ import {
 } from '../../shared/types';
 import { AUTHENTIC_WRITING_PROMPTS, analyzeEssayLocally } from './data/writingPromptsData';
 
-const BASE_URL = '/api';
+export const BASE_URL = '/api';
 
 export async function fetchHealth(): Promise<{ status: string }> {
   const res = await fetch(`${BASE_URL}/health`);

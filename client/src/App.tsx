@@ -15,6 +15,9 @@ import { ListeningStudioView } from './components/ListeningStudioView';
 import { LectureView } from './components/LectureView';
 import { KanjiCanvasView } from './components/KanjiCanvasView';
 import { AnalyticsView } from './components/AnalyticsView';
+import { JLPTExamHubView } from './components/JLPTExamHubView';
+import { JLPTExamRunnerView } from './components/JLPTExamRunnerView';
+import { JLPTFullExamPackage } from './data/jlptMockBank';
 
 export const AppContent: React.FC = () => {
   const { t } = useLanguage();
@@ -36,10 +39,16 @@ export const AppContent: React.FC = () => {
     category: 'HIRAGANA',
     level: 'N5'
   });
+  const [jlptActiveExam, setJlptActiveExam] = useState<{ pkg: JLPTFullExamPackage; mode: 'strict' | 'practice' } | null>(null);
+  const [jlptShowLessonDrill, setJlptShowLessonDrill] = useState<boolean>(false);
 
   const handleNavigate = (view: string, options?: { category?: 'HIRAGANA' | 'KATAKANA' | 'KANJI'; level?: string }) => {
     if (view === 'kanji' && options) {
       setKanjiNavOptions(options);
+    }
+    if (view === 'exam') {
+      setJlptActiveExam(null);
+      setJlptShowLessonDrill(false);
     }
     setActiveView(view);
   };
@@ -132,6 +141,8 @@ export const AppContent: React.FC = () => {
     } else if (lessonType === 'flashcard_review' || lessonType === 'srs') {
       setActiveView('srs');
     } else if (mode === 'drill') {
+      setJlptShowLessonDrill(true);
+      setJlptActiveExam(null);
       setActiveView('exam');
     } else {
       setActiveView('lecture');
@@ -142,9 +153,13 @@ export const AppContent: React.FC = () => {
     <div className="min-h-screen bg-washi-100 dark:bg-sumi-950 text-stone-900 dark:text-stone-100 flex flex-col selection:bg-vermilion-500 selection:text-white transition-colors duration-200">
       <Navbar
         activeView={activeView}
-        setActiveView={setActiveView}
+        setActiveView={handleNavigate}
         activeTrack={activeTrack}
-        onTrackChange={handleTrackChange}
+        onTrackChange={(newTrack) => {
+          setJlptActiveExam(null);
+          setJlptShowLessonDrill(false);
+          handleTrackChange(newTrack);
+        }}
         srsDueCount={srsDueCount}
         streakDays={dashboardData?.user?.streakDays || 0}
       />
@@ -181,6 +196,8 @@ export const AppContent: React.FC = () => {
             initialLessonId={currentLectureLessonId}
             onStartDrill={(lessonId) => {
               setCurrentExamLessonId(lessonId);
+              setJlptShowLessonDrill(true);
+              setJlptActiveExam(null);
               setActiveView('exam');
             }}
             onNavigateToWriting={() => setActiveView('studio')}
@@ -189,12 +206,35 @@ export const AppContent: React.FC = () => {
         )}
 
         {activeView === 'exam' && (
-          <ExamRunnerView
-            lessonId={currentExamLessonId}
-            activeTrack={activeTrack}
-            onNavigateBack={() => setActiveView('curriculum')}
-            onSelectExam={(id) => setCurrentExamLessonId(id)}
-          />
+          activeTrack.startsWith('jlpt_') ? (
+            jlptShowLessonDrill ? (
+              <ExamRunnerView
+                lessonId={currentExamLessonId}
+                activeTrack={activeTrack}
+                onNavigateBack={() => setJlptShowLessonDrill(false)}
+                onSelectExam={(id) => setCurrentExamLessonId(id)}
+              />
+            ) : jlptActiveExam ? (
+              <JLPTExamRunnerView
+                examPackage={jlptActiveExam.pkg}
+                mode={jlptActiveExam.mode}
+                onExitToHub={() => setJlptActiveExam(null)}
+              />
+            ) : (
+              <JLPTExamHubView
+                activeTrack={activeTrack}
+                onStartExam={(pkg, examMode) => setJlptActiveExam({ pkg, mode: examMode })}
+                onOpenLessonDrill={() => setJlptShowLessonDrill(true)}
+              />
+            )
+          ) : (
+            <ExamRunnerView
+              lessonId={currentExamLessonId}
+              activeTrack={activeTrack}
+              onNavigateBack={() => setActiveView('curriculum')}
+              onSelectExam={(id) => setCurrentExamLessonId(id)}
+            />
+          )
         )}
 
         {activeView === 'studio' && (

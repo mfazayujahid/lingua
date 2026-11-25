@@ -93,3 +93,37 @@ export function playCharacterCompleteSound() {
     osc.stop(startTime + 0.4);
   });
 }
+
+/**
+ * Official JLPT Chokai Listening Section Chime Cue (4-note ascending/descending broadcast chime)
+ */
+export function playJLPTChimeSound() {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const chimeNotes = [
+    { freq: 523.25, delay: 0, dur: 0.35 },    // C5
+    { freq: 659.25, delay: 0.25, dur: 0.35 }, // E5
+    { freq: 783.99, delay: 0.50, dur: 0.35 }, // G5
+    { freq: 523.25, delay: 0.75, dur: 0.65 }  // C5 hold
+  ];
+
+  chimeNotes.forEach(n => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const t0 = ctx.currentTime + n.delay;
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(n.freq, t0);
+
+    gain.gain.setValueAtTime(0.001, t0);
+    gain.gain.linearRampToValueAtTime(0.18, t0 + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.001, t0 + n.dur);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(t0);
+    osc.stop(t0 + n.dur);
+  });
+}
