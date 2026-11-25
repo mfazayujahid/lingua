@@ -235,7 +235,7 @@ export const JLPTExamHubView: React.FC<JLPTExamHubViewProps> = ({
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 flex items-center gap-2">
             <Layers className="w-4 h-4 text-vermilion-500" />
-            <span>{language === 'id' ? 'Koridor 5 Tingkat Resmi JLPT (N5 – N1)' : 'Official 5-Tier JLPT Corridor (N5 – N1)'}</span>
+            <span>{language === 'id' ? 'Koridor Format JLPT 5 Tingkat (N5 – N1)' : 'JLPT-Aligned 5-Tier Corridor (N5 – N1)'}</span>
           </h2>
           {loadingPacks && (
             <span className="text-xs text-stone-400 animate-pulse">
@@ -328,7 +328,7 @@ export const JLPTExamHubView: React.FC<JLPTExamHubViewProps> = ({
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-washi-200 dark:border-sumi-800 pb-4">
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-vermilion-500">
-                {language === 'id' ? 'Struktur Resmi Sesi Ujian' : 'Official Session Structure'}
+                {language === 'id' ? 'Struktur Sesi Ujian' : 'Standard Session Structure'}
               </span>
               <h3 className="text-lg sm:text-xl font-extrabold text-stone-900 dark:text-stone-100 mt-0.5">
                 {currentSpec.label} — {language === 'id' ? currentSpec.subtitleId : currentSpec.subtitleEn}
@@ -498,7 +498,7 @@ export const JLPTExamHubView: React.FC<JLPTExamHubViewProps> = ({
               </span>
               <span className="font-semibold text-stone-800 dark:text-stone-200">
                 {examMode === 'strict'
-                  ? language === 'id' ? '1x Putar (Dengan Bel Resmi)' : 'Single-Play + Official Chime'
+                  ? language === 'id' ? '1x Putar (Dengan Bel Simulasi)' : 'Single-Play + Start Chime'
                   : language === 'id' ? 'Putar Ulang Bebas' : 'Unlimited Replay'}
               </span>
             </div>

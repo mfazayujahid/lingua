@@ -18,9 +18,11 @@ import { AnalyticsView } from './components/AnalyticsView';
 import { JLPTExamHubView } from './components/JLPTExamHubView';
 import { JLPTExamRunnerView } from './components/JLPTExamRunnerView';
 import { JLPTFullExamPackage } from './data/jlptMockBank';
+import { LegalDisclaimerModal } from './components/LegalDisclaimerModal';
+import { Scale } from 'lucide-react';
 
 export const AppContent: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeView, setActiveView] = useState<string>('dashboard');
   const [activeTrack, setActiveTrack] = useState<LevelCode>(() => {
     try {
@@ -41,6 +43,7 @@ export const AppContent: React.FC = () => {
   });
   const [jlptActiveExam, setJlptActiveExam] = useState<{ pkg: JLPTFullExamPackage; mode: 'strict' | 'practice' } | null>(null);
   const [jlptShowLessonDrill, setJlptShowLessonDrill] = useState<boolean>(false);
+  const [isDisclaimerOpen, setIsDisclaimerOpen] = useState<boolean>(false);
 
   const handleNavigate = (view: string, options?: { category?: 'HIRAGANA' | 'KATAKANA' | 'KANJI'; level?: string }) => {
     if (view === 'kanji' && options) {
@@ -270,18 +273,35 @@ export const AppContent: React.FC = () => {
 
       {/* Footer (Visible & Non-Occluded across Mobile and Desktop) */}
       <footer className="border-t border-washi-300 dark:border-sumi-850 bg-washi-50 dark:bg-sumi-900 py-6 pb-24 lg:pb-6 text-center text-xs text-stone-500 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="font-jp text-vermilion-500 font-bold">文</span>
-            <span>{t('footer.brand_desc')}</span>
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-jp text-vermilion-500 font-bold">文</span>
+              <span>{t('footer.brand_desc')}</span>
+            </div>
+            <button
+              onClick={() => setIsDisclaimerOpen(true)}
+              className="inline-flex items-center gap-1 text-[11px] font-semibold text-stone-500 hover:text-vermilion-600 dark:hover:text-vermilion-400 underline underline-offset-2 transition-colors ml-0 sm:ml-2"
+            >
+              <Scale className="w-3.5 h-3.5" />
+              <span>{language === 'id' ? 'Penafian Hukum & Merek (Fair Use)' : 'Legal Disclaimer & Fair Use'}</span>
+            </button>
           </div>
-          <div className="flex gap-3 text-stone-400">
+          <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-stone-400">
             <span>{t('footer.theme_label')}</span>
             <span>•</span>
             <span>{t('footer.zero_synthetic')}</span>
+            <span>•</span>
+            <span>KanjiVG © Ulrich Apel (CC BY-SA 3.0)</span>
           </div>
         </div>
       </footer>
+
+      {/* Legal Disclaimer & Trademark Notice Modal */}
+      <LegalDisclaimerModal
+        isOpen={isDisclaimerOpen}
+        onClose={() => setIsDisclaimerOpen(false)}
+      />
     </div>
   );
 };

@@ -702,7 +702,7 @@ export const JLPTExamRunnerView: React.FC<JLPTExamRunnerViewProps> = ({
                     <div className="flex items-center gap-2 text-xs font-bold text-indigo-800 dark:text-indigo-300">
                       <Volume2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                       <span>
-                        {language === 'id' ? 'Pemutar Audio Chokai Resmi' : 'Official Chokai Audio Stimulus'}
+                        {language === 'id' ? 'Pemutar Audio Chokai' : 'Chokai Audio Stimulus'}
                         {currentQuestion.audioSpeakers ? ` • ${currentQuestion.audioSpeakers}` : ''}
                       </span>
                     </div>
@@ -738,7 +738,7 @@ export const JLPTExamRunnerView: React.FC<JLPTExamRunnerViewProps> = ({
                           <Play className="w-3.5 h-3.5 fill-current" />
                           <span>
                             {st === 'chime'
-                              ? language === 'id' ? 'Bel Resmi JLPT...' : 'Official JLPT Chime...'
+                              ? language === 'id' ? 'Bel Pembuka JLPT...' : 'JLPT Chime Cue...'
                               : st === 'playing'
                                 ? t('jlpt_exam.chokai_playing')
                                 : st === 'played' && mode === 'strict'
@@ -1114,7 +1114,7 @@ export const JLPTExamRunnerView: React.FC<JLPTExamRunnerViewProps> = ({
             <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
               {language === 'id'
                 ? `Anda telah menjawab ${answeredCount} dari ${questions.length} soal (${questions.length - answeredCount} belum dijawab). Setelah dikumpulkan, sistem akan menghitung skor skala 0–180 beserta validasi batas minimum seksi 19/60.`
-                : `You answered ${answeredCount} of ${questions.length} questions. Upon submission, your official 180-point scaled score and 19/60 sectional cutoff evaluation will be generated.`}
+                : `You answered ${answeredCount} of ${questions.length} questions. Upon submission, your calibrated 180-point scaled score and 19/60 sectional cutoff evaluation will be generated.`}
             </p>
             <div className="flex justify-end gap-2.5 pt-2">
               <button

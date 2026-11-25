@@ -456,12 +456,12 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'writing.underlength_modal_confirm': 'Evaluate Anyway',
 
     // JLPT 5-Tier Official Mock Exam Engine
-    'jlpt_exam.hub_badge': 'Official JEES Standard Simulator (N5–N1)',
-    'jlpt_exam.hub_title': 'JLPT 5-Tier Official Mock Exam Hub',
+    'jlpt_exam.hub_badge': 'JLPT-Format Standard Practice Simulator (N5–N1)',
+    'jlpt_exam.hub_title': 'JLPT 5-Tier Mock Exam Practice Hub',
     'jlpt_exam.hub_subtitle': 'Full 180-point scaled mock exams with sectional 19-point cutoff verification, Digital Optical Mark Sheet, Star Reordering, and Chokai Audio.',
     'jlpt_exam.mode_title': 'Examination Delivery Mode',
-    'jlpt_exam.mode_strict': 'Official Simulation (Strict Timed)',
-    'jlpt_exam.mode_strict_desc': 'Authentic JEES session countdowns, single-play listening audio, and no mid-exam answer peeking.',
+    'jlpt_exam.mode_strict': 'Full Timed Simulation (Strict Mode)',
+    'jlpt_exam.mode_strict_desc': 'Standard session countdowns, single-play listening audio, and no mid-exam answer peeking.',
     'jlpt_exam.mode_practice': 'Untimed Practice Drill',
     'jlpt_exam.mode_practice_desc': 'Relaxed pace, free audio replay, and instant grammar/distractor explanations per question.',
     'jlpt_exam.cutoff_rule_badge': 'Minimum Cutoff: 19/60 pts per section (Must pass all sections)',
@@ -486,7 +486,7 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'jlpt_exam.chokai_playing': 'Playing Official Chokai Audio...',
     'jlpt_exam.chokai_played': 'Audio Stream Completed',
     'jlpt_exam.submit_exam': 'Submit Exam',
-    'jlpt_exam.score_report_title': 'JLPT Official Score Report (合否結果通知書)',
+    'jlpt_exam.score_report_title': 'JLPT Practice Score Report (合否結果通知書)',
     'jlpt_exam.total_scaled_score': 'Composite Scaled Score',
     'jlpt_exam.sectional_breakdown': 'Sectional Scaled Score Breakdown',
     'jlpt_exam.cutoff_threshold_label': 'Min Cutoff: {min}/{max}',
@@ -943,12 +943,12 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'writing.underlength_modal_confirm': 'Tetap Evaluasi',
 
     // JLPT 5-Tier Official Mock Exam Engine (100% Indonesian)
-    'jlpt_exam.hub_badge': 'Simulator Resmi Standar JEES (N5–N1)',
-    'jlpt_exam.hub_title': 'Pusat Simulasi Ujian Resmi JLPT 5 Tingkat',
+    'jlpt_exam.hub_badge': 'Simulator Latihan Format JLPT (N5–N1)',
+    'jlpt_exam.hub_title': 'Pusat Simulasi Latihan JLPT 5 Tingkat',
     'jlpt_exam.hub_subtitle': 'Simulasi penuh skala 180 poin dengan validasi batas minimum seksi 19/60, Lembar Jawab Komputer (Mark Sheet), Susun Bintang ★, dan Audio Chokai.',
     'jlpt_exam.mode_title': 'Mode Pelaksanaan Ujian',
-    'jlpt_exam.mode_strict': 'Simulasi Resmi (Strict Timed)',
-    'jlpt_exam.mode_strict_desc': 'Timer hitung mundur resmi per sesi, audio listening diputar 1x tanpa ulang, dan pembahasan terkunci hingga selesai.',
+    'jlpt_exam.mode_strict': 'Simulasi Lengkap Berwaktu (Strict Mode)',
+    'jlpt_exam.mode_strict_desc': 'Timer hitung mundur standar per sesi, audio listening diputar 1x tanpa ulang, dan pembahasan terkunci hingga selesai.',
     'jlpt_exam.mode_practice': 'Mode Latihan Bebas (Untimed Practice)',
     'jlpt_exam.mode_practice_desc': 'Tanpa batas waktu ketat, bebas memutar ulang audio, serta dapat membuka penjelasan tata bahasa per soal.',
     'jlpt_exam.cutoff_rule_badge': 'Batas Minimum: 19/60 poin tiap seksi (Wajib lolos seluruh seksi)',
@@ -973,7 +973,7 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'jlpt_exam.chokai_playing': 'Sedang Memutar Audio Chokai...',
     'jlpt_exam.chokai_played': 'Pemutaran Audio Selesai',
     'jlpt_exam.submit_exam': 'Kumpulkan Lembar Jawab',
-    'jlpt_exam.score_report_title': 'Laporan Hasil Resmi Ujian JLPT (合否結果通知書)',
+    'jlpt_exam.score_report_title': 'Laporan Hasil Evaluasi Latihan JLPT (合否結果通知書)',
     'jlpt_exam.total_scaled_score': 'Skor Skala Komposit',
     'jlpt_exam.sectional_breakdown': 'Rincian Skor Skala Per Seksi',
     'jlpt_exam.cutoff_threshold_label': 'Batas Minimum: {min}/{max}',
@@ -1032,3 +1032,4 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 };
 
 export const useLanguage = () => useContext(LanguageContext);
+

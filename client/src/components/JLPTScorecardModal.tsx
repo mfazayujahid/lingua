@@ -146,7 +146,7 @@ export const JLPTScorecardModal: React.FC<JLPTScorecardModalProps> = ({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-washi-300 dark:border-sumi-800 pb-6">
           <div className="space-y-1.5">
             <div className="text-[11px] font-bold uppercase tracking-widest text-stone-500 dark:text-stone-400">
-              JEES • JAPAN EDUCATIONAL EXCHANGES AND SERVICES
+              LINGUAMASTERY • INDEPENDENT JLPT-FORMAT PREPARATION REPORT
             </div>
             <h1 className="text-xl sm:text-2xl font-extrabold text-stone-900 dark:text-stone-100">
               {t('jlpt_exam.score_report_title')}
@@ -166,7 +166,7 @@ export const JLPTScorecardModal: React.FC<JLPTScorecardModalProps> = ({
             </div>
           </div>
 
-          {/* Official Verdict Hanko Seal Stamp */}
+          {/* Diagnostic Verdict Hanko Seal Stamp */}
           <div
             className={`px-6 py-4 rounded-2xl border-2 flex items-center gap-4 shrink-0 ${
               result.overallPassed
@@ -185,7 +185,7 @@ export const JLPTScorecardModal: React.FC<JLPTScorecardModalProps> = ({
             </div>
             <div>
               <div className="text-[10px] font-bold uppercase tracking-wider opacity-80">
-                {language === 'id' ? 'Hasil Akhir Resmi' : 'Official Verdict'}
+                {language === 'id' ? 'Hasil Evaluasi Latihan' : 'Diagnostic Verdict'}
               </div>
               <div className="text-xl sm:text-2xl font-black tracking-tight">
                 {result.verdictJp} ({language === 'id' ? result.verdictId : result.verdictEn})
@@ -485,7 +485,7 @@ export const JLPTScorecardModal: React.FC<JLPTScorecardModalProps> = ({
                 </div>
                 <div className="p-2.5 rounded-lg bg-white/80 dark:bg-sumi-850 border border-washi-200 dark:border-sumi-800">
                   <span className="text-stone-500 block text-[10px] uppercase font-bold">
-                    {language === 'id' ? 'Kunci Jawaban Resmi:' : 'Official Key:'}
+                    {language === 'id' ? 'Kunci Jawaban Acuan:' : 'Answer Key:'}
                   </span>
                   <span className="font-jp font-bold text-emerald-700 dark:text-emerald-300">
                     {q.correctAnswer}
@@ -538,3 +538,4 @@ export const JLPTScorecardModal: React.FC<JLPTScorecardModalProps> = ({
     </div>
   );
 };
+
