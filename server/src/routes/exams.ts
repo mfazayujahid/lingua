@@ -5,6 +5,7 @@ import {
   evaluateMockSubmission,
   computeBatteryTrajectory
 } from '../algorithms/multiMock';
+import { evaluateJLPTSubmission } from '../lib/jlptScorer';
 import {
   LevelCode,
   ExamPackageContent,
@@ -39,24 +40,40 @@ function normalizeLevelCode(input?: string): string {
 
 /**
  * GET /api/exams/packages?track=:levelCode
- * Returns the 5 official exam packages for the target track/level with candidate attempt summaries.
+ * Returns the official exam packages for the target track/level with candidate attempt summaries.
  */
 examsRouter.get('/packages', (req: Request, res: Response) => {
   const trackQuery = (req.query.track || req.query.level || req.query.levelCode) as string | undefined;
   const userId = (req.query.userId as string) || 'user_001';
-  const levelCode = normalizeLevelCode(trackQuery);
 
   try {
-    const rows = db.prepare(`
-      SELECT 
-        id, level_code, pack_number, title_en, title_id,
-        thematic_focus_en, thematic_focus_id, difficulty_tier,
-        total_duration_minutes, pass_threshold_score, total_questions,
-        created_at
-      FROM exam_packages
-      WHERE level_code = ?
-      ORDER BY pack_number ASC
-    `).all(levelCode) as ExamPackageRow[];
+    let rows: ExamPackageRow[] = [];
+    const isGenericJlpt = trackQuery && trackQuery.trim().toLowerCase() === 'jlpt';
+
+    if (isGenericJlpt) {
+      rows = db.prepare(`
+        SELECT 
+          id, level_code, pack_number, title_en, title_id,
+          thematic_focus_en, thematic_focus_id, difficulty_tier,
+          total_duration_minutes, pass_threshold_score, total_questions,
+          created_at
+        FROM exam_packages
+        WHERE level_code LIKE 'jlpt_%'
+        ORDER BY level_code DESC, pack_number ASC
+      `).all() as ExamPackageRow[];
+    } else {
+      const levelCode = normalizeLevelCode(trackQuery);
+      rows = db.prepare(`
+        SELECT 
+          id, level_code, pack_number, title_en, title_id,
+          thematic_focus_en, thematic_focus_id, difficulty_tier,
+          total_duration_minutes, pass_threshold_score, total_questions,
+          created_at
+        FROM exam_packages
+        WHERE level_code = ?
+        ORDER BY pack_number ASC
+      `).all(levelCode) as ExamPackageRow[];
+    }
 
     // Fetch user attempts for these packages to build attempt summaries
     const attempts = db.prepare(`
@@ -65,9 +82,9 @@ examsRouter.get('/packages', (req: Request, res: Response) => {
         raw_score, total_questions, scaled_score, passed,
         sectional_breakdown, time_spent_seconds, completed_at
       FROM user_exam_attempts
-      WHERE user_id = ? AND level_code = ?
+      WHERE user_id = ?
       ORDER BY completed_at ASC
-    `).all(userId, levelCode) as UserExamAttemptRow[];
+    `).all(userId) as UserExamAttemptRow[];
 
     // Group attempts by package_id
     const attemptsByPackage = new Map<string, UserExamAttemptRow[]>();
@@ -117,7 +134,7 @@ examsRouter.get('/packages', (req: Request, res: Response) => {
     });
 
     res.json({
-      track: levelCode,
+      track: isGenericJlpt ? 'jlpt' : normalizeLevelCode(trackQuery),
       totalPackages: packages.length,
       packages
     });
@@ -187,6 +204,7 @@ examsRouter.get('/packages/:packageId', (req: Request, res: Response) => {
 /**
  * POST /api/exams/submit
  * Records a full exam attempt, evaluates score/band with authentic distractor audit.
+ * Supports both IELTS multi-mock exams and JLPT 5-Tier official scaled scoring.
  */
 examsRouter.post('/submit', (req: Request, res: Response) => {
   const {
@@ -218,8 +236,43 @@ examsRouter.post('/submit', (req: Request, res: Response) => {
     }
 
     const packageContent: ExamPackageContent = JSON.parse(row.package_data_json);
+    const isJLPT = row.level_code.startsWith('jlpt_') || packageId.startsWith('jlpt_');
 
-    // Run the scoring and distractor audit engine
+    if (isJLPT) {
+      // Evaluate using official JLPT 0-180 scaled score engine & 19-point cutoff safeguard
+      const jlptResult = evaluateJLPTSubmission(
+        packageContent,
+        answers,
+        Number(timeSpentSeconds) || 0,
+        userId
+      );
+
+      // Persist attempt into user_exam_attempts table
+      db.prepare(`
+        INSERT INTO user_exam_attempts (
+          id, user_id, package_id, level_code, pack_number,
+          raw_score, total_questions, scaled_score, passed,
+          sectional_breakdown, time_spent_seconds, completed_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      `).run(
+        jlptResult.attemptId,
+        userId,
+        packageId,
+        jlptResult.levelCode,
+        packageContent.packNumber || row.pack_number || 1,
+        jlptResult.rawScore,
+        jlptResult.totalQuestions,
+        jlptResult.scaledScore,
+        jlptResult.overallPassed ? 1 : 0,
+        JSON.stringify(jlptResult.sectionalScores),
+        Number(timeSpentSeconds) || 0
+      );
+
+      res.json(jlptResult);
+      return;
+    }
+
+    // Run the scoring and distractor audit engine for IELTS
     const evaluation = evaluateMockSubmission(
       packageContent,
       answers,
@@ -281,7 +334,7 @@ examsRouter.get('/trajectory', (req: Request, res: Response) => {
         id, user_id, package_id, level_code, pack_number,
         raw_score, total_questions, scaled_score, passed,
         sectional_breakdown, time_spent_seconds, completed_at
-      FROM user_exam_attempts
+      ) FROM user_exam_attempts
       WHERE user_id = ? AND level_code = ?
       ORDER BY completed_at ASC
     `).all(userId, levelCode) as UserExamAttemptRow[];

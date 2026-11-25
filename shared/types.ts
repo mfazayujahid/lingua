@@ -454,7 +454,7 @@ export interface SectionalScore {
 export interface AccentVulnerabilityProfile {
   accent: ListeningAccentCode | string;
   accentName: string;
-  sectionNumber?: number;
+  sectionNumber: number;
   correctCount: number;
   totalCount: number;
   accuracyPct: number;
@@ -523,11 +523,21 @@ export interface ExamQuestionItem {
   id: string;
   questionNumber: number;
   sectionNumber: number;
-  itemType: 'mcq' | 'tfng' | 'matching_headings' | 'sentence_completion' | 'star_sentence' | 'summary_completion' | string;
+  itemType: 'mcq' | 'tfng' | 'matching_headings' | 'sentence_completion' | 'star_sentence' | 'summary_completion' | 'cloze' | 'chokai_audio' | string;
   prompt: string;
   passagePart?: number;
   passageTitle?: string;
   passageText?: string;
+  passageId?: string;
+  stimulusText?: string;
+  audioUrl?: string;
+  sessionNumber?: number;
+  mondaiNumber?: number;
+  mondaiTitleJp?: string;
+  mondaiTitleId?: string;
+  sectionCategory?: 'language_knowledge' | 'reading' | 'listening';
+  scrambledChunks?: [string, string, string, string];
+  starPosition?: 1 | 2 | 3 | 4;
   options?: string[];
   correctAnswer: string | number | string[];
   acceptedAnswers?: string[];
@@ -558,6 +568,115 @@ export interface ExamPackageContent {
   totalQuestions: number;
   passages?: ExamPassage[];
   questions: ExamQuestionItem[];
+}
+
+// ==========================================
+// JLPT 5-Tier Official Mock Engine Types (docs/SPEC.md §2.2 & §3)
+// ==========================================
+
+export interface JLPTExamSession {
+  sessionNumber: number;
+  sectionNumber?: number;
+  sessionTitleJp: string;
+  sessionTitleEn: string;
+  sessionTitleId: string;
+  durationMinutes: number;
+}
+
+export interface JLPTExamPassage {
+  id: string;
+  passageType: 'short' | 'medium' | 'long' | 'comparative' | 'information_retrieval' | string;
+  titleJp: string;
+  titleEn: string;
+  textJp: string;
+  hasFurigana?: boolean;
+  noticeAssetUrl?: string;
+  wordCount?: number;
+  partNumber?: number;
+  title?: string;
+  titleId?: string;
+  text?: string;
+}
+
+export interface JLPTExamQuestion extends Omit<ExamQuestionItem, 'sectionNumber'> {
+  sessionNumber: number;
+  sectionNumber?: number;
+  mondaiNumber: number;
+  mondaiTitleJp: string;
+  mondaiTitleId: string;
+  itemType: 'mcq' | 'star_sentence' | 'cloze' | 'chokai_audio' | string;
+  stimulusText?: string;
+  passageId?: string;
+  audioUrl?: string;
+  prompt: string;
+  scrambledChunks?: [string, string, string, string];
+  starPosition?: 1 | 2 | 3 | 4;
+  options: string[];
+  correctAnswer: string | number;
+  explanation: string;
+  explanationId: string;
+  sectionCategory: 'language_knowledge' | 'reading' | 'listening';
+}
+
+export interface JLPTExamPackageData {
+  id: string;
+  trackCode: 'jlpt';
+  levelCode: 'n5' | 'n4' | 'n3' | 'n2' | 'n1' | 'jlpt_n5' | 'jlpt_n4' | 'jlpt_n3' | 'jlpt_n2' | 'jlpt_n1';
+  packNumber: number;
+  titleEn: string;
+  titleId: string;
+  titleJp: string;
+  durationMinutes: number;
+  passThresholdScore: number;
+  sectionalCutoffScore: number; // 19
+  furiganaPolicy: 'full' | 'partial' | 'none';
+  sessions: JLPTExamSession[];
+  passages: JLPTExamPassage[];
+  questions: JLPTExamQuestion[];
+  thematicFocusEn?: string;
+  thematicFocusId?: string;
+  difficultyTier?: ExamDifficultyTier | string;
+  totalDurationMinutes?: number;
+  totalQuestions?: number;
+}
+
+export interface JLPTSectionalScore {
+  raw: number;
+  total: number;
+  scaled: number;
+  cutoffPassed: boolean;
+}
+
+export interface JLPTQuestionEvaluation {
+  questionNumber: number;
+  userAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+  explanation: string;
+  explanationId: string;
+}
+
+export interface JLPTScoringResult {
+  attemptId: string;
+  packageId: string;
+  levelCode: string;
+  rawScore: number;
+  totalQuestions: number;
+  accuracyPct: number;
+  scaledScore: number; // 0 - 180
+  sectionalScores: {
+    languageKnowledge: JLPTSectionalScore;
+    reading: JLPTSectionalScore;
+    listening: JLPTSectionalScore;
+  };
+  passThreshold: number;
+  overallPassed: boolean;
+  passed?: boolean;
+  sectionalCutoffFailed: boolean;
+  verdictJp: '合格' | '不合格';
+  verdictId: 'LULUS' | 'TIDAK LULUS';
+  cutoffAlertId?: string;
+  questionEvaluations: JLPTQuestionEvaluation[];
 }
 
 export interface ExamPackageAttemptSummary {
@@ -716,7 +835,7 @@ export interface ExamSubmissionEvaluationResult {
 // Phase 4: AI Diagnostic Essay Assessment Types
 // ==========================================
 
-export type IELTSWritingTaskType = 'task1_academic' | 'task1_general' | 'task2_discursive';
+export type IELTSWritingTaskType = 'task1_academic' | 'task1_general' | 'task2_discursive' | 'task_1' | 'task_2';
 
 export type AnnotationCategory = 
   | 'grammar_error' 
@@ -735,6 +854,7 @@ export interface IELTSWritingPromptStimulus {
   promptTextId: string;
   minimumWords: number;
   suggestedMinutes: number;
+  category?: string;
   visualType?: 'line_graph' | 'bar_chart' | 'pie_chart' | 'data_table' | 'process_diagram' | 'map';
   visualAssetUrl?: string;
   visualDataPoints?: Record<string, any>;
