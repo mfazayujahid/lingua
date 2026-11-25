@@ -506,84 +506,165 @@ The platform evaluates candidate answers against official Cambridge grading conv
 
 ### 2.2 Japanese JLPT Framework (N5 $\rightarrow$ N4 $\rightarrow$ N3 $\rightarrow$ N2 $\rightarrow$ N1)
 
-The JLPT tests Japanese communicative, lexical, orthographic, and academic competence across 5 hierarchical levels. This platform provides full curriculum and pedagogical support across all five tiers, establishing a seamless learning corridor from foundational literacy (N5/N4) to upper-intermediate practical competence (N3) and advanced corporate/academic fluency (N2/N1).
+The Japanese-Language Proficiency Test (日本語能力試験 - JLPT) is the global gold standard for assessing and certifying the Japanese language proficiency of non-native speakers, jointly administered by the Japan Foundation (国際交流基金) and Japan Educational Exchanges and Services (日本国際教育支援協会 - JEES). The examination evaluates communicative competence, lexical breadth, orthographic precision, syntactic flexibility, and discourse comprehension across five hierarchical levels (N5 through N1).
 
-#### 2.2.1 Level Profiles & Competency Definitions
-* **N5 (Beginner / Elementary Literacy)**:
-  * *Target*: Ability to comprehend foundational Japanese, including hiragana, katakana, and elementary daily kanji.
-  * *Kanji*: ~100 kanji.
-  * *Vocabulary*: ~800 words.
-  * *Reading*: Ability to read and comprehend typical expressions, daily phrases, and basic sentences written in hiragana, katakana, and elementary kanji.
-  * *Listening*: Ability to listen and comprehend short, spoken conversations about familiar daily topics and classroom interactions when spoken slowly and clearly.
-* **N4 (Upper Elementary / Basic Everyday Fluency)**:
-  * *Target*: Ability to understand basic Japanese used in daily life, routine personal activities, and familiar public contexts.
-  * *Kanji*: ~300 kanji.
-  * *Vocabulary*: ~1,500 words.
-  * *Reading*: Ability to read and comprehend passages on familiar daily topics written in basic vocabulary and kanji, as well as notices, basic schedules, and everyday instructions.
-  * *Listening*: Ability to comprehend everyday dialogues spoken at slightly slower than natural speed, grasping basic relational context and core action items.
-* **N3 (Bridge to Intermediate)**:
-  * *Target*: Ability to understand Japanese used in everyday situations to a certain degree.
-  * *Kanji*: ~650 kanji.
-  * *Vocabulary*: ~3,750 words.
-  * *Reading*: Ability to read and understand passages on everyday topics, grasp headlines in newspapers, comprehend summary information.
-  * *Listening*: Ability to listen and comprehend coherent conversations in everyday situations spoken at near-natural speed, following relationships and main ideas.
-* **N2 (Business & Academic Fluency)**:
-  * *Target*: Ability to understand Japanese used in everyday situations, and in a variety of circumstances to a certain degree. Prerequisite for Japanese corporate employment and most university admissions.
-  * *Kanji*: ~1,000 kanji.
-  * *Vocabulary*: ~6,000 words.
-  * *Reading*: Ability to read articles, commentaries, and critiques in newspapers and magazines on general topics, comprehend narrative intent, logical structure, and underlying nuances.
-  * *Listening*: Ability to comprehend oral reports, conversations, and news broadcasts spoken at natural speed in diverse situations.
-* **N1 (Mastery & High Nuance)**:
-  * *Target*: Ability to understand Japanese used in a variety of complex, abstract, and nuanced circumstances.
-  * *Kanji*: ~2,136+ (full Jōyō Kanji inventory).
-  * *Vocabulary*: ~10,000+ words.
-  * *Reading*: Highly sophisticated academic prose, editorials, abstract essays, literary critiques; extracting implicit subtext, subtle tone, and rhetorical devices.
-  * *Listening*: Lectures, debates, and complex business/political negotiations at natural or fast speed, grasping nuances, speaker stances, and implicit conclusions.
+To guarantee **99% authentic test parity**, our engine replicates every dimension of the official JLPT: exact section divisions, strict official session durations, official Item Response Theory (IRT) scaled scoring (0–180), sectional minimum passing cutoffs (19/60 rule), canonical Mondai (問題) taxonomies, Furigana typography governance, and authentic Optical Mark Sheet (マークシート) mechanics.
 
-#### 2.2.2 Test Structure, Scoring Scale & Cutoffs
-JLPT uses **Scaled Scoring** based on Item Response Theory (IRT) rather than raw points. Total points range from **0 to 180 points**.
+#### 2.2.1 Official 5-Tier Examination Architecture, Session Configurations & Timings
 
-To pass the JLPT, an examinee must satisfy **two independent conditions simultaneously**:
-1. **Total Scaled Score** $\ge$ **Overall Pass Threshold**.
-2. **Each Individual Sectional Score** $\ge$ **Sectional Cutoff Threshold**. Failure on even one section results in automatic test failure, regardless of total score.
+In accordance with official JEES test administration standards (including the revised test session durations instituted since December 2020), the JLPT is structured into distinct timed test sessions. Examinees must complete each session in sequence under strict proctoring; no retro-active navigation or time-pooling across sessions is permitted.
 
-##### Critical Scoring Structure Distinction: 2 Scored Sections (N5 & N4) vs 3 Scored Sections (N1–N3)
-* **Foundational Corridor (N5 & N4)**: Official scoring combines Language Knowledge (Vocabulary/Grammar) and Reading into a single **0–120 point** scaled section. Sectional passing requires $\ge 38$ points out of 120 (31.7%). Listening is scored as an independent **0–60 point** section with a cutoff of $\ge 19$ points (31.7%).
-* **Intermediate & Advanced Corridor (N1, N2, N3)**: Official scoring splits the test into three independent **0–60 point** sections: Language Knowledge, Reading, and Listening. Each section enforces an individual cutoff of $\ge 19$ points out of 60 (31.7%).
-
-| Level | Test Section 1 (Timing) | Test Section 2 (Timing) | Test Section 3 (Timing) | Total Score | Total Pass Mark | Sectional Cutoff Thresholds |
+| Level | Administrative Sessions (Test Booklets) | Session Timing | Scored Reporting Sections | Scaled Score Range | Total Pass Mark | Sectional Cutoff Thresholds |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **N5** | **Language Knowledge (Vocab)** (20 min) | **Language Knowledge (Grammar) & Reading** (40 min) $\rightarrow$ *Combined scaled to 0–120* | **Listening** (30 min) $\rightarrow$ *Scaled to 0–60* | 180 pts | **80 / 180** (44.4%) | **Lang Knowledge / Reading: 38 / 120** (31.7%)<br>**Listening: 19 / 60** (31.7%) |
-| **N4** | **Language Knowledge (Vocab)** (25 min) | **Language Knowledge (Grammar) & Reading** (55 min) $\rightarrow$ *Combined scaled to 0–120* | **Listening** (35 min) $\rightarrow$ *Scaled to 0–60* | 180 pts | **90 / 180** (50.0%) | **Lang Knowledge / Reading: 38 / 120** (31.7%)<br>**Listening: 19 / 60** (31.7%) |
-| **N3** | **Language Knowledge (Kanji & Vocab)** (30 min) | **Language Knowledge (Grammar) & Reading** (70 min) $\rightarrow$ *Combined scaled to 0–60 for Vocab/Grammar, 0–60 for Reading* | **Listening** (40 min) $\rightarrow$ *Scaled to 0–60* | 180 pts | **95 / 180** (52.8%) | **Lang Knowledge: 19 / 60** (31.7%)<br>**Reading: 19 / 60** (31.7%)<br>**Listening: 19 / 60** (31.7%) |
-| **N2** | **Language Knowledge (Kanji, Vocab, Grammar) & Reading** (105 min) $\rightarrow$ *Scored separately: Lang Knowledge 0–60, Reading 0–60* | — | **Listening** (50 min) $\rightarrow$ *Scaled to 0–60* | 180 pts | **90 / 180** (50.0%) | **Lang Knowledge: 19 / 60** (31.7%)<br>**Reading: 19 / 60** (31.7%)<br>**Listening: 19 / 60** (31.7%) |
-| **N1** | **Language Knowledge (Kanji, Vocab, Grammar) & Reading** (110 min) $\rightarrow$ *Scored separately: Lang Knowledge 0–60, Reading 0–60* | — | **Listening** (55 min) $\rightarrow$ *Scaled to 0–60* | 180 pts | **100 / 180** (55.6%) | **Lang Knowledge: 19 / 60** (31.7%)<br>**Reading: 19 / 60** (31.7%)<br>**Listening: 19 / 60** (31.7%) |
+| **N5** | **Session 1**: 言語知識（文字・語彙）<br>**Session 2**: 言語知識（文法）・読解<br>**Session 3**: 聴解 | Vocab: **20 min**<br>Grammar/Read: **40 min**<br>Listening: **30 min**<br>*(Total: 90 min)* | **Section 1**: 言語知識（文字・語彙・文法）・読解<br>**Section 2**: 聴解 | Lang Knowledge / Reading: **0–120 pts**<br>Listening: **0–60 pts**<br>*(Total: 0–180 pts)* | **80 / 180** (44.4%) | **Lang Knowledge / Reading: $\ge 38$ / 120** (31.7%)<br>**Listening: $\ge 19$ / 60** (31.7%) |
+| **N4** | **Session 1**: 言語知識（文字・語彙）<br>**Session 2**: 言語知識（文法）・読解<br>**Session 3**: 聴解 | Vocab: **25 min**<br>Grammar/Read: **55 min**<br>Listening: **35 min**<br>*(Total: 115 min)* | **Section 1**: 言語知識（文字・語彙・文法）・読解<br>**Section 2**: 聴解 | Lang Knowledge / Reading: **0–120 pts**<br>Listening: **0–60 pts**<br>*(Total: 0–180 pts)* | **90 / 180** (50.0%) | **Lang Knowledge / Reading: $\ge 38$ / 120** (31.7%)<br>**Listening: $\ge 19$ / 60** (31.7%) |
+| **N3** | **Session 1**: 言語知識（文字・語彙）<br>**Session 2**: 言語知識（文法）・読解<br>**Session 3**: 聴解 | Vocab: **30 min**<br>Grammar/Read: **70 min**<br>Listening: **40 min**<br>*(Total: 140 min)* | **Section 1**: 言語知識（文字・語彙）<br>**Section 2**: 言語知識（文法）・読解<br>**Section 3**: 聴解 | Lang Knowledge: **0–60 pts**<br>Reading: **0–60 pts**<br>Listening: **0–60 pts**<br>*(Total: 0–180 pts)* | **95 / 180** (52.8%) | **Lang Knowledge: $\ge 19$ / 60** (31.7%)<br>**Reading: $\ge 19$ / 60** (31.7%)<br>**Listening: $\ge 19$ / 60** (31.7%) |
+| **N2** | **Session 1**: 言語知識（文字・語彙・文法）・読解<br>**Session 2**: 聴解 | Lang Knowledge / Read: **105 min**<br>Listening: **50 min**<br>*(Total: 155 min)* | **Section 1**: 言語知識（文字・語彙）<br>**Section 2**: 読解<br>**Section 3**: 聴解 | Lang Knowledge: **0–60 pts**<br>Reading: **0–60 pts**<br>Listening: **0–60 pts**<br>*(Total: 0–180 pts)* | **90 / 180** (50.0%) | **Lang Knowledge: $\ge 19$ / 60** (31.7%)<br>**Reading: $\ge 19$ / 60** (31.7%)<br>**Listening: $\ge 19$ / 60** (31.7%) |
+| **N1** | **Session 1**: 言語知識（文字・語彙・文法）・読解<br>**Session 2**: 聴解 | Lang Knowledge / Read: **110 min**<br>Listening: **60 min**<br>*(Total: 170 min)* | **Section 1**: 言語知識（文字・語彙）<br>**Section 2**: 読解<br>**Section 3**: 聴解 | Lang Knowledge: **0–60 pts**<br>Reading: **0–60 pts**<br>Listening: **0–60 pts**<br>*(Total: 0–180 pts)* | **100 / 180** (55.6%) | **Lang Knowledge: $\ge 19$ / 60** (31.7%)<br>**Reading: $\ge 19$ / 60** (31.7%)<br>**Listening: $\ge 19$ / 60** (31.7%) |
 
-#### 2.2.3 JLPT Item Types Breakdown
-* **Language Knowledge (Vocabulary/Kanji)**:
-  * *Kanji Reading (漢字読み)*: Select hiragana reading for underlined kanji compound.
-  * *Orthography / Kanji Writing (表記)* (N3/N2): Select correct kanji for underlined hiragana.
-  * *Word Formation (語形成)* (N2): Prefixes/suffixes (e.g., 最〜, 不〜, 〜感, 〜化).
-  * *Contextually Defined Expressions (文脈規定)*: Choose best fit word in a sentence blank.
-  * *Paraphrases / Synonyms (言い換え類義)*: Choose sentence closest in meaning.
-  * *Usage (用法)*: Identify the sentence where a specified word is used grammatically and naturally.
-* **Language Knowledge (Grammar)**:
-  * *Grammar Form Selection (文法形式の判断)*: Clause connector or particle selection.
-  * *Sentence Composition / Star Sentence (文の組み立て)*: Reorder 4 fragments; identify the item placed at the star $(\star)$ position.
-  * *Text-Level Grammar (文章の文法)*: Cohesion and conjunctions in a continuous passage.
-* **Reading Comprehension**:
-  * *Short Passages (短文)* (~200 words, 1 question each).
-  * *Medium Passages (中文)* (~500 words, 3 questions each).
-  * *Long Passages (長文)* (~900–1000 words, 3–4 questions each).
-  * *Integrated Comprehension / Dual Text (統合理解)* (N2/N1, comparison of two texts on one topic).
-  * *Thematic / Editorial Assertion (主張理解)* (N1, grasping author’s philosophical stance).
-  * *Information Retrieval (情報検索)* (Flyers, tables, official rules, notices).
-* **Listening Comprehension**:
-  * *Task-Based Comprehension (課題理解)*: What should the person do next?
-  * *Key Point Comprehension (ポイント理解)*: Why did it happen?
-  * *General Outline (概要理解)*: Monologue summary / topic identification.
-  * *Quick Response (即時応答)*: Real-time turn-taking conversational reply.
-  * *Integrated Comprehension (統合理解)* (N2/N1): Multi-person dialogue with synthesis task.
+#### 2.2.2 Dual Passing Criteria & The Absolute 19-Point Benchmark Rule
+
+To attain official certification (合格 - Passed), a candidate must satisfy **two simultaneous, non-negotiable conditions**:
+1. **Total Scaled Score $\ge$ Overall Passing Threshold**: The candidate's aggregated scaled score across all reporting sections must meet or exceed the level's benchmark (N1: 100/180; N2: 90/180; N3: 95/180; N4: 90/180; N5: 80/180).
+2. **Every Sectional Scaled Score $\ge$ Sectional Passing Threshold**:
+   - For **N1, N2, N3**: Every individual section (Language Knowledge, Reading, Listening) must achieve $\ge 19 / 60$ points.
+   - For **N4, N5**: The combined Language Knowledge/Reading section must achieve $\ge 38 / 120$ points, and Listening must achieve $\ge 19 / 60$ points.
+
+> [!CRITICAL]
+> **Automatic Failure Guarantee (基準点未達)**: If an examinee scores 179/180 total points but attains 18/60 in Listening (or any individual section), the result is **不合格 (FAILED)**. Our engine rigorously models this official safeguard, flagging candidates with explicit "Sectional Cutoff Alert" indicators.
+
+#### 2.2.3 Furigana Governance Standard across Levels (N5 $\rightarrow$ N1)
+
+In the official JLPT examination, ruby annotations (振仮名 - Furigana) are strictly controlled by level guidelines to evaluate authentic reading capability:
+* **JLPT N5**: **100% Full Furigana**. Every kanji character without exception is annotated with small hiragana ruby above the kanji to assist foundational learners.
+* **JLPT N4**: **100% Full Furigana**. All kanji in prompts, reading passages, and questions feature full ruby annotations.
+* **JLPT N3**: **Partial Selective Furigana**. Kanji covered in the foundational N5/N4 levels (~300 characters, such as 日, 本, 学, 校, 食, 行, 見) appear **without** furigana. Intermediate kanji specific to N3 or beyond are provided with furigana.
+* **JLPT N2**: **Zero Furigana on Jōyō Kanji**. Standard general-use kanji (常用漢字) are displayed strictly unannotated. Furigana is exclusively reserved for non-Jōyō kanji, rare person/place names, or specialized terminology, accompanied by vocabulary gloss footnotes at the foot of reading passages.
+* **JLPT N1**: **Zero Furigana**. Full Joyo kanji inventory (2,136 characters) and advanced literary compounds appear completely naked without ruby. Only extremely rare archaic characters or non-standard ateji carry ruby annotations.
+
+#### 2.2.4 Master Inventory of Official Mondai (問題) Modules per Level
+
+The official JLPT employs standardized question modules designated as **Mondai (問題)**. Each module possesses a specific prompt structure, cognitive target, and fixed item count. Below is the exhaustive authoritative inventory across all 5 levels:
+
+##### 1. JLPT N5 Mondai Inventory (Total: ~66 Questions | 90 min)
+* **Session 1: 言語知識（文字・語彙）(20 min)**
+  * **問題1: 漢字読み (Kanji Reading)** (12 items): Select the correct hiragana reading for an underlined kanji word in a basic everyday sentence.
+  * **問題2: 表記 (Orthography / Hiragana-to-Kanji)** (8 items): Select the correct kanji or katakana for an underlined hiragana word.
+  * **問題3: 文脈規定 (Contextual Vocabulary Selection)** (10 items): Select the most semantically and grammatically appropriate word to complete a sentence blank `( )`.
+  * **問題4: 言い換え類義 (Paraphrase & Synonyms)** (5 items): Select the sentence that expresses the closest meaning to the stimulus sentence.
+* **Session 2: 言語知識（文法）・読解 (40 min)**
+  * *文法 (Grammar)*:
+    * **問題1: 文法形式の判断 (Grammar Form Selection)** (16 items): Select correct particles (は, が, に, で, を), verb conjugations (te-form, polite forms), and basic functional expressions.
+    * **問題2: 文の組み立て (★ Star Sentence Reordering)** (5 items): Permute 4 scrambled sentence fragments `[1] [2] [★] [4]` and identify the option that lands in the 3rd slot ($\star$).
+    * **問題3: 文章の文法 (Text Grammar Cloze)** (5 items): Fill blanks within a short coherent passage (e.g., student diary or letter) testing cohesive conjunctions and sentence endings.
+  * *読解 (Reading Comprehension)*:
+    * **問題4: 内容理解（短文） (Short Passages)** (3 passages, 3 items): Passages of ~80–150 words (emails, friendly notes, diary entries) testing direct factual recall.
+    * **問題5: 内容理解（中文） (Medium Passages)** (1–2 passages, 2 items): Passages of ~250 words about school, hobbies, or daily experiences.
+    * **問題6: 情報検索 (Information Retrieval)** (1 passage, 2 items): Authentic real-world notice, store flyer, timetable, or event announcement (~250 words) with multiple conditions.
+* **Session 3: 聴解 (Listening Comprehension) (30 min)**
+  * **問題1: 課題理解 (Task-Based Comprehension)** (7 items): Dialogues with printed illustrations/options. Candidates listen to a scenario, hear a specific question first, listen to the dialogue, and identify the character's immediate next action.
+  * **問題2: ポイント理解 (Key Point Comprehension)** (6 items): Candidates listen to identify specific causal details, reasons, or preferences.
+  * **問題3: 発話表現 (Verbal Expression)** (5 items): Candidates look at an illustration with an arrow pointing to a person and select the culturally appropriate spoken phrase for that situation.
+  * **問題4: 即時応答 (Quick Response)** (6 items): Real-time conversational adjacency pairs. Hear a short utterance and select the immediate conversational reply (no text printed). Preceded by official two-tone chime trigger (♪ピンポン).
+
+##### 2. JLPT N4 Mondai Inventory (Total: ~71 Questions | 115 min)
+* **Session 1: 言語知識（文字・語彙）(25 min)**
+  * **問題1: 漢字読み (Kanji Reading)** (9 items): Hiragana reading for basic everyday kanji compounds (travel, health, work, town).
+  * **問題2: 表記 (Orthography)** (6 items): Select correct kanji for underlined hiragana.
+  * **問題3: 文脈規定 (Contextual Vocabulary Selection)** (10 items): Intermediate daily vocabulary (adverbs, verbs of giving/receiving, transitive/intransitive pairs).
+  * **問題4: 言い換え類義 (Paraphrase & Synonyms)** (5 items): Identifying equivalent daily phrases and idioms.
+* **Session 2: 言語知識（文法）・読解 (55 min)**
+  * *文法 (Grammar)*:
+    * **問題1: 文法形式の判断 (Grammar Form Selection)** (15 items): Potential form (〜られる), conditional forms (〜たら, 〜ば, 〜なら), giving/receiving (〜てあげる, 〜てもらう, 〜てくれる), honorific basics.
+    * **問題2: 文の組み立て (★ Star Sentence Reordering)** (5 items): 4-slot sentence permutation with complex clause embedment.
+    * **問題3: 文章の文法 (Text Grammar Cloze)** (5 items): Cohesive passage cloze assessing discourse markers and relative clauses.
+  * *読解 (Reading Comprehension)*:
+    * **問題4: 内容理解（短文） (Short Passages)** (4 passages, 4 items): Passages of ~100–200 words (work instructions, personal correspondence, brief essays).
+    * **問題5: 内容理解（中文） (Medium Passages)** (2 passages, 4 items): Passages of ~450 words on cultural observations or workplace interactions.
+    * **問題6: 情報検索 (Information Retrieval)** (1 passage, 2 items): Apartment garbage disposal rules, clinic schedules, or library guides (~400 words) with multiple qualifying criteria.
+* **Session 3: 聴解 (Listening Comprehension) (35 min)**
+  * **問題1: 課題理解 (Task-Based Comprehension)** (8 items): Task identification with printed options.
+  * **問題2: ポイント理解 (Key Point Comprehension)** (7 items): Identifying specific rationale or core conditions.
+  * **問題3: 発話表現 (Verbal Expression)** (5 items): Visual situational turn-taking phrases.
+  * **問題4: 即時応答 (Quick Response)** (8 items): Real-time conversational replies with official chime.
+
+##### 3. JLPT N3 Mondai Inventory (Total: ~77 Questions | 140 min)
+* **Session 1: 言語知識（文字・語彙）(30 min)**
+  * **問題1: 漢字読み (Kanji Reading)** (8 items): Intermediate On-yomi / Kun-yomi compounds (social life, corporate basics).
+  * **問題2: 表記 (Orthography)** (6 items): Selecting accurate kanji among orthographic homophones.
+  * **問題3: 文脈規定 (Contextual Vocabulary Selection)** (11 items): Nuanced adverbs, compound verbs, and abstract adjectives.
+  * **問題4: 言い換え類義 (Paraphrase & Synonyms)** (5 items): Paraphrases of idioms, compound verbs, and descriptive phrases.
+  * **問題5: 用法 (Contextual Usage)** (5 items): Identify the single sentence among 4 options where a designated target word is used in a semantically and syntactically natural Japanese context.
+* **Session 2: 言語知識（文法）・読解 (70 min)**
+  * *文法 (Grammar)*:
+    * **問題1: 文法形式の判断 (Grammar Form Selection)** (13 items): Intermediate grammar forms (〜わけにはいかない, 〜わりに, 〜に関して, 〜一方).
+    * **問題2: 文の組み立て (★ Star Sentence Reordering)** (5 items): 4-fragment ordering testing nuanced clause connectors.
+    * **問題3: 文章の文法 (Text Grammar Cloze)** (5 items): Multi-paragraph cloze testing logical discourse flow.
+  * *読解 (Reading Comprehension)*:
+    * **問題4: 内容理解（短文） (Short Passages)** (4 passages, 4 items): Passages of ~150–350 words (notices, business memos, personal reflections).
+    * **問題5: 内容理解（中文） (Medium Passages)** (2 passages, 6 items): Passages of ~550 words analyzing societal trends or everyday psychology.
+    * **問題6: 内容理解（長文） (Long Passage)** (1 passage, 4 items): An extended text of ~750 words detailing personal narrative, cultural commentary, or explanatory prose.
+    * **問題7: 情報検索 (Information Retrieval)** (1 passage, 2 items): Commercial flyers, municipal notices, or flextime company guidelines (~600 words).
+* **Session 3: 聴解 (Listening Comprehension) (40 min)**
+  * **問題1: 課題理解 (Task-Based Comprehension)** (6 items): Multi-step action identification.
+  * **問題2: ポイント理解 (Key Point Comprehension)** (6 items): Grasping implicit reasons or conditional decisions.
+  * **問題3: 概要理解 (General Outline Comprehension)** (3 items): Monologues or reports (~150 words); understanding overarching topic or speaker stance (no text printed).
+  * **問題4: 発話表現 (Verbal Expression)** (4 items): Situational keigo (sonkeigo, kenjougo) selection.
+  * **問題5: 即時応答 (Quick Response)** (9 items): Real-time conversational turns at natural conversational speed.
+
+##### 4. JLPT N2 Mondai Inventory (Total: ~84 Questions | 155 min)
+* **Session 1: 言語知識（文字・語彙・文法）・読解 (105 min)**
+  * *文字・語彙 (Vocabulary/Kanji)*:
+    * **問題1: 漢字読み (Kanji Reading)** (5 items): Advanced Joyo kanji compounds (把握, 契機, 是正, 妥協).
+    * **問題2: 表記 (Orthography)** (5 items): Distinguishing subtle visual kanji radicals in homophones.
+    * **問題3: 語形成 (Word Formation)** (5 items): Specialized prefixes and suffixes (最〜, 諸〜, 〜性, 〜化, 〜圏, 〜感).
+    * **問題4: 文脈規定 (Contextual Vocabulary Selection)** (7 items): Business and civic idioms, formal verbs.
+    * **問題5: 言い換え類義 (Paraphrase & Synonyms)** (5 items): Formal stylistic rephrasing.
+    * **問題6: 用法 (Contextual Usage)** (5 items): Identifying natural corporate and academic usage across 4 full candidate sentences.
+  * *文法 (Grammar)*:
+    * **問題7: 文法形式の判断 (Grammar Form Selection)** (12 items): Advanced conjunctions (〜にほかならない, 〜ざるを得ない, 〜を契機に, 〜まい).
+    * **問題8: 文の組み立て (★ Star Sentence Reordering)** (5 items): Complex syntax permutation with nested subordinations.
+    * **問題9: 文章の文法 (Text Grammar Cloze)** (5 items): Cohesive expository essay cloze.
+  * *読解 (Reading Comprehension)*:
+    * **問題10: 内容理解（短文） (Short Passages)** (5 passages, 5 items): Expository essays and business directives (~350 words).
+    * **問題11: 内容理解（中文） (Medium Passages)** (3 passages, 9 items): In-depth analytical texts on science, culture, sociology (~500 words).
+    * **問題12: 統合理解 (Integrated Comparative Reading)** (1 pair, 2 items): Dual passages (Text A and Text B) expressing contrasting viewpoints or complementary analyses of a single contemporary issue (~600 words combined).
+    * **問題13: 主張理解（長文） (Thematic Assertion / Extended Essay)** (1 passage, 3 items): A sustained editorial or philosophical critique (~900 words) requiring identification of the author's underlying argument.
+    * **問題14: 情報検索 (Information Retrieval)** (1 guide, 2 items): Complex corporate policies, technical specifications, or facility rental regulations (~700 words).
+* **Session 2: 聴解 (Listening Comprehension) (50 min)**
+  * **問題1: 課題理解 (Task-Based Comprehension)** (5 items): Multi-party workplace decisions.
+  * **問題2: ポイント理解 (Key Point Comprehension)** (6 items): Evaluating corporate and personal motivations.
+  * **問題3: 概要理解 (General Outline Comprehension)** (5 items): News reports and presentations; extracting central thesis.
+  * **問題4: 即時応答 (Quick Response)** (11–12 items): Rapid conversational turn-taking with natural contractions, keigo, and elliptical speech.
+  * **問題5: 統合理解 (Integrated Comprehension)** (2 tasks, 3–4 items): Multi-person dialogues (3 speakers) synthesizing conflicting priorities or choosing among complex service plans.
+
+##### 5. JLPT N1 Mondai Inventory (Total: ~83 Questions | 170 min)
+* **Session 1: 言語知識（文字・語彙・文法）・読解 (110 min)**
+  * *文字・語彙 (Vocabulary/Kanji)*:
+    * **問題1: 漢字読み (Kanji Reading)** (6 items): High-register Joyo kanji readings (示唆, 乖離, 脆い, 斡旋, 躊躇, 煩雑). Note: N1 does not contain separate 表記 questions.
+    * **問題2: 文脈規定 (Contextual Vocabulary Selection)** (7 items): High-level abstract prose vocabulary, four-character idioms (四字熟語).
+    * **問題3: 言い換え類義 (Paraphrase & Synonyms)** (6 items): Subtle synonym distinction in academic contexts.
+    * **問題4: 用法 (Contextual Usage)** (6 items): Complex idiomatic collocations evaluated across 4 dense sentences.
+  * *文法 (Grammar)*:
+    * **問題5: 文法形式の判断 (Grammar Form Selection)** (10 items): Classical, literary, and archaic grammar forms (〜極まりない, 〜を皮切りに, 〜ごとき, 〜であれ, 〜ずくめ).
+    * **問題6: 文の組み立て (★ Star Sentence Reordering)** (5 items): Intricate syntactic permutations with inversion, double negations, and emphatic rhetorical devices.
+    * **問題7: 文章の文法 (Text Grammar Cloze)** (5 items): Highly abstract philosophical or academic prose cloze.
+  * *読解 (Reading Comprehension)*:
+    * **問題8: 内容理解（短文） (Short Passages)** (4 passages, 4 items): Dense philosophical, aesthetic, or scientific commentaries (~350 words).
+    * **問題9: 内容理解（中文） (Medium Passages)** (3 passages, 9 items): Analytical treatises on epistemology, linguistics, civilization (~550–600 words).
+    * **問題10: 内容理解（長文） (Long Passages)** (1 passage, 4 items): Extended academic discourse (~1,000 words) probing cognitive or societal paradigms.
+    * **問題11: 統合理解 (Integrated Comparative Dual Passages)** (1 pair, 3 items): Two complex authorial perspectives on a single philosophical, legal, or sociological dispute (~800 words combined).
+    * **問題12: 主張理解（長文） (Authorial Thesis / Editorial Critique)** (1 passage, 3 items): Long-form intellectual essay (~1,000 words) extracting the author's nuanced philosophical stance.
+    * **問題13: 情報検索 (Information Retrieval)** (1 document, 2 items): High-density regulations, official public bids, or legal warranty frameworks (~700 words).
+* **Session 2: 聴解 (Listening Comprehension) (60 min)**
+  * **問題1: 課題理解 (Task-Based Comprehension)** (6 items): Complex business strategy decisions under competing constraints.
+  * **問題2: ポイント理解 (Key Point Comprehension)** (7 items): Unpacking nuanced motivations and implicit diplomatic conditions.
+  * **問題3: 概要理解 (General Outline Comprehension)** (6 items): Academic lectures, symposium presentations, and critical editorial commentaries.
+  * **問題4: 即時応答 (Quick Response)** (13–14 items): Fast-paced, idiomatic, high-context conversational turns with rhetorical questions and veiled expressions.
+  * **問題5: 統合理解 (Integrated Comprehension)** (2 tasks, 3 items):
+    - *Task 1 (Comparison Dialogue)*: 1 dialogue with 2 questions evaluating two candidates' independent choices from four options.
+    - *Task 2 (Multi-Speaker Discussion)*: Multi-speaker panel discussion (e.g., 3-4 executives discussing a strategic pivot) with 1 comprehensive synthesis question.
+
 
 #### 2.2.4 Japanese Orthography, Stroke Order Standards (Hitsujun 筆順) & Stroke Topology
 
@@ -2322,6 +2403,238 @@ export interface EssaySubmissionPayload {
   isTimedMode: boolean;
   locale: 'en' | 'id';
 }
+```
+
+---
+
+
+#### 4.2.7 Official JLPT Mock Exam Engine Data Entities & Relational Schema
+
+To power 99% authentic JLPT mock examinations across all 5 tiers (N5 through N1) with strict session timers, dual execution modes (Proctored Timed vs Practice Drill), optical mark sheet synchronization, and official 180-point IRT scoring, the platform specifies dedicated examination data entities:
+
+```mermaid
+erDiagram
+    EXAM_PACKAGES ||--o{ EXAM_QUESTIONS : contains
+    EXAM_PACKAGES ||--o{ EXAM_SUBMISSIONS : taken_in
+    EXAM_SUBMISSIONS ||--o{ EXAM_CANDIDATE_ANSWERS : records
+    EXAM_QUESTIONS ||--o{ EXAM_CANDIDATE_ANSWERS : answered_by
+```
+
+##### 1. TypeScript Interfaces
+
+```typescript
+/**
+ * Official JLPT Exam Package Metadata & Section Structure
+ */
+export interface ExamPackageRecord {
+  id: string;                                // e.g. "jlpt_n2_mock_pack_01"
+  title: string;                             // e.g. "JLPT N2 Official Practice Battery Pack 1"
+  titleJa: string;                           // "日本語能力試験 N2 公式実戦模試 第1回"
+  description: string;
+  levelCode: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+  trackCode: 'ja_jlpt';
+  totalDurationMinutes: number;              // N1: 170, N2: 155, N3: 140, N4: 115, N5: 90
+  totalQuestionsCount: number;               // N1: ~83, N2: ~84, N3: ~77, N4: ~71, N5: ~66
+  totalScore: 180;                           // Official JLPT scale: 180 points
+  passingScoreRequired: number;              // N1: 100, N2: 90, N3: 95, N4: 90, N5: 80
+  furiganaPolicy: 'full' | 'selective_n4_base' | 'zero_joyo'; // N5/N4: full, N3: selective, N2/N1: zero
+  sectionsJson: ExamSectionDefinition[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ExamSectionDefinition {
+  sectionCode: 'lang_knowledge_reading' | 'lang_knowledge_vocab' | 'lang_knowledge_grammar_reading' | 'reading' | 'listening';
+  sectionNameEn: string;
+  sectionNameJa: string;
+  administrativeSessionOrder: 1 | 2 | 3;
+  durationMinutes: number;
+  maxScaledScore: 60 | 120;
+  minimumPassBenchmark: 19 | 38;             // 19/60 for N1-N3; 38/120 & 19/60 for N4-N5
+  mondaiCount: number;
+  mondaiDefinitions: {
+    mondaiNumber: number;
+    mondaiNameJa: string;
+    mondaiNameEn: string;
+    itemCount: number;
+    questionFormat: 'MCQ_SINGLE' | 'STAR_REORDER' | 'CLOZE' | 'READING_PASSAGE' | 'CHOKAI_AUDIO';
+  }[];
+}
+
+/**
+ * Individual Exam Question Entity
+ */
+export interface ExamQuestionRecord {
+  id: string;                                // e.g. "q_n2_p1_m08_03"
+  packageId: string;                         // FK -> exam_packages.id
+  sectionCode: string;                       // e.g. "lang_knowledge_reading"
+  administrativeSessionOrder: number;        // 1, 2, or 3
+  mondaiNumber: number;                      // e.g. 1 (Kanji Reading), 8 (Star Reordering)
+  itemNumber: number;                        // Item number within Mondai (e.g. 1 to 5)
+  globalItemNumber: number;                  // Sequential item index across booklet (e.g. 1 to 84)
+  stimulusType: 'NONE' | 'READING_PASSAGE' | 'NOTICE_FLYER' | 'AUDIO_TASK' | 'AUDIO_QUICK_RESPONSE' | 'ILLUSTRATION';
+  stimulusText?: string;                     // HTML / Markdown passage text or transcript
+  stimulusAudioUrl?: string;                 // MP3 audio track with official chime sound
+  stimulusImageUrl?: string;                 // High-res SVG/WebP for flyers, maps, or illustrations
+  questionText: string;                      // Sentence prompt with blank, underlined token, or question
+  hasUnderlineTarget?: boolean;              // True for 漢字読み / 表記 / 言い換え
+  underlineTargetWord?: string;              // Target kanji/phrase underlined
+  isStarReorderQuestion?: boolean;           // True for 文の組み立て
+  starSlotIndex?: 1 | 2 | 3 | 4;             // Slot position carrying the star (standard: 3)
+  optionsJson: Array<{
+    optionNumber: 1 | 2 | 3 | 4;
+    text: string;
+    rubyText?: string;                       // Furigana annotation payload where permitted
+  }>;
+  correctAnswer: 1 | 2 | 3 | 4;               // Correct option number
+  correctStarPermutation?: [number, number, number, number]; // e.g. [2, 4, 3, 1]
+  explanationJson: {
+    englishSummary: string;
+    japaneseSummary: string;
+    grammarRuleReference?: string;
+    vocabularyNuance?: string;
+    passageEvidenceCitation?: string;
+    distractorAnalysis: Record<string, string>; // Analysis for options 1, 2, 3, 4
+  };
+  rubricCategory: string;                    // e.g. "JLPT:N2:GRAMMAR:STAR_ORDER"
+  irtDifficulty_b: number;                   // Item difficulty parameter (-3.0 to +3.0)
+  irtDiscrimination_a: number;               // Item discrimination parameter (0.5 to 2.5)
+}
+
+/**
+ * Exam Submission & Mark Sheet State
+ */
+export interface ExamSubmissionRecord {
+  id: string;                                // e.g. "sub_n2_user123_20261125_01"
+  userId: string;
+  packageId: string;
+  sessionMode: 'PROCTORED_TIMED' | 'PRACTICE_DRILL';
+  startedAt: string;
+  completedAt?: string;
+  timeSpentSeconds: number;
+  totalRawScore: number;
+  totalScaledScore: number;                  // 0 to 180
+  isTotalPassed: boolean;
+  isSectionalPassed: boolean;
+  passStatus: 'PASSED' | 'FAILED_SECTIONAL_CUTOFF' | 'FAILED_TOTAL_SCORE' | 'FAILED_BOTH';
+  sectionalScores: {
+    sectionCode: string;
+    sectionNameJa: string;
+    scaledScore: number;                     // 0 to 60 (or 0 to 120 for N4/N5 LK/Reading)
+    benchmarkRequired: number;               // 19 or 38
+    isPassed: boolean;
+    rawCorrect: number;
+    rawTotal: number;
+    subSkillRatings?: Record<string, 'A' | 'B' | 'C'>; // A >= 67%, B: 34-66%, C < 34%
+  }[];
+  integrityViolationsCount: number;
+  strikeDetails: Array<{ timestamp: string; violationType: 'BLUR' | 'TAB_SWITCH' | 'WINDOW_RESIZE'; strikeNumber: number }>;
+}
+
+export interface ExamCandidateAnswerRecord {
+  id: string;
+  submissionId: string;
+  questionId: string;
+  selectedOption?: 1 | 2 | 3 | 4 | null;
+  candidateStarPermutation?: [number, number, number, number] | null;
+  isCorrect: boolean;
+  scaledPointsAwarded: number;
+  timeSpentMs: number;
+  isFlaggedForReview: boolean;
+  answeredAt: string;
+  revisionHistory: Array<{ previousOption: number | null; timestamp: string }>;
+}
+```
+
+##### 2. Relational SQL DDL (PostgreSQL / SQLite Production Schema)
+
+```sql
+-- Official JLPT Exam Packages
+CREATE TABLE exam_packages (
+    id VARCHAR(64) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    title_ja VARCHAR(255) NOT NULL,
+    description TEXT,
+    level_code VARCHAR(8) NOT NULL CHECK (level_code IN ('N5', 'N4', 'N3', 'N2', 'N1')),
+    track_code VARCHAR(16) NOT NULL DEFAULT 'ja_jlpt',
+    total_duration_minutes INTEGER NOT NULL,
+    total_questions_count INTEGER NOT NULL,
+    total_score INTEGER NOT NULL DEFAULT 180,
+    passing_score_required INTEGER NOT NULL,
+    furigana_policy VARCHAR(32) NOT NULL CHECK (furigana_policy IN ('full', 'selective_n4_base', 'zero_joyo')),
+    sections_json JSONB NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Official JLPT Exam Questions
+CREATE TABLE exam_questions (
+    id VARCHAR(64) PRIMARY KEY,
+    package_id VARCHAR(64) NOT NULL REFERENCES exam_packages(id) ON DELETE CASCADE,
+    section_code VARCHAR(64) NOT NULL,
+    administrative_session_order INTEGER NOT NULL,
+    mondai_number INTEGER NOT NULL,
+    item_number INTEGER NOT NULL,
+    global_item_number INTEGER NOT NULL,
+    stimulus_type VARCHAR(32) NOT NULL DEFAULT 'NONE',
+    stimulus_text TEXT,
+    stimulus_audio_url VARCHAR(512),
+    stimulus_image_url VARCHAR(512),
+    question_text TEXT NOT NULL,
+    has_underline_target BOOLEAN DEFAULT FALSE,
+    underline_target_word VARCHAR(128),
+    is_star_reorder_question BOOLEAN DEFAULT FALSE,
+    star_slot_index INTEGER CHECK (star_slot_index BETWEEN 1 AND 4),
+    options_json JSONB NOT NULL,
+    correct_answer INTEGER NOT NULL CHECK (correct_answer BETWEEN 1 AND 4),
+    correct_star_permutation JSONB,
+    explanation_json JSONB NOT NULL,
+    rubric_category VARCHAR(64) NOT NULL,
+    irt_difficulty_b REAL NOT NULL DEFAULT 0.0,
+    irt_discrimination_a REAL NOT NULL DEFAULT 1.0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_exam_questions_package ON exam_questions(package_id, administrative_session_order, mondai_number);
+
+-- Candidate Exam Submissions (Mark Sheet Batches)
+CREATE TABLE exam_submissions (
+    id VARCHAR(64) PRIMARY KEY,
+    user_id VARCHAR(64) NOT NULL,
+    package_id VARCHAR(64) NOT NULL REFERENCES exam_packages(id) ON DELETE CASCADE,
+    session_mode VARCHAR(32) NOT NULL CHECK (session_mode IN ('PROCTORED_TIMED', 'PRACTICE_DRILL')),
+    started_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE,
+    time_spent_seconds INTEGER NOT NULL DEFAULT 0,
+    total_raw_score INTEGER NOT NULL DEFAULT 0,
+    total_scaled_score REAL NOT NULL DEFAULT 0.0,
+    is_total_passed BOOLEAN NOT NULL DEFAULT FALSE,
+    is_sectional_passed BOOLEAN NOT NULL DEFAULT FALSE,
+    pass_status VARCHAR(32) NOT NULL DEFAULT 'IN_PROGRESS',
+    sectional_scores JSONB,
+    integrity_violations_count INTEGER NOT NULL DEFAULT 0,
+    strike_details JSONB,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Individual Candidate Mark Sheet Bubbles
+CREATE TABLE exam_candidate_answers (
+    id VARCHAR(64) PRIMARY KEY,
+    submission_id VARCHAR(64) NOT NULL REFERENCES exam_submissions(id) ON DELETE CASCADE,
+    question_id VARCHAR(64) NOT NULL REFERENCES exam_questions(id) ON DELETE CASCADE,
+    selected_option INTEGER CHECK (selected_option BETWEEN 1 AND 4),
+    candidate_star_permutation JSONB,
+    is_correct BOOLEAN NOT NULL DEFAULT FALSE,
+    scaled_points_awarded REAL NOT NULL DEFAULT 0.0,
+    time_spent_ms INTEGER NOT NULL DEFAULT 0,
+    is_flagged_for_review BOOLEAN NOT NULL DEFAULT FALSE,
+    answered_at TIMESTAMP WITH TIME ZONE,
+    revision_history JSONB,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uq_sub_question UNIQUE (submission_id, question_id)
+);
+
+CREATE INDEX idx_candidate_answers_sub ON exam_candidate_answers(submission_id);
 ```
 
 ---
