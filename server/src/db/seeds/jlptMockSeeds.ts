@@ -25,11 +25,16 @@ export function createJLPTExamPackages(): ExamPackageContent[] {
         passThresholdScore: p.passThresholdScore,
         totalQuestions: p.questions.length,
         passages: p.passages.map(pas => ({
+          id: pas.id,
           partNumber: pas.partNumber || 1,
           title: pas.titleJp || pas.titleEn,
+          titleJp: pas.titleJp,
+          titleEn: pas.titleEn,
           titleId: pas.titleId || pas.titleEn,
           wordCount: (pas.textJp || '').length,
-          text: pas.textJp
+          text: pas.textJp,
+          textJp: pas.textJp,
+          textB: pas.textB
         })),
         questions: p.questions.map(q => ({
           id: q.id,
