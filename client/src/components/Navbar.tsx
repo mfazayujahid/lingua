@@ -19,7 +19,8 @@ import {
   Globe,
   ArrowLeftRight,
   Mic,
-  Headphones
+  Headphones,
+  Scale
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -29,6 +30,7 @@ interface NavbarProps {
   onTrackChange: (track: LevelCode) => void;
   srsDueCount: number;
   streakDays: number;
+  onOpenDisclaimer?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -37,7 +39,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeTrack,
   onTrackChange,
   srsDueCount,
-  streakDays
+  streakDays,
+  onOpenDisclaimer
 }) => {
   const { theme, toggleTheme } = useTheme();
   const { furiganaEnabled, toggleFurigana } = useFurigana();
@@ -208,6 +211,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Globe className="w-3.5 h-3.5 text-vermilion-500" />
                 <span className="font-mono">{language === 'id' ? 'ID' : 'EN'}</span>
               </button>
+
+              {/* Legal Disclaimer & Fair Use Notice Modal Trigger */}
+              {onOpenDisclaimer && (
+                <button
+                  onClick={onOpenDisclaimer}
+                  className="p-1 sm:p-1.5 rounded-lg border border-washi-300 dark:border-sumi-800 text-stone-600 dark:text-stone-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-washi-200 dark:hover:bg-sumi-800 transition-colors shrink-0"
+                  title={language === 'id' ? 'Penafian Hukum & Merek (Fair Use)' : 'Legal Disclaimer & Fair Use'}
+                  aria-label="Legal Disclaimer"
+                >
+                  <Scale className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500" />
+                </button>
+              )}
 
               {/* Theme Toggle Button */}
               <button
