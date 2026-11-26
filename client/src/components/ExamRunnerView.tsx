@@ -367,14 +367,19 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
           try {
             const lessonData = await fetchLesson('les_ia_mock_full_1');
             loadedLessonInfo = lessonData.lesson;
-            loadedItems = (lessonData.items || []).map((it: any) => ({
-              ...it,
-              passageText: it.passageText || it.passage_text,
-              itemType: it.itemType || it.item_type,
-              options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
-              correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
-            }));
+            if (lessonData.items && lessonData.items.length > 0) {
+              loadedItems = (lessonData.items || []).map((it: any) => ({
+                ...it,
+                passageText: it.passageText || it.passage_text,
+                itemType: it.itemType || it.item_type,
+                options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+                correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+              }));
+            }
           } catch {
+            loadedItems = [];
+          }
+          if (!loadedItems || loadedItems.length === 0) {
             loadedItems = generateIeltsAcademicPackItems(1);
           }
         } else {
@@ -387,14 +392,19 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
           try {
             const lessonData = await fetchLesson('les_n5_gram_1');
             loadedLessonInfo = lessonData.lesson;
-            loadedItems = (lessonData.items || []).map((it: any) => ({
-              ...it,
-              passageText: it.passageText || it.passage_text,
-              itemType: it.itemType || it.item_type,
-              options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
-              correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
-            }));
+            if (lessonData.items && lessonData.items.length > 0) {
+              loadedItems = (lessonData.items || []).map((it: any) => ({
+                ...it,
+                passageText: it.passageText || it.passage_text,
+                itemType: it.itemType || it.item_type,
+                options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+                correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+              }));
+            }
           } catch {
+            loadedItems = [];
+          }
+          if (!loadedItems || loadedItems.length === 0) {
             loadedItems = generateJlptN5PackItems(1);
           }
         } else {
@@ -404,14 +414,19 @@ export const ExamRunnerView: React.FC<ExamRunnerViewProps> = ({
         try {
           const lessonData = await fetchLesson(idToLoad);
           loadedLessonInfo = lessonData.lesson;
-          loadedItems = (lessonData.items || []).map((it: any) => ({
-            ...it,
-            passageText: it.passageText || it.passage_text,
-            itemType: it.itemType || it.item_type,
-            options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
-            correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
-          }));
+          if (lessonData.items && lessonData.items.length > 0) {
+            loadedItems = (lessonData.items || []).map((it: any) => ({
+              ...it,
+              passageText: it.passageText || it.passage_text,
+              itemType: it.itemType || it.item_type,
+              options: it.options || (typeof it.options_json === 'string' ? JSON.parse(it.options_json) : it.options_json),
+              correctAnswer: it.correctAnswer || (typeof it.correct_answer_json === 'string' ? JSON.parse(it.correct_answer_json) : it.correct_answer_json)
+            }));
+          }
         } catch {
+          loadedItems = [];
+        }
+        if (!loadedItems || loadedItems.length === 0) {
           if (!isJapaneseTrack) {
             loadedItems = generateIeltsAcademicPackItems(selectedPackNumber);
           } else {
