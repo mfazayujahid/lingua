@@ -17,6 +17,7 @@ import {
   EssaySubmissionPayload
 } from '../../shared/types';
 import { AUTHENTIC_WRITING_PROMPTS, analyzeEssayLocally } from './data/writingPromptsData';
+import staticDatabase from './data/staticDatabase.json';
 
 export const BASE_URL = '/api';
 
@@ -26,27 +27,63 @@ export async function fetchHealth(): Promise<{ status: string }> {
 }
 
 export async function fetchDashboard(userId = 'user_001'): Promise<any> {
-  const res = await fetch(`${BASE_URL}/dashboard?userId=${userId}`);
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/dashboard?userId=${userId}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, using local offline dashboard', err);
+  }
+  const localTrack = localStorage.getItem('lingua_active_track') || 'jlpt_n5';
+  const localDashboard = JSON.parse(JSON.stringify((staticDatabase as any).dashboard));
+  localDashboard.user.activeTrack = localTrack;
+  return localDashboard;
 }
 
 export async function switchUserTrack(newTrack: LevelCode, userId = 'user_001'): Promise<any> {
-  const res = await fetch(`${BASE_URL}/dashboard/switch-track`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ newTrack, userId })
-  });
-  return res.json();
+  try {
+    localStorage.setItem('lingua_active_track', newTrack);
+    const res = await fetch(`${BASE_URL}/dashboard/switch-track`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ newTrack, userId })
+    });
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, track switched locally', err);
+  }
+  return { success: true, activeTrack: newTrack };
 }
 
 export async function fetchCurriculum(trackLevel: LevelCode): Promise<any> {
-  const res = await fetch(`${BASE_URL}/curriculum?level=${trackLevel}`);
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/curriculum?level=${trackLevel}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, using static curriculum', err);
+  }
+  const curriculums = (staticDatabase as any).curriculums || {};
+  return curriculums[trackLevel] || curriculums['jlpt_n5'] || { pillars: [], roadmap: [] };
 }
 
 export async function fetchLesson(lessonId: string): Promise<any> {
-  const res = await fetch(`${BASE_URL}/curriculum/lessons/${lessonId}`);
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/curriculum/lessons/${lessonId}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, locating static lesson', err);
+  }
+  const curriculums = (staticDatabase as any).curriculums || {};
+  for (const c of Object.values(curriculums) as any[]) {
+    if (!c.pillars) continue;
+    for (const p of c.pillars) {
+      for (const u of p.units || []) {
+        for (const l of u.lessons || []) {
+          if (l.id === lessonId) return { lesson: l, unit: u };
+        }
+      }
+    }
+  }
+  return { lesson: { id: lessonId, title: 'Practice Lesson', content: '' } };
 }
 
 export async function fetchSRSQueue(userId = 'user_001'): Promise<{ count: number; items: SRSItem[] }> {
@@ -111,8 +148,13 @@ export async function fetchWritingPrompt(level = 'jlpt_n5'): Promise<any> {
 }
 
 export async function fetchKanjiList(level?: string): Promise<any[]> {
-  const res = await fetch(`${BASE_URL}/kanji${level ? `?level=${level}` : ''}`);
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/kanji${level ? `?level=${level}` : ''}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, using static kanji list', err);
+  }
+  return (staticDatabase as any).kanjiList || [];
 }
 
 export async function fetchKanjiCatalog(level?: string, search?: string, limit = 50, offset = 0): Promise<{
@@ -122,13 +164,25 @@ export async function fetchKanjiCatalog(level?: string, search?: string, limit =
   stats: Record<string, number>;
   items: any[];
 }> {
-  const params = new URLSearchParams();
-  if (level && level !== 'ALL') params.append('level', level);
-  if (search) params.append('search', search);
-  params.append('limit', String(limit));
-  params.append('offset', String(offset));
-  const res = await fetch(`${BASE_URL}/kanji/catalog?${params.toString()}`);
-  return res.json();
+  try {
+    const params = new URLSearchParams();
+    if (level && level !== 'ALL') params.append('level', level);
+    if (search) params.append('search', search);
+    params.append('limit', String(limit));
+    params.append('offset', String(offset));
+    const res = await fetch(`${BASE_URL}/kanji/catalog?${params.toString()}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, using static kanji catalog', err);
+  }
+  const cat = (staticDatabase as any).kanjiCatalog || { total: 0, items: [], stats: {} };
+  return {
+    total: cat.total || 0,
+    limit,
+    offset,
+    stats: cat.stats || {},
+    items: (cat.items || []).slice(offset, offset + limit)
+  };
 }
 
 export async function fetchJoyoDetail(character: string): Promise<any> {
@@ -229,8 +283,13 @@ export async function fetchAnalytics(userId = 'user_001'): Promise<DiagnosticAna
 
 // Speaking Studio APIs
 export async function fetchSpeakingPackages(): Promise<{ packages: any[] }> {
-  const res = await fetch(`${BASE_URL}/speaking/packages`);
-  return res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/speaking/packages`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend unavailable, using static speaking packages', err);
+  }
+  return (staticDatabase as any).speakingPackages || { packages: [] };
 }
 
 export async function fetchSpeakingPackage(packageId: string): Promise<{ package: SpeakingExamPackage }> {
