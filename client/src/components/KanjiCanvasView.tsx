@@ -20,6 +20,7 @@ import {
   playStrokeErrorSound,
   playCharacterCompleteSound
 } from '../lib/sound';
+import { ensureVectorsLoaded } from '../lib/kanjiVgLoader';
 import confetti from 'canvas-confetti';
 import {
   Feather,
@@ -138,6 +139,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   useEffect(() => {
     loadMasteredCharacters();
     loadKanjiList();
+    ensureVectorsLoaded();
     const effectiveLvl = initialLevel || (activeTrack?.startsWith('jlpt_') ? activeTrack.replace('jlpt_', '').toUpperCase() : 'N5');
     const targetLvl = initialCategory === 'KANJI' ? effectiveLvl : 'ALL';
     loadJoyoCatalog(targetLvl, '', initialCategory === 'KANJI');
@@ -240,6 +242,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     stopDemonstration();
     setLoading(true);
     try {
+      await ensureVectorsLoaded();
       const detail = await fetchJoyoDetail(joyoItem.character);
       setJoyoDetail(detail);
 
@@ -298,6 +301,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     setUserDrawnStrokes({});
 
     try {
+      await ensureVectorsLoaded();
       const data = await fetchKanjiDetail(id);
       setKanjiData(data);
       if (data.jlptLevel === 'HIRAGANA') setCategory('HIRAGANA');
