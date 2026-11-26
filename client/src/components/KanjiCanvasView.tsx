@@ -238,43 +238,12 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     loadJoyoCatalog(lvl, kanjiSearch);
   };
 
-  const handleSelectJoyoKanji = async (joyoItem: any) => {
+  const handleSelectJoyoKanji = (joyoItem: any) => {
     stopDemonstration();
-    setLoading(true);
-    try {
-      await ensureVectorsLoaded();
-      const detail = await fetchJoyoDetail(joyoItem.character);
-      setJoyoDetail(detail);
-
-      // Check if stroke vector model exists in seeds or API
-      const strokeData = await fetchKanjiDetail(joyoItem.character);
-      if (strokeData && strokeData.strokeMetadata && strokeData.strokeMetadata.length > 0) {
-        setKanjiData(strokeData);
-        setCurrentKanjiId(strokeData.id);
-      } else {
-        // Construct fallback single-stroke display if direct vector isn't pre-seeded
-        setKanjiData({
-          id: joyoItem.id,
-          character: joyoItem.character,
-          jlptLevel: joyoItem.jlptLevel,
-          onYomi: (joyoItem.onYomi || []).join('、'),
-          kunYomi: (joyoItem.kunYomi || []).join('、'),
-          englishGloss: (joyoItem.meanings || []).join(', '),
-          radical: joyoItem.primaryRadical,
-          strokeCount: joyoItem.strokeCount,
-          strokePaths: detail?.strokePaths || [],
-          strokeMetadata: detail?.strokeMetadata || []
-        });
-        setCurrentKanjiId(joyoItem.id);
-      }
-      setAcceptedStrokes([]);
-      setUserDrawnStrokes({});
-      setCurrentStrokeIdx(1);
-      setFeedback(null);
-    } catch (err) {
-      console.error('Failed to select joyo kanji', err);
-    } finally {
-      setLoading(false);
+    if (currentKanjiId === joyoItem.id) {
+      loadKanjiDetail(joyoItem.id);
+    } else {
+      setCurrentKanjiId(joyoItem.id);
     }
   };
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'linguamastery-v1';
+const CACHE_NAME = 'linguamastery-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -7,12 +7,10 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
-  );
   self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS_TO_CACHE))
+  );
 });
 
 self.addEventListener('activate', event => {
@@ -21,30 +19,40 @@ self.addEventListener('activate', event => {
       return Promise.all(
         keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
-  // Stale-while-revalidate for static assets, network-first for others
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      const fetchPromise = fetch(event.request)
+  // 1. Navigation requests: Network-First to guarantee latest HTML & bundle hashes
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
         .then(networkResponse => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, responseToCache);
-            });
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseToCache));
           }
           return networkResponse;
         })
-        .catch(() => cachedResponse);
+        .catch(() => caches.match(event.request).then(cached => cached || caches.match('/index.html')))
+    );
+    return;
+  }
 
-      return cachedResponse || fetchPromise;
+  // 2. Static hashed assets (/assets/...): Cache-First
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse) return cachedResponse;
+      return fetch(event.request).then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseToCache));
+        }
+        return networkResponse;
+      });
     })
   );
 });

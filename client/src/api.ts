@@ -357,20 +357,24 @@ export async function fetchKanjiCatalog(level?: string, search?: string, limit =
 }
 
 export async function fetchJoyoDetail(character: string): Promise<any> {
+  const cleanChar = character.replace(/^.*_/, '');
   try {
-    const res = await fetch(`${BASE_URL}/kanji/detail/${encodeURIComponent(character)}`);
-    if (res.ok) return await res.json();
+    const res = await fetch(`${BASE_URL}/kanji/detail/${encodeURIComponent(cleanChar)}`);
+    const ct = res.headers.get('content-type');
+    if (res.ok && ct && ct.includes('application/json')) {
+      return await res.json();
+    }
   } catch (err) {
-    console.warn('Backend unavailable, using local joyo detail', err);
+    // Offline or static execution
   }
   const catalog = joyoCatalogData as any[];
-  const item = catalog.find((c: any) => c.character === character || c.id === character);
-  const strokeSeed = KANJI_SEEDS.find(k => k.character === character || k.id === character);
+  const item = catalog.find((c: any) => c.character === cleanChar || c.id === character || c.character === character);
+  const strokeSeed = KANJI_SEEDS.find(k => k.character === cleanChar || k.id === character);
 
-  // Check KanjiVG vector dataset (pre-bundled 81 N5 + 乙 or dynamic load)
+  // Check KanjiVG vector dataset (pre-bundled 2,136 Jōyō Kanji)
   let strokes = strokeSeed ? strokeSeed.strokes : null;
   if (!strokes) {
-    strokes = getCachedOrPreloadedVector(character) || await loadKanjiVgVector(character);
+    strokes = getCachedOrPreloadedVector(cleanChar) || await loadKanjiVgVector(cleanChar);
   }
 
   if (item) {
@@ -382,8 +386,8 @@ export async function fetchJoyoDetail(character: string): Promise<any> {
     };
   }
   return {
-    id: `joyo_${character}`,
-    character,
+    id: `joyo_${cleanChar}`,
+    character: cleanChar,
     onYomi: strokeSeed ? [strokeSeed.onYomi] : [],
     kunYomi: strokeSeed ? [strokeSeed.kunYomi] : [],
     meanings: strokeSeed ? [strokeSeed.englishGloss] : [],
@@ -416,9 +420,12 @@ export async function scheduleKanjiSrs(character: string, pacing: 'SUSTAINABLE' 
 export async function fetchKanjiDetail(kanjiId: string): Promise<KanjiStrokeData> {
   try {
     const res = await fetch(`${BASE_URL}/kanji/${kanjiId}`);
-    if (res.ok) return await res.json();
+    const ct = res.headers.get('content-type');
+    if (res.ok && ct && ct.includes('application/json')) {
+      return await res.json();
+    }
   } catch (err) {
-    console.warn('Backend unavailable, locating kanji detail locally', err);
+    // Offline or static execution
   }
 
   // 1. Look in Kana seeds
