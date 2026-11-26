@@ -1,11 +1,81 @@
-# graft's local graph cache — regenerable, not committed (run `graft build`).
-/graft/
-
+# Dependencies
 node_modules/
 client/node_modules/
 server/node_modules/
+.pnp
+.pnp.js
+
+# Production Builds
+dist/
 client/dist/
 server/dist/
+build/
+
+# Local Databases & State
 *.db
 *.db-*
+*.sqlite
+*.sqlite3
+lingua.db
+lingua_mastery.db
+
+# Environment Variables & Secrets / Credentials
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.cert
+*.pfx
+*.p12
+id_rsa*
+credentials.json
+client_secret*.json
+service-account*.json
+token.json
+acp_token.json
+
+# Agent & AI Assistant Tool Configurations / Settings
+.agents/
+.adal/
+.claude/
+.cursor/
+.gemini/
+.grok/
+.kiro/
+.trail/
+.windsurf/
+.orca/
+memory/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+MEMORY.md
+SOUL.md
+bot.json
+opencode.json
+.github/copilot-instructions.md
+.github/instructions/
+
+# Local Code Intelligence Caches (Graft / Trail)
+/graft/
+docs/trail_viz/
+
+# Logs & Runtime Diagnostics
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS & Editor Artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
