@@ -12,6 +12,7 @@ import {
 import {
   resampleStroke,
   validateDrawnStroke,
+  sampleSvgPathPoints,
   ValidationOutcome
 } from '../lib/strokeValidator';
 import {
@@ -113,6 +114,26 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const currentPathRef = useRef<StrokePoint[]>([]);
   const isAnimatingRef = useRef<boolean>(false);
+  const animFrameRef = useRef<number | null>(null);
+  const animTimeoutRef = useRef<any>(null);
+
+  const stopDemonstration = () => {
+    isAnimatingRef.current = false;
+    if (animFrameRef.current) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
+    if (animTimeoutRef.current) {
+      clearTimeout(animTimeoutRef.current);
+      animTimeoutRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopDemonstration();
+    };
+  }, []);
 
   useEffect(() => {
     loadMasteredCharacters();
@@ -216,6 +237,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   };
 
   const handleSelectJoyoKanji = async (joyoItem: any) => {
+    stopDemonstration();
     setLoading(true);
     try {
       const detail = await fetchJoyoDetail(joyoItem.character);
@@ -267,13 +289,13 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   };
 
   const loadKanjiDetail = async (id: string) => {
+    stopDemonstration();
     setLoading(true);
     setFeedback(null);
     setCompletedModal(null);
     setCurrentStrokeIdx(1);
     setAcceptedStrokes([]);
     setUserDrawnStrokes({});
-    isAnimatingRef.current = false;
 
     try {
       const data = await fetchKanjiDetail(id);
@@ -295,6 +317,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
 
   // When category changes, select first character of that category
   const handleCategoryChange = (cat: 'HIRAGANA' | 'KATAKANA' | 'KANJI') => {
+    stopDemonstration();
     setCategory(cat);
     setSubFilter('ALL');
     setAcceptedStrokes([]);
@@ -428,7 +451,8 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
         drawnLength += Math.hypot(rawPoints[i].x - rawPoints[i - 1].x, rawPoints[i].y - rawPoints[i - 1].y);
       }
 
-      if (drawnLength < 50) {
+      const minLen = (kanjiData.strokeCount || 1) === 1 ? 120 : 60;
+      if (drawnLength < minLen) {
         setFeedback({
           isValid: false,
           status: 'shape_mismatch',
@@ -552,6 +576,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
 
   
   const handleNextCharacter = () => {
+    stopDemonstration();
     if (!kanjiList.length) return;
     const currentIndex = kanjiList.findIndex(k => k.id === currentKanjiId);
     const nextItem = kanjiList[(currentIndex + 1) % kanjiList.length];
@@ -562,6 +587,20 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
 
   const playDemonstration = () => {
     if (!kanjiData) return;
+
+    if (!kanjiData.strokeMetadata || kanjiData.strokeMetadata.length === 0) {
+      setFeedback({
+        isValid: false,
+        status: 'shape_mismatch',
+        message: language === 'id'
+          ? 'Data vektor urutan goresan belum tersedia untuk peragaan karakter ini.'
+          : 'Vector stroke order data not available for demonstration on this character.',
+        geometryScore: 50
+      });
+      return;
+    }
+
+    stopDemonstration();
     isAnimatingRef.current = true;
     setAcceptedStrokes([]);
     setUserDrawnStrokes({});
@@ -569,22 +608,129 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     setFeedback(null);
     setCompletedModal(null);
 
-    let step = 1;
-    const max = kanjiData.strokeCount;
-    const timer = setInterval(() => {
-      if (step <= max) {
-        playStrokeSuccessSound();
-        setAcceptedStrokes(prev => [...prev, step]);
-        setCurrentStrokeIdx(step + 1);
-        step++;
-      } else {
-        clearInterval(timer);
-        isAnimatingRef.current = false;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const totalStrokes = kanjiData.strokeMetadata.length;
+
+    const animateStroke = (strokeIndex: number) => {
+      if (!isAnimatingRef.current) return;
+
+      const strokeDef = kanjiData.strokeMetadata?.find(s => s.strokeIndex === strokeIndex);
+      if (!strokeDef) {
+        finishDemonstration();
+        return;
       }
-    }, 650);
+
+      setCurrentStrokeIdx(strokeIndex);
+      const strokePoints = sampleSvgPathPoints(strokeDef.svgPath, 36);
+      if (strokePoints.length === 0) {
+        strokePoints.push({ x: strokeDef.startPoint[0], y: strokeDef.startPoint[1] });
+        strokePoints.push({ x: strokeDef.endPoint[0], y: strokeDef.endPoint[1] });
+      }
+
+      const durationMs = 380;
+      const startTime = performance.now();
+
+      const renderFrame = (now: number) => {
+        if (!isAnimatingRef.current) return;
+
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / durationMs);
+
+        // 1. Redraw previously completed strokes in default ink
+        ctx.clearRect(0, 0, 1000, 1000);
+        for (let i = 1; i < strokeIndex; i++) {
+          const prevDef = kanjiData.strokeMetadata?.find(s => s.strokeIndex === i);
+          if (prevDef) {
+            ctx.save();
+            ctx.strokeStyle = theme === 'dark' ? '#F6F5F0' : '#14161A';
+            ctx.lineWidth = 26;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            const p = new Path2D(prevDef.svgPath);
+            ctx.stroke(p);
+            ctx.restore();
+          }
+        }
+
+        // 2. Draw active animating stroke in Vermilion red with dynamic brush tip
+        const visibleCount = Math.max(2, Math.floor(progress * strokePoints.length));
+        const activePoints = strokePoints.slice(0, visibleCount);
+
+        if (activePoints.length > 1) {
+          ctx.save();
+          ctx.strokeStyle = '#C83C23';
+          ctx.lineWidth = 28;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+
+          ctx.beginPath();
+          ctx.moveTo(activePoints[0].x, activePoints[0].y);
+          for (let i = 1; i < activePoints.length - 1; i++) {
+            const xc = (activePoints[i].x + activePoints[i + 1].x) / 2;
+            const yc = (activePoints[i].y + activePoints[i + 1].y) / 2;
+            ctx.quadraticCurveTo(activePoints[i].x, activePoints[i].y, xc, yc);
+          }
+          ctx.lineTo(activePoints[activePoints.length - 1].x, activePoints[activePoints.length - 1].y);
+          ctx.stroke();
+
+          // Brush tip head indicator
+          const tip = activePoints[activePoints.length - 1];
+          ctx.fillStyle = '#E85D3B';
+          ctx.beginPath();
+          ctx.arc(tip.x, tip.y, 14, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.restore();
+        }
+
+        if (progress < 1) {
+          animFrameRef.current = requestAnimationFrame(renderFrame);
+        } else {
+          // Completed this stroke!
+          playStrokeSuccessSound();
+          setAcceptedStrokes(prev => [...prev, strokeIndex]);
+
+          if (strokeIndex < totalStrokes) {
+            animTimeoutRef.current = setTimeout(() => {
+              if (isAnimatingRef.current) {
+                animateStroke(strokeIndex + 1);
+              }
+            }, 140);
+          } else {
+            animTimeoutRef.current = setTimeout(() => {
+              finishDemonstration();
+            }, 300);
+          }
+        }
+      };
+
+      animFrameRef.current = requestAnimationFrame(renderFrame);
+    };
+
+    const finishDemonstration = () => {
+      isAnimatingRef.current = false;
+      playCharacterCompleteSound();
+      setCurrentStrokeIdx(1);
+      setFeedback({
+        isValid: true,
+        status: 'accepted',
+        message: language === 'id'
+          ? 'Peragaan selesai! Silakan latihan menulis di atas kanvas mulai dari Goresan 1.'
+          : 'Demonstration finished! Practice writing on the canvas starting from Stroke 1.',
+        geometryScore: 100
+      });
+      redrawCanvas();
+    };
+
+    animateStroke(1);
   };
 
   const handleResetCanvas = () => {
+    stopDemonstration();
     setCurrentStrokeIdx(1);
     setAcceptedStrokes([]);
     setUserDrawnStrokes({});

@@ -21,6 +21,7 @@ import staticDatabase from './data/staticDatabase.json';
 import joyoCatalogData from './data/joyoCatalogData.json';
 import { KANA_SEEDS } from './data/kanaSeeds';
 import { KANJI_SEEDS } from './data/kanjiSeeds';
+import { getCachedOrPreloadedVector, loadKanjiVgVector } from './lib/kanjiVgLoader';
 
 export const BASE_URL = '/api';
 
@@ -365,12 +366,19 @@ export async function fetchJoyoDetail(character: string): Promise<any> {
   const catalog = joyoCatalogData as any[];
   const item = catalog.find((c: any) => c.character === character || c.id === character);
   const strokeSeed = KANJI_SEEDS.find(k => k.character === character || k.id === character);
+
+  // Check KanjiVG vector dataset (pre-bundled 81 N5 + 乙 or dynamic load)
+  let strokes = strokeSeed ? strokeSeed.strokes : null;
+  if (!strokes) {
+    strokes = getCachedOrPreloadedVector(character) || await loadKanjiVgVector(character);
+  }
+
   if (item) {
     return {
       ...item,
-      strokePaths: strokeSeed ? strokeSeed.strokes.map(s => s.svgPath) : [],
-      strokeMetadata: strokeSeed ? strokeSeed.strokes : [],
-      hasStrokeVector: Boolean(strokeSeed)
+      strokePaths: strokes ? strokes.map(s => s.svgPath) : [],
+      strokeMetadata: strokes || [],
+      hasStrokeVector: Boolean(strokes && strokes.length > 0)
     };
   }
   return {
@@ -379,10 +387,10 @@ export async function fetchJoyoDetail(character: string): Promise<any> {
     onYomi: strokeSeed ? [strokeSeed.onYomi] : [],
     kunYomi: strokeSeed ? [strokeSeed.kunYomi] : [],
     meanings: strokeSeed ? [strokeSeed.englishGloss] : [],
-    strokeCount: strokeSeed?.strokeCount || 1,
-    strokePaths: strokeSeed ? strokeSeed.strokes.map(s => s.svgPath) : [],
-    strokeMetadata: strokeSeed ? strokeSeed.strokes : [],
-    hasStrokeVector: Boolean(strokeSeed)
+    strokeCount: strokes?.length || strokeSeed?.strokeCount || 1,
+    strokePaths: strokes ? strokes.map(s => s.svgPath) : [],
+    strokeMetadata: strokes || [],
+    hasStrokeVector: Boolean(strokes && strokes.length > 0)
   };
 }
 
@@ -447,9 +455,15 @@ export async function fetchKanjiDetail(kanjiId: string): Promise<KanjiStrokeData
     };
   }
 
+  // Extract character for 2,136 Joyo catalog lookup
+  const catalog = joyoCatalogData as any[];
+  const joyo = catalog.find((c: any) => c.id === kanjiId || c.character === kanjiId || kanjiId.endsWith(`_${c.character}`));
+  const targetChar = joyo?.character || (kanjiId.length === 1 ? kanjiId : kanjiId.split('_').pop() || kanjiId);
+
+  // Check KanjiVG vector dataset (pre-bundled 81 N5 + 乙 or dynamic load)
+  const strokes = getCachedOrPreloadedVector(targetChar) || await loadKanjiVgVector(targetChar);
+
   // 3. Look in Joyo catalog
-  const catalog = (staticDatabase as any).kanjiCatalog?.items || [];
-  const joyo = catalog.find((c: any) => c.id === kanjiId || c.character === kanjiId);
   if (joyo) {
     return {
       id: joyo.id,
@@ -459,16 +473,31 @@ export async function fetchKanjiDetail(kanjiId: string): Promise<KanjiStrokeData
       kunYomi: Array.isArray(joyo.kunYomi) ? joyo.kunYomi.join('、') : joyo.kunYomi,
       englishGloss: Array.isArray(joyo.meanings) ? joyo.meanings.join(', ') : joyo.englishGloss || '',
       radical: joyo.primaryRadical || joyo.radical || joyo.character,
-      strokeCount: joyo.strokeCount || 1,
-      strokePaths: [],
-      strokeMetadata: []
+      strokeCount: strokes?.length || joyo.strokeCount || 1,
+      strokePaths: strokes ? strokes.map(s => s.svgPath) : [],
+      strokeMetadata: strokes || []
+    };
+  }
+
+  if (strokes && strokes.length > 0) {
+    return {
+      id: `kanji_${targetChar}`,
+      character: targetChar,
+      jlptLevel: 'N5',
+      onYomi: '',
+      kunYomi: '',
+      englishGloss: targetChar,
+      radical: targetChar,
+      strokeCount: strokes.length,
+      strokePaths: strokes.map(s => s.svgPath),
+      strokeMetadata: strokes
     };
   }
 
   // Fallback default
   return {
     id: kanjiId,
-    character: kanjiId.length === 1 ? kanjiId : 'あ',
+    character: targetChar.length === 1 ? targetChar : 'あ',
     jlptLevel: 'HIRAGANA',
     onYomi: 'a',
     kunYomi: 'a',
