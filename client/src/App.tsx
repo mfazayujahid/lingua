@@ -94,6 +94,10 @@ export const AppContent: React.FC = () => {
       setActiveView('dashboard');
     }
     setActiveTrack(newTrack);
+    if (newTrack.startsWith('jlpt_')) {
+      const lvl = newTrack.replace('jlpt_', '').toUpperCase();
+      setKanjiNavOptions(prev => ({ ...prev, level: lvl }));
+    }
     try {
       localStorage.setItem('lingua_active_track', newTrack);
     } catch (e) {}
@@ -256,7 +260,8 @@ export const AppContent: React.FC = () => {
         {activeView === 'kanji' && (
           <KanjiCanvasView
             initialCategory={kanjiNavOptions.category}
-            initialLevel={kanjiNavOptions.level}
+            initialLevel={activeTrack.startsWith('jlpt_') ? (activeTrack.replace('jlpt_', '').toUpperCase() as any) : kanjiNavOptions.level}
+            activeTrack={activeTrack}
           />
         )}
 

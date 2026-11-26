@@ -59,12 +59,14 @@ const KANA_ROW_MAP: Record<string, string[]> = {
 export interface KanjiCanvasViewProps {
   initialCategory?: 'HIRAGANA' | 'KATAKANA' | 'KANJI';
   initialLevel?: string;
+  activeTrack?: string;
   onMasteryUpdate?: (character: string) => void;
 }
 
 export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   initialCategory,
   initialLevel = 'N5',
+  activeTrack,
   onMasteryUpdate
 }) => {
   const { theme } = useTheme();
@@ -115,27 +117,28 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   useEffect(() => {
     loadMasteredCharacters();
     loadKanjiList();
-    const targetLvl = initialCategory === 'KANJI' ? (initialLevel || 'N5') : 'ALL';
+    const effectiveLvl = initialLevel || (activeTrack?.startsWith('jlpt_') ? activeTrack.replace('jlpt_', '').toUpperCase() : 'N5');
+    const targetLvl = initialCategory === 'KANJI' ? effectiveLvl : 'ALL';
     loadJoyoCatalog(targetLvl, '', initialCategory === 'KANJI');
   }, []);
 
-  // Sync when initialCategory or initialLevel props change dynamically
+  // Sync when initialCategory or initialLevel / activeTrack props change dynamically
   useEffect(() => {
     if (initialCategory) {
       setCategory(initialCategory);
-      if (initialCategory === 'KANJI') {
-        const lvl = initialLevel || 'N5';
-        setKanjiLevelFilter(lvl);
-        loadJoyoCatalog(lvl, '', true);
-      } else {
-        setSubFilter('ALL');
-        const firstKana = kanjiList.find(k => k.jlpt_level === initialCategory);
-        if (firstKana) {
-          setCurrentKanjiId(firstKana.id);
-        }
+    }
+    const effectiveLvl = initialLevel || (activeTrack?.startsWith('jlpt_') ? activeTrack.replace('jlpt_', '').toUpperCase() : 'N5');
+    setKanjiLevelFilter(effectiveLvl);
+    if (initialCategory === 'KANJI' || category === 'KANJI') {
+      loadJoyoCatalog(effectiveLvl, '', true);
+    } else if (initialCategory) {
+      setSubFilter('ALL');
+      const firstKana = kanjiList.find(k => k.jlpt_level === initialCategory);
+      if (firstKana) {
+        setCurrentKanjiId(firstKana.id);
       }
     }
-  }, [initialCategory, initialLevel]);
+  }, [initialCategory, initialLevel, activeTrack]);
 
   useEffect(() => {
     if (currentKanjiId) {
@@ -197,7 +200,14 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
 
   const handleSearchChange = (q: string) => {
     setKanjiSearch(q);
-    loadJoyoCatalog(kanjiLevelFilter, q);
+    if (q.trim()) {
+      setKanjiLevelFilter('ALL');
+      loadJoyoCatalog('ALL', q, true);
+    } else {
+      const fallbackLvl = initialLevel || 'N5';
+      setKanjiLevelFilter(fallbackLvl);
+      loadJoyoCatalog(fallbackLvl, '', true);
+    }
   };
 
   const handleLevelFilterChange = (lvl: string) => {
@@ -211,29 +221,31 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
       const detail = await fetchJoyoDetail(joyoItem.character);
       setJoyoDetail(detail);
 
-      // Check if stroke vector model exists in kanji_stroke_data
-      const strokeItem = kanjiList.find(k => k.character === joyoItem.character);
-      if (strokeItem) {
-        setCurrentKanjiId(strokeItem.id);
+      // Check if stroke vector model exists in seeds or API
+      const strokeData = await fetchKanjiDetail(joyoItem.character);
+      if (strokeData && strokeData.strokeMetadata && strokeData.strokeMetadata.length > 0) {
+        setKanjiData(strokeData);
+        setCurrentKanjiId(strokeData.id);
       } else {
         // Construct fallback single-stroke display if direct vector isn't pre-seeded
         setKanjiData({
           id: joyoItem.id,
           character: joyoItem.character,
           jlptLevel: joyoItem.jlptLevel,
-          onYomi: joyoItem.onYomi.join('、'),
-          kunYomi: joyoItem.kunYomi.join('、'),
-          englishGloss: joyoItem.meanings.join(', '),
+          onYomi: (joyoItem.onYomi || []).join('、'),
+          kunYomi: (joyoItem.kunYomi || []).join('、'),
+          englishGloss: (joyoItem.meanings || []).join(', '),
           radical: joyoItem.primaryRadical,
           strokeCount: joyoItem.strokeCount,
-          strokePaths: [],
-          strokeMetadata: []
+          strokePaths: detail?.strokePaths || [],
+          strokeMetadata: detail?.strokeMetadata || []
         });
-        setAcceptedStrokes([]);
-        setUserDrawnStrokes({});
-        setCurrentStrokeIdx(1);
-        setFeedback(null);
+        setCurrentKanjiId(joyoItem.id);
       }
+      setAcceptedStrokes([]);
+      setUserDrawnStrokes({});
+      setCurrentStrokeIdx(1);
+      setFeedback(null);
     } catch (err) {
       console.error('Failed to select joyo kanji', err);
     } finally {
@@ -285,10 +297,15 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
   const handleCategoryChange = (cat: 'HIRAGANA' | 'KATAKANA' | 'KANJI') => {
     setCategory(cat);
     setSubFilter('ALL');
+    setAcceptedStrokes([]);
+    setUserDrawnStrokes({});
+    setCurrentStrokeIdx(1);
+    setFeedback(null);
+
     if (cat === 'KANJI') {
-      if (joyoCatalog.length > 0) {
-        handleSelectJoyoKanji(joyoCatalog[0]);
-      }
+      const lvl = kanjiLevelFilter && kanjiLevelFilter !== 'ALL' ? kanjiLevelFilter : (initialLevel || 'N5');
+      setKanjiLevelFilter(lvl);
+      loadJoyoCatalog(lvl, kanjiSearch, true);
     } else {
       const filtered = kanjiList.filter(k => {
         if (cat === 'HIRAGANA') return k.jlpt_level === 'HIRAGANA';
@@ -405,6 +422,26 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
     if (rawPoints.length < 2) return;
 
     if (!kanjiData.strokeMetadata || kanjiData.strokeMetadata.length === 0) {
+      // Calculate drawn stroke length to prevent accidental clicks or micro-dots
+      let drawnLength = 0;
+      for (let i = 1; i < rawPoints.length; i++) {
+        drawnLength += Math.hypot(rawPoints[i].x - rawPoints[i - 1].x, rawPoints[i].y - rawPoints[i - 1].y);
+      }
+
+      if (drawnLength < 50) {
+        setFeedback({
+          isValid: false,
+          status: 'shape_mismatch',
+          message: language === 'id'
+            ? 'Goresan terlalu pendek untuk dicatat. Gambarlah bentuk goresan yang jelas.'
+            : 'Stroke too short to record. Draw a clear stroke shape.',
+          geometryScore: 20
+        });
+        playStrokeErrorSound();
+        setTimeout(() => redrawCanvas(), 350);
+        return;
+      }
+
       // Freeform recognition & stroke progress tracking
       playStrokeSuccessSound();
       const nextStrokeIdx = currentStrokeIdx + 1;
@@ -419,9 +456,9 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
         isValid: true,
         status: 'accepted',
         message: language === 'id'
-          ? `Goresan ${currentStrokeIdx} dari ${kanjiData.strokeCount || 1} diterima!`
-          : `Stroke ${currentStrokeIdx} of ${kanjiData.strokeCount || 1} accepted!`,
-        geometryScore: 95
+          ? `Goresan ${currentStrokeIdx} dari ${kanjiData.strokeCount || 1} dicatat (Latihan Bebas).`
+          : `Stroke ${currentStrokeIdx} of ${kanjiData.strokeCount || 1} recorded (Freeform Mode).`,
+        geometryScore: 80
       });
 
       if (nextStrokeIdx > (kanjiData.strokeCount || 1)) {
@@ -695,7 +732,7 @@ export const KanjiCanvasView: React.FC<KanjiCanvasViewProps> = ({
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[11px] font-semibold text-stone-500 mr-1">{language === 'id' ? 'Tingkat JLPT:' : 'JLPT Level:'}</span>
               {['ALL', 'N5', 'N4', 'N3', 'N2', 'N1'].map(lvl => {
-                const count = lvl === 'ALL' ? joyoTotal : joyoStats[lvl] || 0;
+                const count = lvl === 'ALL' ? (joyoStats.total || 2136) : (joyoStats[lvl] || 0);
                 return (
                   <button
                     key={lvl}

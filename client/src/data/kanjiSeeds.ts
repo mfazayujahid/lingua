@@ -1239,6 +1239,88 @@ export const KANJI_SEEDS: KanjiCharacterSeed[] = [
       }
     ]
   },
+  {
+    id: 'kanji_n5_nani',
+    character: '何',
+    jlptLevel: 'N5',
+    onYomi: 'カ',
+    kunYomi: 'なに, なん',
+    englishGloss: 'What, which',
+    radical: '亻',
+    strokeCount: 7,
+    strokes: [
+      {
+        strokeIndex: 1,
+        svgPath: 'M 298,126 C 300,145 296,161 291,178 C 255,286 202,392 103,521',
+        startPoint: [298, 126],
+        endPoint: [103, 521],
+        primaryAngleDeg: 116,
+        strokeType: 'left_fall',
+        directionalHint: 'Top-right to Bottom-left',
+        pedagogicalRule: 'Left-falling slant stroke of ninben (亻) radical.'
+      },
+      {
+        strokeIndex: 2,
+        svgPath: 'M 246,335 C 257,349 260,363 260,385 C 260,472 259,667 258,794 C 258,818 258,839 258,857',
+        startPoint: [246, 335],
+        endPoint: [258, 857],
+        primaryAngleDeg: 89,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Vertical downward stem of ninben (亻) radical.'
+      },
+      {
+        strokeIndex: 3,
+        svgPath: 'M 357,244 C 373,249 400,250 416,249 C 537,237 726,205 840,195 C 866,193 882,197 896,199',
+        startPoint: [357, 244],
+        endPoint: [896, 199],
+        primaryAngleDeg: 355,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Top horizontal bar of the 可 component.'
+      },
+      {
+        strokeIndex: 4,
+        svgPath: 'M 375,404 C 382,411 387,419 387,424 C 393,461 400,517 408,574 C 410,593 410,592 412,608',
+        startPoint: [375, 404],
+        endPoint: [412, 608],
+        primaryAngleDeg: 80,
+        strokeType: 'vertical',
+        directionalHint: 'Top to Bottom',
+        pedagogicalRule: 'Left vertical line of the mouth (口) element.'
+      },
+      {
+        strokeIndex: 5,
+        svgPath: 'M 397,418 C 455,407 536,391 578,384 C 607,379 618,387 612,416 C 604,451 589,511 582,546',
+        startPoint: [397, 418],
+        endPoint: [582, 546],
+        primaryAngleDeg: 35,
+        strokeType: 'hook',
+        directionalHint: 'Left to Right then Downward',
+        pedagogicalRule: 'Horizontal and right-falling bend of the mouth (口) element.'
+      },
+      {
+        strokeIndex: 6,
+        svgPath: 'M 418,580 C 452,576 505,569 551,563 C 568,561 586,559 604,557',
+        startPoint: [418, 580],
+        endPoint: [604, 557],
+        primaryAngleDeg: 353,
+        strokeType: 'horizontal',
+        directionalHint: 'Left to Right',
+        pedagogicalRule: 'Bottom horizontal closing stroke of the mouth (口) element.'
+      },
+      {
+        strokeIndex: 7,
+        svgPath: 'M 764,227 C 773,236 780,247 781,273 C 784,397 779,791 779,833 C 779,931 721,858 695,826',
+        startPoint: [764, 227],
+        endPoint: [695, 826],
+        primaryAngleDeg: 95,
+        strokeType: 'hook',
+        directionalHint: 'Vertical Downward with Upward Hook',
+        pedagogicalRule: 'Long vertical stroke of 丁 ending with a crisp upward hook.'
+      }
+    ]
+  },
 
   // ─── JLPT N4 (3 Characters) ──────────────────────────────────
   {

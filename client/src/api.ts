@@ -18,6 +18,7 @@ import {
 } from '../../shared/types';
 import { AUTHENTIC_WRITING_PROMPTS, analyzeEssayLocally } from './data/writingPromptsData';
 import staticDatabase from './data/staticDatabase.json';
+import joyoCatalogData from './data/joyoCatalogData.json';
 import { KANA_SEEDS } from './data/kanaSeeds';
 import { KANJI_SEEDS } from './data/kanjiSeeds';
 
@@ -298,7 +299,7 @@ export async function fetchKanjiList(level?: string): Promise<any[]> {
   return list;
 }
 
-export async function fetchKanjiCatalog(level?: string, search?: string, limit = 50, offset = 0): Promise<{
+export async function fetchKanjiCatalog(level?: string, search?: string, limit = 60, offset = 0): Promise<{
   total: number;
   limit: number;
   offset: number;
@@ -316,13 +317,41 @@ export async function fetchKanjiCatalog(level?: string, search?: string, limit =
   } catch (err) {
     console.warn('Backend unavailable, using static kanji catalog', err);
   }
-  const cat = (staticDatabase as any).kanjiCatalog || { total: 0, items: [], stats: {} };
+
+  let catalog = joyoCatalogData as any[];
+
+  // 1. Filter by JLPT level
+  if (level && level !== 'ALL') {
+    const targetLvl = level.toUpperCase();
+    catalog = catalog.filter(k => k.jlptLevel === targetLvl);
+  }
+
+  // 2. Filter by search query
+  if (search && search.trim()) {
+    const q = search.trim().toLowerCase();
+    catalog = catalog.filter(k => 
+      k.character === q ||
+      (k.meanings || []).some((m: string) => m.toLowerCase().includes(q)) ||
+      (k.onYomi || []).some((r: string) => r.toLowerCase().includes(q)) ||
+      (k.kunYomi || []).some((r: string) => r.toLowerCase().includes(q))
+    );
+  }
+
+  const stats = {
+    total: 2136,
+    N5: 81,
+    N4: 168,
+    N3: 369,
+    N2: 369,
+    N1: 1149
+  };
+
   return {
-    total: cat.total || 0,
+    total: catalog.length,
     limit,
     offset,
-    stats: cat.stats || {},
-    items: (cat.items || []).slice(offset, offset + limit)
+    stats,
+    items: catalog.slice(offset, offset + limit)
   };
 }
 
@@ -333,9 +362,9 @@ export async function fetchJoyoDetail(character: string): Promise<any> {
   } catch (err) {
     console.warn('Backend unavailable, using local joyo detail', err);
   }
-  const catalog = (staticDatabase as any).kanjiCatalog?.items || [];
+  const catalog = joyoCatalogData as any[];
   const item = catalog.find((c: any) => c.character === character || c.id === character);
-  const strokeSeed = KANJI_SEEDS.find(k => k.character === character);
+  const strokeSeed = KANJI_SEEDS.find(k => k.character === character || k.id === character);
   if (item) {
     return {
       ...item,
